@@ -4,5 +4,6 @@ format: html
 ---
 
 <!-- - [مقدمة للدورة](./modules/00_course_intro/Course_Intro.qmd) -->
-- [مقدمة عن تعلم الآلة](./modules/01_intro/Intro_ML.qmd)
-- [الانحدار (Regression)](./modules/02_regression/Regression.qmd)
+- [مقدمة عن تعلم الآلة](./modules/M1/01_intro/Intro_ML.qmd)
+- [الانحدار (Regression)](./modules/M1/02_regression/Regression.qmd)
+- [الانحدار متعدد المتغيرات](./modules/M1/03_multi-variable_regression/multi-variable_regression.qmd)
