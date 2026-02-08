@@ -90,7 +90,7 @@ format: html
 
 في هذا النموذج، يقوم المبرمج بدور اللغوي. حيث يجب عليه كتابة كل قاعدة نحوية وكل مفردة يدوياً. إذا لم تكن القاعدة مكتوبة في الكود، فلن يفهمها النظام:
 
-```python
+```{python}
 def rule_based_translate(sentence):
     # Dictionary (Lexicon)
     dictionary = {
@@ -124,7 +124,7 @@ print(rule_based_translate("the black cat")) # Output: el negro gato (Incorrect)
 
 هنا يبدأ تعلم الآلة. نحن لا نعطيه قواعد بل نعطيه بيانات متوازية (جمل مقابل ترجتمها)، وهو يستنتج الأنماط والاحتمالات وحده.
 
-```python
+```{python}
 from collections import defaultdict, Counter
 
 # SMT: Learning from data (Parallel Corpus)
