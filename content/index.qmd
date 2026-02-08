@@ -1,0 +1,8 @@
+---
+title: "فهرس"
+format: html
+---
+
+<!-- - [مقدمة للدورة](./modules/00_course_intro/Course_Intro.qmd) -->
+- [مقدمة عن تعلم الآلة](./modules/01_intro/Intro_ML.qmd)
+- [الانحدار (Regression)](./modules/02_regression/Regression.qmd)

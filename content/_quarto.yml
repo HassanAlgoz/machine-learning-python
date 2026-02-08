@@ -1,0 +1,30 @@
+project:
+  type: website
+  title: "Introduction to ML"
+  preview: 
+    port: 4600
+  output-dir: _site
+
+jupyter: python3
+
+execute:
+  # https://quarto.org/docs/computations/python.html#kernel-daemon
+  daemon: true 
+
+  # https://quarto.org/docs/computations/caching.html#jupyter-cache
+  cache: true
+
+  # https://quarto.org/docs/publishing/github-pages.html#freezing-computations
+  freeze: auto
+
+
+dir: rtl
+lang: ar
+language: _language_ar.yml
+
+format:
+  html:
+    theme: [cosmo, custom.scss]
+
+number-depth: 1
+lightbox: auto

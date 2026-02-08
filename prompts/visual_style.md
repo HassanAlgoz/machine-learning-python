@@ -1,0 +1,1 @@
+stylized as a minimalist technical illustration, clean vector line art, white background, thin black strokes, green accent, no gradients, high-contrast schematic aesthetic.
