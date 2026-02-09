@@ -26,6 +26,7 @@ format: html
 
 - معرفة نوع البيانات
 - التطبيع: Normalization (عندما تكون العلاقة لاخطيَّة - اي: متغيرة)
+- [القيم المفقودة](http://scikit-learn.org/stable/modules/impute.html#impute)
 - معضلة التخصيص والتعميم (Overfitting)
 - التقييم (Eval) والتقويم (Improve)
 - الحاجة لخط إنتاج التنبؤ (**Predictive Model Pipeline**)
