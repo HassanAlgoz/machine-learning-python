@@ -79,7 +79,7 @@ format: html
 
 ##### الطريقة الأولى: تقييس لوغارتمي (Log Scaling)
 
-فهي تحوِّل التوزيع غير الطبيعي، المنحاز إلى أحد الجانبين -الموجب أو السالب- إلى **توزيع طبيعي** (Normal Distribution) باستعمال اللوغاريتم الطبيعي ($\ln$). كما هو موضح في [الصورة التالية](https://scikit-learn.org/stable/auto_examples/compose/plot_transformed_target.html):
+فهي تحوِّل التوزيع غير الطبيعي، المنحاز إلى أحد الجانبين -الموجب أو السالب- إلى **توزيع طبيعي** (Normal Distribution) باستعمال اللوغاريتم الطبيعي ($\ln$). كما هو موضح في الصورة التالية:
 
 ![](https://scikit-learn.org/stable/_images/sphx_glr_plot_transformed_target_003.png) 
 
@@ -90,7 +90,7 @@ format: html
 
 انظر [تحويل قيمة الهدف](https://scikit-learn.org/stable/auto_examples/compose/plot_transformed_target.html).
 
-**التقسيم (Binning / Bucketing)** هو أحد أساليب **هندسة الميزات** (Feature Engineering) التي تتضمن تجميع القيم الرقمية في فئات أو حاويات (Bins) منفصلة.
+**التقسيم ([Binning](https://scikit-learn.org/stable/modules/preprocessing.html#discretization))** هو أحد أساليب **هندسة الميزات** (Feature Engineering) التي تتضمن تجميع القيم الرقمية في فئات أو حاويات (Bins) منفصلة.
 
 * **مثال:** عدد المتسوقين (زوار المتجر) مقابل درجة الحرارة (حالة الطقس).
 
