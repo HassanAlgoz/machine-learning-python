@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ar" xml:lang="ar" dir="rtl"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>تسوية الخصائص (Feature Scaling) – Machine Learning with Python</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-e5f995b0c242d35549e3936d69094528.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "لا يوجد نتائج",
+    "search-matching-documents-text": "الصفحات المطابقة",
+    "search-copy-link-title": "نسخ الرابط إلى الحافظة",
+    "search-hide-matches-text": "إخفاء المطابقات الإضافية",
+    "search-more-match-text": "مطابقة واحدة في هذه الصفحة",
+    "search-more-matches-text": "مطابقات إضافية في هذه الصفحة",
+    "search-clear-button-title": "إزالة",
+    "search-text-placeholder": "ابحث عن...",
+    "search-detached-cancel-button-title": "إلغاء",
+    "search-submit-button-title": "إرسال",
+    "search-label": "البحث"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">تسوية الخصائص (Feature Scaling)</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>عملية تسوية الخصائص</strong> (Feature Scaling) <strong>توحِّد قيَم المتغيرات المتفاوتة لتكون على مقياس مماثل</strong>.</p>
+<p>والحاجة إليها ماسَّة لأنها تعطي المعنى التالي:</p>
+<ul>
+<li>مثل: الوزن <code>100kg</code> والطول <code>100m</code>، لا يستويان من حيث النسبة إلى القيم المحيطة لنفس المتغير.</li>
+<li>كذلك: مبلغ <code>10</code> ملايين دولار في أسعار المنازل يعد قيمة كبيرة. وبالقياس، فإن الرقم <code>10</code> في عدد الغرف يعد قيمة كبيرة أيضًا.</li>
+<li>وعكسه: مبلغ <code>30</code> آلاف دولار بالنسبة لسعر منزل يعد قيمة صغيرة. وبالقياس فإن القيمة <code>3</code> في عدد الغرف يعد قيمة صغيرة أيضًأ.</li>
+</ul>
+<section id="أهميتها" class="level3">
+<h3 class="anchored" data-anchor-id="أهميتها">أهميتها</h3>
+<p>تظهر أهمية ذلك في:</p>
+<section id="في-تفسير-قوة-أثر-المتغيرات-نفسها" class="level4">
+<h4 class="anchored" data-anchor-id="في-تفسير-قوة-أثر-المتغيرات-نفسها">في تفسير قوة أثر المتغيرات نفسها</h4>
+<p>إذْ لا يُمكن تفسير قوَّة تأثير المتغيرات بالنظر للمعاملات: <span class="math inline">\(w_1, w_2, \dots\)</span> حين تكون قيم المتغيرات نفسها متفاوتة. لكن حين نضعها على نفس المقياس، تكون قيمة المعامل بعد التدريب ممثلة لأهميَّة المتغير الذي يصحبه العامل.</p>
+</section>
+<section id="في-خوارزمية-النزول-التدريجي-sgd" class="level4">
+<h4 class="anchored" data-anchor-id="في-خوارزمية-النزول-التدريجي-sgd">في خوارزمية النزول التدريجي (SGD)</h4>
+<p>إذْ تتأثر الخطوة -في اتجاه تقليل الخسارة- بتفاوت قيَم المتغيرات.</p>
+<p><a href="./assets/gradient_descent_2_params_unscaled_vs_scaled.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="./assets/gradient_descent_2_params_unscaled_vs_scaled.png" class="img-fluid"></a></p>
+</section>
+<section id="وفي-خوارزمية-أقرب-جيران-knn" class="level4">
+<h4 class="anchored" data-anchor-id="وفي-خوارزمية-أقرب-جيران-knn">وفي خوارزمية أقرب جيران (KNN)</h4>
+<p>إذْ تعتمد على حساب المسافة بين متغيرات متفاوتة القيَم. كما هو موضح في <a href="https://scikit-learn.org/stable/auto_examples/preprocessing/plot_scaling_importance.html#effect-of-rescaling-on-a-k-neighbors-models">الصورة التالية</a>:</p>
+<p><a href="https://scikit-learn.org/stable/_images/sphx_glr_plot_scaling_importance_001.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://scikit-learn.org/stable/_images/sphx_glr_plot_scaling_importance_001.png" class="img-fluid"></a></p>
+<p>والسبب في أن أماكن النقاط لا يتغير هو أن الرسم يُجري عمليَّة تسوية أصلاً؛ لتظهر جميع النقاط.</p>
+<p>وقد لا تتأثر بعض الخوارزميات بتفاوُت القيَم لكنه أيضًا لا يضرها، مثل: شجرة القرارة (Decision Tree).</p>
+</section>
+</section>
+<section id="كيفياتها" class="level3">
+<h3 class="anchored" data-anchor-id="كيفياتها">كيفياتها</h3>
+<p>وهناك طبيعتان لطرق <strong>التسوية</strong>: خطية ولا خطيَّة.</p>
+<section id="أولا-الخطية" class="level4">
+<h4 class="anchored" data-anchor-id="أولا-الخطية">أولاً: <strong>الخطية</strong></h4>
+<p>وهي لا تغيِّرُ نسبة ما بين القيَم نفسها.</p>
+<p>ولها طريقتان معروفتان:</p>
+<section id="الطريقة-الأولى-تقييس-النطاق-بين-الصفر-والواحد" class="level5">
+<h5 class="anchored" data-anchor-id="الطريقة-الأولى-تقييس-النطاق-بين-الصفر-والواحد">الطريقة الأولى: تقييس النطاق بين الصفر والواحد</h5>
+<p>في المكتبة (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html"><code>MinMaxScaler</code></a>)، وتعني تحويل القيم من نطاقها الأصلي إلى نطاق ثابت:</p>
+<ul>
+<li>عادةً من 0 إلى 1</li>
+<li>أو من -1 إلى +1</li>
+</ul>
+<p><strong>الاستخدام</strong>: يكون التقييس الخطي فعالاً عند تحقق شروط، نمثل لها بعمر الإنسان:</p>
+<ol type="1">
+<li><strong>حدود مستقرة:</strong> القيم الدنيا والقصوى للميزة تظل ثابتة (عادةً من 0 إلى 100 عام)</li>
+<li><strong>تشبع النطاق:</strong> يوجد عدد جيد من البيانات لجميع الفئات العمرية.</li>
+<li><strong>قلة القيم المتطرفة</strong>: نسبة ضئيلة جداً تعيش بعد 100 عام.</li>
+</ol>
+</section>
+<section id="الطريقة-الثانية-تقييس-النطاق-بالمقياس-الطبيعي" class="level5">
+<h5 class="anchored" data-anchor-id="الطريقة-الثانية-تقييس-النطاق-بالمقياس-الطبيعي">الطريقة الثانية: تقييس النطاق بالمقياس الطبيعي</h5>
+<p>في المكتبة (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html"><code>StandardScaler</code></a>)، إذْ يتم تنصيف القيَم حوْلَ الصفر (بطرحها من المتوسط)، وتكون القيَم بين ثلاث درجات بالنسبة للانحراف المعياري (بقسمتها عليه).</p>
+<p>مناسب عندما تتبع البيانات <strong>التوزيع الطبيعي</strong> أو قريبًا منه.</p>
+<p>انظر: <a href="https://scikit-learn.org/stable/auto_examples/preprocessing/plot_scaling_importance.html">أهميَّة التسوية</a>.</p>
+<p><strong>التقليم (Clipping)</strong> هي عملية استبعاد القيَم المتطرفة (Outliers) بهدف التخفيف من أثرها السلبي على أداء النموذج. قد يتحقق ذلك بإزالة أي قيم تقع خارج:</p>
+<ul>
+<li>نطاق -3 إلى +3 درجات معيارية</li>
+<li>أو ما فوق 99% من البيانات وما دون 1% منها</li>
+</ul>
+<p><strong>مثال:</strong> لنفترض وجود مجموعة بيانات بميزة تُسمى <code>roomsPerPerson</code> (عدد الغرف لكل شخص). في حين أن أغلب القيم تتبع التوزيع الطبيعي، قد توجد بضع قيم متطرفة لمنازل تحتوي على عدد هائل من الغرف لكل فرد.</p>
+</section>
+</section>
+<section id="ثانيا-لا-خطية" class="level4">
+<h4 class="anchored" data-anchor-id="ثانيا-لا-خطية">ثانيًا: <strong>لا خطيَّة</strong></h4>
+<p>إذْ تغيِّرُ نسبة ما بين القيَم. ومنها:</p>
+<section id="الطريقة-الأولى-تقييس-لوغارتمي-log-scaling" class="level5">
+<h5 class="anchored" data-anchor-id="الطريقة-الأولى-تقييس-لوغارتمي-log-scaling">الطريقة الأولى: تقييس لوغارتمي (Log Scaling)</h5>
+<p>فهي تحوِّل التوزيع غير الطبيعي، المنحاز إلى أحد الجانبين -الموجب أو السالب- إلى <strong>توزيع طبيعي</strong> (Normal Distribution) باستعمال اللوغاريتم الطبيعي (<span class="math inline">\(\ln\)</span>). كما هو موضح في <a href="https://scikit-learn.org/stable/auto_examples/compose/plot_transformed_target.html">الصورة التالية</a>:</p>
+<p><a href="https://scikit-learn.org/stable/_images/sphx_glr_plot_transformed_target_003.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://scikit-learn.org/stable/_images/sphx_glr_plot_transformed_target_003.png" class="img-fluid"></a></p>
+<p>مفيدة للبيانات التي تتبع <strong>توزيع قانون القوة (Power Law Distribution)</strong>، والذي يتميز بوجود قلة من نقاط البيانات ذات القيم العالية جداً وكثير من النقاط ذات القيم المنخفضة.</p>
+<ul>
+<li><strong>مثال 1:</strong> عدد قليل من الأفلام يشتهر بقوَّة، بينما الغالبية العظمى تحصل على القليل من الانتباه.</li>
+<li><strong>مثال 2:</strong> معظم الكتب تبيع نسخاً قليلة جداً، بينما تحقق كتب (الأكثر مبيعاً) الملايين.</li>
+</ul>
+<p>انظر <a href="https://scikit-learn.org/stable/auto_examples/compose/plot_transformed_target.html">تحويل قيمة الهدف</a>.</p>
+<p><strong>التقسيم (Binning / Bucketing)</strong> هو أحد أساليب <strong>هندسة الميزات</strong> (Feature Engineering) التي تتضمن تجميع القيم الرقمية في فئات أو حاويات (Bins) منفصلة.</p>
+<ul>
+<li><strong>مثال:</strong> عدد المتسوقين (زوار المتجر) مقابل درجة الحرارة (حالة الطقس).</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./assets/scatter_temp_vs_shoppers.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="شكل 2. مخطط مبعثر (Scatter plot) يوضح العلاقة بين درجة الحرارة وعدد المتسوقين."><img src="./assets/scatter_temp_vs_shoppers.png" class="img-fluid figure-img" alt="شكل 2. مخطط مبعثر (Scatter plot) يوضح العلاقة بين درجة الحرارة وعدد المتسوقين."></a></p>
+<figcaption><strong>شكل 2.</strong> مخطط مبعثر (Scatter plot) يوضح العلاقة بين درجة الحرارة وعدد المتسوقين.</figcaption>
+</figure>
+</div>
+<p>يشير الرسم البياني إلى وجود ثلاث مجموعات (Clusters) ضمن النطاقات الفرعية التالية:</p>
+<ul>
+<li><strong>الفئة 1:</strong> نطاق درجة الحرارة من 4 إلى 11.</li>
+<li><strong>الفئة 2:</strong> نطاق درجة الحرارة من 12 إلى 26.</li>
+<li><strong>الفئة 3:</strong> نطاق درجة الحرارة من 27 إلى 36.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./assets/scatter_temp_vs_shoppers_binned.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="شكل 3. نفس المخطط المبعثر السابق مع خطين أحمرين يحددان الفواصل بين الفئات الثلاث."><img src="./assets/scatter_temp_vs_shoppers_binned.png" class="img-fluid figure-img" alt="شكل 3. نفس المخطط المبعثر السابق مع خطين أحمرين يحددان الفواصل بين الفئات الثلاث."></a></p>
+<figcaption><strong>شكل 3.</strong> نفس المخطط المبعثر السابق مع خطين أحمرين يحددان الفواصل بين الفئات الثلاث.</figcaption>
+</figure>
+</div>
+<p>يعتبر التقسيم بديلاً جيدًا لعمليات <strong>التقييس</strong> (Scaling) أو <strong>التقليم</strong> (Clipping) عند تحقق أي من الشرطين التاليين:</p>
+<ol type="1">
+<li><strong>ضعف العلاقة الخطية</strong>: عندما تكون العلاقة الخطية الإجمالية بين الميزة والوسم (Label) ضعيفة أو منعدمة. (يوضح المثال أعلاه حالة “لا خطية”: حيث يصعد المنحنى ثم يهبط؛ أي أنه منحنى وليس خطاً مستقيماً).</li>
+<li><strong>تكتل البيانات</strong>: عندما تكون قيم الميزة متجمعة في كتل أو مجموعات واضحة.</li>
+</ol>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "تم النسخ!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "تم النسخ!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

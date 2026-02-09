@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ar" xml:lang="ar" dir="rtl"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>مقدمة عن تعلم الآلة – Introduction to ML</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-e5f995b0c242d35549e3936d69094528.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "لا يوجد نتائج",
+    "search-matching-documents-text": "الصفحات المطابقة",
+    "search-copy-link-title": "نسخ الرابط إلى الحافظة",
+    "search-hide-matches-text": "إخفاء المطابقات الإضافية",
+    "search-more-match-text": "مطابقة واحدة في هذه الصفحة",
+    "search-more-matches-text": "مطابقات إضافية في هذه الصفحة",
+    "search-clear-button-title": "إزالة",
+    "search-text-placeholder": "ابحث عن...",
+    "search-detached-cancel-button-title": "إلغاء",
+    "search-submit-button-title": "إرسال",
+    "search-label": "البحث"
+  }
+}</script>
+
+
+</head>
+
+<body class="fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">مقدمة عن تعلم الآلة</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="المحاور" class="level2">
+<h2 class="anchored" data-anchor-id="المحاور">المحاور</h2>
+<ul>
+<li>علاقة علم المنطق بتعلم الآلة</li>
+<li>المبادئ العشرة لعلم تعلم الآلة</li>
+</ul>
+</section>
+<section id="مقدمة-في-علم-تعلم-الآلة" class="level2">
+<h2 class="anchored" data-anchor-id="مقدمة-في-علم-تعلم-الآلة">مقدمة في علم تعلم الآلة</h2>
+<p>اعلم أن <strong>تعلم الآلة</strong> (Machine Learning) هو علم يبحث في قدرة البرامج على استخراج الأنماط المفيدة من البيانات تلقائيا. وقد أصبح هذا العلم في زماننا هو الأداة الأساسية لتحليل المعلومات الضخمة واستخراج فوائدها.</p>
+<section id="أمثلة-من-تطبيقاته" class="level3">
+<h3 class="anchored" data-anchor-id="أمثلة-من-تطبيقاته">أمثلة من تطبيقاته</h3>
+<p>لقد دخلت هذه التقنية في تفاصيل حياتنا، ومن ذلك:</p>
+<ul>
+<li><strong>محركات البحث:</strong> التي تتعلم كيف تقدم لك أفضل النتائج مع ترتيب الإعلانات.</li>
+<li><strong>حماية البريد:</strong> عبر برمجيات تتعلم تمييز الرسائل المزعجة وطردها.</li>
+<li><strong>أمن الأموال:</strong> من خلال نظم تكتشف عمليات الاحتيال في البطاقات الائتمانية.</li>
+<li><strong>الأجهزة الذكية:</strong> مثل الكاميرات التي تميز الوجوه، والهواتف التي تفهم الأوامر الصوتية.</li>
+<li><strong>سلامة الطريق:</strong> عبر أنظمة ذكية في السيارات تتوقع الحوادث وتمنعها.</li>
+</ul>
+</section>
+<section id="الفرق-بينه-وبين-البرمجة-المعتادة" class="level3">
+<h3 class="anchored" data-anchor-id="الفرق-بينه-وبين-البرمجة-المعتادة">الفرق بينه وبين البرمجة المعتادة</h3>
+<p>والسر في الحاجة إلى هذا العلم هو أن المهام أصبحت من التعقيد بحيث لا يمكن للمبرمج أن يضع لها خطوات تفصيلية ثابتة لكل حالة. فكما أن الكائنات الذكية تكتسب مهاراتها من <strong>التجربة والخبرة</strong> بدلا من مجرد اتباع التعليمات، فإن أدوات تعلم الآلة تهدف إلى إعطاء البرامج القدرة على <strong>التعلم والتكيف</strong> مع البيانات الجديدة من تلقاء نفسها.</p>
+</section>
+</section>
+<section id="أولا-علاقة-علم-المنطق-بتعلم-الآلة-ml" class="level2">
+<h2 class="anchored" data-anchor-id="أولا-علاقة-علم-المنطق-بتعلم-الآلة-ml">أولًا: علاقة علم المنطق بتعلم الآلة (ML)</h2>
+<p>يرتبط علم المنطق بتعلم الآلة ارتباطاً وثيقاً؛ فإذا كان المنطق التقليدي (المنطق الصوري) يعتمد على <strong>الاستنتاج (Deduction)</strong> -أي الانتقال من القواعد العامة إلى الحالات الخاصة- فإن تعلم الآلة يعتمد أساساً على <strong>الاستقراء (Induction)</strong> -أي استنباط القواعد العامة من البيانات (الحالات الخاصة)-.</p>
+</section>
+<section id="الفرق-بين-الاستنتاج-الاستقراء" class="level2">
+<h2 class="anchored" data-anchor-id="الفرق-بين-الاستنتاج-الاستقراء">الفرق بين الاستنتاج الاستقراء</h2>
+<p>الفرق الجوهري بين الاستنتاج والاستقراء يكمن في “اتجاه” حركتك الذهنية بين الكلي والجزئي. إليك التفصيل:</p>
+<section id="الاستنتاج-deduction---من-الكلي-إلى-الجزئي" class="level3">
+<h3 class="anchored" data-anchor-id="الاستنتاج-deduction---من-الكلي-إلى-الجزئي">1. الاستنتاج (Deduction) - من الكلي إلى الجزئي</h3>
+<p>هو الانتقال من <strong>قاعدة عامة</strong> مسلّم بها إلى <strong>نتيجة خاصة</strong> بالضرورة. إذا كانت المقدمات صحيحة، فالنتيجة صحيحة حتماً.</p>
+<ul>
+<li><strong>المثال:</strong> * (قاعدة عامة): كل مبرمج يحتاج إلى مهارة حل المشكلات.</li>
+<li>(جزئي): “أحمد” مبرمج.</li>
+<li>(النتيجة): إذاً، “أحمد” يحتاج إلى مهارة حل المشكلات.</li>
+</ul>
+</section>
+<section id="الاستقراء-induction---من-الجزئي-إلى-الكلي" class="level3">
+<h3 class="anchored" data-anchor-id="الاستقراء-induction---من-الجزئي-إلى-الكلي">2. الاستقراء (Induction) - من الجزئي إلى الكلي</h3>
+<p>هو الانتقال من <strong>ملاحظات جزئية</strong> متكررة لبناء <strong>قاعدة عامة</strong> (وهو جوهر تعلم الآلة). النتيجة هنا <strong>احتمالية</strong> (Likelyhood) وليست يقينية بنسبة 100%.</p>
+<p><strong>المثال:</strong></p>
+<ul>
+<li>(ملاحظة 1): الرسالة رقم 1 تحتوي كلمة <code>"عرض مجاني"</code> وهي <code>"دعائية"</code>.</li>
+<li>(ملاحظة 2): الرسالة رقم 2 تحتوي كلمة <code>"عرض مجاني"</code> وهي <code>"دعائية"</code>.</li>
+<li>(القاعدة): أي رسالة تحتوي <code>"عرض مجاني"</code> يُحتمل جداً أن تكون <code>"دعائية"</code>.</li>
+</ul>
+</section>
+<section id="مثال-الكود-الاستنتاج" class="level3">
+<h3 class="anchored" data-anchor-id="مثال-الكود-الاستنتاج">3. مثال الكود: الاستنتاج</h3>
+<p>في البرمجة التقليدية، نحن نكتب القواعد يدوياً. هذا هو الاستنتاج؛ لأن البرنامج يطبق القاعدة العامة التي وضعها المبرمج على أي مدخل جزئي.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># طريقة الاستنتاج: المبرمج يضع القاعدة</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> check_admission(grade):</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="co"># قاعدة عامة: إذا كانت الدرجة &gt;= 50 فهو ناجح</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> grade <span class="op">&gt;=</span> <span class="dv">50</span>:</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"ناجح"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"راسب"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># تطبيق القاعدة على حالة جزئية</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>student_grade <span class="op">=</span> <span class="dv">75</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> check_admission(student_grade)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"النتيجة: </span><span class="sc">{</span>result<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="مثال-الكود-الاستقراء" class="level3">
+<h3 class="anchored" data-anchor-id="مثال-الكود-الاستقراء">4. مثال الكود: الاستقراء</h3>
+<p>هنا لا نعطي الآلة قاعدة، بل نعطيها <strong>بيانات</strong> (حالات جزئية) وهي تستنتج القاعدة. وفقاً لتوثيق <strong>Scikit-learn</strong> الرسمي، نستخدم نموذجاً ليتعلم من الأنماط.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. ملاحظات خاصة (بيانات: س، ص)</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># لنفترض أن ص = 2 * س (الآلة لا تعرف هذه القاعدة، ستستقرؤها)</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.array([[<span class="dv">1</span>], [<span class="dv">2</span>], [<span class="dv">3</span>], [<span class="dv">4</span>]]) <span class="co"># المدخلات</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>])        <span class="co"># المخرجات</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. عملية الاستقراء (التعلم)</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>model.fit(X, y)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. التنبؤ بحالة جديدة بناءً على القاعدة المستقرأة</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>new_case <span class="op">=</span> np.array([[<span class="dv">5</span>]])</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>prediction <span class="op">=</span> model.predict(new_case)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"التنبؤ للقيمة 5 هو: </span><span class="sc">{</span>prediction[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">"</span>) <span class="co"># النتيجة ستكون 10 تقريباً</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="المبادئ-العشرة" class="level2">
+<h2 class="anchored" data-anchor-id="المبادئ-العشرة">المبادئ العشرة</h2>
+<p>وقد اشتهر عند الناس قول محمد بن علي الصبان (توفي 1206هـ):</p>
+<blockquote class="blockquote">
+<p>إنَّ مبادئ كل فن عشرة … الحد والموضوع ثم الثمرة</p>
+<p>وفضله ونسبة والواضع … والاسم الاستمداد حكم الشارع</p>
+<p>فمسائل والبعض بالبعض اكتفى … ومن درى الجميع حاز الشرفا</p>
+</blockquote>
+<p>تُفصل هذه الأبيات الجوانب الأساسية لأي علم كالتالي:</p>
+<ol type="1">
+<li><strong>الحد:</strong> تعريف العلم (ماهيته).</li>
+<li><strong>الموضوع:</strong> المجال الذي يبحث فيه العلم (عن ماذا يتحدث؟).</li>
+<li><strong>الثمرة:</strong> الفائدة المرجوة من تعلمه.</li>
+<li><strong>النسبة:</strong> علاقة هذا العلم بغيره من العلوم (هل هو فرع أم أصل؟).</li>
+<li><strong>الفضل:</strong> مرتبته ومكانته بين العلوم.</li>
+<li><strong>الواضع:</strong> أول من دوّن قواعد هذا العلم أو أسسه.</li>
+<li><strong>الاسم:</strong> المسميات التي يُعرف بها العلم.</li>
+<li><strong>الاستمداد:</strong> المصادر التي استُمد منها هذا العلم.</li>
+<li><strong>حكم الشارع:</strong> الحكم الفقهي لتعلمه (فرض عين، فرض كفاية، مندوب، إلخ).</li>
+<li><strong>المسائل:</strong> القضايا والقواعد التي يقررها العلم.</li>
+</ol>
+</section>
+<section id="الحد-التعريف" class="level2">
+<h2 class="anchored" data-anchor-id="الحد-التعريف">1. الحَدّ (التعريف)</h2>
+<p>هو فرع من الذكاء الاصطناعي يُعنى بتطوير خوارزميات إحصائية قادرة على استخلاص الأنماط من البيانات وتطبيق ما تعلمته على <strong>بيانات جديدة لم تدخل في نطاق التدريب (Out-of-sample data)</strong>، مما يمكنها من اتخاذ قرارات أو القيام بتنبؤات دون الحاجة لتعليمات برمجية صلبة لكل حالة.</p>
+</section>
+<section id="الموضوع" class="level2">
+<h2 class="anchored" data-anchor-id="الموضوع">2. المَوْضُوع</h2>
+<p>موضوعه <strong>البيانات</strong> من حيث البحث عن الأنماط، و<strong>الخوارزميات</strong> من حيث قدرتها على <strong>التعميم (Generalization)</strong>.</p>
+<blockquote class="blockquote">
+<p><strong>شرح التعميم:</strong> هو قدرة النموذج على تجاوز حفظ البيانات التدريبية (Memorization) والوصول إلى جوهر العلاقات الرياضية بين المتغيرات، بحيث يظل أداؤه دقيقاً عند مواجهة بيانات لم يسبق له رؤيتها.</p>
+</blockquote>
+</section>
+<section id="الثمرة" class="level2">
+<h2 class="anchored" data-anchor-id="الثمرة">3. الثَّمَرَة</h2>
+<p>تتجلى ثمرته في حل المسائل الكبرى للعلم، وتتفرع كالتالي:</p>
+<p>تتنوع ثمار هذا العلم بحسب المسألة المبحوث فيها، ويمكن تقسيمها إلى ثلاثة أفنان رئيسة:</p>
+<section id="أولا-ثمرات-التعلم-الخاضع-للإشراف-supervised-learning" class="level3">
+<h3 class="anchored" data-anchor-id="أولا-ثمرات-التعلم-الخاضع-للإشراف-supervised-learning">أولاً: ثمرات التعلم الخاضع للإشراف (Supervised Learning)</h3>
+<p>وهي الثمار التي تُجنى عند توفر <strong>البيانات الموسومة</strong> (Labeled Data)، وتنقسم إلى:</p>
+<ul>
+<li><strong>ثمرة التصنيف (Classification):</strong>
+<ul>
+<li><strong>التشخيص الطبي:</strong> تمييز الأمراض والأورام (حميد/خبيث) بدقة عالية.</li>
+<li><strong>أمن المعلومات:</strong> تصنيف رسائل البريد (هام/سبام) أو كشف البرمجيات الخبيثة.</li>
+<li><strong>التعرف على الأنماط:</strong> مثل تحويل الصور إلى نصوص أو التعرف على الوجوه.</li>
+</ul></li>
+<li><strong>ثمرة الانحدار (Regression):</strong>
+<ul>
+<li><strong>التنبؤ المالي:</strong> تقدير أسعار العقارات أو أسهم البورصة بناءً على المؤشرات.</li>
+<li><strong>التحليل الهندسي:</strong> توقع العمر الافتراضي للمعدات أو درجات الحرارة المستقبلية.</li>
+</ul></li>
+</ul>
+</section>
+<section id="ثانيا-ثمرات-التعلم-غير-الخاضع-للإشراف-unsupervised-learning" class="level3">
+<h3 class="anchored" data-anchor-id="ثانيا-ثمرات-التعلم-غير-الخاضع-للإشراف-unsupervised-learning">ثانياً: ثمرات التعلم غير الخاضع للإشراف (Unsupervised Learning)</h3>
+<p>وهي الثمار المستخرجة من البيانات الخام التي لا تملك نتائج مسبقة، ومنها:</p>
+<ul>
+<li><strong>ثمرة التكتيل (Clustering):</strong>
+<ul>
+<li><strong>التحليل التسويقي:</strong> تقسيم قاعدة العملاء إلى فئات متجانسة بناءً على السلوك الشرائي.</li>
+<li><strong>علم الجينوم:</strong> تجميع الجينات ذات الأنماط المتشابهة لاكتشاف الوظائف الحيوية.</li>
+</ul></li>
+<li><strong>ثمرة تقليل الأبعاد (Dimensionality Reduction):</strong>
+<ul>
+<li><strong>تبسيط البيانات:</strong> ضغط المعلومات الضخمة مع الحفاظ على خصائصها الجوهرية ليسهل فهمها.</li>
+</ul></li>
+<li><strong>ثمرة كشف الشذوذ (Anomaly Detection):</strong>
+<ul>
+<li><strong>الأمن المصرفي:</strong> رصد العمليات المالية المريبة التي تخرج عن النمط المعتاد للمستخدم.</li>
+</ul></li>
+</ul>
+</section>
+<section id="ثالثا-ثمرات-التعلم-التعزيزي-reinforcement-learning" class="level3">
+<h3 class="anchored" data-anchor-id="ثالثا-ثمرات-التعلم-التعزيزي-reinforcement-learning">ثالثاً: ثمرات التعلم التعزيزي (Reinforcement Learning)</h3>
+<p>وهي أرفع الثمار، وتتعلق ببيئات اتخاذ القرار المتسلسل، ومن ثمارها:</p>
+<ul>
+<li><strong>ثمرة الأنظمة الذاتية (Autonomous Systems):</strong>
+<ul>
+<li><strong>الروبوتات:</strong> تمكين الآلات من المشي أو مسك الأشياء عبر المحاولة والخطأ.</li>
+<li><strong>المركبات:</strong> قيادة السيارات ذاتية التحكم في البيئات المزدحمة.</li>
+</ul></li>
+<li><strong>ثمرة التخطيط الاستراتيجي:</strong>
+<ul>
+<li><strong>الألعاب المعقدة:</strong> التفوق على البشر في ألعاب مثل الشطرنج و<code>Go</code> و<code>Dota 2</code>.</li>
+<li><strong>إدارة الموارد:</strong> توزيع الطاقة في الشبكات الكهربائية الذكية لتحقيق أقصى كفاءة.</li>
+</ul></li>
+</ul>
+<p><strong>ملاحظة منهجية:</strong> هذه الثمرات ليست غايات في ذاتها فحسب، بل هي أدوات خادمة لعلوم أخرى؛ فالطب يستثمر ثمرة التصنيف، والاقتصاد يستثمر ثمرة الانحدار، مما يجعل علم تعلم الآلة <strong>علماً خادماً</strong> لغيره من العلوم.</p>
+</section>
+</section>
+<section id="النسبة" class="level2">
+<h2 class="anchored" data-anchor-id="النسبة">4. النِّسْبَة</h2>
+<p>هو قسيم لعلوم الإحصاء التطبيقي، وفرع أصيل من فروع الذكاء الاصطناعي، يتمايز عنها بتركيزه الكامل على <strong>التعلم من التجربة</strong> بدلاً من القواعد المسبقة.</p>
+</section>
+<section id="الفضل" class="level2">
+<h2 class="anchored" data-anchor-id="الفضل">5. الفَضْل</h2>
+<p>تظهر أفضليته في التعامل مع المهام التي يعجز العقل البشري عن معالجتها؛ مثل <strong>تحليل البيانات عالية الأبعاد (High-dimensional data)</strong>؛ فالعقل البشري يصعب عليه تخيل أو استنتاج علاقات في فضاء يتكون من آلاف المتغيرات (مثل تحليل تتابع الحمض النووي DNA)، بينما تقوم الخوارزميات بذلك ببراعة رياضية.</p>
+</section>
+<section id="الواضع" class="level2">
+<h2 class="anchored" data-anchor-id="الواضع">6. الوَاضِع</h2>
+<p>يُعد <strong>آرثر صامويل</strong> واضع المصطلح (1959)، و<strong>آلان تورينج</strong> (توفي عام <strong>1954م</strong>) صاحب التساؤل التأسيسي “هل يمكن للآلات أن تفكر؟”.</p>
+</section>
+<section id="الاسم" class="level2">
+<h2 class="anchored" data-anchor-id="الاسم">7. الِاسْم</h2>
+<p>يُعرف بـ <strong>تعلم الآلة</strong> (Machine Learning)، ويُسمى أيضاً: <strong>التعلم الإحصائي (Statistical Learning)</strong>، و<strong>التحليلات التنبؤية (Predictive Analytics)</strong> في سياق الأعمال، ويدخل ضمنياً تحت مسمى <strong>تنقيب البيانات (Data Mining)</strong> عند التركيز على الاكتشاف.</p>
+</section>
+<section id="الاستمداد" class="level2">
+<h2 class="anchored" data-anchor-id="الاستمداد">8. الِاسْتِمْدَاد</h2>
+<p>يستمد هذا العلم كيانه من ثلاثة روافد أساسية:</p>
+<ul>
+<li><strong>الرياضيات:</strong> خاصة الجبر الخطي (لتمثيل البيانات) والتفاضل (لتحسين النماذج).</li>
+<li><strong>الإحصاء:</strong> لتوفير الأطر النظرية للتعلم من العينات والاستدلال.</li>
+<li><strong>المنطق والحوسبة:</strong> لتنفيذ هذه النماذج في بيئة برمجية فعالة.</li>
+</ul>
+</section>
+<section id="حكم-الشارع" class="level2">
+<h2 class="anchored" data-anchor-id="حكم-الشارع">9. حُكْم الشَّارِع</h2>
+<p>يُصنف ضمن العلوم التجريبية التي يُحكم عليها بحسب غايتها؛ فهي محمودة إذا استُخدمت في الطب والزراعة وتحقيق العدل، ومذمومة إذا أدت إلى الكذب والظلم ونحوه.</p>
+</section>
+<section id="المسائل" class="level2">
+<h2 class="anchored" data-anchor-id="المسائل">10. المَسَائِل</h2>
+<p>هي القضايا الكلية التي يبحث فيها، وأهمها:</p>
+<ul>
+<li><strong>التعلم الخاضع للإشراف (Supervised):</strong> تدريب النموذج على مدخلات معلومة النتائج (Labeled Data) ليتعلم رسم خريطة (Mapping) بين المدخل والمخرج.</li>
+<li><strong>التعلم غير الخاضع للإشراف (Unsupervised):</strong> معالجة بيانات لا تحمل نتائج مسبقة لاكتشاف الأنماط والعلاقات الكامنة فيها تلقائياً.</li>
+<li><strong>التعلم التعزيزي (Reinforcement):</strong> تدريب <strong>وكيل</strong> (Agent) على اتخاذ قرارات في بيئة معينة للحصول على أكبر قدر من المكافآت.</li>
+<li><strong>التعلّم العميق (Deep Learning)</strong> - كفرع تخصصي من تعلم الآلة. وهو نمط من التعلم يعتمد على بنية شبكات عصبية اصطناعية متعددة الطبقات (Multi-layered Neural Networks)، تقوم باستخلاص الميزات (Features) من البيانات الخام بشكل هرمي وتلقائي، بدءاً من البسيط إلى المعقد.</li>
+</ul>
+<hr>
+<p>التالي: <a href="./03_Predict.html">التنبؤ</a></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "تم النسخ!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "تم النسخ!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
