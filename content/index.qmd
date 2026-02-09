@@ -4,6 +4,38 @@ format: html
 ---
 
 <!-- - [مقدمة للدورة](./modules/00_course_intro/Course_Intro.qmd) -->
-- [مقدمة عن تعلم الآلة](./modules/M1/01_intro/Intro_ML.qmd)
-- [التعلم بالإشراف](./modules/M1/02_supervised_learning/supervised_learning.qmd)
-- [خط إنتاج التنبؤات](./modules/M1/03_predictive_pipeline/regression_2.qmd)
+
+نبدأ بالسؤال الأول: [ما هو علم تعلُّم الآلة؟](./modules/M1/01_intro/Intro_ML.qmd)
+
+
+الموضوع الأول: [التعلم بالإشراف (Supervised Learning)](modules/M1/02_supervised_learning/supervised_learning.qmd) وفيه:
+
+- علاقة أحاديَّة (بين متغير تابع ومتغير مستقل واحد)
+- خوارزمية الانحدار الخطي (LinearRegression)
+- خوارزمية النزول التدريجي (SGDRegressor)
+
+السؤال الثاني: [كيف نمثل العلاقة المركبة بين متغير تابع ومجموعة متغيرات مستقلة؟](modules/M1/03_predictive_pipeline/regression_2.qmd)
+
+- الحاجة **للمعياريَّة**: تسوية القيَم من المتغيرات المختلفة (Standardization)
+- اعتبار المتغيرات الوصفية بترميزها رقميًّا (Encoding)
+- تفسير النموذج الناتج عن التعلم
+
+السؤال الثالث: ما هي العقبات التي تحول دون تعلم أفضل نموذج؟ وكيف نعالجها؟
+
+- معرفة نوع البيانات
+- التطبيع: Normalization (عندما تكون العلاقة لاخطيَّة - اي: متغيرة)
+- معضلة التخصيص والتعميم (Overfitting)
+- التقييم (Eval) والتقويم (Improve)
+- الحاجة لخط إنتاج التنبؤ (**Predictive Model Pipeline**)
+
+التنبؤ بالمقادير المنفصلة: **التصنيف**(Classification). وفيه:
+
+- النوع الثاني من التعلُّم: **الحِفظ** (KNNClassifier)
+
+دراسة خوارزميَّات خاصَّة:
+
+- العصبون (Perceptron)
+- شجرة القرار وغابة القرار العشوائية (DT)
+- نموذج بايز الساذج (Naive Bayes) للاحتمالات
+- نموذج آلات المتجهات الداعمة (SVM)
+- الأساليب التجميعية (Ensemble Methods)
