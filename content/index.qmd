@@ -3,7 +3,7 @@ title: "فهرس"
 format: html
 ---
 
-<!-- - [مقدمة للدورة](./modules/00_course_intro/Course_Intro.qmd) -->
+- [مقدمة للدورة](./modules/M1/00_course_intro/Course_Intro.qmd)
 
 نبدأ بالسؤال الأول: [ما هو علم تعلُّم الآلة؟](./modules/M1/01_intro/Intro_ML.qmd)
 

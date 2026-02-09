@@ -1,6 +1,6 @@
 project:
   type: website
-  title: "Introduction to ML"
+  title: "Machine Learning with Python"
   preview: 
     port: 4600
   output-dir: _site
