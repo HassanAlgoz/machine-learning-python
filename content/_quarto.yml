@@ -5,8 +5,6 @@ project:
     port: 4600
   output-dir: _site
 
-jupyter: python3
-
 execute:
   # https://quarto.org/docs/computations/python.html#kernel-daemon
   daemon: true 
