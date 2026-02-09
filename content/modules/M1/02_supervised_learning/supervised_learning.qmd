@@ -1,5 +1,5 @@
 ---
-title: "نموذج الانحدار الخطي (Linear Regression)"
+title: "التعلم بالإشراف (Supervised Learning)"
 format: html
 ---
 
