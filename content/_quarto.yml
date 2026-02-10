@@ -5,6 +5,8 @@ project:
     port: 4600
   output-dir: _site
 
+bibliography: references.bib
+
 execute:
   # https://quarto.org/docs/computations/python.html#kernel-daemon
   daemon: true 
