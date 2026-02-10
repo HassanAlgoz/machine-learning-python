@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Exercise: Linear Regression – Machine Learning with Python</title>
+<title>ohe_problem_demo – Machine Learning with Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -118,54 +118,284 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Exercise: Linear Regression</h1>
+
+
+
+<p>Note: this doesn’t seem to be a problem for the Ames dataset, but it can be a problem for other datasets.</p>
+<div id="4aa41d99" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OneHotEncoder</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> fetch_openml</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>ames_housing <span class="op">=</span> fetch_openml(data_id<span class="op">=</span><span class="dv">41211</span>, as_frame<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> ames_housing.data</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> ames_housing.target</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/home/halgoz/work/udacity-c6/c6/content/modules/M1/.venv/lib/python3.12/site-packages/sklearn/datasets/_openml.py:1035: UserWarning: Version 1 of dataset ames-housing is inactive, meaning that issues have been found in the dataset. Try using a newer version from this URL: https://openml.org/data/v1/download/20649135/ames-housing.arff
+  warn(</code></pre>
 </div>
+<div class="cell-output cell-output-display" data-execution_count="1">
+<div>
 
 
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">MS_SubClass</th>
+<th data-quarto-table-cell-role="th">MS_Zoning</th>
+<th data-quarto-table-cell-role="th">Lot_Frontage</th>
+<th data-quarto-table-cell-role="th">Lot_Area</th>
+<th data-quarto-table-cell-role="th">Street</th>
+<th data-quarto-table-cell-role="th">Alley</th>
+<th data-quarto-table-cell-role="th">Lot_Shape</th>
+<th data-quarto-table-cell-role="th">Land_Contour</th>
+<th data-quarto-table-cell-role="th">Utilities</th>
+<th data-quarto-table-cell-role="th">Lot_Config</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">Pool_QC</th>
+<th data-quarto-table-cell-role="th">Fence</th>
+<th data-quarto-table-cell-role="th">Misc_Feature</th>
+<th data-quarto-table-cell-role="th">Misc_Val</th>
+<th data-quarto-table-cell-role="th">Mo_Sold</th>
+<th data-quarto-table-cell-role="th">Year_Sold</th>
+<th data-quarto-table-cell-role="th">Sale_Type</th>
+<th data-quarto-table-cell-role="th">Sale_Condition</th>
+<th data-quarto-table-cell-role="th">Longitude</th>
+<th data-quarto-table-cell-role="th">Latitude</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>One_Story_1946_and_Newer_All_Styles</td>
+<td>Residential_Low_Density</td>
+<td>141</td>
+<td>31770</td>
+<td>Pave</td>
+<td>No_Alley_Access</td>
+<td>Slightly_Irregular</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>Corner</td>
+<td>...</td>
+<td>No_Pool</td>
+<td>No_Fence</td>
+<td>None</td>
+<td>0</td>
+<td>5</td>
+<td>2010</td>
+<td>WD</td>
+<td>Normal</td>
+<td>-93.619754</td>
+<td>42.054035</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>One_Story_1946_and_Newer_All_Styles</td>
+<td>Residential_High_Density</td>
+<td>80</td>
+<td>11622</td>
+<td>Pave</td>
+<td>No_Alley_Access</td>
+<td>Regular</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>Inside</td>
+<td>...</td>
+<td>No_Pool</td>
+<td>Minimum_Privacy</td>
+<td>None</td>
+<td>0</td>
+<td>6</td>
+<td>2010</td>
+<td>WD</td>
+<td>Normal</td>
+<td>-93.619756</td>
+<td>42.053014</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>One_Story_1946_and_Newer_All_Styles</td>
+<td>Residential_Low_Density</td>
+<td>81</td>
+<td>14267</td>
+<td>Pave</td>
+<td>No_Alley_Access</td>
+<td>Slightly_Irregular</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>Corner</td>
+<td>...</td>
+<td>No_Pool</td>
+<td>No_Fence</td>
+<td>Gar2</td>
+<td>12500</td>
+<td>6</td>
+<td>2010</td>
+<td>WD</td>
+<td>Normal</td>
+<td>-93.619387</td>
+<td>42.052659</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>One_Story_1946_and_Newer_All_Styles</td>
+<td>Residential_Low_Density</td>
+<td>93</td>
+<td>11160</td>
+<td>Pave</td>
+<td>No_Alley_Access</td>
+<td>Regular</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>Corner</td>
+<td>...</td>
+<td>No_Pool</td>
+<td>No_Fence</td>
+<td>None</td>
+<td>0</td>
+<td>4</td>
+<td>2010</td>
+<td>WD</td>
+<td>Normal</td>
+<td>-93.617320</td>
+<td>42.051245</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Two_Story_1946_and_Newer</td>
+<td>Residential_Low_Density</td>
+<td>74</td>
+<td>13830</td>
+<td>Pave</td>
+<td>No_Alley_Access</td>
+<td>Slightly_Irregular</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>Inside</td>
+<td>...</td>
+<td>No_Pool</td>
+<td>Minimum_Privacy</td>
+<td>None</td>
+<td>0</td>
+<td>3</td>
+<td>2010</td>
+<td>WD</td>
+<td>Normal</td>
+<td>-93.638933</td>
+<td>42.060899</td>
+</tr>
+</tbody>
+</table>
 
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<p>Your task is to do the following:</p>
-<ol type="1">
-<li>Load the data</li>
-<li>Explore the data</li>
-<li>Identify the features and their types</li>
-<li>Identify the target and its type</li>
-<li>Initialize a regression model</li>
-<li>Train the model</li>
-<li>Evaluate the model</li>
-<li>Make predictions on new cases of your choice</li>
-</ol>
-<div id="9a33cbf7" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<p>5 rows × 80 columns</p>
 </div>
-<section id="hours-vs-marks-dataset" class="level3">
-<h3 class="anchored" data-anchor-id="hours-vs-marks-dataset">1. <a href="https://www.kaggle.com/datasets/souradippal/simple-linear-regression-hours-vs-marks-data">Hours vs Marks Dataset</a></h3>
-<p>Some important characteristics of the dataset, to ask yourself about:</p>
+</div>
+</div>
 <ul>
-<li>What is the number of samples?</li>
-<li>What is the distribution of the features? (<code>min</code>, <code>max</code>, <code>mean</code>, <code>median</code>, <code>std</code>, <code>quantiles</code>). Hint: use <code>DataFrame.describe()</code></li>
-<li>What is the distribution of the target?</li>
-<li>Are there missing values?</li>
-<li>What is the relationship between the feature and the target? Increasing, decreasing, random, or non-linear (changing: maybe, increasing until X, then decreasing)? Plot the feature vs the target to answer this.</li>
+<li>We use <code>info()</code> to check the <strong>Dtype</strong> of the features, to select the categorical columns only, using <code>select_dtypes</code>.</li>
 </ul>
-<div id="54c086fb" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pd.read_csv(<span class="st">"../datasets/Rounded_Student_Hours_Studied_vs_Marks_Dataset.csv"</span>).head()</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
+<div id="406d17ff" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>data.info()</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.DataFrame'&gt;
+RangeIndex: 2930 entries, 0 to 2929
+Data columns (total 80 columns):
+ #   Column              Non-Null Count  Dtype   
+---  ------              --------------  -----   
+ 0   MS_SubClass         2930 non-null   category
+ 1   MS_Zoning           2930 non-null   category
+ 2   Lot_Frontage        2930 non-null   int64   
+ 3   Lot_Area            2930 non-null   int64   
+ 4   Street              2930 non-null   category
+ 5   Alley               2930 non-null   category
+ 6   Lot_Shape           2930 non-null   category
+ 7   Land_Contour        2930 non-null   category
+ 8   Utilities           2930 non-null   category
+ 9   Lot_Config          2930 non-null   category
+ 10  Land_Slope          2930 non-null   category
+ 11  Neighborhood        2930 non-null   category
+ 12  Condition_1         2930 non-null   category
+ 13  Condition_2         2930 non-null   category
+ 14  Bldg_Type           2930 non-null   category
+ 15  House_Style         2930 non-null   category
+ 16  Overall_Qual        2930 non-null   category
+ 17  Overall_Cond        2930 non-null   category
+ 18  Year_Built          2930 non-null   int64   
+ 19  Year_Remod_Add      2930 non-null   int64   
+ 20  Roof_Style          2930 non-null   category
+ 21  Roof_Matl           2930 non-null   category
+ 22  Exterior_1st        2930 non-null   category
+ 23  Exterior_2nd        2930 non-null   category
+ 24  Mas_Vnr_Type        2930 non-null   category
+ 25  Mas_Vnr_Area        2930 non-null   int64   
+ 26  Exter_Qual          2930 non-null   category
+ 27  Exter_Cond          2930 non-null   category
+ 28  Foundation          2930 non-null   category
+ 29  Bsmt_Qual           2930 non-null   category
+ 30  Bsmt_Cond           2930 non-null   category
+ 31  Bsmt_Exposure       2930 non-null   category
+ 32  BsmtFin_Type_1      2930 non-null   category
+ 33  BsmtFin_SF_1        2930 non-null   int64   
+ 34  BsmtFin_Type_2      2930 non-null   category
+ 35  BsmtFin_SF_2        2930 non-null   int64   
+ 36  Bsmt_Unf_SF         2930 non-null   int64   
+ 37  Total_Bsmt_SF       2930 non-null   int64   
+ 38  Heating             2930 non-null   category
+ 39  Heating_QC          2930 non-null   category
+ 40  Central_Air         2930 non-null   category
+ 41  Electrical          2930 non-null   category
+ 42  First_Flr_SF        2930 non-null   int64   
+ 43  Second_Flr_SF       2930 non-null   int64   
+ 44  Low_Qual_Fin_SF     2930 non-null   int64   
+ 45  Gr_Liv_Area         2930 non-null   int64   
+ 46  Bsmt_Full_Bath      2930 non-null   int64   
+ 47  Bsmt_Half_Bath      2930 non-null   int64   
+ 48  Full_Bath           2930 non-null   int64   
+ 49  Half_Bath           2930 non-null   int64   
+ 50  Bedroom_AbvGr       2930 non-null   int64   
+ 51  Kitchen_AbvGr       2930 non-null   int64   
+ 52  Kitchen_Qual        2930 non-null   category
+ 53  TotRms_AbvGrd       2930 non-null   int64   
+ 54  Functional          2930 non-null   category
+ 55  Fireplaces          2930 non-null   int64   
+ 56  Fireplace_Qu        2930 non-null   category
+ 57  Garage_Type         2930 non-null   category
+ 58  Garage_Finish       2930 non-null   category
+ 59  Garage_Cars         2930 non-null   int64   
+ 60  Garage_Area         2930 non-null   int64   
+ 61  Garage_Qual         2930 non-null   category
+ 62  Garage_Cond         2930 non-null   category
+ 63  Paved_Drive         2930 non-null   category
+ 64  Wood_Deck_SF        2930 non-null   int64   
+ 65  Open_Porch_SF       2930 non-null   int64   
+ 66  Enclosed_Porch      2930 non-null   int64   
+ 67  Three_season_porch  2930 non-null   int64   
+ 68  Screen_Porch        2930 non-null   int64   
+ 69  Pool_Area           2930 non-null   int64   
+ 70  Pool_QC             2930 non-null   category
+ 71  Fence               2930 non-null   category
+ 72  Misc_Feature        2930 non-null   category
+ 73  Misc_Val            2930 non-null   int64   
+ 74  Mo_Sold             2930 non-null   int64   
+ 75  Year_Sold           2930 non-null   int64   
+ 76  Sale_Type           2930 non-null   category
+ 77  Sale_Condition      2930 non-null   category
+ 78  Longitude           2930 non-null   float64 
+ 79  Latitude            2930 non-null   float64 
+dtypes: category(46), float64(2), int64(32)
+memory usage: 913.2 KB</code></pre>
+</div>
+</div>
+<div id="48eec73e" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>categorical_columns <span class="op">=</span> data.select_dtypes(include<span class="op">=</span>[<span class="st">'str'</span>, <span class="st">'category'</span>]).columns.tolist()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>cat_data <span class="op">=</span> data[categorical_columns]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>cat_data.head()</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
 <div>
 
 
@@ -173,151 +403,195 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Hours_Studied</th>
-<th data-quarto-table-cell-role="th">Marks</th>
+<th data-quarto-table-cell-role="th">MS_SubClass</th>
+<th data-quarto-table-cell-role="th">MS_Zoning</th>
+<th data-quarto-table-cell-role="th">Street</th>
+<th data-quarto-table-cell-role="th">Alley</th>
+<th data-quarto-table-cell-role="th">Lot_Shape</th>
+<th data-quarto-table-cell-role="th">Land_Contour</th>
+<th data-quarto-table-cell-role="th">Utilities</th>
+<th data-quarto-table-cell-role="th">Lot_Config</th>
+<th data-quarto-table-cell-role="th">Land_Slope</th>
+<th data-quarto-table-cell-role="th">Neighborhood</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">Garage_Type</th>
+<th data-quarto-table-cell-role="th">Garage_Finish</th>
+<th data-quarto-table-cell-role="th">Garage_Qual</th>
+<th data-quarto-table-cell-role="th">Garage_Cond</th>
+<th data-quarto-table-cell-role="th">Paved_Drive</th>
+<th data-quarto-table-cell-role="th">Pool_QC</th>
+<th data-quarto-table-cell-role="th">Fence</th>
+<th data-quarto-table-cell-role="th">Misc_Feature</th>
+<th data-quarto-table-cell-role="th">Sale_Type</th>
+<th data-quarto-table-cell-role="th">Sale_Condition</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">0</th>
-<td>4.76</td>
-<td>46.27</td>
+<td>One_Story_1946_and_Newer_All_Styles</td>
+<td>Residential_Low_Density</td>
+<td>Pave</td>
+<td>No_Alley_Access</td>
+<td>Slightly_Irregular</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>Corner</td>
+<td>Gtl</td>
+<td>North_Ames</td>
+<td>...</td>
+<td>Attchd</td>
+<td>Fin</td>
+<td>Typical</td>
+<td>Typical</td>
+<td>Partial_Pavement</td>
+<td>No_Pool</td>
+<td>No_Fence</td>
+<td>None</td>
+<td>WD</td>
+<td>Normal</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">1</th>
-<td>3.00</td>
-<td>34.30</td>
+<td>One_Story_1946_and_Newer_All_Styles</td>
+<td>Residential_High_Density</td>
+<td>Pave</td>
+<td>No_Alley_Access</td>
+<td>Regular</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>Inside</td>
+<td>Gtl</td>
+<td>North_Ames</td>
+<td>...</td>
+<td>Attchd</td>
+<td>Unf</td>
+<td>Typical</td>
+<td>Typical</td>
+<td>Paved</td>
+<td>No_Pool</td>
+<td>Minimum_Privacy</td>
+<td>None</td>
+<td>WD</td>
+<td>Normal</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">2</th>
-<td>2.08</td>
-<td>33.63</td>
+<td>One_Story_1946_and_Newer_All_Styles</td>
+<td>Residential_Low_Density</td>
+<td>Pave</td>
+<td>No_Alley_Access</td>
+<td>Slightly_Irregular</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>Corner</td>
+<td>Gtl</td>
+<td>North_Ames</td>
+<td>...</td>
+<td>Attchd</td>
+<td>Unf</td>
+<td>Typical</td>
+<td>Typical</td>
+<td>Paved</td>
+<td>No_Pool</td>
+<td>No_Fence</td>
+<td>Gar2</td>
+<td>WD</td>
+<td>Normal</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">3</th>
-<td>4.04</td>
-<td>47.81</td>
+<td>One_Story_1946_and_Newer_All_Styles</td>
+<td>Residential_Low_Density</td>
+<td>Pave</td>
+<td>No_Alley_Access</td>
+<td>Regular</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>Corner</td>
+<td>Gtl</td>
+<td>North_Ames</td>
+<td>...</td>
+<td>Attchd</td>
+<td>Fin</td>
+<td>Typical</td>
+<td>Typical</td>
+<td>Paved</td>
+<td>No_Pool</td>
+<td>No_Fence</td>
+<td>None</td>
+<td>WD</td>
+<td>Normal</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">4</th>
-<td>9.49</td>
-<td>66.26</td>
+<td>Two_Story_1946_and_Newer</td>
+<td>Residential_Low_Density</td>
+<td>Pave</td>
+<td>No_Alley_Access</td>
+<td>Slightly_Irregular</td>
+<td>Lvl</td>
+<td>AllPub</td>
+<td>Inside</td>
+<td>Gtl</td>
+<td>Gilbert</td>
+<td>...</td>
+<td>Attchd</td>
+<td>Fin</td>
+<td>Typical</td>
+<td>Typical</td>
+<td>Paved</td>
+<td>No_Pool</td>
+<td>Minimum_Privacy</td>
+<td>None</td>
+<td>WD</td>
+<td>Normal</td>
 </tr>
 </tbody>
 </table>
 
+<p>5 rows × 46 columns</p>
 </div>
 </div>
 </div>
-</section>
-<section id="experience-vs-salary-data" class="level3">
-<h3 class="anchored" data-anchor-id="experience-vs-salary-data">2. <a href="https://raw.githubusercontent.com/ybifoundation/Dataset/main/Salary%20Data.csv">Experience vs Salary Data</a></h3>
-<p>Is the relationship between the feature (<code>Experience Years</code>) and the target (<code>Salary</code>) linear?</p>
-<div id="3d821217" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pd.read_csv(<span class="st">"../datasets/Salary Data.csv"</span>).head()</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Experience Years</th>
-<th data-quarto-table-cell-role="th">Salary</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">0</th>
-<td>1.1</td>
-<td>39343</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">1</th>
-<td>1.2</td>
-<td>42774</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">2</th>
-<td>1.3</td>
-<td>46205</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">3</th>
-<td>1.5</td>
-<td>37731</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">4</th>
-<td>2.0</td>
-<td>43525</td>
-</tr>
-</tbody>
-</table>
-
+<ul>
+<li>Calculate the memory usage before and after encoding the categorical features</li>
+</ul>
+<div id="4682bd41" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ncols_before <span class="op">=</span> cat_data.shape[<span class="dv">1</span>]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>mem_before <span class="op">=</span> cat_data.memory_usage(deep<span class="op">=</span><span class="va">True</span>).<span class="bu">sum</span>() <span class="op">/</span> <span class="dv">1024</span><span class="op">**</span><span class="dv">2</span>  <span class="co"># MB</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<div id="4efd0c7f" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>encoder <span class="op">=</span> OneHotEncoder(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    sparse_output<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    handle_unknown<span class="op">=</span><span class="st">'ignore'</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>encoder.set_output(transform<span class="op">=</span><span class="st">'pandas'</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>cat_data_encoded <span class="op">=</span> encoder.fit_transform(data[categorical_columns])</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<div id="e345b323" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ncols_after <span class="op">=</span> cat_data_encoded.shape[<span class="dv">1</span>]</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>mem_after <span class="op">=</span> cat_data_encoded.memory_usage(deep<span class="op">=</span><span class="va">True</span>).<span class="bu">sum</span>() <span class="op">/</span> <span class="dv">1024</span><span class="op">**</span><span class="dv">2</span>  <span class="co"># MB</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section>
-<section id="bmi-and-life-expectancy-dataset" class="level3">
-<h3 class="anchored" data-anchor-id="bmi-and-life-expectancy-dataset">3. <a href="./datasets/bmi_and_life_expectancy.csv">BMI and Life Expectancy Dataset</a></h3>
-<p>Optional: the <code>Country</code> column can be used to group some countries together to find out some underlying patterns that are not directly visible in the data.</p>
-<div id="871eb07a" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pd.read_csv(<span class="st">"../datasets/bmi_and_life_expectancy.csv"</span>).head()</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Country</th>
-<th data-quarto-table-cell-role="th">Life expectancy</th>
-<th data-quarto-table-cell-role="th">BMI</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">0</th>
-<td>Afghanistan</td>
-<td>52.8</td>
-<td>20.62058</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">1</th>
-<td>Albania</td>
-<td>76.8</td>
-<td>26.44657</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">2</th>
-<td>Algeria</td>
-<td>75.5</td>
-<td>24.59620</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">3</th>
-<td>Andorra</td>
-<td>84.6</td>
-<td>27.63048</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">4</th>
-<td>Angola</td>
-<td>56.7</td>
-<td>22.25083</td>
-</tr>
-</tbody>
-</table>
-
-</div>
+<ul>
+<li>Compare</li>
+</ul>
+<div id="e01ced26" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Columns Before: </span><span class="sc">{</span>ncols_before<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Columns After: </span><span class="sc">{</span>ncols_after<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Memory Before: </span><span class="sc">{</span>mem_before<span class="sc">:.2f}</span><span class="ss"> MB"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Memory After: </span><span class="sc">{</span>mem_after<span class="sc">:.2f}</span><span class="ss"> MB"</span>)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Columns Before: 46
+Columns After: 318
+Memory Before: 0.15 MB
+Memory After: 7.11 MB</code></pre>
 </div>
 </div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -393,7 +667,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/HassanAlgoz\.github\.io\/machine-learning-python\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

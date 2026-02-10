@@ -429,9 +429,7 @@ y = mx+b
 <p>هذا النموذج يعادل وجود خطين، حيث يخضع الخط الثاني لقيد يجعله متعامداً على الخط الأول (بزاوية 90 درجة). ونتيجة لذلك، يشكلان معاً <strong>مستوًى</strong>. لذا، يمكن وصف هذه العملية بأنها <strong>ملاءمة مستوى (Plane fitting)</strong> بدلاً من ملاءمة خط (Line fitting).</p>
 <p><a href="./assets/multi-variable_regression.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="./assets/multi-variable_regression.png" class="img-fluid"></a></p>
 <p>وقس على ذلك زيادة الخصائص إلى ثلاثة وأربعة كإضافة عمر البيت وموقعه مثلاً، وأكثر من ذلك. فإننا قد لا نستطيع تخيُّلَ ذلك إلا أن خوارزميَّة التعلم هي هي: تضبِطُ المعاملات (Parameters) / الأوزان (Weights) بما يقلل الخطأ تدريجيًّا للوصول إلى أقلِّ خطًأ.</p>
-<blockquote class="blockquote">
-<p>لكن تظهر مشكلة جوهريَّة عندما نحاول اعتبار مجموع متغيرات متفاوتة في القيَم. ما هي هذه المشكلة وكيف نحلها؟ نتابع في الدرس القادم.</p>
-</blockquote>
+<p><strong>لكن تظهر مشكلة جوهريَّة عندما نحاول اعتبار مجموع متغيرات متفاوتة في القيَم. ما هي هذه المشكلة وكيف نحلها؟ نتابع في الدرس القادم.</strong></p>
 </section>
 <section id="خلاصة-الدرس-مقدمة-في-التعلم-بالإشراف-والانحدار-الخطي" class="level2">
 <h2 class="anchored" data-anchor-id="خلاصة-الدرس-مقدمة-في-التعلم-بالإشراف-والانحدار-الخطي">خلاصة الدرس: مقدمة في التعلم بالإشراف والانحدار الخطي</h2>
@@ -568,7 +566,7 @@ y = mx+b
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/HassanAlgoz\.github\.io\/machine-learning-python\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

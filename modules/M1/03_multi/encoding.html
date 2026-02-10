@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>الترميز (Encoding) – Machine Learning with Python</title>
+<title>ترميز الفئات (Encoding Categories) – Machine Learning with Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -40,6 +40,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../site_libs/bootstrap/bootstrap-e5f995b0c242d35549e3936d69094528.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -84,7 +87,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">الترميز (Encoding)</h1>
+<h1 class="title">ترميز الفئات (Encoding Categories)</h1>
 </div>
 
 
@@ -101,12 +104,17 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>نبحث في هذا الدرس:</p>
-<ul>
-<li>اعتبار المتغيرات الوصفية بترميزها رقميًّا (Encoding)</li>
-</ul>
+<p>يجب ترميز البيانات الوصفية بصيغة عددية لنتعامل معها في معظم خوارزميات تعلم الآلة.</p>
+<p>فأما <strong>الأوصاف المرتبة</strong> (Ordinal): كالأحجام (صغير، وسط، كبير) أو المراكز (الأول، الثاني، الثالث) ونحو ذلك فيتم ترميزها بالأعداد مرتَّبة على نحو: (1, 2, 3) باستعمال <code>OrdinalEncoder</code>.</p>
+<p>وهي <strong>وغير المرتَّبة</strong> (Nominal): يمكن ترميزهما بالصفر والواحد، وجودًا وعدمًا، بعدد القيَم الفريدة للصفة. ويستعمل لذلك <code>OneHotEncoder</code>.</p>
+<p><a href="./assets/ohe_vs_oe.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="./assets/ohe_vs_oe.png" class="img-fluid"></a></p>
+<section id="مشكلة-الذاكرة" class="level2">
+<h2 class="anchored" data-anchor-id="مشكلة-الذاكرة">مشكلة الذاكرة</h2>
+<p>ومما يجب التنبيه عليه: أن كل صفة فريدة يتم إنشاء عمود مستقل لها. وذلك قد يتسبب في امتلاء الذاكرة، لذلك فإننا نحدُّ من عدد الصفات باعتبار القيَم الفريدة المتكررة أكثر من <code>min_frequencies</code> من المرات، ثم حدُّ عدد الصفات بـ <code>max_categories</code>.</p>
+<p>انظر التفاصيل في <a href="../../../modules/M1/03_multi/exercises/01_categorical_feature_encoding.html">الدفتر التفاعلي</a>.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -510,6 +518,38 @@ ul.task-list li input[type="checkbox"] {
   });
   </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

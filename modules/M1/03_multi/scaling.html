@@ -140,35 +140,36 @@ window.Quarto = {
 <li>كذلك: مبلغ <code>10</code> ملايين دولار في أسعار المنازل يعد قيمة كبيرة. وبالقياس، فإن الرقم <code>10</code> في عدد الغرف يعد قيمة كبيرة أيضًا.</li>
 <li>وعكسه: مبلغ <code>30</code> آلاف دولار بالنسبة لسعر منزل يعد قيمة صغيرة. وبالقياس فإن القيمة <code>3</code> في عدد الغرف يعد قيمة صغيرة أيضًأ.</li>
 </ul>
-<section id="أهميتها" class="level3">
-<h3 class="anchored" data-anchor-id="أهميتها">أهميتها</h3>
+<section id="أهميتها" class="level2">
+<h2 class="anchored" data-anchor-id="أهميتها">أهميتها</h2>
 <p>تظهر أهمية ذلك في:</p>
-<section id="في-تفسير-قوة-أثر-المتغيرات-نفسها" class="level4">
-<h4 class="anchored" data-anchor-id="في-تفسير-قوة-أثر-المتغيرات-نفسها">في تفسير قوة أثر المتغيرات نفسها</h4>
+<section id="في-تفسير-قوة-أثر-المتغيرات-نفسها" class="level3">
+<h3 class="anchored" data-anchor-id="في-تفسير-قوة-أثر-المتغيرات-نفسها">في تفسير قوة أثر المتغيرات نفسها</h3>
 <p>إذْ لا يُمكن تفسير قوَّة تأثير المتغيرات بالنظر للمعاملات: <span class="math inline">\(w_1, w_2, \dots\)</span> حين تكون قيم المتغيرات نفسها متفاوتة. لكن حين نضعها على نفس المقياس، تكون قيمة المعامل بعد التدريب ممثلة لأهميَّة المتغير الذي يصحبه العامل.</p>
 </section>
-<section id="في-خوارزمية-النزول-التدريجي-sgd" class="level4">
-<h4 class="anchored" data-anchor-id="في-خوارزمية-النزول-التدريجي-sgd">في خوارزمية النزول التدريجي (SGD)</h4>
+<section id="في-خوارزمية-النزول-التدريجي-sgd" class="level3">
+<h3 class="anchored" data-anchor-id="في-خوارزمية-النزول-التدريجي-sgd">في خوارزمية النزول التدريجي (SGD)</h3>
 <p>إذْ تتأثر الخطوة -في اتجاه تقليل الخسارة- بتفاوت قيَم المتغيرات.</p>
 <p><a href="./assets/gradient_descent_2_params_unscaled_vs_scaled.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="./assets/gradient_descent_2_params_unscaled_vs_scaled.png" class="img-fluid"></a></p>
 </section>
-<section id="وفي-خوارزمية-أقرب-جيران-knn" class="level4">
-<h4 class="anchored" data-anchor-id="وفي-خوارزمية-أقرب-جيران-knn">وفي خوارزمية أقرب جيران (KNN)</h4>
+<section id="وفي-خوارزمية-أقرب-جيران-knn" class="level3">
+<h3 class="anchored" data-anchor-id="وفي-خوارزمية-أقرب-جيران-knn">وفي خوارزمية أقرب جيران (KNN)</h3>
 <p>إذْ تعتمد على حساب المسافة بين متغيرات متفاوتة القيَم. كما هو موضح في <a href="https://scikit-learn.org/stable/auto_examples/preprocessing/plot_scaling_importance.html#effect-of-rescaling-on-a-k-neighbors-models">الصورة التالية</a>:</p>
 <p><a href="https://scikit-learn.org/stable/_images/sphx_glr_plot_scaling_importance_001.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://scikit-learn.org/stable/_images/sphx_glr_plot_scaling_importance_001.png" class="img-fluid"></a></p>
 <p>والسبب في أن أماكن النقاط لا يتغير هو أن الرسم يُجري عمليَّة تسوية أصلاً؛ لتظهر جميع النقاط.</p>
 <p>وقد لا تتأثر بعض الخوارزميات بتفاوُت القيَم لكنه أيضًا لا يضرها، مثل: شجرة القرارة (Decision Tree).</p>
+<p>للمزيد راجع: <a href="https://scikit-learn.org/stable/auto_examples/preprocessing/plot_scaling_importance.html">أهميَّة التسوية</a>.</p>
 </section>
 </section>
-<section id="كيفياتها" class="level3">
-<h3 class="anchored" data-anchor-id="كيفياتها">كيفياتها</h3>
+<section id="كيفياتها" class="level2">
+<h2 class="anchored" data-anchor-id="كيفياتها">كيفياتها</h2>
 <p>وهناك طبيعتان لطرق <strong>التسوية</strong>: خطية ولا خطيَّة.</p>
-<section id="أولا-الخطية" class="level4">
-<h4 class="anchored" data-anchor-id="أولا-الخطية">أولاً: <strong>الخطية</strong></h4>
+<section id="أولا-الخطية" class="level3">
+<h3 class="anchored" data-anchor-id="أولا-الخطية">أولاً: <strong>الخطية</strong></h3>
 <p>وهي لا تغيِّرُ نسبة ما بين القيَم نفسها.</p>
 <p>ولها طريقتان معروفتان:</p>
-<section id="الطريقة-الأولى-تقييس-النطاق-بين-الصفر-والواحد" class="level5">
-<h5 class="anchored" data-anchor-id="الطريقة-الأولى-تقييس-النطاق-بين-الصفر-والواحد">الطريقة الأولى: تقييس النطاق بين الصفر والواحد</h5>
+<section id="الطريقة-الأولى-تقييس-النطاق-بين-الصفر-والواحد" class="level4">
+<h4 class="anchored" data-anchor-id="الطريقة-الأولى-تقييس-النطاق-بين-الصفر-والواحد">الطريقة الأولى: تقييس النطاق بين الصفر والواحد</h4>
 <p>في المكتبة (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html"><code>MinMaxScaler</code></a>)، وتعني تحويل القيم من نطاقها الأصلي إلى نطاق ثابت:</p>
 <ul>
 <li>عادةً من 0 إلى 1</li>
@@ -181,11 +182,15 @@ window.Quarto = {
 <li><strong>قلة القيم المتطرفة</strong>: نسبة ضئيلة جداً تعيش بعد 100 عام.</li>
 </ol>
 </section>
-<section id="الطريقة-الثانية-تقييس-النطاق-بالمقياس-الطبيعي" class="level5">
-<h5 class="anchored" data-anchor-id="الطريقة-الثانية-تقييس-النطاق-بالمقياس-الطبيعي">الطريقة الثانية: تقييس النطاق بالمقياس الطبيعي</h5>
+<section id="الطريقة-الثانية-تقييس-النطاق-بالمقياس-الطبيعي" class="level4">
+<h4 class="anchored" data-anchor-id="الطريقة-الثانية-تقييس-النطاق-بالمقياس-الطبيعي">الطريقة الثانية: تقييس النطاق بالمقياس الطبيعي</h4>
 <p>في المكتبة (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html"><code>StandardScaler</code></a>)، إذْ يتم تنصيف القيَم حوْلَ الصفر (بطرحها من المتوسط)، وتكون القيَم بين ثلاث درجات بالنسبة للانحراف المعياري (بقسمتها عليه).</p>
+<p>يتم حساب الدرجة المعيارية <span class="math inline">\(z\)</span> لعينة <span class="math inline">\(x\)</span> كما يلي:</p>
+<p><span class="math display">\[
+z = \frac{x - \mu}{s}
+\]</span></p>
+<p>حيث تمثل <span class="math inline">\(\mu\)</span> و <span class="math inline">\(s\)</span> المتوسط الحسابي والانحراف المعياري لعينات التدريب، على التوالي.</p>
 <p>مناسب عندما تتبع البيانات <strong>التوزيع الطبيعي</strong> أو قريبًا منه.</p>
-<p>انظر: <a href="https://scikit-learn.org/stable/auto_examples/preprocessing/plot_scaling_importance.html">أهميَّة التسوية</a>.</p>
 <p><strong>التقليم (Clipping)</strong> هي عملية استبعاد القيَم المتطرفة (Outliers) بهدف التخفيف من أثرها السلبي على أداء النموذج. قد يتحقق ذلك بإزالة أي قيم تقع خارج:</p>
 <ul>
 <li>نطاق -3 إلى +3 درجات معيارية</li>
@@ -194,12 +199,12 @@ window.Quarto = {
 <p><strong>مثال:</strong> لنفترض وجود مجموعة بيانات بميزة تُسمى <code>roomsPerPerson</code> (عدد الغرف لكل شخص). في حين أن أغلب القيم تتبع التوزيع الطبيعي، قد توجد بضع قيم متطرفة لمنازل تحتوي على عدد هائل من الغرف لكل فرد.</p>
 </section>
 </section>
-<section id="ثانيا-لا-خطية" class="level4">
-<h4 class="anchored" data-anchor-id="ثانيا-لا-خطية">ثانيًا: <strong>لا خطيَّة</strong></h4>
+<section id="ثانيا-لا-خطية" class="level3">
+<h3 class="anchored" data-anchor-id="ثانيا-لا-خطية">ثانيًا: <strong>لا خطيَّة</strong></h3>
 <p>إذْ تغيِّرُ نسبة ما بين القيَم. ومنها:</p>
-<section id="الطريقة-الأولى-تقييس-لوغارتمي-log-scaling" class="level5">
-<h5 class="anchored" data-anchor-id="الطريقة-الأولى-تقييس-لوغارتمي-log-scaling">الطريقة الأولى: تقييس لوغارتمي (Log Scaling)</h5>
-<p>فهي تحوِّل التوزيع غير الطبيعي، المنحاز إلى أحد الجانبين -الموجب أو السالب- إلى <strong>توزيع طبيعي</strong> (Normal Distribution) باستعمال اللوغاريتم الطبيعي (<span class="math inline">\(\ln\)</span>). كما هو موضح في <a href="https://scikit-learn.org/stable/auto_examples/compose/plot_transformed_target.html">الصورة التالية</a>:</p>
+<section id="الطريقة-الأولى-تقييس-لوغارتمي-log-scaling" class="level4">
+<h4 class="anchored" data-anchor-id="الطريقة-الأولى-تقييس-لوغارتمي-log-scaling">الطريقة الأولى: تقييس لوغارتمي (Log Scaling)</h4>
+<p>فهي تحوِّل التوزيع غير الطبيعي، المنحاز إلى أحد الجانبين -الموجب أو السالب- إلى <strong>توزيع طبيعي</strong> (Normal Distribution) باستعمال اللوغاريتم الطبيعي (<span class="math inline">\(\ln\)</span>). كما هو موضح في الصورة التالية:</p>
 <p><a href="https://scikit-learn.org/stable/_images/sphx_glr_plot_transformed_target_003.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://scikit-learn.org/stable/_images/sphx_glr_plot_transformed_target_003.png" class="img-fluid"></a></p>
 <p>مفيدة للبيانات التي تتبع <strong>توزيع قانون القوة (Power Law Distribution)</strong>، والذي يتميز بوجود قلة من نقاط البيانات ذات القيم العالية جداً وكثير من النقاط ذات القيم المنخفضة.</p>
 <ul>
@@ -207,7 +212,7 @@ window.Quarto = {
 <li><strong>مثال 2:</strong> معظم الكتب تبيع نسخاً قليلة جداً، بينما تحقق كتب (الأكثر مبيعاً) الملايين.</li>
 </ul>
 <p>انظر <a href="https://scikit-learn.org/stable/auto_examples/compose/plot_transformed_target.html">تحويل قيمة الهدف</a>.</p>
-<p><strong>التقسيم (Binning / Bucketing)</strong> هو أحد أساليب <strong>هندسة الميزات</strong> (Feature Engineering) التي تتضمن تجميع القيم الرقمية في فئات أو حاويات (Bins) منفصلة.</p>
+<p><strong>التقسيم (<a href="https://scikit-learn.org/stable/modules/preprocessing.html#discretization">Binning</a>)</strong> هو أحد أساليب <strong>هندسة الميزات</strong> (Feature Engineering) التي تتضمن تجميع القيم الرقمية في فئات أو حاويات (Bins) منفصلة.</p>
 <ul>
 <li><strong>مثال:</strong> عدد المتسوقين (زوار المتجر) مقابل درجة الحرارة (حالة الطقس).</li>
 </ul>
@@ -234,6 +239,8 @@ window.Quarto = {
 <li><strong>ضعف العلاقة الخطية</strong>: عندما تكون العلاقة الخطية الإجمالية بين الميزة والوسم (Label) ضعيفة أو منعدمة. (يوضح المثال أعلاه حالة “لا خطية”: حيث يصعد المنحنى ثم يهبط؛ أي أنه منحنى وليس خطاً مستقيماً).</li>
 <li><strong>تكتل البيانات</strong>: عندما تكون قيم الميزة متجمعة في كتل أو مجموعات واضحة.</li>
 </ol>
+<hr>
+<p><a href="../../../modules/M1/03_multi/categorical_feature_encoding.html">التالي</a>: <strong>كيف نُعمِل المتغيرات الوصفية في النموذج؟</strong></p>
 
 
 </section>
@@ -314,7 +321,7 @@ window.Quarto = {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/HassanAlgoz\.github\.io\/machine-learning-python\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

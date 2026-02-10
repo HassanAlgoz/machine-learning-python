@@ -101,7 +101,9 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<!-- - [مقدمة للدورة](./modules/00_course_intro/Course_Intro.qmd) -->
+<ul>
+<li><a href="./modules/M1/00_course_intro/Course_Intro.html">مقدمة للدورة</a></li>
+</ul>
 <p>نبدأ بالسؤال الأول: <a href="./modules/M1/01_intro/Intro_ML.html">ما هو علم تعلُّم الآلة؟</a></p>
 <p>الموضوع الأول: <a href="./modules/M1/02_supervised_learning/supervised_learning.html">التعلم بالإشراف (Supervised Learning)</a> وفيه:</p>
 <ul>
@@ -114,15 +116,12 @@ ul.task-list li input[type="checkbox"] {
 </ul></li>
 </ul>
 <p>السؤال الثاني: <a href="./modules/M1/03_multi/scaling.html">كيف نحل مشكلة تفاوُت قيَم المتغيرات</a></p>
-<ul>
-<li>الحاجة <strong>للمعياريَّة</strong>: تسوية القيَم من المتغيرات المختلفة (Standardization)</li>
-<li>اعتبار المتغيرات الوصفية بترميزها رقميًّا (Encoding)</li>
-<li>تفسير النموذج الناتج عن التعلم</li>
-</ul>
-<p>السؤال الثالث: ما هي العقبات التي تحول دون تعلم أفضل نموذج؟ وكيف نعالجها؟</p>
+<p>السؤال الثالث: <a href="./modules/M1/03_multi/categorical_feature_encoding.html">كيف نُعمِل المتغيرات الوصفية في النموذج؟</a></p>
+<p>السؤال الرابع: ما هي العقبات التي تحول دون تعلم أفضل نموذج؟ وكيف نعالجها؟</p>
 <ul>
 <li>معرفة نوع البيانات</li>
 <li>التطبيع: Normalization (عندما تكون العلاقة لاخطيَّة - اي: متغيرة)</li>
+<li><a href="http://scikit-learn.org/stable/modules/impute.html#impute">القيم المفقودة</a></li>
 <li>معضلة التخصيص والتعميم (Overfitting)</li>
 <li>التقييم (Eval) والتقويم (Improve)</li>
 <li>الحاجة لخط إنتاج التنبؤ (<strong>Predictive Model Pipeline</strong>)</li>
@@ -216,7 +215,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/HassanAlgoz\.github\.io\/machine-learning-python\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

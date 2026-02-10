@@ -75,6 +75,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../site_libs/bootstrap/bootstrap-e5f995b0c242d35549e3936d69094528.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -165,32 +168,59 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>يُعرف بـ <strong>تعلم الآلة (Machine Learning)</strong>، ويُسمى أيضاً: <strong>التعلم الإحصائي (Statistical Learning)</strong>، و<strong>التحليلات التنبؤية (Predictive Analytics)</strong> في سياق الأعمال، ويدخل ضمنياً تحت مسمى <strong>تنقيب البيانات (Data Mining)</strong> عند التركيز على الاكتشاف.</p>
 <p>ويُعد <strong>آرثر صامويل</strong> واضع المصطلح (1959)، و<strong>آلان تورينج</strong> (توفي عام <strong>1954م</strong>) صاحب التساؤل التأسيسي: (<strong>هل يمكن للآلات أن تفكر؟</strong>).</p>
 </section>
-<section id="حده-وموضوعه" class="level2">
-<h2 class="anchored" data-anchor-id="حده-وموضوعه">حده وموضوعه</h2>
+<section id="الحد" class="level2">
+<h2 class="anchored" data-anchor-id="الحد">الحد</h2>
 <p>اعلم أن <strong>تعلم الآلة</strong> (Machine Learning) علم يبحث في قدرة المنطق الآلي على استخراج الأنماط المفيدة من البيانات.</p>
-<p>وتنقسم موضوعاته بحسب <strong>إشارة التعلم</strong> (Learning Signal): وجودًا ثم عدمًا ثم تأخيرًا. وتسمى كذلك <strong>بالوَسم</strong> (Label) إلى ثلاثة أقسام رئيسية:</p>
+</section>
+<section id="الفضل" class="level2">
+<h2 class="anchored" data-anchor-id="الفضل">الفَضْل</h2>
+<p>تتحتم الاستعانة بتعلم الآلة في سياقين لا تفي فيهما البرمجة المباشرة بالمطلوب.</p>
+<p>أولهما: <strong>استعصاء المهمة على الصياغة الإجرائية</strong>، ويتمثل ذلك في عجز الإنسان عن تفكيك أسرار ممارساته الفطرية —كالإدراك البصري والكلامي— ليصيغها في قواعد رقمية، أو في ضخامة البيانات التي تفوق بطبيعتها حدود الاستيعاب والتحليل البشري.</p>
+<p>وثانيهما: <strong>حتمية التكيف</strong>؛ فبينما تتسم البرمجيات التقليدية بالجمود حيال المتغيرات، يمنح تعلم الآلة الأنظمة قدرةً ذاتية على تطويع سلوكها وفقاً للخبرة المكتسبة والمستجدات المحيطة، محولاً إياها من أدوات ثابتة إلى كيانات مرنة تتطور بتطور التجربة.</p>
+</section>
+<section id="الموضوع" class="level2">
+<h2 class="anchored" data-anchor-id="الموضوع">الموضوع</h2>
+<p>وتنقسم موضوعاته بحسب <strong>إشارة التعلم</strong> (Learning Signal) إلى ثلاثة أقسام رئيسية:</p>
+<ol type="1">
+<li>الإشارة موجودة: التعلم الإشرافي (Supervised Learning)</li>
+<li>الإشارة غير موجودة: التعلم اللا إشرافي (Unsupservised Learning)</li>
+<li>الإشارة تأتي بعد الفعل: التعلم بالتعزيز (Reinforcement Learning)</li>
+</ol>
 <section id="القسم-الأول-التعلم-الإشرافي-supervised-learning" class="level3">
 <h3 class="anchored" data-anchor-id="القسم-الأول-التعلم-الإشرافي-supervised-learning">القسم الأول: التعلم الإشرافي (Supervised Learning)</h3>
 <p>حيث تكون <strong>البيانات موسومَة</strong> (Labeled Data)؛ فيتم تدريب النموذج على مدخلات معلومة النتائج؛ ليتعلم رسم خريطة بين المدخل والمخرج تلقائيًّا.</p>
-<p>مثل <strong>تنظيم النشر:</strong> عبر برمجيات تتعلم تمييز المنشورات المزعجة والمسيئة لتمنعها من الظهور.</p>
-<p>ومثل <strong>المراقبة:</strong> عبر أنظمة تتعرف على السمات الحيوية للأشخاص لتمييزهم في صور كاميرات الفيديو.</p>
+<ul>
+<li>مثل <strong>حالة الطقس</strong>: التنبؤ بحالة الطقس غدًا بناء على بيانات تاريخية مسجَّلة للمنطقة الجغرافية.</li>
+<li>مثل <strong>تنظيم النشر:</strong> عبر برمجيات تتعلم تمييز المنشورات المزعجة والمسيئة لتمنعها من الظهور.</li>
+<li>ومثل <strong>المراقبة (التعلم العميق):</strong> عبر أنظمة تتعرف على السمات الحيوية للأشخاص لتمييزهم في صور كاميرات الفيديو.</li>
+</ul>
+<p><a href="./assets/01_supervised.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="./assets/01_supervised.png" class="img-fluid"></a></p>
 </section>
 <section id="القسم-الثاني-التعلم-اللا-إشرافي-unsupervised-learning" class="level3">
 <h3 class="anchored" data-anchor-id="القسم-الثاني-التعلم-اللا-إشرافي-unsupervised-learning">القسم الثاني: التعلم اللا إشرافي (Unsupervised Learning)</h3>
 <p>حيث لا يوجد وَسم صريح؛ بل الغرض كشف النمط الكامن في نفس البيانات: كالتشابه فيما بينها أو التكتل والتجمع حول قيَم معيَّنة، وكذلك تبسيطها.</p>
-<p>مثل <strong>محركات البحث:</strong> عبر أنظمة فهرسة تلقائية وتمكين البحث فيها بالكلمة والمعنى.</p>
-<p>ومثل <strong>التحليل التسويقي:</strong> تقسيم قاعدة العملاء إلى فئات متجانسة بناءً على السلوك الشرائي.</p>
+<ul>
+<li>مثل <strong>محركات البحث:</strong> عبر أنظمة فهرسة تلقائية وتمكين البحث فيها بالكلمة والمعنى.</li>
+<li>ومثل <strong>التحليل التسويقي:</strong> تقسيم قاعدة العملاء إلى فئات متجانسة بناءً على السلوك الشرائي.</li>
+<li>ومثل <strong>مشابهة الصورة (التعلم العميق)</strong>: حيث يمكن البحث عن الصور المتشابهة (أشياء، أشخاص، حيوانات، أجواء، مناطق، …إلخ)</li>
+</ul>
+<p><a href="./assets/02_unsupervised.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="./assets/02_unsupervised.png" class="img-fluid"></a></p>
 </section>
 <section id="القسم-الثالث-التعلم-التعزيزي-reinforcement-learning" class="level3">
 <h3 class="anchored" data-anchor-id="القسم-الثالث-التعلم-التعزيزي-reinforcement-learning">القسم الثالث: التعلم التعزيزي (Reinforcement Learning)</h3>
 <p>وهو نوع من التعلم يقوم على التفاعل مع البيئة المحيطة؛ وبناءً على هذا التفاعل تُرصَدُ الإشارة وتُفسَّر بالسلب أو الإيجاب؛ وينبني على ذلك تعزيز السلوك أو تثبيطه.</p>
-<p>مثل <strong>الألعاب المعقدة:</strong> تحسين الأداء في ألعاب مثل الشطرنج و<code>Go</code> و<code>Dota 2</code>.</p>
-<p>ومثل <strong>أنظمة التوصية:</strong> حيث يتم إبراز المحتوى الذي يعجب المستخدم وتثبيط المحتوى الذي لا يعجبه.</p>
+<ul>
+<li>مثل <strong>أنظمة التوصية:</strong> حيث يتم رصد إشارة الإعجاب أو عدمه من المستخدمين (البيئة) بناءً على توصيات الخوارزمية، فيتم تفسيرها بالسلب والإيجاب لتحسين التوصيات القادمة.</li>
+<li>ومثل <strong>الألعاب المعقدة:</strong> تحسين الأداء في ألعاب مثل الشطرنج و<code>Go</code> و<code>Dota 2</code>.</li>
+<li>ومثل <strong>الروبوتات</strong>: الذراع الآلية، الجسم الآلي، أو المركبة أو الطائرة الآلية.</li>
+</ul>
+<p><a href="./assets/03_reinforcement.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="./assets/03_reinforcement.png" class="img-fluid"></a></p>
+<p>وكل ما سبق من الثمرات يتحقق بمجموع الأقسام لا بمفردها، بل وباستعمال القواعد وهندسة البرمجيات معها.</p>
 </section>
 </section>
 <section id="علاقته-بالعلوم-الأخرى" class="level2">
 <h2 class="anchored" data-anchor-id="علاقته-بالعلوم-الأخرى">علاقته بالعلوم الأخرى</h2>
-<p>علم تعلم الآلة (ML) قسيم لعلوم <strong>الإحصاء التطبيقي</strong> (Applied Statistics) وفرعٌ أصيل عن <strong>الذكاء الاصطناعي</strong> (Artificial Intelligence)، يتميَّز <strong>بالتعلم من التجربة</strong> بدلاً من القواعد الإجرائية الثابتة في البرمجة التقليدية أو النماذج الإحصائية المُسبقة.</p>
+<p>علم <strong>تعلم الآلة</strong> (Machine Learning) قسيم لعلوم <strong>الإحصاء التطبيقي</strong> (Applied Statistics) وفرعٌ أصيل عن <strong>الذكاء الاصطناعي</strong> (Artificial Intelligence)، يتميَّز <strong>بالتعلم من التجربة</strong> بدلاً من: القواعد الإجرائية الثابتة في البرمجة التقليدية أو النماذج الإحصائية المُسبقة من نظريات الإحصاء.</p>
 <p>ويستمد هذا العلم كيانه من ثلاثة روافد أساسية:</p>
 <ul>
 <li><strong>الحاسب:</strong> لتنفيذ هذه النماذج في بيئة برمجية فعالة.</li>
@@ -198,14 +228,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>الإحصاء:</strong> لتوفير الأطر النظرية للتعلم من العينات والاستدلال.</li>
 </ul>
 <p>أما <strong>التعلّم العميق (Deep Learning)</strong>: فهو فرع من <strong>تعلم الآلة</strong> (Machine Learning). وهو نمط من التعلم يعتمد على بنية شبكات عصبية اصطناعية متعددة الطبقات، تقوم باستخلاص الميزات من البيانات الخام بشكل هرمي وتلقائي، بدءاً من البسيط إلى المعقد.</p>
+<p><a href="./assets/related_fields.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="./assets/related_fields.png" class="img-fluid"></a></p>
 </section>
-<section id="الفضل" class="level2">
-<h2 class="anchored" data-anchor-id="الفضل">الفَضْل</h2>
-<p>تتحتم الاستعانة بتعلم الآلة في سياقين لا تفي فيهما البرمجة المباشرة بالمطلوب.</p>
-<p>أولهما: <strong>استعصاء المهمة على الصياغة الإجرائية</strong>، ويتمثل ذلك في عجز الإنسان عن تفكيك أسرار ممارساته الفطرية —كالإدراك البصري والكلامي— ليصيغها في قواعد رقمية، أو في ضخامة البيانات التي تفوق بطبيعتها حدود الاستيعاب والتحليل البشري.</p>
-<p>وثانيهما: <strong>حتمية التكيف</strong>؛ فبينما تتسم البرمجيات التقليدية بالجمود حيال المتغيرات، يمنح تعلم الآلة الأنظمة قدرةً ذاتية على تطويع سلوكها وفقاً للخبرة المكتسبة والمستجدات المحيطة، محولاً إياها من أدوات ثابتة إلى كيانات مرنة تتطور بتطور التجربة.</p>
-<section id="مثال-يوضح-الفرق-بين-الترجمة-بالقواعد-الإجرائية-و-الترجمة-بالإحصاء" class="level3">
-<h3 class="anchored" data-anchor-id="مثال-يوضح-الفرق-بين-الترجمة-بالقواعد-الإجرائية-و-الترجمة-بالإحصاء">مثال يوضح الفرق بين الترجمة بالقواعد الإجرائية و الترجمة بالإحصاء</h3>
+<section id="مثال-تقريبي-الفرق-بين-الترجمة-بالقواعد-الإجرائية-و-الترجمة-بالإحصاء" class="level2">
+<h2 class="anchored" data-anchor-id="مثال-تقريبي-الفرق-بين-الترجمة-بالقواعد-الإجرائية-و-الترجمة-بالإحصاء">مثال تقريبي: الفرق بين الترجمة بالقواعد الإجرائية و الترجمة بالإحصاء</h2>
+<section id="الترجمة-بالقواميس-والقواعد-اللغوية" class="level3">
+<h3 class="anchored" data-anchor-id="الترجمة-بالقواميس-والقواعد-اللغوية">الترجمة بالقواميس والقواعد اللغوية</h3>
 <p>في هذا النموذج، يقوم المبرمج بدور اللغوي. حيث يجب عليه كتابة كل قاعدة نحوية وكل مفردة يدوياً. إذا لم تكن القاعدة مكتوبة في الكود، فلن يفهمها النظام:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rule_based_translate(sentence):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Dictionary (Lexicon)</span></span>
@@ -235,6 +263,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rule_based_translate(<span class="st">"the black cat"</span>)) <span class="co"># Output: el negro gato (Incorrect)</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 <p>يتطلب هذا النوع جهداً بشرياً هائلاً لصياغة آلاف القواعد لكل لغة، ويصعب عليه التعامل مع الاستثناءات اللغوية.</p>
+</section>
+<section id="الترجمة-الإحصائية-بالبيانات-المتوازية" class="level3">
+<h3 class="anchored" data-anchor-id="الترجمة-الإحصائية-بالبيانات-المتوازية">الترجمة الإحصائية بالبيانات المتوازية</h3>
 <p>هنا يبدأ تعلم الآلة. نحن لا نعطيه قواعد بل نعطيه بيانات متوازية (جمل مقابل ترجتمها)، وهو يستنتج الأنماط والاحتمالات وحده.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> defaultdict, Counter</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -268,7 +299,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> train_smt(parallel_data)</span>
 <span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(smt_translate(<span class="st">"the cat"</span>, model)) <span class="co"># Output: el gato</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-<p>ملخص الفرق في جدول:</p>
+</section>
+<section id="ملخص-الفرق-في-جدول" class="level3">
+<h3 class="anchored" data-anchor-id="ملخص-الفرق-في-جدول">ملخص الفرق في جدول</h3>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 24%">
@@ -302,7 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 <p>ومن ميزات تعلم الآلة: التكيُّف مع تغير اللغة بل مع استعمالات الألفاظ في السياقات المختلفة مع اختلاف الأزمنة.</p>
 <hr>
-<p>التالي: <a href="./03_Predict.qmd">التنبؤ</a></p>
+<p>التالي: <a href="../../../modules/M1/02_supervised_learning/supervised_learning.html">كيف تتعلم الآلة؟</a></p>
 
 
 </section>
@@ -382,7 +415,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/HassanAlgoz\.github\.io\/machine-learning-python\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -710,6 +743,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   });
   </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
