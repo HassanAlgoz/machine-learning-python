@@ -16,13 +16,16 @@ format: html
 - علاقة مركَّبة من مجموع متغيرات مستقلة
     - المشكلة: تفاوُت قيَم المتغيرات المعتبرة في النموذج
 
-السؤال الثاني: [كيف نحل مشكلة تفاوُت قيَم المتغيرات](modules/M1/03_multi/scaling.qmd)
+السؤال الثاني: [كيف نحل مشكلة تفاوُت قيَم المتغيرات؟](modules/M1/03_multi/scaling.qmd)
 
 السؤال الثالث: [كيف نُعمِل المتغيرات الوصفية في النموذج؟](./modules/M1/03_multi/categorical_feature_encoding.ipynb)
 
 استدراك: [ملء الفراغات في البيانات: القيم المفقودة](./modules/M1/03_multi/missing.qmd)
 
-موضوع: [الحاجة لخط إنتاج التنبؤ](./modules/M1/03_multi/pipeline.ipynb)
+موضوع: [الحاجة لخط إنتاج التنبؤ](./modules/M1/03_multi/pipeline_models.ipynb)
+
+- Get a **reliable [`.score()`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.score.html)** using [`cross_validate`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_validate.html).
+- Inspect [`Pipeline.named_steps`](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline.named_steps) for debugging.
 
 السؤال الرابع: ما هي العقبات التي تحول دون تعلم أفضل نموذج؟ وكيف نعالجها؟
 
