@@ -20,14 +20,16 @@ format: html
 
 السؤال الثالث: [كيف نُعمِل المتغيرات الوصفية في النموذج؟](./modules/M1/03_multi/categorical_feature_encoding.ipynb)
 
+استدراك: [ملء الفراغات في البيانات: القيم المفقودة](./modules/M1/03_multi/missing.qmd)
+
+موضوع: [الحاجة لخط إنتاج التنبؤ](./modules/M1/03_multi/pipeline.ipynb)
+
 السؤال الرابع: ما هي العقبات التي تحول دون تعلم أفضل نموذج؟ وكيف نعالجها؟
 
 - معرفة نوع البيانات
 - التطبيع: Normalization (عندما تكون العلاقة لاخطيَّة - اي: متغيرة)
-- [القيم المفقودة](http://scikit-learn.org/stable/modules/impute.html#impute)
 - معضلة التخصيص والتعميم (Overfitting)
 - التقييم (Eval) والتقويم (Improve)
-- الحاجة لخط إنتاج التنبؤ (**Predictive Model Pipeline**)
 
 التنبؤ بالمقادير المنفصلة: **التصنيف**(Classification). وفيه:
 
