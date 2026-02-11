@@ -30,4 +30,35 @@ format: html
 
 الثاني: **باعتبار المتغيرات الأخرى**. ويكون بذلك مسألة تنبؤ: انحدار (Regression) أو تصنيف (Classification) بحسب نوع المتغيِّر ذي القيمة المفقودة.
 
+- بيانات تجريبية تحتوي على قيم مفقودة (NaN)
+
+```python
+import numpy as np
+X = [[1, 2, np.nan], 
+     [3, 4, 3], 
+     [np.nan, 6, 5], 
+     [8, 8, 7]]
+
+```
+
+- التقدير البسيط (Mean)
+
+```python
+from sklearn.impute import SimpleImputer
+
+mean_imputer = SimpleImputer(strategy='mean')
+X_transformed = mean_imputer.fit_transform(X)
+X_transformed
+```
+
+- التقدير باستخدام أقرب الجيران (KNN)، يحسب المسافة الإقليدية بين السجلات لتقدير القيم
+
+```python
+from sklearn.impute import KNNImputer
+
+knn_imputer = KNNImputer(n_neighbors=2)
+X_transformed = knn_imputer.fit_transform(X)
+X_transformed
+```
+
 انظر: [ملء القيم المفقودة](https://scikit-learn.org/stable/modules/impute.html).
