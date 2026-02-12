@@ -12,6 +12,7 @@ $font-family-sans-serif: "Noto Naskh Arabic", "Source Sans Pro", -apple-system, 
 $headings-font-weight: 400 !default;
 
 $web-font-path: "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" !default;
+
 @if $web-font-path {
     @import url($web-font-path);
 }
@@ -32,14 +33,16 @@ $mermaid-node-fg-color: $primary;
 
 // Code blocks
 
-code, pre {
+code,
+pre,
+.references {
     direction: ltr; // Set text direction to LTR
     text-align: left; // Align text to the left
 }
 
 // Typography
 
-body {
+body[dir="rtl"] {
     -webkit-font-smoothing: antialiased;
     // direction: rtl; // Set text direction to RTL
     // text-align: right; // Align text to the right
@@ -49,7 +52,7 @@ body {
         direction: ltr;
         text-align: left;
     }
-    
+
     // Indicators
     .badge {
         &.bg-light {
@@ -71,32 +74,30 @@ body {
     //         float: right; // Ensure progress bar starts from the right
     //     }
     // }
+
+    // quarto-scss-analysis-annotation { "origin": null }
+
+    ul.task-list li input[type="checkbox"] {
+        margin: 0;
+    }
+
+    ol {
+        list-style-type: arabic-indic;
+    }
+
+    .sidebar-item-text.sidebar-link.text-start {
+        text-align: start !important;
+    }
+
+    .list-unstyled {
+        padding-left: initial !important;
+    }
 }
 
 // Progress bars
-
 .progress {
     .progress-bar {
         font-size: 8px;
         line-height: 8px;
     }
-}
-
-
-// quarto-scss-analysis-annotation { "origin": null }
-
-ul.task-list li input[type="checkbox"] {
-    margin: 0;
-}
-
-ol {
-    list-style-type: arabic-indic;
-}
-
-.sidebar-item-text.sidebar-link.text-start {
-    text-align: start !important;
-}
-
-.list-unstyled {
-    padding-left: initial !important;
 }

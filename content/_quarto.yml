@@ -4,6 +4,8 @@ project:
   preview: 
     port: 4600
   output-dir: _site
+  resources:
+    - "exercises/*.ipynb"
 
 bibliography: references.bib
 
