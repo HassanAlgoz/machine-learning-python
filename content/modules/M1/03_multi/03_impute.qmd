@@ -26,9 +26,9 @@ format: html
 
 واستنتاجُها يكون بأحد طريقين:
 
-الأول: **من القيَم الأخرى لنفس المتغيِّر**. كحساب المتوسط أو الوسيط أو الأكثر تكرارًا أو قيمة ثابتة.
+الأول: **من القيَم الأخرى لنفس المتغيِّر** ([`SimpleImputer`](https://scikit-learn.org/stable/modules/impute.html#univariate-feature-imputation)). كحساب المتوسط أو الوسيط أو الأكثر تكرارًا أو قيمة ثابتة.
 
-الثاني: **باعتبار المتغيرات الأخرى**. ويكون بذلك مسألة تنبؤ: انحدار (Regression) أو تصنيف (Classification) بحسب نوع المتغيِّر ذي القيمة المفقودة.
+الثاني: **باعتبار المتغيرات الأخرى** ([مثل: `IterativeImputer`](https://scikit-learn.org/stable/modules/impute.html#multivariate-feature-imputation)). ويكون بذلك مسألة تنبؤ: انحدار (Regression) أو تصنيف (Classification) بحسب نوع المتغيِّر ذي القيمة المفقودة.
 
 - بيانات تجريبية تحتوي على قيم مفقودة (NaN)
 
@@ -51,7 +51,7 @@ X_transformed = mean_imputer.fit_transform(X)
 X_transformed
 ```
 
-- التقدير باستخدام أقرب الجيران (KNN)، يحسب المسافة الإقليدية بين السجلات لتقدير القيم
+- التقدير باستخدام خوارزمية التعلم: **أقرب الجيران (KNN)**:
 
 ```python
 from sklearn.impute import KNNImputer
@@ -60,5 +60,7 @@ knn_imputer = KNNImputer(n_neighbors=2)
 X_transformed = knn_imputer.fit_transform(X)
 X_transformed
 ```
+
+---
 
 انظر: [ملء القيم المفقودة](https://scikit-learn.org/stable/modules/impute.html).
