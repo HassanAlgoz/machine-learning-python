@@ -15,15 +15,8 @@ format: html
 - مشكلة: [ملء الفراغات في البيانات: القيم المفقودة](./modules/M1/03_multi/03_impute.qmd)
 - موضوع: [الحاجة لخط إنتاج التنبؤ](./modules/M1/04_pipeline/01_pipeline.qmd)
     - تطبيق: [بناء خط إنتاج التنبؤ](./modules/M1/04_pipeline/02_make_pipeline.ipynb)
-- موضوع: [التقييم والتدقيق والتقويم](./modules/M1/05_eval/01_evaluation.qmd):
-    - معضلة التخصيص والتعميم (Overfitting vs Generalization)
-    - Get a **reliable [`.score()`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.score.html)** using [`cross_validate`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_validate.html).
-    - Inspect [`Pipeline.named_steps`](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline.named_steps) for debugging.
-- السؤال الرابع: ما هي العقبات التي تحول دون تعلم أفضل نموذج؟ وكيف نعالجها؟
 
-التنبؤ بالمقادير المنفصلة: **التصنيف**(Classification). وفيه:
-
-- النوع الثاني من التعلُّم: **الحِفظ** (KNNClassifier)
+---
 
 دراسة خوارزميَّات خاصَّة:
 
@@ -32,7 +25,3 @@ format: html
 - نموذج بايز الساذج (Naive Bayes) للاحتمالات
 - نموذج آلات المتجهات الداعمة (SVM)
 - الأساليب التجميعية (Ensemble Methods)
-
----
-
-- التطبيع: Normalization (عندما تكون العلاقة لاخطيَّة - اي: متغيرة)
