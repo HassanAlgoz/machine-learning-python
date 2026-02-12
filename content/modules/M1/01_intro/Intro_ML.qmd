@@ -93,7 +93,7 @@ format: html
 2. **التعلم اللا إشرافي** (Unsupservised Learning): حيث الإشارة هي البيانات نفسها.
 3. **التعلم بالتعزيز** (Reinforcement Learning): حيث الإشارة هي ردة فعل من البيئة التي يعمل فيها العميل المتعلم.
 
-![](./assets/subjects_of_ml.png)
+![](./assets/learning_signal.png)
 
 ### القسم الأول: التعلم الإشرافي (Supervised Learning)
 
