@@ -3,36 +3,23 @@ title: "فهرس"
 format: html
 ---
 
-- [مقدمة للدورة](./modules/M1/00_course_intro/Course_Intro.qmd)
-
-نبدأ بالسؤال الأول: [ما هو علم تعلُّم الآلة؟](./modules/M1/01_intro/Intro_ML.qmd)
-
-
-الموضوع الأول: [التعلم بالإشراف (Supervised Learning)](modules/M1/02_supervised_learning/supervised_learning.qmd) وفيه:
-
-- علاقة أحاديَّة (بين متغير تابع ومتغير مستقل واحد)
-- خوارزمية الانحدار الخطي (LinearRegression)
-- خوارزمية النزول التدريجي (SGDRegressor)
-- علاقة مركَّبة من مجموع متغيرات مستقلة
-    - المشكلة: تفاوُت قيَم المتغيرات المعتبرة في النموذج
-
-السؤال الثاني: [كيف نحل مشكلة تفاوُت قيَم المتغيرات؟](modules/M1/03_multi/scaling.qmd)
-
-السؤال الثالث: [كيف نُعمِل المتغيرات الوصفية في النموذج؟](./modules/M1/03_multi/categorical_feature_encoding.ipynb)
-
-استدراك: [ملء الفراغات في البيانات: القيم المفقودة](./modules/M1/03_multi/missing.qmd)
-
-موضوع: [الحاجة لخط إنتاج التنبؤ](./modules/M1/03_multi/pipeline_models.ipynb)
-
-- Get a **reliable [`.score()`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.score.html)** using [`cross_validate`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_validate.html).
-- Inspect [`Pipeline.named_steps`](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline.named_steps) for debugging.
-
-السؤال الرابع: ما هي العقبات التي تحول دون تعلم أفضل نموذج؟ وكيف نعالجها؟
-
-- معرفة نوع البيانات
-- التطبيع: Normalization (عندما تكون العلاقة لاخطيَّة - اي: متغيرة)
-- معضلة التخصيص والتعميم (Overfitting)
-- التقييم (Eval) والتقويم (Improve)
+<!-- - [مقدمة للدورة](./modules/M1/00_course_intro/Course_Intro.qmd) -->
+- نبدأ بالسؤال الأول: [ما هو علم تعلُّم الآلة؟](./modules/M1/01_intro/Intro_ML.qmd)
+- الموضوع الأول: [التعلم بالإشراف (Supervised Learning)](modules/M1/02_supervised_learning/supervised_learning.qmd) وفيه:
+    - علاقة أحاديَّة (بين متغير تابع ومتغير مستقل واحد)
+    - خوارزمية الانحدار الخطي (LinearRegression)
+    - خوارزمية النزول التدريجي (SGDRegressor)
+    - علاقة مركَّبة من مجموع متغيرات مستقلة
+- مشكلة: [كيف نحل مشكلة تفاوُت قيَم المتغيرات؟](modules/M1/03_multi/01_scale.qmd)
+- سؤال: [كيف نُعمِل المتغيرات الوصفية في النموذج؟](./modules/M1/03_multi/02_encode.ipynb)
+- مشكلة: [ملء الفراغات في البيانات: القيم المفقودة](./modules/M1/03_multi/03_impute.qmd)
+- موضوع: [الحاجة لخط إنتاج التنبؤ](./modules/M1/04_pipeline/01_pipeline.qmd)
+    - تطبيق: [بناء خط إنتاج التنبؤ](./modules/M1/04_pipeline/02_make_pipeline.ipynb)
+- موضوع: [التقييم والتدقيق والتقويم](./modules/M1/05_eval/01_evaluation.qmd):
+    - معضلة التخصيص والتعميم (Overfitting vs Generalization)
+    - Get a **reliable [`.score()`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.score.html)** using [`cross_validate`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_validate.html).
+    - Inspect [`Pipeline.named_steps`](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline.named_steps) for debugging.
+- السؤال الرابع: ما هي العقبات التي تحول دون تعلم أفضل نموذج؟ وكيف نعالجها؟
 
 التنبؤ بالمقادير المنفصلة: **التصنيف**(Classification). وفيه:
 
@@ -45,3 +32,7 @@ format: html
 - نموذج بايز الساذج (Naive Bayes) للاحتمالات
 - نموذج آلات المتجهات الداعمة (SVM)
 - الأساليب التجميعية (Ensemble Methods)
+
+---
+
+- التطبيع: Normalization (عندما تكون العلاقة لاخطيَّة - اي: متغيرة)

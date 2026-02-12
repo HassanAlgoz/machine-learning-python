@@ -1,0 +1,178 @@
+---
+title: "خط معالجة البيانات (Pipeline)"
+format: html
+---
+
+نتعلم في هذا الدرس: الانتقال من النموذج إلى **خط المعالجة** ([Pipeline](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html)) ومكوناته هي:
+
+1. **المُقدّر (Estimator)**
+2. **المحوّل (Transformer)**
+3. **المتنبئ (Predictor)**
+
+## ما هو خط المعالجة ([Pipeline](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html))؟
+
+هو **الخط** أو **المسار** السابق لدخول البيانات إلى خوارزمية التعلم. وذلك ليتم ضبط النموذج مع جميع المعالجات القبليَّة له جُملَةً واحدة؛ فالتغيير فيها أو في عوامل النموذج، كلاهُما يؤثر في نتيجة التنبؤ.
+
+في مكتبة sklearn تم تسمية الوِحدة والقِطعة الواحدة في مسار المعالجة باسم **المقدِّر** (Estimator)، وهي إما:
+
+1. **محوِّل** (Transformer) وهي خطوات المعالجة التي تحصي من البيانات ثم تحولها.
+2. **متنبئ** (Predictor) وهي النموذج المتعلم من بيانات التدريب، القادر على التنبؤ.
+
+![الثالوث: المُقدّر، المحوّل، المتنبئ (Estimator, Transformer, Predictor)](./assets/estimator_transformer_predictor.png)
+
+لنفصّل الأمر:
+
+### 1. المُقدّر (Estimator)
+
+يتيميَّز بالإجراء `fit()` الذي إنما يحسب مقادير من البيانات؛ ولا يغير البيانات نفسها.
+
+وهذا **الصنف مجرَّد** (Abstract Class) ؛ إذْ لا وجود لمقدِّر غير محول ولا متنبئ. بل لابد أن يكون أحدهما.
+
+```python
+estimator = estimator.fit(data, targets)
+```
+
+أو
+
+```python
+estimator = estimator.fit(data)
+```
+
+### 2. المحوّل (Transformer)
+
+يضيف إلى التقدير، الإجراء `transform()` الذي يغير البيانات بناءً على المقادير التي تم حسابها من بيانات التدريب.
+
+```python
+new_data = transformer.transform(data)
+```
+
+عندما يمكن تنفيذ عمليتي الملاءمة والتحويل معاً بكفاءة أعلى بكثير مما لو تم تنفيذهما بشكل منفصل، يتم تنفيذ: [`fit_transform()`](https://scikit-learn.org/stable/modules/generated/sklearn.base.TransformerMixin.html#sklearn.base.TransformerMixin.fit_transform)
+
+```python
+new_data = transformer.fit_transform(data)
+```
+
+وإليك أمثلة للمحولات وعمل كلا الإجرائين فيه:
+
+| **المحول** | **التقدير: `fit()`** | **التحويل: `transform()`** |
+| ---: | ---: | ---: |
+| [`SimpleImputer`](https://www.google.com/search?q=%5Bhttps://scikit-learn.org/stable/modules/generated/sklearn.impute.SimpleImputer.html%5D(https://scikit-learn.org/stable/modules/generated/sklearn.impute.SimpleImputer.html)) | يحصي **القيمة المحددة حسب الاستراتيجية** لبيانات التدريب. | يملأ القيم المفقودة في البيانات باستخدام القيمة المحسوبة. |
+| [`StandardScaler`](https://www.google.com/search?q=%5Bhttps://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html%5D(https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html)) | يحسب **المتوسط الحسابي** و**الانحراف المعياري** لبيانات التدريب. | يطبق التحويل لتوحيد قياس البيانات. |
+| [`OneHotEncoder`](https://www.google.com/search?q=%5Bhttps://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html%5D(https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html)) | يحدد الصفات الفريدة ويخصص ترميزاً أحاديًّا لكل منها. | يطبق الترميزات على العينات ليحولها إلى أعمدة أحادية. |
+| [`OrdinalEncoder`](https://www.google.com/search?q=%5Bhttps://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OrdinalEncoder.html%5D(https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OrdinalEncoder.html)) | يحدد الصفات الفريدة ويخصص لها ترتيباً عدديًا. | يطبق الترميز ويحول الصفات إلى قيم عددية مرتبة. |
+يُستخدم لتعديل البيانات بطريقة تعليم خاضع للإشراف أو غير خاضع للإشراف (على سبيل المثال: إضافة أعمدة، أو تغييرها، أو إزالتها، ولكن ليس  إضافة أو إزالة الصفوف). وينفذ كما يلي:
+
+### 3. المتنبئ (Predictor)
+
+مثل النماذج: `LinearRegression`, `SGDRegressor`, `KNeighborsClassifier`
+
+فأما إجراءاته فهي:
+
+1. التقدير: `fit(X)` وهي ملاءمة النموذج للبيانات وفق خوارزمية التعلم الآلي المحددة. وهنا يحصل التعليم / التدريب.
+2. التنبؤ: `predict(new_X)` تطبّق النموذج على الحالات الجديدة فقط.
+prediction = predictor.predict(data)
+كما تضيف خوارزميات التصنيف احتماليَّة الصنف قبل الجزم، بإحدى الطريقتين:
+
+1. [`predict_proba(new_X)`](https://scikit-learn.org/stable/glossary.html#term-predict_proba) تعيد احتمالية الصنف لكل حالة.
+2. [`decision_function(new_X)`](https://scikit-learn.org/stable/glossary.html#term-decision_function) تعيد قيمة تقريبية لاحتمال الصنف.
+
+#### التقييم
+
+يمكن قياس [جودة الملاءمة](https://en.wikipedia.org/wiki/Goodness_of_fit) أو احتمالية البيانات التي لم يسبق له رؤيتها في التدريب، كما يلي (كلما كانت القيمة أعلى، كان ذلك أفضل): [`score()`](https://scikit-learn.org/stable/modules/generated/sklearn.base.RegressorMixin.html#sklearn.base.RegressorMixin.score)
+
+```python
+score = model.score(data)
+```
+
+### الهيكل التنظيمي للمكتبة
+
+وهذا تقريب لشكل المكتبة، يبيِّنُ أنواع المقدرات: المحولات والمتنبئات.
+
+```python
+"""
+sklearn/
+├── preprocessing/       <-- (Transformers)
+│   ├── StandardScaler
+│   └── OneHotEncoder
+├── impute/              <-- (Transformers)
+│   └── SimpleImputer
+├── linear_model/        <-- (Predictors)
+│   ├── LinearRegression
+│   └── LogisticRegression
+├── ensemble/            <-- (Predictors)
+│   └── RandomForestClassifier
+└── pipeline/            <-- (The Glue)
+    └── Pipeline
+"""
+```
+
+حيث يتم استيرادها على هذا النحو:
+
+```python
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LinearRegression
+```
+
+### خلاصة المقدرات
+
+| العنصر | الإجراء | الغرض |
+| ---: | ---: | ---: |
+| [المُقدِّر (Estimator)](https://scikit-learn.org/stable/glossary.html#term-estimator) | [`fit()`](https://scikit-learn.org/stable/glossary.html#term-fit) | لملاءمة المعاملات من البيانات. |
+| [المُحوِّل (Transformer)](https://scikit-learn.org/stable/glossary.html#term-transformer) | [`transform()`](https://scikit-learn.org/stable/glossary.html#term-transform) | لتطبيق المعاملات التي تم حسابها أو تعلمها على البيانات. |
+| [المُتنبِّئ (Predictor)](https://scikit-learn.org/stable/glossary.html#term-predictor) | [`predict()`](https://scikit-learn.org/stable/glossary.html#term-predict) | لاستخدام المعاملات التي تم تعلمها للتنبؤ. |
+| المُتنبِّئ (Predictor) | [`score()`](https://scikit-learn.org/stable/glossary.html#term-score) | لتقييم جودة الملاءمة (الأعلى أفضل). |
+
+*المصدر: [توثيق scikit-learn الرسمي لتصميم الواجهة البرمجية](https://scikit-learn.org/stable/developers/develop.html).*
+
+## أهمية خط المعالجة في التعلم الآلي
+
+أولها: **الإجمال (عكس التفصيل):** فبدلاً من كتابة كود طويل لكل خطوة كهذا:
+
+```python
+step_1 = SimpleImputer()
+X_train = step_1.fit_transform(X_train)
+
+step_2 = StandardScaler()
+X_train = step_2.fit_transform(X_train)
+
+step_3 = SGDRegressor()
+X_train = step_3.fit_transform(X_train)
+
+model.fit(X_train, y_train)
+```
+
+.. المسار يجمع الخطوات في سلسلة واحدة، يتم فيها تسمية كل خطوة، ووضع المقدِّر الخاص بها، على النحو التالي
+
+```python
+model = Pipeline(
+	steps=[
+		('imputer', SimpleImputer()),
+		('scaler', StandardScaler()),
+		('regressor', SGDRegressor()),
+	]
+)
+```
+
+.. فيكفي استدعاء `fit()` مرة واحدة على بياناتك لملاءمة سلسلة المقدرات جملةً واحدة:
+
+```python
+model.fit(X_train, y_train)
+```
+
+وكذلك عند التنبؤ، لا حاجة لمعرفة تفاصيل التحويلات ثم كتابتها واحدة واحدة، بل هي محفوظة كقطعة متكاملة:
+
+```python
+model.predict(X_new)
+```
+
+أما الفائدة الثانية والثالثة، فتتضحان ندخل في موضوع **التقييم والتقويم**، ونذكرهما هنا من غير تعقيب:
+
+الثانية: تابعٌ للأوَّل، وهو **الأمان (Safety)**، فخط المعالجة يساعد على تجنب تسرب إحصاءات بيانات الاختبار إلى النموذج المدرب في التحقق المتقاطع (cross-validation)، بضمان استخدام نفس العينات لتدريب المحوّلات والمتنبئات كليهما.
+
+الثالثة: **ضبط المسار ككل**: يمكنك البحث عن معلمات جميع المُقدّرات في المسار دفعة واحدة. (يُشرح لاحقاً. انظر: [ضبط المعلمات الفوقية بالبحث الشبكي (Hyperparameter tuning by grid-search)](https://inria.github.io/scikit-learn-mooc/python_scripts/parameter_tuning_grid_search.html)).
+
+---
+
+- [عملي: بناء خط معالجة](./02_make_pipeline.ipynb)
+- [تمرين: بناء خط معالجة](./exercises/01_pipeline_ex.ipynb)
