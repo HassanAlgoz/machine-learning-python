@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Exercise: Categorical feature encoding – Machine Learning with Python</title>
+<title>تسوية الخصائص (Feature Scaling) – Machine Learning with Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,61 +20,29 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../../">
-<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-b5fd66f8f47aa271496cf9622bf1ba01.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-b5fd66f8f47aa271496cf9622bf1ba01.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -102,10 +70,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "البحث"
   }
 }</script>
-<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -122,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Exercise: Categorical feature encoding</h1>
+<h1 class="title">تسوية الخصائص (Feature Scaling)</h1>
 </div>
 
 
@@ -139,213 +133,119 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Dataset: <a href="https://www.openml.org/search?type=data&amp;status=active&amp;id=42165">Ames Housing dataset</a></p>
-<ol type="1">
-<li>Download the dataset and load it into a pandas DataFrame.</li>
-<li>Encode the categorical features using the <code>OrdinalEncoder</code> and <code>OneHotEncoder</code> using the <code>fit</code> and <code>transform</code> methods</li>
-</ol>
-<p>Consider the following columns:</p>
+<p><strong>عملية تسوية الخصائص</strong> (Feature Scaling) <strong>توحِّد قيَم المتغيرات المتفاوتة لتكون على مقياس مماثل</strong>.</p>
+<p>والحاجة إليها ماسَّة لأنها تعطي المعنى التالي:</p>
 <ul>
-<li><code>SalePrice</code>: The property’s sale price in dollars. This is the <strong>target variable</strong>.</li>
-<li><code>LotArea</code>: Lot size in square feet</li>
-<li><code>MSZoning</code>: Identifies the general zoning classification of the sale.
-<ul>
-<li>Categories:
-<ul>
-<li><code>A</code> Agriculture</li>
-<li><code>C</code> Commercial</li>
-<li><code>FV</code> Floating Village Residential</li>
-<li><code>I</code> Industrial</li>
-<li><code>RH</code> Residential High Density</li>
-<li><code>RL</code> Residential Low Density</li>
-<li><code>RP</code> Residential Low Density Park</li>
-<li><code>RM</code> Residential Medium Density</li>
-</ul></li>
-</ul></li>
-<li><code>LandSlope</code>: Slope of property
-<ul>
-<li>Categories:
-<ul>
-<li><code>Gtl</code> Gentle slope</li>
-<li><code>Mod</code> Moderate Slope<br>
-</li>
-<li><code>Sev</code> Severe Slope</li>
-</ul></li>
-</ul></li>
+<li>مثل: الوزن <code>100kg</code> والطول <code>100m</code>، لا يستويان من حيث النسبة إلى القيم المحيطة لنفس المتغير.</li>
+<li>كذلك: مبلغ <code>10</code> ملايين دولار في أسعار المنازل يعد قيمة كبيرة. وبالقياس، فإن الرقم <code>10</code> في عدد الغرف يعد قيمة كبيرة أيضًا.</li>
+<li>وعكسه: مبلغ <code>30</code> آلاف دولار بالنسبة لسعر منزل يعد قيمة صغيرة. وبالقياس فإن القيمة <code>3</code> في عدد الغرف يعد قيمة صغيرة أيضًأ.</li>
 </ul>
-<p><strong>Optional</strong>: Split the data into training and testing sets using the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html"><code>train_test_split</code></a> function, and use the <code>fit</code> on the training set and <code>transform</code> on the testing set.</p>
-<div id="af792153" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> fetch_openml</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>ames_housing <span class="op">=</span> fetch_openml(name<span class="op">=</span><span class="st">"house_prices"</span>, as_frame<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> ames_housing.data</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> ames_housing.target</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
-
-
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Id</th>
-<th data-quarto-table-cell-role="th">MSSubClass</th>
-<th data-quarto-table-cell-role="th">MSZoning</th>
-<th data-quarto-table-cell-role="th">LotFrontage</th>
-<th data-quarto-table-cell-role="th">LotArea</th>
-<th data-quarto-table-cell-role="th">Street</th>
-<th data-quarto-table-cell-role="th">Alley</th>
-<th data-quarto-table-cell-role="th">LotShape</th>
-<th data-quarto-table-cell-role="th">LandContour</th>
-<th data-quarto-table-cell-role="th">Utilities</th>
-<th data-quarto-table-cell-role="th">...</th>
-<th data-quarto-table-cell-role="th">ScreenPorch</th>
-<th data-quarto-table-cell-role="th">PoolArea</th>
-<th data-quarto-table-cell-role="th">PoolQC</th>
-<th data-quarto-table-cell-role="th">Fence</th>
-<th data-quarto-table-cell-role="th">MiscFeature</th>
-<th data-quarto-table-cell-role="th">MiscVal</th>
-<th data-quarto-table-cell-role="th">MoSold</th>
-<th data-quarto-table-cell-role="th">YrSold</th>
-<th data-quarto-table-cell-role="th">SaleType</th>
-<th data-quarto-table-cell-role="th">SaleCondition</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">0</th>
-<td>1</td>
-<td>60</td>
-<td>RL</td>
-<td>65.0</td>
-<td>8450</td>
-<td>Pave</td>
-<td>NaN</td>
-<td>Reg</td>
-<td>Lvl</td>
-<td>AllPub</td>
-<td>...</td>
-<td>0</td>
-<td>0</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
-<td>2</td>
-<td>2008</td>
-<td>WD</td>
-<td>Normal</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">1</th>
-<td>2</td>
-<td>20</td>
-<td>RL</td>
-<td>80.0</td>
-<td>9600</td>
-<td>Pave</td>
-<td>NaN</td>
-<td>Reg</td>
-<td>Lvl</td>
-<td>AllPub</td>
-<td>...</td>
-<td>0</td>
-<td>0</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
-<td>5</td>
-<td>2007</td>
-<td>WD</td>
-<td>Normal</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">2</th>
-<td>3</td>
-<td>60</td>
-<td>RL</td>
-<td>68.0</td>
-<td>11250</td>
-<td>Pave</td>
-<td>NaN</td>
-<td>IR1</td>
-<td>Lvl</td>
-<td>AllPub</td>
-<td>...</td>
-<td>0</td>
-<td>0</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
-<td>9</td>
-<td>2008</td>
-<td>WD</td>
-<td>Normal</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">3</th>
-<td>4</td>
-<td>70</td>
-<td>RL</td>
-<td>60.0</td>
-<td>9550</td>
-<td>Pave</td>
-<td>NaN</td>
-<td>IR1</td>
-<td>Lvl</td>
-<td>AllPub</td>
-<td>...</td>
-<td>0</td>
-<td>0</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
-<td>2</td>
-<td>2006</td>
-<td>WD</td>
-<td>Abnorml</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">4</th>
-<td>5</td>
-<td>60</td>
-<td>RL</td>
-<td>84.0</td>
-<td>14260</td>
-<td>Pave</td>
-<td>NaN</td>
-<td>IR1</td>
-<td>Lvl</td>
-<td>AllPub</td>
-<td>...</td>
-<td>0</td>
-<td>0</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
-<td>12</td>
-<td>2008</td>
-<td>WD</td>
-<td>Normal</td>
-</tr>
-</tbody>
-</table>
-
-<p>5 rows × 80 columns</p>
+<section id="أهميتها" class="level2">
+<h2 class="anchored" data-anchor-id="أهميتها">أهميتها</h2>
+<p>تظهر أهمية ذلك في:</p>
+<section id="في-تفسير-قوة-أثر-المتغيرات-نفسها" class="level3">
+<h3 class="anchored" data-anchor-id="في-تفسير-قوة-أثر-المتغيرات-نفسها">في تفسير قوة أثر المتغيرات نفسها</h3>
+<p>إذْ لا يُمكن تفسير قوَّة تأثير المتغيرات بالنظر للمعاملات: <span class="math inline">\(w_1, w_2, \dots\)</span> حين تكون قيم المتغيرات نفسها متفاوتة. لكن حين نضعها على نفس المقياس، تكون قيمة المعامل بعد التدريب ممثلة لأهميَّة المتغير الذي يصحبه العامل.</p>
+</section>
+<section id="في-خوارزمية-النزول-التدريجي-sgd" class="level3">
+<h3 class="anchored" data-anchor-id="في-خوارزمية-النزول-التدريجي-sgd">في خوارزمية النزول التدريجي (SGD)</h3>
+<p>إذْ تتأثر الخطوة -في اتجاه تقليل الخسارة- بتفاوت قيَم المتغيرات.</p>
+<p><a href="./assets/gradient_descent_2_params_unscaled_vs_scaled.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="./assets/gradient_descent_2_params_unscaled_vs_scaled.png" class="img-fluid"></a></p>
+</section>
+<section id="وفي-خوارزمية-أقرب-جيران-knn" class="level3">
+<h3 class="anchored" data-anchor-id="وفي-خوارزمية-أقرب-جيران-knn">وفي خوارزمية أقرب جيران (KNN)</h3>
+<p>إذْ تعتمد على حساب المسافة بين متغيرات متفاوتة القيَم. كما هو موضح في <a href="https://scikit-learn.org/stable/auto_examples/preprocessing/plot_scaling_importance.html#effect-of-rescaling-on-a-k-neighbors-models">الصورة التالية</a>:</p>
+<p><a href="https://scikit-learn.org/stable/_images/sphx_glr_plot_scaling_importance_001.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://scikit-learn.org/stable/_images/sphx_glr_plot_scaling_importance_001.png" class="img-fluid"></a></p>
+<p>والسبب في أن أماكن النقاط لا يتغير هو أن الرسم يُجري عمليَّة تسوية أصلاً؛ لتظهر جميع النقاط.</p>
+<p>وقد لا تتأثر بعض الخوارزميات بتفاوُت القيَم لكنه أيضًا لا يضرها، مثل: شجرة القرارة (Decision Tree).</p>
+<p>للمزيد راجع: <a href="https://scikit-learn.org/stable/auto_examples/preprocessing/plot_scaling_importance.html">أهميَّة التسوية</a>.</p>
+</section>
+</section>
+<section id="كيفياتها" class="level2">
+<h2 class="anchored" data-anchor-id="كيفياتها">كيفياتها</h2>
+<p>وهناك طبيعتان لطرق <strong>التسوية</strong>: خطية ولا خطيَّة.</p>
+<section id="أولا-الخطية" class="level3">
+<h3 class="anchored" data-anchor-id="أولا-الخطية">أولاً: <strong>الخطية</strong></h3>
+<p>وهي لا تغيِّرُ نسبة ما بين القيَم نفسها.</p>
+<p>ولها طريقتان معروفتان:</p>
+<section id="الطريقة-الأولى-تقييس-النطاق-بين-الصفر-والواحد" class="level4">
+<h4 class="anchored" data-anchor-id="الطريقة-الأولى-تقييس-النطاق-بين-الصفر-والواحد">الطريقة الأولى: تقييس النطاق بين الصفر والواحد</h4>
+<p>في المكتبة (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html"><code>MinMaxScaler</code></a>)، وتعني تحويل القيم من نطاقها الأصلي إلى نطاق ثابت:</p>
+<ul>
+<li>عادةً من 0 إلى 1</li>
+<li>أو من -1 إلى +1</li>
+</ul>
+<p><strong>الاستخدام</strong>: يكون التقييس الخطي فعالاً عند تحقق شروط، نمثل لها بعمر الإنسان:</p>
+<ol type="1">
+<li><strong>حدود مستقرة:</strong> القيم الدنيا والقصوى للميزة تظل ثابتة (عادةً من 0 إلى 100 عام)</li>
+<li><strong>تشبع النطاق:</strong> يوجد عدد جيد من البيانات لجميع الفئات العمرية.</li>
+<li><strong>قلة القيم المتطرفة</strong>: نسبة ضئيلة جداً تعيش بعد 100 عام.</li>
+</ol>
+</section>
+<section id="الطريقة-الثانية-تقييس-النطاق-بالمقياس-الطبيعي" class="level4">
+<h4 class="anchored" data-anchor-id="الطريقة-الثانية-تقييس-النطاق-بالمقياس-الطبيعي">الطريقة الثانية: تقييس النطاق بالمقياس الطبيعي</h4>
+<p>في المكتبة (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html"><code>StandardScaler</code></a>)، إذْ يتم مركزة القيَم حوْلَ الصفر (بطرحها من المتوسط)، وتكون القيَم بين ثلاث درجات بالنسبة للانحراف المعياري (بقسمتها عليه).</p>
+<p>يتم حساب الدرجة المعيارية <span class="math inline">\(z\)</span> لعينة <span class="math inline">\(x\)</span> كما يلي:</p>
+<p><span class="math display">\[
+z = \frac{x - \mu}{s}
+\]</span></p>
+<p>حيث تمثل <span class="math inline">\(\mu\)</span> و <span class="math inline">\(s\)</span> المتوسط الحسابي والانحراف المعياري لعينات التدريب، على التوالي.</p>
+<p>مناسب عندما تتبع البيانات <strong>التوزيع الطبيعي</strong> أو قريبًا منه.</p>
+<p><strong>التقليم (Clipping)</strong> هي عملية استبعاد القيَم المتطرفة (Outliers) بهدف التخفيف من أثرها السلبي على أداء النموذج. قد يتحقق ذلك بإزالة أي قيم تقع خارج:</p>
+<ul>
+<li>نطاق -3 إلى +3 درجات معيارية</li>
+<li>أو ما فوق 99% من البيانات وما دون 1% منها</li>
+</ul>
+<p><strong>مثال:</strong> لنفترض وجود مجموعة بيانات بميزة تُسمى <code>roomsPerPerson</code> (عدد الغرف لكل شخص). في حين أن أغلب القيم تتبع التوزيع الطبيعي، قد توجد بضع قيم متطرفة لمنازل تحتوي على عدد هائل من الغرف لكل فرد.</p>
+</section>
+</section>
+<section id="ثانيا-لا-خطية" class="level3">
+<h3 class="anchored" data-anchor-id="ثانيا-لا-خطية">ثانيًا: <strong>لا خطيَّة</strong></h3>
+<p>إذْ تغيِّرُ نسبة ما بين القيَم. ومنها:</p>
+<section id="الطريقة-الأولى-تقييس-لوغارتمي-log-scaling" class="level4">
+<h4 class="anchored" data-anchor-id="الطريقة-الأولى-تقييس-لوغارتمي-log-scaling">الطريقة الأولى: تقييس لوغارتمي (Log Scaling)</h4>
+<p>فهي تحوِّل التوزيع غير الطبيعي، المنحاز إلى أحد الجانبين -الموجب أو السالب- إلى <strong>توزيع طبيعي</strong> (Normal Distribution) متناظر باستعمال اللوغاريتم الطبيعي (<span class="math inline">\(\ln\)</span>). كما هو موضح في الصورة التالية:</p>
+<p><a href="https://scikit-learn.org/stable/_images/sphx_glr_plot_transformed_target_003.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://scikit-learn.org/stable/_images/sphx_glr_plot_transformed_target_003.png" class="img-fluid"></a></p>
+<p>مفيدة للبيانات التي تتبع <strong>توزيع قانون القوة (Power Law Distribution)</strong>، والذي يتميز بوجود قلة من نقاط البيانات ذات القيم العالية جداً وكثير من النقاط ذات القيم المنخفضة.</p>
+<ul>
+<li><strong>مثال 1:</strong> عدد قليل من الأفلام يشتهر بقوَّة، بينما الغالبية العظمى تحصل على القليل من الانتباه.</li>
+<li><strong>مثال 2:</strong> معظم الكتب تبيع نسخاً قليلة جداً، بينما تحقق كتب (الأكثر مبيعاً) الملايين.</li>
+</ul>
+<p>انظر <a href="https://scikit-learn.org/stable/auto_examples/compose/plot_transformed_target.html">تحويل قيمة الهدف</a>.</p>
+<p><strong>التقسيم (<a href="https://scikit-learn.org/stable/modules/preprocessing.html#discretization">Binning</a>)</strong> هو أحد أساليب <strong>هندسة الميزات</strong> (Feature Engineering) التي تتضمن تجميع القيم الرقمية في فئات أو حاويات (Bins) منفصلة.</p>
+<ul>
+<li><strong>مثال:</strong> عدد المتسوقين (زوار المتجر) مقابل درجة الحرارة (حالة الطقس).</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./assets/scatter_temp_vs_shoppers.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="شكل 2. مخطط مبعثر (Scatter plot) يوضح العلاقة بين درجة الحرارة وعدد المتسوقين."><img src="./assets/scatter_temp_vs_shoppers.png" class="img-fluid figure-img" alt="شكل 2. مخطط مبعثر (Scatter plot) يوضح العلاقة بين درجة الحرارة وعدد المتسوقين."></a></p>
+<figcaption><strong>شكل 2.</strong> مخطط مبعثر (Scatter plot) يوضح العلاقة بين درجة الحرارة وعدد المتسوقين.</figcaption>
+</figure>
 </div>
+<p>يشير الرسم البياني إلى وجود ثلاث مجموعات (Clusters) ضمن النطاقات الفرعية التالية:</p>
+<ul>
+<li><strong>الفئة 1:</strong> نطاق درجة الحرارة من 4 إلى 11.</li>
+<li><strong>الفئة 2:</strong> نطاق درجة الحرارة من 12 إلى 26.</li>
+<li><strong>الفئة 3:</strong> نطاق درجة الحرارة من 27 إلى 36.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./assets/scatter_temp_vs_shoppers_binned.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="شكل 3. نفس المخطط المبعثر السابق مع خطين أحمرين يحددان الفواصل بين الفئات الثلاث."><img src="./assets/scatter_temp_vs_shoppers_binned.png" class="img-fluid figure-img" alt="شكل 3. نفس المخطط المبعثر السابق مع خطين أحمرين يحددان الفواصل بين الفئات الثلاث."></a></p>
+<figcaption><strong>شكل 3.</strong> نفس المخطط المبعثر السابق مع خطين أحمرين يحددان الفواصل بين الفئات الثلاث.</figcaption>
+</figure>
 </div>
-</div>
-<div id="ef974959" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># INSERT CODE HERE</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+<p>يعتبر التقسيم بديلاً جيدًا لعمليات <strong>التقييس</strong> (Scaling) أو <strong>التقليم</strong> (Clipping) عند تحقق أي من الشرطين التاليين:</p>
+<ol type="1">
+<li><strong>ضعف العلاقة الخطية</strong>: عندما تكون العلاقة الخطية الإجمالية بين الميزة والوسم (Label) ضعيفة أو منعدمة. (يوضح المثال أعلاه حالة “لا خطية”: حيث يصعد المنحنى ثم يهبط؛ أي أنه منحنى وليس خطاً مستقيماً).</li>
+<li><strong>تكتل البيانات</strong>: عندما تكون قيم الميزة متجمعة في كتل أو مجموعات واضحة.</li>
+</ol>
+<hr>
+<p><a href="../../../modules/M1/03_multi/02_encode.html">التالي</a>: <strong>كيف نُعمِل المتغيرات الوصفية في النموذج؟</strong></p>
 
 
+</section>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -749,6 +649,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   });
   </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

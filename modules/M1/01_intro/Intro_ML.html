@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -74,7 +94,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-e5f995b0c242d35549e3936d69094528.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-b5fd66f8f47aa271496cf9622bf1ba01.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -106,6 +126,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -150,51 +199,93 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <p>تُفصل هذه الأبيات الجوانب الأساسية لأي علم كالتالي:</p>
 <ol type="1">
-<li><strong>الحد:</strong> تعريف العلم (ماهيته).</li>
-<li><strong>الموضوع:</strong> المجال الذي يبحث فيه العلم (عن ماذا يتحدث؟).</li>
-<li><strong>الثمرة:</strong> الفائدة المرجوة من تعلمه.</li>
-<li><strong>النسبة:</strong> علاقة هذا العلم بغيره من العلوم (هل هو فرع أم أصل؟).</li>
-<li><strong>الفضل:</strong> مرتبته ومكانته بين العلوم.</li>
-<li><strong>الواضع:</strong> أول من دوّن قواعد هذا العلم أو أسسه.</li>
-<li><strong>الاسم:</strong> المسميات التي يُعرف بها العلم.</li>
-<li><strong>الاستمداد:</strong> المصادر التي استُمد منها هذا العلم.</li>
+<li><strong>الحد:</strong> تعريف الفن الذي يميزه عن غيره، سواء كان تعريفاً جامعاً مانعاً أو وصفياً.</li>
+<li><strong>الموضوع:</strong> المجال الذي يبحث فيه العلم (مثلاً: الكلمات هي موضوع علم النحو).</li>
+<li><strong>الثمرة:</strong> الغاية والفائدة المرجوة من تعلم هذا العلم.</li>
+<li><strong>النسبة:</strong> علاقة هذا الفن بغيره من الفنون (هل هو مباين لها، أم أصل لها، أم فرع؟).</li>
+<li><strong>الفضل:</strong> مكانة العلم وشرفه مقارنة بالعلوم الأخرى.</li>
+<li><strong>الواضع:</strong> أول من دوّن العلم أو وضع قواعده الأساسية.</li>
+<li><strong>الاسم:</strong> ما يُعرف به العلم وما اشتهر به من أسماء.</li>
+<li><strong>الاستمداد:</strong> المصادر التي يُشتق منها العلم ويستقي منها أحكامه وقواعده.</li>
 <li><strong>حكم الشارع:</strong> الحكم الفقهي لتعلمه (فرض عين، فرض كفاية، مندوب، إلخ).</li>
-<li><strong>المسائل:</strong> القضايا والقواعد التي يقررها العلم.</li>
+<li><strong>المسائل:</strong> القضايا والقواعد الكلية التي تُبحث داخل العلم.</li>
 </ol>
-<p>وفيما يلي بيانُها في علم <strong>تعلم الآلة</strong> (Machine Learning) من غير إفراد.</p>
+<p>وفيما يلي بيانُها في علم <strong>تعلم الآلة</strong>.</p>
 </section>
-<section id="الاسم" class="level2">
-<h2 class="anchored" data-anchor-id="الاسم">الِاسْم</h2>
-<p>يُعرف بـ <strong>تعلم الآلة (Machine Learning)</strong>، ويُسمى أيضاً: <strong>التعلم الإحصائي (Statistical Learning)</strong>، و<strong>التحليلات التنبؤية (Predictive Analytics)</strong> في سياق الأعمال، ويدخل ضمنياً تحت مسمى <strong>تنقيب البيانات (Data Mining)</strong> عند التركيز على الاكتشاف.</p>
-<p>ويُعد <strong>آرثر صامويل</strong> واضع المصطلح (1959)، و<strong>آلان تورينج</strong> (توفي عام <strong>1954م</strong>) صاحب التساؤل التأسيسي: (<strong>هل يمكن للآلات أن تفكر؟</strong>).</p>
-</section>
-<section id="الحد" class="level2">
-<h2 class="anchored" data-anchor-id="الحد">الحد</h2>
-<p>اعلم أن <strong>تعلم الآلة</strong> (Machine Learning) علم يبحث في قدرة المنطق الآلي على استخراج الأنماط المفيدة من البيانات.</p>
-</section>
-<section id="الفضل" class="level2">
-<h2 class="anchored" data-anchor-id="الفضل">الفَضْل</h2>
-<p>تتحتم الاستعانة بتعلم الآلة في سياقين لا تفي فيهما البرمجة المباشرة بالمطلوب.</p>
-<p>أولهما: <strong>استعصاء المهمة على الصياغة الإجرائية</strong>، ويتمثل ذلك في عجز الإنسان عن تفكيك أسرار ممارساته الفطرية —كالإدراك البصري والكلامي— ليصيغها في قواعد رقمية، أو في ضخامة البيانات التي تفوق بطبيعتها حدود الاستيعاب والتحليل البشري.</p>
-<p>وثانيهما: <strong>حتمية التكيف</strong>؛ فبينما تتسم البرمجيات التقليدية بالجمود حيال المتغيرات، يمنح تعلم الآلة الأنظمة قدرةً ذاتية على تطويع سلوكها وفقاً للخبرة المكتسبة والمستجدات المحيطة، محولاً إياها من أدوات ثابتة إلى كيانات مرنة تتطور بتطور التجربة.</p>
+<section id="الـحد-التعريف" class="level2">
+<h2 class="anchored" data-anchor-id="الـحد-التعريف">1. الـحَدُّ (التعريف)</h2>
+<p>قيل: هو علم يبحث في قدرة المنطق الآلي على استخراج الأنماط المفيدة من البيانات تلقائيًّا. <span class="citation" data-cites="ShalevShwartz2014">(<a href="#ref-ShalevShwartz2014" role="doc-biblioref">Shalev-Shwartz و Ben-David 2014</a>)</span></p>
+<p>وحسب توم ميتشيل <span class="citation" data-cites="mitchell2015intro">(<a href="#ref-mitchell2015intro" role="doc-biblioref">Mitchell 2015</a>)</span>: يقال إن البرنامج يتعلم من الخبرة (<span class="math inline">\(E\)</span>) بالنسبة لصنف من المهام (<span class="math inline">\(T\)</span>) ومقياس أداء (<span class="math inline">\(P\)</span>)، إذا تحسن أداؤه في المهام (<span class="math inline">\(T\)</span>) كما يقاس بـ (<span class="math inline">\(P\)</span>) مع زيادة الخبرة (<span class="math inline">\(E\)</span>).</p>
 </section>
 <section id="الموضوع" class="level2">
-<h2 class="anchored" data-anchor-id="الموضوع">الموضوع</h2>
-<p>وتنقسم موضوعاته بحسب <strong>إشارة التعلم</strong> (Learning Signal) إلى ثلاثة أقسام رئيسية:</p>
+<h2 class="anchored" data-anchor-id="الموضوع">2. المَوْضُوع</h2>
+<p>موضوع هذا العلم هو <strong>البيانات</strong> (Data) من حيث استخلاص <strong>الأنماط</strong> (Patterns) منها. ويبحث في العلاقة بين المدخلات (<span class="math inline">\(X\)</span>) والمخرجات (<span class="math inline">\(Y\)</span>)، أو في بنية البيانات نفسها في حال غياب المخرجات.</p>
+</section>
+<section id="الـثمرة" class="level2">
+<h2 class="anchored" data-anchor-id="الـثمرة">3. الـثَّمَرَة</h2>
+<p>تتلخص ثمرته في <strong>أتمتة الاستدلال</strong>؛ فبينما كان الإنسان قديماً يستنبط القوانين يدوياً، أصبح تعلم الآلة هو الأداة التي تستنبط القوانين من بحور البيانات المتلاطمة (Big Data). ويتجلى ذلك في <strong>التعميم</strong> (Generalization)؛ أي بناء أنظمة قادرة على اتخاذ قرارات دقيقة تجاه بيانات لم ترها من قبل، وتوفير حلول للمشكلات التي يعجز المنطق البرمجي التقليدي (If-Else) عن حلها، مثل التعرف على الوجوه والأصوات والكلام والترجمة والتحدث والتحرك والتفاعل مع البيئة المحيطة المليئة بالمتغيرات.</p>
+</section>
+<section id="الـفضل" class="level2">
+<h2 class="anchored" data-anchor-id="الـفضل">4. الـفَضْل</h2>
+<p>هو محرك الثورة التقنية الحالية.</p>
+<p>وتتحتم الاستعانة به في سياقين لا تفي بهما البرمجة القواعدية الجامدة:</p>
+<p>أولهما: <strong>استعصاء المهمة على الصياغة الإجرائية</strong>، ويتمثل ذلك في عجز الإنسان عن تفكيك أسرار ممارساته الفطرية —كالإدراك البصري والكلامي— ليصيغها في قواعد رقمية، أو في ضخامة البيانات التي تفوق بطبيعتها حدود الاستيعاب والتحليل البشري.</p>
+<p>وثانيهما: <strong>الحاجة للتكيف المستمر</strong>؛ فبينما تتسم البرمجيات التقليدية بالجمود حيال المتغيرات، يمنح تعلم الآلة الأنظمة قدرةً ذاتية على تطويع سلوكها وفقاً للخبرة المكتسبة والمستجدات المحيطة، محولاً إياها من أدوات ثابتة إلى كيانات مرنة تتطور بتطور التجربة.</p>
+</section>
+<section id="الـنسبة" class="level2">
+<h2 class="anchored" data-anchor-id="الـنسبة">5. الـنِّسْبَة</h2>
+<ul>
+<li><strong>بالنسبة للذكاء الاصطناعي:</strong> هو جزء من كل.</li>
+<li><strong>بالنسبة للإحصاء:</strong> هناك تداخل عميق يُعرف بـ <strong>التعلم الإحصائي</strong> (Statistical Learning)، إلا أن تعلم الآلة يركز أكثر على الأداء التنبؤي والنجاعة الحاسوبية، بينما يركز الإحصاء التقليدي على الاستدلال وصحة الفرضيات.</li>
+<li>أما <strong>التعلّم العميق</strong> (Deep Learning): فهو فرع. وهو نمط من التعلم يعتمد على بنية شبكات عصبية اصطناعية متعددة الطبقات، تقوم باستخلاص الميزات من البيانات الخام بشكل هرمي وتلقائي، بدءاً من البسيط إلى المعقد.</li>
+</ul>
+</section>
+<section id="الاسـتمداد" class="level2">
+<h2 class="anchored" data-anchor-id="الاسـتمداد">6. الاسْـتِمْدَادُ</h2>
+<p>يستمد هذا العلم أدواته من ثلاثة روافد أساسية:</p>
 <ol type="1">
-<li>الإشارة موجودة: التعلم الإشرافي (Supervised Learning)</li>
-<li>الإشارة غير موجودة: التعلم اللا إشرافي (Unsupservised Learning)</li>
-<li>الإشارة تأتي بعد الفعل: التعلم بالتعزيز (Reinforcement Learning)</li>
+<li><strong>الرياضيات:</strong>
+<ol type="1">
+<li>الجبر الخطي (Linear Algebra)</li>
+<li>وحساب التفاضل والتكامل (Calculus)</li>
+<li><a href="https://en.wikipedia.org/wiki/Mathematical_optimization">والتحسين (Optimization)</a></li>
+</ol></li>
+<li><strong>الإحصاء والاحتمالات:</strong> (Statistic &amp; Probability Theory).</li>
+<li><strong>علوم الحاسب:</strong> هو تطبيق لمبادئ الخوارزميات وهياكل البيانات.</li>
 </ol>
+<p><a href="./assets/related_fields.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="./assets/related_fields.png" class="img-fluid"></a></p>
+</section>
+<section id="الـواضع" class="level2">
+<h2 class="anchored" data-anchor-id="الـواضع">7. الـوَاضِع</h2>
+<p>لا ينسب لشخص واحد، بل هو تراكم معرفي:</p>
+<ol type="1">
+<li><strong>التأسيس</strong> (1950): <a href="https://plato.stanford.edu/entries/turing-test/">اختبار تورينج</a> ووضع حجر الأساس الفلسفي للذكاء الميكانيكي.</li>
+<li><strong>المنطق</strong> (1956): ورشة دارتموث وظهور <strong>الأنظمة الخبيرة</strong> المعتمدة على القواعد.</li>
+<li><strong>البيانات</strong> (1990s): التحول من القواعد اليدوية إلى الإحصاء وتعلم الآلة (ML).</li>
+</ol>
+</section>
+<section id="الاسم" class="level2">
+<h2 class="anchored" data-anchor-id="الاسم">8. الاسْم</h2>
+<p>يُعرف بـ <strong>تعلم الآلة (Machine Learning)</strong>، ويطلق عليه في الأوساط الأكاديمية الصرفة <strong>التعلم الإحصائي (Statistical Learning)</strong>، وفي سياقات أخرى <strong>استخراج الأنماط (Pattern Recognition)</strong> أو <strong>التنقيب في البيانات (Data Mining)</strong>، مع فروقات طفيفة في التركيز.</p>
+</section>
+<section id="المـسائل" class="level2">
+<h2 class="anchored" data-anchor-id="المـسائل">9. المَـسَائِل</h2>
+<p>وتنقسم مسائله الكلية بحسب <strong>إشارة التعلم</strong> (Learning Signal) إلى ثلاثة أقسام رئيسية:</p>
+<ol type="1">
+<li><strong>التعلم الإشرافي</strong> (Supervised Learning): حيث الإشارة موجودة مع البيانات.</li>
+<li><strong>التعلم اللا إشرافي</strong> (Unsupservised Learning): حيث الإشارة هي البيانات نفسها.</li>
+<li><strong>التعلم بالتعزيز</strong> (Reinforcement Learning): حيث الإشارة هي ردة فعل من البيئة التي يعمل فيها العميل المتعلم.</li>
+</ol>
+<p><a href="./assets/learning_signal.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="./assets/learning_signal.png" class="img-fluid"></a></p>
 <section id="القسم-الأول-التعلم-الإشرافي-supervised-learning" class="level3">
 <h3 class="anchored" data-anchor-id="القسم-الأول-التعلم-الإشرافي-supervised-learning">القسم الأول: التعلم الإشرافي (Supervised Learning)</h3>
 <p>حيث تكون <strong>البيانات موسومَة</strong> (Labeled Data)؛ فيتم تدريب النموذج على مدخلات معلومة النتائج؛ ليتعلم رسم خريطة بين المدخل والمخرج تلقائيًّا.</p>
 <ul>
 <li>مثل <strong>حالة الطقس</strong>: التنبؤ بحالة الطقس غدًا بناء على بيانات تاريخية مسجَّلة للمنطقة الجغرافية.</li>
 <li>مثل <strong>تنظيم النشر:</strong> عبر برمجيات تتعلم تمييز المنشورات المزعجة والمسيئة لتمنعها من الظهور.</li>
-<li>ومثل <strong>المراقبة (التعلم العميق):</strong> عبر أنظمة تتعرف على السمات الحيوية للأشخاص لتمييزهم في صور كاميرات الفيديو.</li>
+<li>ومثل <strong>تصنيف الصور (التعلم العميق):</strong> عبر أنظمة تتعرف على السمات المميزة للأشياء أو الأوجه أو الأماكن لتحديدها من الصور في كاميرات الفيديو.</li>
 </ul>
-<p><a href="./assets/01_supervised.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="./assets/01_supervised.png" class="img-fluid"></a></p>
+<p><a href="./assets/01_supervised.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="./assets/01_supervised.png" class="img-fluid"></a></p>
 </section>
 <section id="القسم-الثاني-التعلم-اللا-إشرافي-unsupervised-learning" class="level3">
 <h3 class="anchored" data-anchor-id="القسم-الثاني-التعلم-اللا-إشرافي-unsupervised-learning">القسم الثاني: التعلم اللا إشرافي (Unsupervised Learning)</h3>
@@ -202,9 +293,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>مثل <strong>محركات البحث:</strong> عبر أنظمة فهرسة تلقائية وتمكين البحث فيها بالكلمة والمعنى.</li>
 <li>ومثل <strong>التحليل التسويقي:</strong> تقسيم قاعدة العملاء إلى فئات متجانسة بناءً على السلوك الشرائي.</li>
-<li>ومثل <strong>مشابهة الصورة (التعلم العميق)</strong>: حيث يمكن البحث عن الصور المتشابهة (أشياء، أشخاص، حيوانات، أجواء، مناطق، …إلخ)</li>
+<li>ومثل <strong>مشابهة الصورة (التعلم العميق)</strong>: حيث يمكن البحث عن الصور المتشابهة بلا تصنيف مسبق (أشياء، أشخاص، حيوانات، أجواء، مناطق، …إلخ)</li>
 </ul>
-<p><a href="./assets/02_unsupervised.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="./assets/02_unsupervised.png" class="img-fluid"></a></p>
+<p><a href="./assets/02_unsupervised.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="./assets/02_unsupervised.png" class="img-fluid"></a></p>
 </section>
 <section id="القسم-الثالث-التعلم-التعزيزي-reinforcement-learning" class="level3">
 <h3 class="anchored" data-anchor-id="القسم-الثالث-التعلم-التعزيزي-reinforcement-learning">القسم الثالث: التعلم التعزيزي (Reinforcement Learning)</h3>
@@ -214,54 +305,50 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>ومثل <strong>الألعاب المعقدة:</strong> تحسين الأداء في ألعاب مثل الشطرنج و<code>Go</code> و<code>Dota 2</code>.</li>
 <li>ومثل <strong>الروبوتات</strong>: الذراع الآلية، الجسم الآلي، أو المركبة أو الطائرة الآلية.</li>
 </ul>
-<p><a href="./assets/03_reinforcement.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="./assets/03_reinforcement.png" class="img-fluid"></a></p>
+<p><a href="./assets/03_reinforcement.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="./assets/03_reinforcement.png" class="img-fluid"></a></p>
 <p>وكل ما سبق من الثمرات يتحقق بمجموع الأقسام لا بمفردها، بل وباستعمال القواعد وهندسة البرمجيات معها.</p>
 </section>
 </section>
-<section id="علاقته-بالعلوم-الأخرى" class="level2">
-<h2 class="anchored" data-anchor-id="علاقته-بالعلوم-الأخرى">علاقته بالعلوم الأخرى</h2>
-<p>علم <strong>تعلم الآلة</strong> (Machine Learning) قسيم لعلوم <strong>الإحصاء التطبيقي</strong> (Applied Statistics) وفرعٌ أصيل عن <strong>الذكاء الاصطناعي</strong> (Artificial Intelligence)، يتميَّز <strong>بالتعلم من التجربة</strong> بدلاً من: القواعد الإجرائية الثابتة في البرمجة التقليدية أو النماذج الإحصائية المُسبقة من نظريات الإحصاء.</p>
-<p>ويستمد هذا العلم كيانه من ثلاثة روافد أساسية:</p>
-<ul>
-<li><strong>الحاسب:</strong> لتنفيذ هذه النماذج في بيئة برمجية فعالة.</li>
-<li><strong>الرياضيات:</strong> خاصة الجبر الخطي (لتمثيل البيانات) والتفاضل (لتحسين النماذج).</li>
-<li><strong>الإحصاء:</strong> لتوفير الأطر النظرية للتعلم من العينات والاستدلال.</li>
-</ul>
-<p>أما <strong>التعلّم العميق (Deep Learning)</strong>: فهو فرع من <strong>تعلم الآلة</strong> (Machine Learning). وهو نمط من التعلم يعتمد على بنية شبكات عصبية اصطناعية متعددة الطبقات، تقوم باستخلاص الميزات من البيانات الخام بشكل هرمي وتلقائي، بدءاً من البسيط إلى المعقد.</p>
-<p><a href="./assets/related_fields.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="./assets/related_fields.png" class="img-fluid"></a></p>
-</section>
 <section id="مثال-تقريبي-الفرق-بين-الترجمة-بالقواعد-الإجرائية-و-الترجمة-بالإحصاء" class="level2">
 <h2 class="anchored" data-anchor-id="مثال-تقريبي-الفرق-بين-الترجمة-بالقواعد-الإجرائية-و-الترجمة-بالإحصاء">مثال تقريبي: الفرق بين الترجمة بالقواعد الإجرائية و الترجمة بالإحصاء</h2>
+<p>ملاحظة: النص البرمجي مولَّد بالذكاء الاصطناعي، والمراد منه فقط الفكرة العامة، فلا تدقق في التفاصيل -بارك الله فيك-.</p>
 <section id="الترجمة-بالقواميس-والقواعد-اللغوية" class="level3">
 <h3 class="anchored" data-anchor-id="الترجمة-بالقواميس-والقواعد-اللغوية">الترجمة بالقواميس والقواعد اللغوية</h3>
 <p>في هذا النموذج، يقوم المبرمج بدور اللغوي. حيث يجب عليه كتابة كل قاعدة نحوية وكل مفردة يدوياً. إذا لم تكن القاعدة مكتوبة في الكود، فلن يفهمها النظام:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> rule_based_translate(sentence):</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Dictionary (Lexicon)</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    dictionary <span class="op">=</span> {</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"the"</span>: <span class="st">"el"</span>, <span class="st">"cat"</span>: <span class="st">"gato"</span>, <span class="st">"is"</span>: <span class="st">"está"</span>, </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"black"</span>: <span class="st">"negro"</span>, <span class="st">"house"</span>: <span class="st">"casa"</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    words <span class="op">=</span> sentence.lower().split()</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    translated <span class="op">=</span> []</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, word <span class="kw">in</span> <span class="bu">enumerate</span>(words):</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Rule 1: Direct word-for-word mapping</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        trans_word <span class="op">=</span> dictionary.get(word, word)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Rule 2: Spanish Adjective Placement </span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># (e.g., "black cat" -&gt; "gato negro")</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> word <span class="op">==</span> <span class="st">"black"</span> <span class="kw">and</span> i <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> words[i<span class="op">-</span><span class="dv">1</span>] <span class="op">==</span> <span class="st">"cat"</span>:</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Swap previous word with current translation</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            prev <span class="op">=</span> translated.pop()</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>            translated.append(trans_word)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            translated.append(prev)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>            translated.append(trans_word)</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>            </span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">" "</span>.join(translated)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"the"</span>: <span class="st">"el"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"cat"</span>: <span class="st">"gato"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"is"</span>: <span class="st">"está"</span>, </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"black"</span>: <span class="st">"negro"</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"house"</span>: <span class="st">"casa"</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        ...</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    words <span class="op">=</span> sentence.lower().split()</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    translated <span class="op">=</span> []</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i, word <span class="kw">in</span> <span class="bu">enumerate</span>(words):</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Rule 1: Direct word-for-word mapping</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        trans_word <span class="op">=</span> dictionary.get(word, word)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Rule 2: Spanish Adjective Placement </span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># (e.g., "black cat" -&gt; "gato negro")</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> word <span class="op">==</span> <span class="st">"black"</span> <span class="kw">and</span> i <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> words[i<span class="op">-</span><span class="dv">1</span>] <span class="op">==</span> <span class="st">"cat"</span>:</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Swap previous word with current translation</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>            ...</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>            ...</span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rule_based_translate(<span class="st">"the black cat"</span>)) <span class="co"># Output: el negro gato (Incorrect)</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Rule 3: ...</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Rule 4: ...</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">" "</span>.join(translated)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rule_based_translate(<span class="st">"the black cat"</span>))</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>                  <span class="co"># Output: el gato negro</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 <p>يتطلب هذا النوع جهداً بشرياً هائلاً لصياغة آلاف القواعد لكل لغة، ويصعب عليه التعامل مع الاستثناءات اللغوية.</p>
 </section>
 <section id="الترجمة-الإحصائية-بالبيانات-المتوازية" class="level3">
@@ -298,7 +385,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">" "</span>.join([<span class="bu">max</span>(model[w], key<span class="op">=</span>model[w].get) <span class="cf">for</span> w <span class="kw">in</span> words])</span>
 <span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> train_smt(parallel_data)</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(smt_translate(<span class="st">"the cat"</span>, model)) <span class="co"># Output: el gato</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(smt_translate(<span class="st">"the black cat"</span>, model))</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>            <span class="co"># Output: el gato negro</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="ملخص-الفرق-في-جدول" class="level3">
 <h3 class="anchored" data-anchor-id="ملخص-الفرق-في-جدول">ملخص الفرق في جدول</h3>
@@ -338,10 +426,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>التالي: <a href="../../../modules/M1/02_supervised_learning/supervised_learning.html">كيف تتعلم الآلة؟</a></p>
 
 
+
 </section>
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">المراجع</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-mitchell2015intro" class="csl-entry" role="listitem">
+Mitchell, Tom. 2015. <span>"Introduction to Machine Learning (10-601)"</span>. Carnegie Mellon University. 2015. <a href="https://www.cs.cmu.edu/~ninamf/courses/601sp15/lectures.shtml">https://www.cs.cmu.edu/~ninamf/courses/601sp15/lectures.shtml</a>.
+</div>
+<div id="ref-ShalevShwartz2014" class="csl-entry" role="listitem">
+Shalev-Shwartz, Shai, و Shai Ben-David. 2014. <em>Understanding Machine Learning: From Theory to Algorithms</em>. Cambridge University Press. <a href="https://doi.org/10.1017/cbo9781107298019">https://doi.org/10.1017/cbo9781107298019</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

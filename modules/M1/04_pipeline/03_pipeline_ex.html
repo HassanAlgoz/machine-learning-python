@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Exercise: Categorical feature encoding – Machine Learning with Python</title>
+<title>Exercise: Pipelines – Machine Learning with Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -58,23 +58,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../../">
-<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-b5fd66f8f47aa271496cf9622bf1ba01.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-e5f995b0c242d35549e3936d69094528.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -122,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Exercise: Categorical feature encoding</h1>
+<h1 class="title">Exercise: Pipelines</h1>
 </div>
 
 
@@ -139,49 +139,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Dataset: <a href="https://www.openml.org/search?type=data&amp;status=active&amp;id=42165">Ames Housing dataset</a></p>
+<p><strong>Your task</strong>: is to build a complete pipeline to process, fit, and score a predictive regression model.</p>
+<p>We will work with two datasets:</p>
 <ol type="1">
-<li>Download the dataset and load it into a pandas DataFrame.</li>
-<li>Encode the categorical features using the <code>OrdinalEncoder</code> and <code>OneHotEncoder</code> using the <code>fit</code> and <code>transform</code> methods</li>
+<li>The California Housing Prices Dataset has <code>8</code> numerical features and <code>1</code> categorical, with <code>20,640</code> samples</li>
+<li>the Abalone Dataset will require you to do more reading and understanding of the dataset, before you can use it.</li>
 </ol>
-<p>Consider the following columns:</p>
+<div id="e860634a" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="california-housing-prices-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="california-housing-prices-dataset">1. California Housing Prices Dataset</h2>
+<p>Find and download the dataset from Kaggle at <a href="https://www.kaggle.com/datasets/dhirajnirne/california-housing-data">California Housing Dataset</a>.</p>
+<p>According to <a href="https://keras.io/api/datasets/california_housing/">keras.io</a>:</p>
+<blockquote class="blockquote">
+<p>This dataset was obtained from the StatLib repository.</p>
+<p>It’s a continuous regression dataset with 20,640 samples with 8 features each.</p>
+<p>The target variable is a scalar: the median house value for California districts, in dollars.</p>
+<p>The 8 input features are the following:</p>
 <ul>
-<li><code>SalePrice</code>: The property’s sale price in dollars. This is the <strong>target variable</strong>.</li>
-<li><code>LotArea</code>: Lot size in square feet</li>
-<li><code>MSZoning</code>: Identifies the general zoning classification of the sale.
-<ul>
-<li>Categories:
-<ul>
-<li><code>A</code> Agriculture</li>
-<li><code>C</code> Commercial</li>
-<li><code>FV</code> Floating Village Residential</li>
-<li><code>I</code> Industrial</li>
-<li><code>RH</code> Residential High Density</li>
-<li><code>RL</code> Residential Low Density</li>
-<li><code>RP</code> Residential Low Density Park</li>
-<li><code>RM</code> Residential Medium Density</li>
-</ul></li>
-</ul></li>
-<li><code>LandSlope</code>: Slope of property
-<ul>
-<li>Categories:
-<ul>
-<li><code>Gtl</code> Gentle slope</li>
-<li><code>Mod</code> Moderate Slope<br>
-</li>
-<li><code>Sev</code> Severe Slope</li>
-</ul></li>
-</ul></li>
+<li>MedInc: median income in block group</li>
+<li>HouseAge: median house age in block group</li>
+<li>AveRooms: average number of rooms per household</li>
+<li>AveBedrms: average number of bedrooms per household</li>
+<li>Population: block group population</li>
+<li>AveOccup: average number of household members</li>
+<li>Latitude: block group latitude</li>
+<li>Longitude: block group longitude</li>
 </ul>
-<p><strong>Optional</strong>: Split the data into training and testing sets using the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html"><code>train_test_split</code></a> function, and use the <code>fit</code> on the training set and <code>transform</code> on the testing set.</p>
-<div id="af792153" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> fetch_openml</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>ames_housing <span class="op">=</span> fetch_openml(name<span class="op">=</span><span class="st">"house_prices"</span>, as_frame<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> ames_housing.data</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> ames_housing.target</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This dataset was derived from the 1990 U.S. census, using one row per census block group. A block group is the smallest geographical unit for which the U.S. Census Bureau publishes sample data (a block group typically has a population of 600 to 3,000 people).</p>
+<p>A household is a group of people residing within a home. Since the average number of rooms and bedrooms in this dataset are provided per household, these columns may take surprisingly large values for block groups with few households and many empty houses, such as vacation resorts.</p>
+</blockquote>
+<div id="add26b19" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pd.read_csv(<span class="st">"../datasets/california_housing.csv"</span>).head()</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div>
 
@@ -190,162 +180,114 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Id</th>
-<th data-quarto-table-cell-role="th">MSSubClass</th>
-<th data-quarto-table-cell-role="th">MSZoning</th>
-<th data-quarto-table-cell-role="th">LotFrontage</th>
-<th data-quarto-table-cell-role="th">LotArea</th>
-<th data-quarto-table-cell-role="th">Street</th>
-<th data-quarto-table-cell-role="th">Alley</th>
-<th data-quarto-table-cell-role="th">LotShape</th>
-<th data-quarto-table-cell-role="th">LandContour</th>
-<th data-quarto-table-cell-role="th">Utilities</th>
-<th data-quarto-table-cell-role="th">...</th>
-<th data-quarto-table-cell-role="th">ScreenPorch</th>
-<th data-quarto-table-cell-role="th">PoolArea</th>
-<th data-quarto-table-cell-role="th">PoolQC</th>
-<th data-quarto-table-cell-role="th">Fence</th>
-<th data-quarto-table-cell-role="th">MiscFeature</th>
-<th data-quarto-table-cell-role="th">MiscVal</th>
-<th data-quarto-table-cell-role="th">MoSold</th>
-<th data-quarto-table-cell-role="th">YrSold</th>
-<th data-quarto-table-cell-role="th">SaleType</th>
-<th data-quarto-table-cell-role="th">SaleCondition</th>
+<th data-quarto-table-cell-role="th">longitude</th>
+<th data-quarto-table-cell-role="th">latitude</th>
+<th data-quarto-table-cell-role="th">housing_median_age</th>
+<th data-quarto-table-cell-role="th">total_rooms</th>
+<th data-quarto-table-cell-role="th">total_bedrooms</th>
+<th data-quarto-table-cell-role="th">population</th>
+<th data-quarto-table-cell-role="th">households</th>
+<th data-quarto-table-cell-role="th">median_income</th>
+<th data-quarto-table-cell-role="th">median_house_value</th>
+<th data-quarto-table-cell-role="th">ocean_proximity</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">0</th>
-<td>1</td>
-<td>60</td>
-<td>RL</td>
-<td>65.0</td>
-<td>8450</td>
-<td>Pave</td>
-<td>NaN</td>
-<td>Reg</td>
-<td>Lvl</td>
-<td>AllPub</td>
-<td>...</td>
-<td>0</td>
-<td>0</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
-<td>2</td>
-<td>2008</td>
-<td>WD</td>
-<td>Normal</td>
+<td>-122.23</td>
+<td>37.88</td>
+<td>41.0</td>
+<td>880.0</td>
+<td>129.0</td>
+<td>322.0</td>
+<td>126.0</td>
+<td>8.3252</td>
+<td>452600.0</td>
+<td>NEAR BAY</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">1</th>
-<td>2</td>
-<td>20</td>
-<td>RL</td>
-<td>80.0</td>
-<td>9600</td>
-<td>Pave</td>
-<td>NaN</td>
-<td>Reg</td>
-<td>Lvl</td>
-<td>AllPub</td>
-<td>...</td>
-<td>0</td>
-<td>0</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
-<td>5</td>
-<td>2007</td>
-<td>WD</td>
-<td>Normal</td>
+<td>-122.22</td>
+<td>37.86</td>
+<td>21.0</td>
+<td>7099.0</td>
+<td>1106.0</td>
+<td>2401.0</td>
+<td>1138.0</td>
+<td>8.3014</td>
+<td>358500.0</td>
+<td>NEAR BAY</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">2</th>
-<td>3</td>
-<td>60</td>
-<td>RL</td>
-<td>68.0</td>
-<td>11250</td>
-<td>Pave</td>
-<td>NaN</td>
-<td>IR1</td>
-<td>Lvl</td>
-<td>AllPub</td>
-<td>...</td>
-<td>0</td>
-<td>0</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
-<td>9</td>
-<td>2008</td>
-<td>WD</td>
-<td>Normal</td>
+<td>-122.24</td>
+<td>37.85</td>
+<td>52.0</td>
+<td>1467.0</td>
+<td>190.0</td>
+<td>496.0</td>
+<td>177.0</td>
+<td>7.2574</td>
+<td>352100.0</td>
+<td>NEAR BAY</td>
 </tr>
 <tr class="even">
 <th data-quarto-table-cell-role="th">3</th>
-<td>4</td>
-<td>70</td>
-<td>RL</td>
-<td>60.0</td>
-<td>9550</td>
-<td>Pave</td>
-<td>NaN</td>
-<td>IR1</td>
-<td>Lvl</td>
-<td>AllPub</td>
-<td>...</td>
-<td>0</td>
-<td>0</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
-<td>2</td>
-<td>2006</td>
-<td>WD</td>
-<td>Abnorml</td>
+<td>-122.25</td>
+<td>37.85</td>
+<td>52.0</td>
+<td>1274.0</td>
+<td>235.0</td>
+<td>558.0</td>
+<td>219.0</td>
+<td>5.6431</td>
+<td>341300.0</td>
+<td>NEAR BAY</td>
 </tr>
 <tr class="odd">
 <th data-quarto-table-cell-role="th">4</th>
-<td>5</td>
-<td>60</td>
-<td>RL</td>
-<td>84.0</td>
-<td>14260</td>
-<td>Pave</td>
-<td>NaN</td>
-<td>IR1</td>
-<td>Lvl</td>
-<td>AllPub</td>
-<td>...</td>
-<td>0</td>
-<td>0</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
-<td>12</td>
-<td>2008</td>
-<td>WD</td>
-<td>Normal</td>
+<td>-122.25</td>
+<td>37.85</td>
+<td>52.0</td>
+<td>1627.0</td>
+<td>280.0</td>
+<td>565.0</td>
+<td>259.0</td>
+<td>3.8462</td>
+<td>342200.0</td>
+<td>NEAR BAY</td>
 </tr>
 </tbody>
 </table>
 
-<p>5 rows × 80 columns</p>
 </div>
 </div>
 </div>
-<div id="ef974959" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># INSERT CODE HERE</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="5d1b110a" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># INSERT YOUR CODE</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</section>
+<section id="abalone-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="abalone-dataset">2. Abalone Dataset</h2>
+<p>Predicting the age of abalone from physical measurements.</p>
+<p>A real challenge is different formats, hence we present this to you as an opportunity to practice dealling with this problem:</p>
+<ol type="1">
+<li>Visit the <a href="https://archive.ics.uci.edu/dataset/1/abalone">dataset page</a> and click the <strong>“Download”</strong> button.
+<ul>
+<li>You will read the page yourself to understand the purpose of this data, and what you are supposed to do.</li>
+<li>You will notice that it is not simply a <code>.csv</code> file. Rather, <code>3</code> different files, compressed.</li>
+</ul></li>
+<li>Find out how to read it correctly as a DataFrame for exploratory data analysis</li>
+<li>Finally, train a regression model on the features and the target</li>
+</ol>
+<div id="ea9eee9f" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># INSERT YOUR CODE</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Find more datasets on <a href="https://archive.ics.uci.edu/datasets">UCI Machine Learning Repository</a>.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -421,7 +363,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/HassanAlgoz\.github\.io\/machine-learning-python\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

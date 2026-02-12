@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="ar" xml:lang="ar" dir="rtl"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ar" xml:lang="ar" dir="ltr"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.26">
@@ -74,7 +74,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-e5f995b0c242d35549e3936d69094528.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-b5fd66f8f47aa271496cf9622bf1ba01.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -109,14 +109,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="fullcontent quarto-light">
+<body class="quarto-light">
 
 <div id="quarto-search-results"></div>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">على هذه الصفحة</h2>
+   
+  <ul>
+  <li><a href="#hours-vs-marks-dataset" id="toc-hours-vs-marks-dataset" class="nav-link active" data-scroll-target="#hours-vs-marks-dataset">1. Hours vs Marks Dataset</a></li>
+  <li><a href="#experience-vs-salary-data" id="toc-experience-vs-salary-data" class="nav-link" data-scroll-target="#experience-vs-salary-data">2. Experience vs Salary Data</a></li>
+  <li><a href="#bmi-and-life-expectancy-dataset" id="toc-bmi-and-life-expectancy-dataset" class="nav-link" data-scroll-target="#bmi-and-life-expectancy-dataset">3. BMI and Life Expectancy Dataset</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>صيغ أخرى</h2><ul><li><a href="02_linear_regression_ex.out.ipynb" download="02_linear_regression_ex.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -139,6 +149,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p>Note: you can <strong>Download</strong> the notebook from the sidebar, where it says “<strong>Jupyter</strong>”.</p>
 <p>Your task is to do the following:</p>
 <ol type="1">
 <li>Load the data</li>
@@ -154,7 +165,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="hours-vs-marks-dataset" class="level3">
-<h3 class="anchored" data-anchor-id="hours-vs-marks-dataset">1. <a href="https://www.kaggle.com/datasets/souradippal/simple-linear-regression-hours-vs-marks-data">Hours vs Marks Dataset</a></h3>
+<h3 class="anchored" data-anchor-id="hours-vs-marks-dataset">1. Hours vs Marks Dataset</h3>
+<p><a href="../datasets/Rounded_Student_Hours_Studied_vs_Marks_Dataset.csv" download="">Download Hours vs Marks Dataset</a> [<a href="https://www.kaggle.com/datasets/souradippal/simple-linear-regression-hours-vs-marks-data">Source</a>].</p>
 <p>Some important characteristics of the dataset, to ask yourself about:</p>
 <ul>
 <li>What is the number of samples?</li>
@@ -211,7 +223,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 <section id="experience-vs-salary-data" class="level3">
-<h3 class="anchored" data-anchor-id="experience-vs-salary-data">2. <a href="https://raw.githubusercontent.com/ybifoundation/Dataset/main/Salary%20Data.csv">Experience vs Salary Data</a></h3>
+<h3 class="anchored" data-anchor-id="experience-vs-salary-data">2. Experience vs Salary Data</h3>
+<p><a href="https://raw.githubusercontent.com/ybifoundation/Dataset/main/Salary%20Data.csv" download="">Donwload Experience vs Salary Dataset</a></p>
 <p>Is the relationship between the feature (<code>Experience Years</code>) and the target (<code>Salary</code>) linear?</p>
 <div id="3d821217" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pd.read_csv(<span class="st">"../datasets/Salary Data.csv"</span>).head()</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
@@ -261,7 +274,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 <section id="bmi-and-life-expectancy-dataset" class="level3">
-<h3 class="anchored" data-anchor-id="bmi-and-life-expectancy-dataset">3. <a href="./datasets/bmi_and_life_expectancy.csv">BMI and Life Expectancy Dataset</a></h3>
+<h3 class="anchored" data-anchor-id="bmi-and-life-expectancy-dataset">3. BMI and Life Expectancy Dataset</h3>
+<p><a href="../datasets/bmi_and_life_expectancy.csv" download="">Download BMI and Life Expectancy Dataset</a></p>
 <p>Optional: the <code>Country</code> column can be used to group some countries together to find out some underlying patterns that are not directly visible in the data.</p>
 <div id="871eb07a" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pd.read_csv(<span class="st">"../datasets/bmi_and_life_expectancy.csv"</span>).head()</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>

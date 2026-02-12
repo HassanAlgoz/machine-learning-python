@@ -139,23 +139,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Your task is to do the following:</p>
-<ol type="1">
-<li>Load the data</li>
-<li>Explore the data</li>
-<li>Identify the features and their types</li>
-<li>Identify the target and its type</li>
-<li>Initialize a regression model</li>
-<li>Train the model</li>
-<li>Evaluate the model</li>
-<li>Make predictions on new cases of your choice</li>
-</ol>
 <p>The dataset progressively gets more complex.</p>
 <ol type="1">
 <li>The Advertising Dataset has only <code>3</code> numerical features, with <code>200</code> samples</li>
 <li>The Auto MPG Dataset has <code>5</code> numerical features and <code>3</code> categorical features, with <code>398</code> samples</li>
 <li>The California Housing Prices Dataset has <code>8</code> numerical features and <code>1</code> categorical, with <code>20,640</code> samples</li>
 <li>Finally, the Abalone Dataset will require you to do more reading and understanding of the dataset, before you can use it.</li>
+</ol>
+<p>Your task is to do the following:</p>
+<ol type="1">
+<li>Load the data: <code>pd.read_csv()</code></li>
+<li>Identify the features and their types: <code>df.info()</code></li>
+<li>Identify the target and its type: <code>target_col = ...</code></li>
+<li>Explore the data: stats (<code>df.describe()</code>) and visuals (<code>import seaborn as sns</code>)</li>
+<li>Initialize a regression model: <code>LinearRegression</code></li>
+<li>Train the model: <code>.fit()</code></li>
+<li>Evaluate the model: <code>.score()</code></li>
+<li>Inspect the model weights:
+<ul>
+<li>Hint: you must pre-process the numerical data to get unbiased weights (<code>StandardScaler</code>)</li>
+<li>Example: how much does spending on TV ads contributes to Sales? (Hint: <code>model.coef_</code>)</li>
+<li>Example: how much the factors leave unexplained on what affects Sales? (Hint: <code>model.intercept_</code>)</li>
+</ul></li>
+<li>Make predictions on new cases of your choice</li>
 </ol>
 <div id="ef8815ba" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
@@ -549,7 +555,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/HassanAlgoz\.github\.io\/machine-learning-python\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

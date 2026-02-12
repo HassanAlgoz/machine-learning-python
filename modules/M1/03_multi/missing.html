@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Exercise: Categorical feature encoding – Machine Learning with Python</title>
+<title>القيم المفقودة – Machine Learning with Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -58,23 +58,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../../">
-<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-b5fd66f8f47aa271496cf9622bf1ba01.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-e5f995b0c242d35549e3936d69094528.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -102,9 +102,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "البحث"
   }
 }</script>
-<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
-
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -122,7 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Exercise: Categorical feature encoding</h1>
+<h1 class="title">القيم المفقودة</h1>
 </div>
 
 
@@ -139,213 +136,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Dataset: <a href="https://www.openml.org/search?type=data&amp;status=active&amp;id=42165">Ames Housing dataset</a></p>
-<ol type="1">
-<li>Download the dataset and load it into a pandas DataFrame.</li>
-<li>Encode the categorical features using the <code>OrdinalEncoder</code> and <code>OneHotEncoder</code> using the <code>fit</code> and <code>transform</code> methods</li>
-</ol>
-<p>Consider the following columns:</p>
+<section id="المشكلة" class="level2">
+<h2 class="anchored" data-anchor-id="المشكلة">المشكلة</h2>
+<p>تتطلب معظم خوارزميات المكتبة ألا تحتوي البيانات على فراغات.</p>
+<p>وهناك أسباب كثيرة تؤدي لفقدان البيانات في كثير من الأحيان، منها:</p>
+<p><strong>الأخطاء البشرية:</strong> إغفال الإدخال سهواً أو تعمد المستخدم عدم الإجابة لحماية خصوصيته.</p>
+<p><strong>الأعطال التقنية:</strong> خلل في الحساسات أو انقطاع الاتصال أثناء نقل البيانات.</p>
+<p><strong>دمج البيانات:</strong> فجوات ناتجة عن عمليات الربط (SQL Joins) أو تغير هيكلة الجداول عبر الزمن.</p>
+<p><strong>الانسحاب:</strong> فقدان البيانات بسبب انسحاب المشاركين من الدراسة المرحلية أو حذف الحسابات.</p>
 <ul>
-<li><code>SalePrice</code>: The property’s sale price in dollars. This is the <strong>target variable</strong>.</li>
-<li><code>LotArea</code>: Lot size in square feet</li>
-<li><code>MSZoning</code>: Identifies the general zoning classification of the sale.
-<ul>
-<li>Categories:
-<ul>
-<li><code>A</code> Agriculture</li>
-<li><code>C</code> Commercial</li>
-<li><code>FV</code> Floating Village Residential</li>
-<li><code>I</code> Industrial</li>
-<li><code>RH</code> Residential High Density</li>
-<li><code>RL</code> Residential Low Density</li>
-<li><code>RP</code> Residential Low Density Park</li>
-<li><code>RM</code> Residential Medium Density</li>
-</ul></li>
-</ul></li>
-<li><code>LandSlope</code>: Slope of property
-<ul>
-<li>Categories:
-<ul>
-<li><code>Gtl</code> Gentle slope</li>
-<li><code>Mod</code> Moderate Slope<br>
-</li>
-<li><code>Sev</code> Severe Slope</li>
-</ul></li>
-</ul></li>
+<li>مثال: في التجارب الطبية، قد ينسحب المريض بسبب الهجرة، الوفاة، أو ببساطة الملل من المتابعة، أو لأن حالته ساءت أو لأنه عانى من أعراض جانبية حادة.</li>
+<li>مثال: في الأنظمة التي تعتمد على الاشتراكات، هم العملاء الذين توقفوا عن استخدام الخدمة. تظهر بياناتهم فارغة في الأشهر التي تلت توقفهم.</li>
 </ul>
-<p><strong>Optional</strong>: Split the data into training and testing sets using the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html"><code>train_test_split</code></a> function, and use the <code>fit</code> on the training set and <code>transform</code> on the testing set.</p>
-<div id="af792153" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> fetch_openml</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>ames_housing <span class="op">=</span> fetch_openml(name<span class="op">=</span><span class="st">"house_prices"</span>, as_frame<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> ames_housing.data</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> ames_housing.target</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
+</section>
+<section id="طريقة-الحل" class="level2">
+<h2 class="anchored" data-anchor-id="طريقة-الحل">طريقة الحل</h2>
+<p>لو تصوَّرنا البيانات في جدوَل، فإن الحل البسيط قد يكون بإزالة تلك الصفوف ذات القيَم المفقودة. لكن ذلك يؤدي لخسارة المعلومات الأخرى الموجودة في نفس الصف. والأفضل أن نقوم <strong>باستكمال</strong> (Impute) القيم المفقودة، أي: استنتاجها من الجزء المعلوم من البيانات.</p>
+<p>واستنتاجُها يكون بأحد طريقين:</p>
+<p>الأول: <strong>من القيَم الأخرى لنفس المتغيِّر</strong>. كحساب المتوسط أو الوسيط أو الأكثر تكرارًا أو قيمة ثابتة.</p>
+<p>الثاني: <strong>باعتبار المتغيرات الأخرى</strong>. ويكون بذلك مسألة تنبؤ: انحدار (Regression) أو تصنيف (Classification) بحسب نوع المتغيِّر ذي القيمة المفقودة.</p>
+<ul>
+<li>بيانات تجريبية تحتوي على قيم مفقودة (NaN)</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> [[<span class="dv">1</span>, <span class="dv">2</span>, np.nan], </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>     [<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">3</span>], </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>     [np.nan, <span class="dv">6</span>, <span class="dv">5</span>], </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>     [<span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">7</span>]]</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>التقدير البسيط (Mean)</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> SimpleImputer</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>mean_imputer <span class="op">=</span> SimpleImputer(strategy<span class="op">=</span><span class="st">'mean'</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>X_transformed <span class="op">=</span> mean_imputer.fit_transform(X)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>X_transformed</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>التقدير باستخدام أقرب الجيران (KNN)، يحسب المسافة الإقليدية بين السجلات لتقدير القيم</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> KNNImputer</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>knn_imputer <span class="op">=</span> KNNImputer(n_neighbors<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>X_transformed <span class="op">=</span> knn_imputer.fit_transform(X)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>X_transformed</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<p>انظر: <a href="https://scikit-learn.org/stable/modules/impute.html">ملء القيم المفقودة</a>.</p>
 
 
-<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th"></th>
-<th data-quarto-table-cell-role="th">Id</th>
-<th data-quarto-table-cell-role="th">MSSubClass</th>
-<th data-quarto-table-cell-role="th">MSZoning</th>
-<th data-quarto-table-cell-role="th">LotFrontage</th>
-<th data-quarto-table-cell-role="th">LotArea</th>
-<th data-quarto-table-cell-role="th">Street</th>
-<th data-quarto-table-cell-role="th">Alley</th>
-<th data-quarto-table-cell-role="th">LotShape</th>
-<th data-quarto-table-cell-role="th">LandContour</th>
-<th data-quarto-table-cell-role="th">Utilities</th>
-<th data-quarto-table-cell-role="th">...</th>
-<th data-quarto-table-cell-role="th">ScreenPorch</th>
-<th data-quarto-table-cell-role="th">PoolArea</th>
-<th data-quarto-table-cell-role="th">PoolQC</th>
-<th data-quarto-table-cell-role="th">Fence</th>
-<th data-quarto-table-cell-role="th">MiscFeature</th>
-<th data-quarto-table-cell-role="th">MiscVal</th>
-<th data-quarto-table-cell-role="th">MoSold</th>
-<th data-quarto-table-cell-role="th">YrSold</th>
-<th data-quarto-table-cell-role="th">SaleType</th>
-<th data-quarto-table-cell-role="th">SaleCondition</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">0</th>
-<td>1</td>
-<td>60</td>
-<td>RL</td>
-<td>65.0</td>
-<td>8450</td>
-<td>Pave</td>
-<td>NaN</td>
-<td>Reg</td>
-<td>Lvl</td>
-<td>AllPub</td>
-<td>...</td>
-<td>0</td>
-<td>0</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
-<td>2</td>
-<td>2008</td>
-<td>WD</td>
-<td>Normal</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">1</th>
-<td>2</td>
-<td>20</td>
-<td>RL</td>
-<td>80.0</td>
-<td>9600</td>
-<td>Pave</td>
-<td>NaN</td>
-<td>Reg</td>
-<td>Lvl</td>
-<td>AllPub</td>
-<td>...</td>
-<td>0</td>
-<td>0</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
-<td>5</td>
-<td>2007</td>
-<td>WD</td>
-<td>Normal</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">2</th>
-<td>3</td>
-<td>60</td>
-<td>RL</td>
-<td>68.0</td>
-<td>11250</td>
-<td>Pave</td>
-<td>NaN</td>
-<td>IR1</td>
-<td>Lvl</td>
-<td>AllPub</td>
-<td>...</td>
-<td>0</td>
-<td>0</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
-<td>9</td>
-<td>2008</td>
-<td>WD</td>
-<td>Normal</td>
-</tr>
-<tr class="even">
-<th data-quarto-table-cell-role="th">3</th>
-<td>4</td>
-<td>70</td>
-<td>RL</td>
-<td>60.0</td>
-<td>9550</td>
-<td>Pave</td>
-<td>NaN</td>
-<td>IR1</td>
-<td>Lvl</td>
-<td>AllPub</td>
-<td>...</td>
-<td>0</td>
-<td>0</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
-<td>2</td>
-<td>2006</td>
-<td>WD</td>
-<td>Abnorml</td>
-</tr>
-<tr class="odd">
-<th data-quarto-table-cell-role="th">4</th>
-<td>5</td>
-<td>60</td>
-<td>RL</td>
-<td>84.0</td>
-<td>14260</td>
-<td>Pave</td>
-<td>NaN</td>
-<td>IR1</td>
-<td>Lvl</td>
-<td>AllPub</td>
-<td>...</td>
-<td>0</td>
-<td>0</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>NaN</td>
-<td>0</td>
-<td>12</td>
-<td>2008</td>
-<td>WD</td>
-<td>Normal</td>
-</tr>
-</tbody>
-</table>
-
-<p>5 rows × 80 columns</p>
-</div>
-</div>
-</div>
-<div id="ef974959" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># INSERT CODE HERE</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-
-
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -421,7 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/HassanAlgoz\.github\.io\/machine-learning-python\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

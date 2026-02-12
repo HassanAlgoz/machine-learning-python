@@ -39,7 +39,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e5f995b0c242d35549e3936d69094528.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b5fd66f8f47aa271496cf9622bf1ba01.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -101,35 +101,25 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<!-- - [مقدمة للدورة](./modules/M1/00_course_intro/Course_Intro.qmd) -->
 <ul>
-<li><a href="./modules/M1/00_course_intro/Course_Intro.html">مقدمة للدورة</a></li>
-</ul>
-<p>نبدأ بالسؤال الأول: <a href="./modules/M1/01_intro/Intro_ML.html">ما هو علم تعلُّم الآلة؟</a></p>
-<p>الموضوع الأول: <a href="./modules/M1/02_supervised_learning/supervised_learning.html">التعلم بالإشراف (Supervised Learning)</a> وفيه:</p>
+<li>نبدأ بالسؤال الأول: <a href="./modules/M1/01_intro/Intro_ML.html">ما هو علم تعلُّم الآلة؟</a></li>
+<li>الموضوع الأول: <a href="./modules/M1/02_supervised_learning/supervised_learning.html">التعلم بالإشراف (Supervised Learning)</a> وفيه:
 <ul>
 <li>علاقة أحاديَّة (بين متغير تابع ومتغير مستقل واحد)</li>
 <li>خوارزمية الانحدار الخطي (LinearRegression)</li>
 <li>خوارزمية النزول التدريجي (SGDRegressor)</li>
-<li>علاقة مركَّبة من مجموع متغيرات مستقلة
+<li>علاقة مركَّبة من مجموع متغيرات مستقلة</li>
+</ul></li>
+<li>مشكلة: <a href="./modules/M1/03_multi/01_scale.html">كيف نحل مشكلة تفاوُت قيَم المتغيرات؟</a></li>
+<li>سؤال: <a href="./modules/M1/03_multi/02_encode.html">كيف نُعمِل المتغيرات الوصفية في النموذج؟</a></li>
+<li>مشكلة: <a href="./modules/M1/03_multi/03_impute.html">ملء الفراغات في البيانات: القيم المفقودة</a></li>
+<li>موضوع: <a href="./modules/M1/04_pipeline/01_pipeline.html">الحاجة لخط إنتاج التنبؤ</a>
 <ul>
-<li>المشكلة: تفاوُت قيَم المتغيرات المعتبرة في النموذج</li>
+<li>تطبيق: <a href="./modules/M1/04_pipeline/02_make_pipeline.html">بناء خط إنتاج التنبؤ</a></li>
 </ul></li>
 </ul>
-<p>السؤال الثاني: <a href="./modules/M1/03_multi/scaling.html">كيف نحل مشكلة تفاوُت قيَم المتغيرات</a></p>
-<p>السؤال الثالث: <a href="./modules/M1/03_multi/categorical_feature_encoding.html">كيف نُعمِل المتغيرات الوصفية في النموذج؟</a></p>
-<p>السؤال الرابع: ما هي العقبات التي تحول دون تعلم أفضل نموذج؟ وكيف نعالجها؟</p>
-<ul>
-<li>معرفة نوع البيانات</li>
-<li>التطبيع: Normalization (عندما تكون العلاقة لاخطيَّة - اي: متغيرة)</li>
-<li><a href="http://scikit-learn.org/stable/modules/impute.html#impute">القيم المفقودة</a></li>
-<li>معضلة التخصيص والتعميم (Overfitting)</li>
-<li>التقييم (Eval) والتقويم (Improve)</li>
-<li>الحاجة لخط إنتاج التنبؤ (<strong>Predictive Model Pipeline</strong>)</li>
-</ul>
-<p>التنبؤ بالمقادير المنفصلة: <strong>التصنيف</strong>(Classification). وفيه:</p>
-<ul>
-<li>النوع الثاني من التعلُّم: <strong>الحِفظ</strong> (KNNClassifier)</li>
-</ul>
+<hr>
 <p>دراسة خوارزميَّات خاصَّة:</p>
 <ul>
 <li>العصبون (Perceptron)</li>

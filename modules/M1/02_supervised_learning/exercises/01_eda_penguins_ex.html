@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="ar" xml:lang="ar" dir="rtl"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ar" xml:lang="ar" dir="ltr"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.26">
@@ -74,7 +74,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../../site_libs/bootstrap/bootstrap-e5f995b0c242d35549e3936d69094528.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../../site_libs/bootstrap/bootstrap-b5fd66f8f47aa271496cf9622bf1ba01.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -106,14 +106,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="fullcontent quarto-light">
+<body class="quarto-light">
 
 <div id="quarto-search-results"></div>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">على هذه الصفحة</h2>
+   
+  <ul>
+  <li><a href="#load-the-dataset" id="toc-load-the-dataset" class="nav-link active" data-scroll-target="#load-the-dataset">Load the dataset</a></li>
+  <li><a href="#step-1-understand-the-features" id="toc-step-1-understand-the-features" class="nav-link" data-scroll-target="#step-1-understand-the-features">Step 1 Understand the Features</a></li>
+  <li><a href="#step-2" id="toc-step-2" class="nav-link" data-scroll-target="#step-2">Step 2</a></li>
+  <li><a href="#step-3" id="toc-step-3" class="nav-link" data-scroll-target="#step-3">Step 3</a></li>
+  <li><a href="#step-4-data-types-conversion" id="toc-step-4-data-types-conversion" class="nav-link" data-scroll-target="#step-4-data-types-conversion">Step 4: Data types conversion</a></li>
+  <li><a href="#step-5-detect-inconsistency-in-categorical-values" id="toc-step-5-detect-inconsistency-in-categorical-values" class="nav-link" data-scroll-target="#step-5-detect-inconsistency-in-categorical-values">Step 5: Detect inconsistency in categorical values</a></li>
+  <li><a href="#step-6-univariate-analysis" id="toc-step-6-univariate-analysis" class="nav-link" data-scroll-target="#step-6-univariate-analysis">Step 6: Univariate Analysis</a></li>
+  <li><a href="#step-7-bivariate-analysis" id="toc-step-7-bivariate-analysis" class="nav-link" data-scroll-target="#step-7-bivariate-analysis">Step 7: Bivariate Analysis</a>
+  <ul class="collapse">
+  <li><a href="#correlation-between-numerical-features" id="toc-correlation-between-numerical-features" class="nav-link" data-scroll-target="#correlation-between-numerical-features">Correlation between numerical features</a></li>
+  </ul></li>
+  <li><a href="#feature-engineering" id="toc-feature-engineering" class="nav-link" data-scroll-target="#feature-engineering">Feature Engineering</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>صيغ أخرى</h2><ul><li><a href="01_eda_penguins_ex.out.ipynb" download="01_eda_penguins_ex.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -136,6 +155,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p>Note: you can <strong>Download</strong> the notebook from the sidebar, where it says “<strong>Jupyter</strong>”.</p>
 <p>In this notebook exercise, we will conduct simple EDA steps on the popular penguins dataset.</p>
 <section id="load-the-dataset" class="level3">
 <h3 class="anchored" data-anchor-id="load-the-dataset">Load the dataset</h3>
@@ -159,7 +179,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="step-1-understand-the-features" class="level1">
 <h1>Step 1 Understand the Features</h1>
 <p>You can find information about this dataset here: https://www.kaggle.com/datasets/parulpandey/palmer-archipelago-antarctica-penguin-data</p>
-<p><strong>Question: in your own words</strong>: 1. describe each feature 2. mention its type (numeric or categorical) 3. write its name in Arabic</p>
+<p><strong>Question: in your own words</strong>:</p>
+<ol type="1">
+<li>describe each feature</li>
+<li>mention its type (numeric or categorical)</li>
+<li>write its name in Arabic</li>
+</ol>
 <p>Please use a Markdown cell to write your answer:</p>
 <p>INSERT ANSWER HERE</p>
 <p>Hint: you can attach an image to illustrate what the features are.</p>
@@ -189,10 +214,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>If</strong> you chose to drop missing values, how much data did you lose?</li>
 </ol>
 </section>
-<section id="step-4" class="level1">
-<h1>Step 4</h1>
-<section id="data-types-conversion" class="level4">
-<h4 class="anchored" data-anchor-id="data-types-conversion">Data types conversion</h4>
+<section id="step-4-data-types-conversion" class="level1">
+<h1>Step 4: Data types conversion</h1>
 <ul>
 <li>We shall convert the string types to <code>category</code> to preserve memory</li>
 <li>numeric types can be stored in less precision: <code>float32</code></li>
@@ -221,20 +244,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'memory saved:'</span>, (mem_usage_before <span class="op">-</span> mem_usage_after).<span class="bu">sum</span>() <span class="op">//</span> <span class="dv">1024</span>, <span class="st">'KB'</span>)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-</section>
-<section id="step-5" class="level1">
-<h1>Step 5</h1>
-<section id="detect-inconsistency-in-categorical-values" class="level4">
-<h4 class="anchored" data-anchor-id="detect-inconsistency-in-categorical-values">Detect inconsistency in categorical values</h4>
+<section id="step-5-detect-inconsistency-in-categorical-values" class="level1">
+<h1>Step 5: Detect inconsistency in categorical values</h1>
 <p>The categorical columns should be checked for any inconsistencies. For example. We look for lowercase, uppercase, or inconsistent use of codes (e.g., “M”, “F”) with non-codes (e.g., “Male”, “Female”) in the <code>sex</code> column.</p>
 <ul>
 <li>hint: use <code>.unique()</code> to check the number of unique values in a column</li>
 <li>you can also use: <code>.value_counts()</code> to check the frequency of each value in a column</li>
 </ul>
-<div id="cell-28" class="cell">
+<div id="cell-27" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># INSERT CODE HERE</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</section>
 </section>
 <section id="step-6-univariate-analysis" class="level1">
 <h1>Step 6: Univariate Analysis</h1>
@@ -246,11 +265,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>df_cat.describe().T</code></li>
 </ul></li>
 </ul>
-<div id="cell-31" class="cell">
+<div id="cell-30" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># INSERT CODE HERE</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Use charts to plot <code>value_counts()</code> categorical variables: 1. plot <code>species</code> using bar plot 1. plot <code>island</code> using pie chart 1. plot <code>sex</code> using horizontal bar plot</p>
-<div id="cell-33" class="cell">
+<p>Use charts to plot <code>value_counts()</code> categorical variables:</p>
+<ol type="1">
+<li>plot <code>species</code> using bar plot</li>
+<li>plot <code>island</code> using pie chart</li>
+<li>plot <code>sex</code> using horizontal bar plot</li>
+</ol>
+<div id="cell-32" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># INSERT CODE HERE</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Plot numerical variables:</p>
@@ -260,20 +284,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Boxplot: <code>flipper_length_mm</code></li>
 <li>Histogram: <code>body_mass_g</code></li>
 </ol>
-<div id="cell-35" class="cell">
+<div id="cell-34" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># INSERT CODE HERE</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<section id="step-7-bivariate-analysis" class="level2">
-<h2 class="anchored" data-anchor-id="step-7-bivariate-analysis">Step 7: Bivariate Analysis</h2>
-<section id="correlation-between-numerical-features" class="level4">
-<h4 class="anchored" data-anchor-id="correlation-between-numerical-features">Correlation between numerical features</h4>
+</section>
+<section id="step-7-bivariate-analysis" class="level1">
+<h1>Step 7: Bivariate Analysis</h1>
+<section id="correlation-between-numerical-features" class="level2">
+<h2 class="anchored" data-anchor-id="correlation-between-numerical-features">Correlation between numerical features</h2>
 <p>Let’s find out if there is any correlation between numerical features.</p>
 <ul>
 <li>Hint: you can use the <code>df.corr()</code> to find the correlation matrix.</li>
 <li>Hint: you can use <code>sns.heatmap()</code> to plot the correlation matrix</li>
 <li>Hint: you can use <code>sns.pairplot()</code> to visualize relationships.</li>
 </ul>
-<div id="cell-38" class="cell">
+<div id="cell-37" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># INSERT CODE HERE</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Question: Write down your observations based on the correlation heatmap.</p>
@@ -282,13 +307,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Looking at these distributions, how hard do you think it would be to classify the penguins only using <code>"culmen depth"</code> and <code>"culmen length"</code>?</p>
 <p>INSERT ANSWER HERE</p>
 </section>
-<section id="feature-engineering" class="level3">
-<h3 class="anchored" data-anchor-id="feature-engineering">Feature Engineering</h3>
+</section>
+<section id="feature-engineering" class="level1">
+<h1>Feature Engineering</h1>
 <ul>
 <li>We might try adding the feature <code>bill_size</code> which is the product of <code>bill_length</code> and <code>bill_depth</code> to see if it has any significance in the model.</li>
 <li>We might also try <code>bill_ratio</code> which is the ratio of <code>bill_length</code> to <code>bill_depth</code> to see if it has any significance in the model.</li>
 </ul>
-<div id="cell-44" class="cell">
+<div id="cell-43" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># INSERT CODE HERE</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Let’s look at the correlation to see whether the newly created features are better.</p>
@@ -296,7 +322,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Compute the correlation matrix</li>
 <li>Select the <code>'body_mass_g'</code> column, sort it, and plot it using horizontal bar plot</li>
 </ol>
-<div id="cell-46" class="cell">
+<div id="cell-45" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># INSERT CODE HERE</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This plots the correlation values for a specific column</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># which is usually what we are interested in</span></span>
@@ -305,8 +331,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->

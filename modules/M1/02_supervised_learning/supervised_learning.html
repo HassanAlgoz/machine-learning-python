@@ -74,7 +74,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-e5f995b0c242d35549e3936d69094528.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-b5fd66f8f47aa271496cf9622bf1ba01.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -320,9 +320,9 @@ y = mx+b
 <p>ملاحظة: تتعدد الرموز في المراجع العلمية لوصف نفس الدالة الخطية، ومن أشهرها:</p>
 <ol type="1">
 <li>الصيغة العامة: <span class="math display">\[f(x) = ax + b\]</span></li>
-<li>صيغة الفرضية الشائعة في الأبحاث: <span class="math display">\[h_{\theta}(x) = \theta_0 + \theta_1 x\]</span></li>
-<li>الصيغة الشائعة في الإحصاء: <span class="math display">\[y = \beta_0 + \beta_1 x\]</span></li>
-<li>صيغة الأوزان الشائعة في الشبكات العصبية الاصطناعية (التعلم العميق): <span class="math display">\[f(x;w) = w_1 x + w_0\]</span> وكلها ترمز إلى نفس الأمر: معادلة خط مستقيم.</li>
+<li>صيغة الفرضية الشائعة في الأبحاث (الحرف اللاتيني: ثيتا): <span class="math display">\[h_{\theta}(x) = \theta_0 + \theta_1 x\]</span></li>
+<li>الصيغة الشائعة في الإحصاء (الحرف اللاتيني: بيتا): <span class="math display">\[y = \beta_0 + \beta_1 x\]</span></li>
+<li>صيغة الأوزان (Weights) الشائعة في الشبكات العصبية الاصطناعية (التعلم العميق): <span class="math display">\[f(x;w) = w_1 x + w_0\]</span> وكلها ترمز إلى نفس الأمر: معادلة خط مستقيم.</li>
 </ol>
 <p>وقد يتم تعريف ناتج الدالة بوضع مثلث فوق الحرف <span class="math inline">\(y\)</span> ليكون هكذا: <span class="math display">\[
 \hat{y} = f(x;w)
@@ -429,67 +429,14 @@ y = mx+b
 <p>هذا النموذج يعادل وجود خطين، حيث يخضع الخط الثاني لقيد يجعله متعامداً على الخط الأول (بزاوية 90 درجة). ونتيجة لذلك، يشكلان معاً <strong>مستوًى</strong>. لذا، يمكن وصف هذه العملية بأنها <strong>ملاءمة مستوى (Plane fitting)</strong> بدلاً من ملاءمة خط (Line fitting).</p>
 <p><a href="./assets/multi-variable_regression.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="./assets/multi-variable_regression.png" class="img-fluid"></a></p>
 <p>وقس على ذلك زيادة الخصائص إلى ثلاثة وأربعة كإضافة عمر البيت وموقعه مثلاً، وأكثر من ذلك. فإننا قد لا نستطيع تخيُّلَ ذلك إلا أن خوارزميَّة التعلم هي هي: تضبِطُ المعاملات (Parameters) / الأوزان (Weights) بما يقلل الخطأ تدريجيًّا للوصول إلى أقلِّ خطًأ.</p>
-<p><strong>لكن تظهر مشكلة جوهريَّة عندما نحاول اعتبار مجموع متغيرات متفاوتة في القيَم. ما هي هذه المشكلة وكيف نحلها؟ نتابع في الدرس القادم.</strong></p>
-</section>
-<section id="خلاصة-الدرس-مقدمة-في-التعلم-بالإشراف-والانحدار-الخطي" class="level2">
-<h2 class="anchored" data-anchor-id="خلاصة-الدرس-مقدمة-في-التعلم-بالإشراف-والانحدار-الخطي">خلاصة الدرس: مقدمة في التعلم بالإشراف والانحدار الخطي</h2>
-<section id="مفهوم-التعلم-بالإشراف-supervised-learning" class="level3">
-<h3 class="anchored" data-anchor-id="مفهوم-التعلم-بالإشراف-supervised-learning">1. مفهوم التعلم بالإشراف (Supervised Learning)</h3>
-<p>هو بناء نموذج يربط بين المعطيات (<span class="math inline">\(x\)</span>) والمخرجات (<span class="math inline">\(y\)</span>) لوجود إشارة تعليم سابقة (Labels).</p>
-</section>
-<section id="تصنيف-البيانات" class="level3">
-<h3 class="anchored" data-anchor-id="تصنيف-البيانات">2. تصنيف البيانات</h3>
-<p>تختلف هيكلة النموذج باختلاف نوع البيانات:</p>
+<p><strong>لكن تظهر مشكلة جوهريَّة عندما نحاول اعتبار مجموع متغيرات متفاوتة في القيَم. ما هي هذه المشكلة وكيف نحلها؟ <a href="../../../modules/M1/03_multi/01_scale.html">نتابع في الدرس القادم</a>.</strong></p>
+<hr>
 <ul>
-<li><strong>المتصلة (Continuous):</strong> قيم عددية بفاصلة عائمة (Floats) مثل: الحرارة، السعر.</li>
-<li><strong>المنفصلة (Discrete):</strong> قيم صحيحة (Integers)، وتنقسم إلى:
-<ul>
-<li><strong>مرتبة (Ordinal):</strong> ذات تسلسل منطقي (مثل: الأول، الثاني) والمسافة بينها غير مشروطة بالتساوي.</li>
-<li><strong>غير مرتبة (Nominal):</strong> فئات وصفية (مثل: الألوان، الوجود/العدم)، وتستخدم للترميز.</li>
-</ul></li>
-</ul>
-</section>
-<section id="الانحدار-الخطي-linear-regression" class="level3">
-<h3 class="anchored" data-anchor-id="الانحدار-الخطي-linear-regression">3. الانحدار الخطي (Linear Regression)</h3>
-<p>نموذج يسعى لرسم علاقة خطية بين المتغير المستقل (<span class="math inline">\(x\)</span>) والتابع (<span class="math inline">\(y\)</span>).</p>
-<ul>
-<li><strong>المعادلة:</strong> <span class="math display">\[y = mx + b\]</span> (أو بصيغ أخرى: <span class="math inline">\(h_\theta(x) = \theta_0 + \theta_1 x\)</span>).</li>
-<li><strong>مجال التنبؤ:</strong>
-<ul>
-<li><strong>داخلي (Interpolation):</strong> ضمن مجال بيانات التدريب (أكثر دقة).</li>
-<li><strong>خارجي (Extrapolation):</strong> خارج المجال (أكثر عرضة للخطأ).</li>
-</ul></li>
-</ul>
-</section>
-<section id="دوال-التكلفة-وتقييم-النموذج-cost-functions" class="level3">
-<h3 class="anchored" data-anchor-id="دوال-التكلفة-وتقييم-النموذج-cost-functions">4. دوال التكلفة وتقييم النموذج (Cost Functions)</h3>
-<p>الهدف تقليل الفرق بين القيمة الحقيقية (<span class="math inline">\(y\)</span>) والمتنبأ بها (<span class="math inline">\(\hat{y}\)</span>):</p>
-<ul>
-<li><strong>MAE (متوسط الخطأ المطلق):</strong> <span class="math display">\[\frac{1}{m}\sum |y - \hat{y}|\]</span></li>
-<li><strong>MSE (متوسط مربع الخطأ):</strong> <span class="math display">\[\frac{1}{m}\sum (y - \hat{y})^2\]</span> (يعاقب القيم المتطرفة بشدة أكبر).</li>
-</ul>
-</section>
-<section id="خوارزميات-التحسين-optimization" class="level3">
-<h3 class="anchored" data-anchor-id="خوارزميات-التحسين-optimization">5. خوارزميات التحسين (Optimization)</h3>
-<p>كيفية ضبط المعاملات (<span class="math inline">\(m, b\)</span>) لتقليل الخطأ:</p>
-<ul>
-<li><strong>الحل التحليلي (Analytical):</strong> دقيق ومباشر (الجبر الخطي)، لكنه مكلف حسابيًا مع البيانات الضخمة.</li>
-<li><strong>النزول التدريجي (Gradient Descent):</strong> حل تكراري يقوم بتحديث الأوزان عكس اتجاه اشتقاق دالة الخسارة.
-<ul>
-<li><strong>النزول العشوائي (SGD):</strong> تحديث الأوزان بناءً على عينة عشوائية لتسريع الحساب (<code>SGDRegressor</code>).</li>
-</ul></li>
-</ul>
-</section>
-<section id="التطبيق-البرمجي-sklearn" class="level3">
-<h3 class="anchored" data-anchor-id="التطبيق-البرمجي-sklearn">6. التطبيق البرمجي (<code>sklearn</code>)</h3>
-<ul>
-<li><strong>التجهيز:</strong> مصفوفات <code>numpy</code> (<code>X</code> ثنائية الأبعاد، <code>y</code> أحادية).</li>
-<li><strong>التدريب:</strong> <code>model.fit(X, y)</code>.</li>
-<li><strong>التنبؤ:</strong> <code>model.predict(new_data)</code>.</li>
+<li><a href="../../../modules/M1/02_supervised_learning/exercises/01_eda_penguins_ex.html">التمرين الأول: البطاريق</a></li>
+<li><a href="../../../modules/M1/02_supervised_learning/exercises/02_linear_regression_ex.html">التمرين الثاني: الانحدار الخطي</a></li>
 </ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
