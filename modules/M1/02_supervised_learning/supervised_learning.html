@@ -169,103 +169,59 @@ window.Quarto = {
 
 
 <p>بسم الله الرحمن الرحيم.</p>
-<p>نشرع في أول أقسام علم تعلم الآلة: <strong>التعلم بالإشراف</strong> (Supervised Learning) ويعني وجود إشارة التعليم التي تربط السبب بالنتيجة: من <span class="math inline">\(x\)</span> (المعطيات) إلى <span class="math inline">\(y\)</span> (المخرجات).</p>
-<section id="المقادير-المتصلة-والمنفصلة-في-المدخلات-والمخرجات" class="level2">
-<h2 class="anchored" data-anchor-id="المقادير-المتصلة-والمنفصلة-في-المدخلات-والمخرجات">المقادير المتصلة والمنفصلة في المدخلات والمخرجات</h2>
-<p>والبيانات -سواءٌ معطيات أو مخرجات- تشمل كل معلومٍ جزئيٍّ من المقادير العددية المتصلة أو المنفصلة. وتختلف طريقة بناء نموذج التعلم ومعايرته باختلافها في المعطيات تارة، وفي المخرجات تارة أخرى.</p>
-<p>فأما <strong>المتصل</strong> فالأعداد الممثلة لدرجة للحرارة والرطوبة أو سرعة الرياح أو ثقل الحجر أو أسعار السلع والقارات ونحوها.</p>
-<p>يعبر عنها بأعداد الفاصلة العائمة (Floats):</p>
-<ul>
-<li><strong>موجب كبير:</strong> <span class="math inline">\(1,500,750.50\)</span> (سعر أصل مالي).</li>
-<li><strong>سالب:</strong> <span class="math inline">\(-15.25\)</span> (درجة التجمد).</li>
-<li><strong>صغير جداً:</strong> <span class="math inline">\(0.000007\)</span> (تركيز كيميائي).</li>
-</ul>
-<p>وأما <strong>المنفصل</strong> فقسمان:</p>
-<p>الأول: <strong>المرتب</strong>. كالأرقام الدالة على المركز الأول والثاني، والصف الثالث والرابع، والدرجة الخامسة والسادسة، ونحو ذلك مما <strong>لا يُشترط فيه تساوي المسافة بين قيَمِه</strong> لكن كالعدد يُمكن المقارنة بين أجزائه.</p>
-<p>يعبر عنها بالأعداد صحيحة (Integers) مثل:</p>
-<ul>
-<li><strong>رتب متسلسلة:</strong> <span class="math inline">\(1, 2, 3\)</span> (الأول، الثاني، الثالث).</li>
-<li><strong>تقييم نسبي:</strong> <span class="math inline">\(-1, 0, 1\)</span> (معارض، محايد، مؤيد).</li>
-</ul>
-<p>الثاني: <strong>غير مرتَّبٌ</strong>. كالأرقام الدالة على والوجود والعدم للسمات مثل: الحمرة والصفرة، والتلف والسلامة في المصنوعات، والتعفن والنضج وعدمه في المطعومات، والحميد والخبيث في الأورام، ونحو ذلك مما هو <strong>غير قابل للمقارنة؛ إذْ هو صفة</strong>.</p>
-<p>ويعبر عنها أيضًا بالأعداد الصحيحة (Integers) مثل:</p>
-<ul>
-<li><strong>ترميز ثنائي:</strong> <span class="math inline">\(0, 1\)</span> (عدم، وجود) أو (سليم، مصاب).</li>
-<li><strong>فئات متعددة:</strong> <span class="math inline">\(101, 102, 103\)</span> (ترميز للمدن أو فصائل الدم).</li>
-</ul>
-</section>
-<section id="التعلم-من-البيانات-الموسومة" class="level2">
-<h2 class="anchored" data-anchor-id="التعلم-من-البيانات-الموسومة">التعلم من البيانات الموسومة</h2>
-<p>ونمثل على ذلك بمهمة بناء نموذج الهدف منه: <strong>تقدير أسعار العقار</strong>.</p>
-<p>فأما العوامل المؤثرة في التقدير فتسمى <strong>الخصائص</strong> (Features). منها: المساحة، وعدد الأدوار، وعدد الغرف، والموقع، وما يجاوره، وكثير غيرها .. إلا أننا نقرِّبُ المثال بالنظر إلى عاملٍ واحد وهو: <strong>المساحة</strong>؛ ونحاوِلُ تقدير <strong>سعر البيت</strong>؛ ويسمى: <strong>الهدف</strong> (Target).</p>
+<p>نشرع في أول أقسام علم تعلم الآلة: <strong>التعلم بالإشراف</strong> (Supervised Learning) ويعني وجود إشارة التعليم التي تربط السبب بالنتيجة: من <span class="math inline">\(x\)</span> (المعطيات) إلى <span class="math inline">\(y\)</span> (النتائج).</p>
+<p>مثال ذلك:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">الصناعة</th>
+<th style="text-align: right;">مهمة النموذج</th>
+<th style="text-align: right;">المعطيات</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">العقارات</td>
+<td style="text-align: right;">تقييم العقارات</td>
+<td style="text-align: right;">المساحة، عدد الغرف، عدد الأدوار، الموقع</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">التسويق</td>
+<td style="text-align: right;">العائد</td>
+<td style="text-align: right;">الإنفاق في الإعلانات، الإيرادات</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">التصنيع</td>
+<td style="text-align: right;">العمر المتبقي</td>
+<td style="text-align: right;">عمر الجهاز، العوامل البيئية</td>
+</tr>
+</tbody>
+</table>
+<section id="مثال-العقار" class="level2">
+<h2 class="anchored" data-anchor-id="مثال-العقار">مثال: العقار</h2>
+<p>فأما العوامل المؤثرة في التقدير فتسمى <strong>الخصائص</strong> (Features). منها، في مثال تقدير سعر البيت: المساحة، وعدد الأدوار، وعدد الغرف، ونحو ذلك .. إلا أننا نقرِّبُ المثال بالنظر إلى عاملٍ واحد وهو: <strong>المساحة</strong>. وتسمى <strong>المتغيرات المستقلة</strong> (Independent Variables). ويرمز لها عادة بالرمز: <span class="math inline">\(x\)</span> في المفرد أو <span class="math inline">\(X\)</span> في الجمع.</p>
+<p>ونحاوِلُ تقدير <strong>سعر البيت</strong>؛ ويسمى: <strong>الهدف</strong> (Target). ويسمى <strong>المتغير التابع</strong> (Dependent Variable). ويرمز له عادة بالرمز: <span class="math inline">\(y\)</span> في المفرد أو <span class="math inline">\(Y\)</span> في الجمع.</p>
 <p>ثم ننظر في أعيان من البيوت وأسعارها؛ باعتبارها زوْجًا. وكل زوجٍ يسمى هنا <strong>مشاهدة</strong> (Observation)؛ فتُجمَعُ في جدوَل كهذا:</p>
 <p><a href="./assets/house_area_vs_price_table.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="./assets/house_area_vs_price_table.png" class="img-fluid"></a></p>
-<ol type="1">
-<li>فأما المساحة (من الخصائص) فهي <strong>المتغير المستقل</strong> (Independent Variable)؛ ويرمز له عادة بالرمز: <span class="math inline">\(x\)</span></li>
-<li>وأما السعر (من الهدف) <strong>المتغير التابع</strong> (Dependent Variable)؛ ويرمز له عادة بالرمز: <span class="math inline">\(y\)</span></li>
-</ol>
-<p>ونحن في هذه التسمية نفترضُ أن العلاقة بين هذين المتغيرين (المساحة والسعر) السببُ فيها هو المساحة، والمسبَّبُ هو السعر.</p>
-<p>ثم تُنقَطُ في رسم يضع المتغير المستقل أفقيًّا (<span class="math inline">\(x\)</span>)، والتابِعَ عموديًّا عليه (<span class="math inline">\(y\)</span>)، فتمثل كل نقطة منها مشاهدة (<span class="math inline">\((x,y)\)</span>).</p>
+<p>ثم تُنقَطُ في رسم يضع المتغير المستقل أفقيًّا (<span class="math inline">\(x\)</span>)، والتابِعَ عموديًّا عليه (<span class="math inline">\(y\)</span>)، فتمثل كل نقطة منها مشاهدة <span class="math inline">\((x,y)\)</span>.</p>
+<p><a href="./assets/area_vs_price.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="./assets/area_vs_price.png" class="img-fluid"></a></p>
 <p>ثُمَّ تُخطُّ العلاقة بينهما بالنظر. <strong>وهو النموذج (Model) الذي نسعى لخطِّه خوارزميًّا</strong>، على نحو هذا الشكل:</p>
-<p><a href="./assets/house_area_vs_price_plot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="./assets/house_area_vs_price_plot.png" class="img-fluid"></a></p>
-</section>
-<section id="موضع-التنبؤ" class="level2">
-<h2 class="anchored" data-anchor-id="موضع-التنبؤ">موضع التنبؤ</h2>
-<p>وإن ثقتنا في قدر التنبؤ الداخلية أعلى منها في الخارجية؛ لأننا في منطقة قريبة من مشاهدات التدريب. وكلما ابتعد التبنؤ عن بيانات التعلم زاد مورد الخطأ فيه:</p>
-<ul>
-<li><strong>داخلي (Interpolation)</strong>: هو التنبؤ بقيمة <span class="math inline">\(y\)</span> لـ <span class="math inline">\(x\)</span> تقع <strong>بين</strong> أصغر وأكبر قيمة في بيانات التدريب.</li>
-<li><strong>خارجي (Extrapolation)</strong>: هو التنبؤ بقيمة <span class="math inline">\(y\)</span> لـ <span class="math inline">\(x\)</span> تقع <strong>خارج</strong> حدود البيانات (أكبر من أقصى قيمة أو أصغر من أدنى قيمة).</li>
-</ul>
+<p><a href="./assets/area_vs_price_fitted.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="./assets/area_vs_price_fitted.png" class="img-fluid"></a></p>
+<p>ثم لا نحتاج للنقاط؛ إذْ صار لدينا النموذج:</p>
+<p><a href="./assets/area_vs_price_model.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="./assets/area_vs_price_model.png" class="img-fluid"></a></p>
 </section>
 <section id="نموذج-الانحدار-الخطي-linear-regression" class="level2">
 <h2 class="anchored" data-anchor-id="نموذج-الانحدار-الخطي-linear-regression">نموذج الانحدار الخطي (Linear Regression)</h2>
-<p><strong>الانحدار</strong> (Regression) لغةً النزول، واصطلاحًا الرجوع. وسبب التسمية يعود لدراسة في الثمانينات من القرن التاسع عشر (Regression towards mediocrity in hereditary stature) حيث لاحظ فيها غالتون أن الأبناء من الآباء القصار والطوال يعودون إلى الطول الطبيعي.</p>
-<p>ومعنى <strong>الخطي</strong> (Linear) لأن المستقيم يمثل علاقة ثابتة بين المتغير المستقل (<span class="math inline">\(x\)</span>) والمتغير التابع (<span class="math inline">\(y\)</span>) زيادةً ونقصانًا. وتظهر هذه العلاقة هندسياً <strong>كخط مستقيم</strong> (Line) في الفضاء ثنائي الأبعاد (2D)، أو كمستوى (Plane) في الأبعاد الثلاثية (3D)، أو كمستوى فائق (Hyperplane) في الأبعاد الأعلى (ND).</p>
+<p><strong>الانحدار</strong> (Regression): لغةً النزول، واصطلاحًا الرجوع. وسبب التسمية يعود لدراسة في الثمانينات من القرن التاسع عشر (Regression towards mediocrity in hereditary stature) حيث لاحظ فيها غالتون أن الأبناء من الآباء القصار والطوال يعودون إلى الطول الطبيعي.</p>
+<p><strong>الخطي</strong> (Linear): لأن المستقيم يمثل علاقة ثابتة بين المتغير المستقل (<span class="math inline">\(x\)</span>) والمتغير التابع (<span class="math inline">\(y\)</span>) زيادةً ونقصانًا. وتظهر هذه العلاقة هندسياً <strong>كخط مستقيم</strong> (Line) في الفضاء ثنائي الأبعاد (2D).</p>
 <p>ومعادلة الخط المستقيم هي:</p>
 <p><span class="math display">\[
 y = mx+b
 \]</span></p>
 <p>فأما <strong>المعاملات</strong> (Parameters) فهي المتغيرات التي تشكل انحناء الخط (<span class="math inline">\(m\)</span>) والنقطة (<span class="math inline">\(b\)</span>) التي يقطع فيها المحور العمودي. فمثلاً:</p>
-<p>فمثلاً: <strong>النموذج (أ):</strong> عند <span class="math inline">\(m=2\)</span> و <span class="math inline">\(b=1\)</span> تكون المعادلة <span class="math inline">\(y = 2x + 1\)</span>. (خط مزاح للأعلى بمقدار وحدة واحدة، ويرتفع بمقدار وحدتين كلما اتجهنا أفقيًا في اتجاه الموجب).</p>
-<p>وهذا يظهر بالحساب:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: right;"><span class="math inline">\(x\)</span></th>
-<th style="text-align: left;">(<span class="math inline">\(2x + 1\)</span>)</th>
-<th style="text-align: right;"><span class="math inline">\(y\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;"><span class="math inline">\(-2\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(2(-2) + 1\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(-3\)</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: right;"><span class="math inline">\(-1\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(2(-1) + 1\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(-1\)</span></td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;"><span class="math inline">\(0\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(2(0) + 1\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(1\)</span></td>
-</tr>
-<tr class="even">
-<td style="text-align: right;"><span class="math inline">\(1\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(2(1) + 1\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(3\)</span></td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;"><span class="math inline">\(2\)</span></td>
-<td style="text-align: left;"><span class="math inline">\(2(2) + 1\)</span></td>
-<td style="text-align: right;"><span class="math inline">\(5\)</span></td>
-</tr>
-</tbody>
-</table>
-<p>ويمكن أن نخط هذا النموذج:</p>
-<p><a href="./assets/y_2x_plus_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="./assets/y_2x_plus_1.png" class="img-fluid"></a></p>
+<p>فمثلاً: <span class="math inline">\(m=2\)</span> و <span class="math inline">\(b=1\)</span> تكون المعادلة <span class="math inline">\(y = 2x + 1\)</span>. (خط مزاح للأعلى بمقدار وحدة واحدة، ويرتفع بمقدار وحدتين كلما اتجهنا أفقيًا في اتجاه الموجب).</p>
+<p>ويمكن أن نخط هذا النموذج (<a href="https://www.desmos.com/calculator">ولك أن تجرب في ديسموس</a>):</p>
+<p><a href="./assets/y_2x_plus_1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="./assets/y_2x_plus_1.png" class="img-fluid"></a></p>
 <p>ننشئ مجموعة خطوط مستقيمة للتدرب على المعادلة لنتعرف عليها عن قُرب:</p>
 <table class="caption-top table">
 <colgroup>
@@ -316,7 +272,7 @@ y = mx+b
 </tbody>
 </table>
 <p>الشكل التالي يبين جميع هذه الخطوط المستقيمة:</p>
-<p><a href="./assets/linear_models.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="./assets/linear_models.png" class="img-fluid"></a></p>
+<p><a href="./assets/linear_models.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="./assets/linear_models.png" class="img-fluid"></a></p>
 <p>ملاحظة: تتعدد الرموز في المراجع العلمية لوصف نفس الدالة الخطية، ومن أشهرها:</p>
 <ol type="1">
 <li>الصيغة العامة: <span class="math display">\[f(x) = ax + b\]</span></li>
@@ -332,6 +288,36 @@ y = mx+b
 <li>فأما الناتج <span class="math inline">\(\hat{y}\)</span> (بتحريك الحرف <span class="math inline">\(y\)</span>) فلتمييز النتيجة التقديرية <span class="math inline">\(\hat{y}\)</span> عن الحقيقية في البيانات <span class="math inline">\(y\)</span> .. (وذلك لأننا سنقارن بين ما يتوقعه النموذج وبين الحقيقة، لتقييم قدرته التنبؤية).</li>
 </ul>
 </section>
+<section id="المقادير-المتصلة-والمنفصلة" class="level2">
+<h2 class="anchored" data-anchor-id="المقادير-المتصلة-والمنفصلة">المقادير المتصلة والمنفصلة</h2>
+<p>والبيانات -سواءٌ معطيات أو مخرجات- تشمل المقادير العددية المتصلة أو المنفصلة. وتختلف طريقة بناء نموذج التعلم ومعايرته باختلافها في المخرجات.</p>
+<p>فأما <strong>المتصل</strong> (Continuous) فالأعداد الممثلة لدرجة للحرارة والرطوبة أو سرعة الرياح أو ثقل الحجر أو أسعار السلع والقارات ونحوها.</p>
+<p>يعبر عنها بأعداد الفاصلة العائمة (Floats):</p>
+<ul>
+<li><strong>موجب كبير:</strong> <span class="math inline">\(1,500,750.50\)</span> (سعر أصل مالي).</li>
+<li><strong>سالب:</strong> <span class="math inline">\(-15.25\)</span> (درجة التجمد).</li>
+<li><strong>صغير جداً:</strong> <span class="math inline">\(0.000007\)</span> (تركيز كيميائي).</li>
+</ul>
+<p>وأما <strong>المنفصل</strong> (Discrete) فقسمان:</p>
+<p>الأول: <strong>المرتب</strong> (Ordinal). كالأرقام الدالة على المركز الأول والثاني، والصف الثالث والرابع، والدرجة الخامسة والسادسة، ونحو ذلك مما <strong>لا يُشترط فيه تساوي المسافة بين قيَمِه</strong> لكن كالعدد يُمكن المقارنة بين أجزائه.</p>
+<p>يعبر عنها بالأعداد صحيحة (Integers) مثل:</p>
+<ul>
+<li><strong>رتب متسلسلة:</strong> <span class="math inline">\(1, 2, 3\)</span> (الأول، الثاني، الثالث).</li>
+<li><strong>تقييم نسبي:</strong> <span class="math inline">\(-1, 0, 1\)</span> (معارض، محايد، مؤيد).</li>
+</ul>
+<p>الثاني: <strong>غير مرتَّبٌ</strong> (Nominal). كالأرقام الدالة على والوجود والعدم للسمات مثل: الحمرة والصفرة، والتلف والسلامة في المصنوعات، والتعفن والنضج وعدمه في المطعومات، والحميد والخبيث في الأورام، ونحو ذلك مما هو <strong>غير قابل للمقارنة؛ إذْ هو صفة</strong>.</p>
+<p>ويعبر عنها أيضًا بالأعداد الصحيحة (Integers) مثل:</p>
+<ul>
+<li><strong>ترميز ثنائي:</strong> <span class="math inline">\(0, 1\)</span> (عدم، وجود) أو (سليم، مصاب).</li>
+<li><strong>فئات متعددة:</strong> <span class="math inline">\(101, 102, 103\)</span> (ترميز للمدن أو فصائل الدم).</li>
+</ul>
+</section>
+<section id="الفرق-بين-مهمة-الانحدار-ومهمة-التصنيف" class="level2">
+<h2 class="anchored" data-anchor-id="الفرق-بين-مهمة-الانحدار-ومهمة-التصنيف">الفرق بين مهمة الانحدار ومهمة التصنيف</h2>
+<p>ولا يؤثر كوْن الخصائص نفسها (<span class="math inline">\(X\)</span>) متصلة أو منفصلة على نوع الخوارزمية، وإنما الذي يؤثر فيها هو نوع المتغير التابع: <span class="math inline">\(y\)</span>.</p>
+<p>فأما <strong>الانحدار (Regression)</strong>: يهدف إلى توقع قيمة متصلة (مثل سعر البيت). وله خوارزميات تعلم خاصة به مثل: <code>LinearRegression</code> و <code>SGDRegressor</code>. وهو موضوعنا الآن.</p>
+<p>وأما <strong>التصنيف (Classification)</strong>: يهدف إلى توقع فئة أو تصنيف (مثل نوع الحيوان). وله خوارزميات تعلم خاصة به مثل: <code>KNNClassifier</code> و <code>LogisticRegression</code>. ويأتي بيانه في حينه.</p>
+</section>
 <section id="كيفية-تدريب-نموذج-انحدار-خطي-في-بايثون" class="level2">
 <h2 class="anchored" data-anchor-id="كيفية-تدريب-نموذج-انحدار-خطي-في-بايثون">كيفية تدريب نموذج انحدار خطي في بايثون</h2>
 <ul>
@@ -342,6 +328,8 @@ y = mx+b
 </ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="مصفوفة-البيانات" class="level3">
+<h3 class="anchored" data-anchor-id="مصفوفة-البيانات">مصفوفة البيانات</h3>
 <ul>
 <li>ثم نعرف البيانات كمصفوفة من حزمة <code>numpy</code> ذات الكفاءة العالية في الحساب المصفوفات (Matrices) والمتجهات (Vertices) الرياضية. وهي مصفوفتان:
 <ul>
@@ -354,32 +342,94 @@ y = mx+b
 <li>مصفوفة الهدف <code>y</code></li>
 </ul></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.array([[<span class="dv">1</span>], [<span class="dv">2</span>], [<span class="dv">3</span>], [<span class="dv">4</span>]]) <span class="co"># المدخلات</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>])        <span class="co"># المخرجات</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li>لنفترض أن العوامل الصحيحة هي <span class="math inline">\(y=2x\)</span> (الآلة لا تعرف هذه القاعدة، بل تتعلمها)؛ لكننا نعرف أن النمط خطي</li>
-</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> np.array([[<span class="dv">1</span>], [<span class="dv">2</span>], [<span class="dv">4</span>]]) <span class="co"># المدخلات</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.array([<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">8</span>])        <span class="co"># المخرجات</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<p>وهي بمثابة هذا الجدول:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(x\)</span></th>
+<th><span class="math inline">\(y\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(1\)</span></td>
+<td><span class="math inline">\(2\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(2\)</span></td>
+<td><span class="math inline">\(4\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(4\)</span></td>
+<td><span class="math inline">\(8\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>ويمكن نثرها في الرسم هكذا:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./assets/data_points_scatter_plot.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="نثر البيانات"><img src="./assets/data_points_scatter_plot.png" class="img-fluid figure-img" alt="نثر البيانات"></a></p>
+<figcaption>نثر البيانات</figcaption>
+</figure>
+</div>
+</section>
+<section id="اختيار-شكل-النموذج" class="level3">
+<h3 class="anchored" data-anchor-id="اختيار-شكل-النموذج">اختيار شكل النموذج</h3>
+<p>النموذج الذي في ذهننا هو:</p>
+<p><span class="math display">\[
+y = 2x
+\]</span></p>
+<p>لكن نريد أن نصل إليه بالتعلم من البيانات. وسنفرض على النموذج أن يكون خطيًّا:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li>عملية الاستقراء (التعلم)</li>
-</ul>
+</section>
+<section id="التدريب-التعلم-الملاءمة-training-learning-fitting" class="level3">
+<h3 class="anchored" data-anchor-id="التدريب-التعلم-الملاءمة-training-learning-fitting">التدريب / التعلم / الملاءمة (Training / Learning / Fitting)</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>model.fit(X, y)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-<p>ملاحظة: في حزمة <code>sklearn</code> تخزن العوامل بعد عملية التدريب على البيانات في نموذج الانحدار الخطي <code>LinearRegression</code> في الخاصيتين: - الميل <span class="math inline">\(b\)</span> باسم: <code>coef_</code> - التقاطع <span class="math inline">\(m\)</span> باسم: `intercept_</p>
-<p>والآن:</p>
+<p>ملاحظة: في حزمة <code>sklearn</code> تخزن العوامل بعد عملية التدريب على البيانات في نموذج الانحدار الخطي <code>LinearRegression</code> في الخاصيتين:</p>
 <ul>
-<li>التنبؤ بحالة جديدة بناءً على العلاقة المستقرأة</li>
+<li>الميل <span class="math inline">\(m\)</span> باسم: <code>coef_</code></li>
+<li>التقاطع <span class="math inline">\(b\)</span> باسم: <code>intercept_</code></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>new_case <span class="op">=</span> np.array([[<span class="dv">5</span>]])</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>prediction <span class="op">=</span> model.predict(new_case)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"التنبؤ للقيمة 5 هو: </span><span class="sc">{</span>prediction[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">"</span>) <span class="co"># النتيجة ستكون 10 تقريباً</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-<p>وقد تتساءل: كيف تعمل الخوارزمية التي تتعلم كيف تلائم النموذج للبيانات؟</p>
-<p>الجواب: يجب أن نضع هدفًا لنصل إليه بطريقة خوارزمية.</p>
+<p>وبهذين المعاملين، يمكننا خطه على الرسم:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./assets/regression_line_model.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="شكل: نموذج انحدار خطي"><img src="./assets/regression_line_model.png" class="img-fluid figure-img" alt="شكل: نموذج انحدار خطي"></a></p>
+<figcaption>شكل: نموذج انحدار خطي</figcaption>
+</figure>
+</div>
+<p>وإن ثقتنا في قدر التنبؤ الداخلية أعلى منها في الخارجية؛ لأننا في منطقة قريبة من مشاهدات التدريب. وكلما ابتعد التبنؤ عن بيانات التعلم زاد مورد الخطأ فيه:</p>
+<ul>
+<li><strong>داخلي (Interpolation)</strong>: هو التنبؤ بقيمة <span class="math inline">\(y\)</span> لـ <span class="math inline">\(x\)</span> تقع <strong>بين</strong> أصغر وأكبر قيمة في بيانات التدريب.</li>
+<li><strong>خارجي (Extrapolation)</strong>: هو التنبؤ بقيمة <span class="math inline">\(y\)</span> لـ <span class="math inline">\(x\)</span> تقع <strong>خارج</strong> حدود البيانات (أكبر من أقصى قيمة أو أصغر من أدنى قيمة).</li>
+</ul>
+<p>يمكننا الآن افتراض خصائص جديدة، يتوقع النموذج النتيجة بناءً عليها:</p>
+<ul>
+<li>الأولى: <code>x=0</code> نقطة أدنى من أصغر قيمة في البيانات</li>
+<li>الثانية: <code>x=3</code> نقطة تقع بين أكبر وأصغر قيمة في البيانات</li>
+<li>الثالثة: <code>x=5</code> نقطة أعلى من أكبر قيمة في البيانات</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>X_new <span class="op">=</span> np.array([[<span class="dv">0</span>], [<span class="dv">3</span>], [<span class="dv">5</span>]])</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> model.predict(X_new)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(y_pred)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<p>ويكون ذلك بمدِّ الخط على هذا النحو:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./assets/extended_regression_line.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="نموذج انحدار خطي ممتد"><img src="./assets/extended_regression_line.png" class="img-fluid figure-img" alt="نموذج انحدار خطي ممتد"></a></p>
+<figcaption>نموذج انحدار خطي ممتد</figcaption>
+</figure>
+</div>
+</section>
 </section>
 <section id="ملاءمة-النموذج-للبيانات" class="level2">
 <h2 class="anchored" data-anchor-id="ملاءمة-النموذج-للبيانات">ملاءمة النموذج للبيانات</h2>
+<ul>
+<li>وقد تتساءل: كيف تعمل الخوارزمية التي تتعلم كيف تلائم النموذج للبيانات؟</li>
+<li>الجواب: يجب أن نضع هدفًا لنصل إليه بطريقة خوارزمية.</li>
+</ul>
 <p>يقيَّم النموذج بحسب ملاءمته للنمط التي تمثله البيانات (النقاط)؛ ويتم قياس ذلك بالمسافة العموديَّة لأنها تمثل الفرق بين التوقُّع والحقيقة: <span class="math inline">\(y_i - \hat{y_i}\)</span> لنقطةٍ ما.</p>
-<p><a href="./assets/linear_model_error_in_red.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="./assets/linear_model_error_in_red.png" class="img-fluid"></a></p>
+<p><a href="./assets/linear_model_error_in_red.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img src="./assets/linear_model_error_in_red.png" class="img-fluid"></a></p>
 <p>ويلخص التقييم في رقمٍ واحد، هو متوسط مطلق الفروق -سلبًا أو إيجابا- بين كل نقطة مسجَّلة <span class="math inline">\((x_i,y_i)\)</span> وما تنبأ به النموذج -الخط- الممثل بـ <span class="math inline">\((x_i, \hat{y}_i)\)</span>. والوصف الرياضي الرمزي لذلك هو:</p>
 <p><span class="math display">\[
 \text{MAE} = \frac{1}{m}\sum_1^m{\vert y_i - \hat{y}_i \vert}
@@ -394,27 +444,60 @@ y = mx+b
 \text{MSE} = \frac{1}{m}\sum_1^m{(y_i - \hat{y}_i)^2}
 \]</span></p>
 <p>هل تلاخظ أي من مجموعتي البيانات الموضحة في الرسم التالي لديها <strong>متوسط مربعات خطأ (MSE)</strong> أعلى؟</p>
-<p><a href="./assets/mae_vs_mse.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="./assets/mae_vs_mse.png" class="img-fluid"></a></p>
+<p><a href="./assets/mae_vs_mse.png" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img src="./assets/mae_vs_mse.png" class="img-fluid"></a></p>
 <p><strong>النتيجة:</strong> مجموعة البيانات الموجودة على <strong>اليمين</strong> لديها متوسط مربعات خطأ (MSE) أعلى، رغم أنها تحتوي على عدد نقاط أقل، وذلك لأن المسافة بين تلك النقطة والخط كانت كبيرة جداً بما يكفي لرفع المتوسط.</p>
 </section>
-<section id="النزول-التدريجي-gradient-descent" class="level2">
-<h2 class="anchored" data-anchor-id="النزول-التدريجي-gradient-descent">النزول التدريجي (Gradient Descent)</h2>
-<p>تقوم خوارزمية التعلم بتحسين أداء النموذج للنزول إلى أقل خطأ يمكن النزول إليه.</p>
-<p>وعلم الجبر الخطي (Linear Algebra) ينظر إلى البيانات على أنها نظام من المعادلات، فيحلُّها بطريقة تحليلية (Analytical)، فيستطيع أن يضبط المعاملات بما يضع الخطأ في أقل قيمة ممكنة. ويمثله في المكتبة: <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html"><code>sklearn.linear_model.LinearRegression</code></a>.</p>
-<p>لكن قد يحول بيننا وبين استعمال الحل التحليلي: كِبَرُ حجم البيانات لكثرتها. فعند ذلك نلجأ لحل تقريبي يقوم على التحسين شيئًا فشيئًا.</p>
-<p><strong>النزول التدريجي العشوائي</strong> (Stochastic Gradient Descent) يقوم على تقسيم البيانات باختيارها بشكل عشوائي، وتحديث الأوزان (المعاملات) بناءً على كل نقطة يتم تحميلها إلى الذاكرة، ثم التالية، والتالية، وهكذا يستطيع التعلم من الكم الهائل من البيانات. والتجرِبَة تقول إن هذا الحل التقريبي ليس ببعيد عن الحل الأمثل الذي تنتجه لنا الطريقة الأولى التحليلية.</p>
+<section id="خوارزميات-الانحدار-الخطي" class="level2">
+<h2 class="anchored" data-anchor-id="خوارزميات-الانحدار-الخطي">خوارزميات الانحدار الخطي</h2>
+<p>يُنظرُ لخوارزميات التعلم أنها عمليات <strong>تحسين</strong> (Optimization). وهي تدخل في علم يسمى: <a href="https://en.wikipedia.org/wiki/Mathematical_optimization">التحسين الرياضي (Mathematical Optimization)</a> أو البرمجة الرياضية (Mathematical Programming).</p>
+<p>تقوم خوارزمية التعلم بتحسين أداء النموذج للنزول إلى أقل خطأ يمكن النزول إليه (لا نشترط أن يكون الأمثل تمامًا).</p>
+<p>وفيما يلي طريقتان للانحدار الخطي، والأهم بالنسبة لنا الثانية.</p>
+<section id="الأولى-المربعات-الصغرى-العادية-ordinary-least-squares" class="level3">
+<h3 class="anchored" data-anchor-id="الأولى-المربعات-الصغرى-العادية-ordinary-least-squares">الأولى: المربعات الصغرى العادية (Ordinary Least Squares)</h3>
+<p>ويمثله في المكتبة: <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html"><code>sklearn.linear_model.LinearRegression</code></a>.</p>
+<p>حيث يقوم على علم الجبر الخطي (Linear Algebra) فينظر إلى البيانات على أنها نظام من المعادلات، فيحلُّها بطريقة تحليلية (Analytical)، فيستطيع أن يضبط المعاملات بما يقلل مجموع مربعات الخطأ، بهذه المعادلة:</p>
+<p><span class="math display">\[
+W = \left( \mathbf{X}^T \mathbf{X} \right)^{-1} \mathbf{X}^T \mathbf{y}
+\]</span></p>
+<p>فالمجهول في هذه المعادلة <span class="math inline">\(W\)</span> هي معاملات النموذج (كالميل والمقطع الصادي في النموذج الخطي). ويتم حسابه من المعلومات: الخصائص <span class="math inline">\(X\)</span> والنتائج <span class="math inline">\(y\)</span>.</p>
+<p>لكن فيها مشكلتان:</p>
+<p><strong>الأولى</strong>: تحتاج أن تضع جميع البيانات في الذاكرة، مما قد يتعسَّر حين تكون كثيرة جدًّا فلا تكفي.</p>
+<p><strong>الثانية</strong>: إذا زادت البيانات وأردنا تحسين النموذج فيما بعد، فلا يُمكِنُ إضافة تلك البيانات الجديدة فقط، بل يجب وضعها جميعًا وحلُّ المعادلة دفعة واحدة.</p>
+</section>
+<section id="الثانية-النزول-التدريجي-العشوائي-stochastic-gradient-descent" class="level3">
+<h3 class="anchored" data-anchor-id="الثانية-النزول-التدريجي-العشوائي-stochastic-gradient-descent">الثانية: النزول التدريجي العشوائي (Stochastic Gradient Descent)</h3>
 <p>ويمثله في المكتبة: <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html"><code>sklearn.linear_model.SGDRegressor</code></a>.</p>
-<p>وهي خوارزمية <strong>تحسين</strong> (Optimization) تعمل بالاشتقاق لمعرفة نسبة الخطأ لكل معامل، ليتِمَّ تغيير المعامِل -بالزيادة أو النقص- بما يقلل نسبته فيه. وتتم بالإجراء البسيط التالي:</p>
+<p>يقوم على تقسيم البيانات باختيارها بشكل عشوائي، وتحديث الأوزان (المعاملات) بناءً على كل نقطة يتم تحميلها إلى الذاكرة، ثم التالية، والتالية، وهكذا يستطيع التعلم من الكم الهائل من البيانات. والتجرِبَة تقول إن هذا الحل التقريبي ليس ببعيد عن الحل الأمثل الذي تنتجه لنا الطريقة الأولى التحليلية.</p>
+<p>وهي خوارزمية تحسين تعمل بالاشتقاق لمعرفة نسبة الخطأ لكل معامل، ليتِمَّ تغيير المعامِل -بالزيادة أو النقص- بما يقلل نسبته فيه. وتتم بالإجراء البسيط التالي:</p>
 <ul>
 <li>تبدأ جميع العوامل بقيَم عشوائية</li>
 <li>نغيرها قليلاً بالزيادة أو النقص</li>
 <li>نرصد الخطأ</li>
 <li>إذا ارتفع الخطأ عكسنا اتجاه التغيير؛ وإلا فهو ينقص، أو على الأقل لا يزيد</li>
 </ul>
-<p>يبين الرسم المتحرك التالي جانبان لهذه الخوارزمية:</p>
-<p><a href="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.startertutorials.com%2Fblog%2Fwp-content%2Fuploads%2F2021%2F09%2FGradient_Descent_Animation.gif&amp;f=1&amp;nofb=1&amp;ipt=6f45fd612debfa317ce1a634fb202297d4c2893a26eb60de7c1da1a87bd74e94" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.startertutorials.com%2Fblog%2Fwp-content%2Fuploads%2F2021%2F09%2FGradient_Descent_Animation.gif&amp;f=1&amp;nofb=1&amp;ipt=6f45fd612debfa317ce1a634fb202297d4c2893a26eb60de7c1da1a87bd74e94" class="img-fluid"></a></p>
+<p>ويفيد أن تتخيل الخوارزميات تزيد وتنقص من معاملات النموذج يمنةً ويسرةً، بما يعدِّل شكل الخط ليلائم البيانات، كما في الرسم التالي:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./assets/model_parameters.png" class="lightbox" data-gallery="quarto-lightbox-gallery-12" title="معاملات النموذج"><img src="./assets/model_parameters.png" class="img-fluid figure-img" alt="معاملات النموذج"></a></p>
+<figcaption>معاملات النموذج</figcaption>
+</figure>
+</div>
+<p>وفيما يلي كود تقريبي للغة مبسَّطة ومتخيَّلة تشبه البايثون لخوارزمية النزول التدريجي:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>W <span class="op">=</span> random()</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>num_steps <span class="op">=</span> <span class="dv">12</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>step_size <span class="op">=</span> <span class="fl">0.01</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> num_steps:</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> p <span class="kw">in</span> [m, b]:</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        delta <span class="op">=</span> choose(<span class="op">+</span>step_size, <span class="op">-</span>step_size)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        p <span class="op">+=</span> delta</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> MSE increases:</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>            p <span class="op">-=</span> delta</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<p>يبين الرسم التالي جانبين لهذه الخوارزمية، بالتحرك شيئًا فشيئًا عبر حلقة تكرار برمجيَّة، تضبط وتضبط إلى أن نصل إلى قاع منحنى الخطأ، ويقابلها الوصول إلى أقرب خطٍّ لبيانات التدريب:</p>
+<p><a href="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.startertutorials.com%2Fblog%2Fwp-content%2Fuploads%2F2021%2F09%2FGradient_Descent_Animation.gif&amp;f=1&amp;nofb=1&amp;ipt=6f45fd612debfa317ce1a634fb202297d4c2893a26eb60de7c1da1a87bd74e94" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.startertutorials.com%2Fblog%2Fwp-content%2Fuploads%2F2021%2F09%2FGradient_Descent_Animation.gif&amp;f=1&amp;nofb=1&amp;ipt=6f45fd612debfa317ce1a634fb202297d4c2893a26eb60de7c1da1a87bd74e94" class="img-fluid"></a></p>
 <p>الأيمن: <strong>رسم بياني وخطي (Line Graph)</strong> فيه المتغير المستقل في المحور الأفقي (<span class="math inline">\(x\)</span>) والمتغير التابع في المحور العمودي (<span class="math inline">\(y\)</span>) ويظهر فيه اقتراب النموذج -الخطي- شيئًا فشيئًا من مجموع البيانات ليلائم نمطها.</p>
 <p>الأيسر: <strong>مُنحنى الخسارة (Loss Curve)</strong>: فيه أحد المعاملات -الذي هو الميل- على المحور الأفقي، مقابل دالة حساب الخطأ (MSE) على المحور العمودي. واشتقاق هذه الدالة بالنسبة للميل؛ يعطيِنَا اتجاه النزول الذي يجب أن نعدِّلَ الميل ليحصل. ويكون هذا بالتدرُّجِ خطوة خطوة.</p>
+</section>
 </section>
 <section id="علاقة-مركبة-من-مجموع-متغيرات-مستقلة" class="level2">
 <h2 class="anchored" data-anchor-id="علاقة-مركبة-من-مجموع-متغيرات-مستقلة">علاقة مركَّبة من مجموع متغيرات مستقلة</h2>
@@ -427,7 +510,7 @@ y = mx+b
 \hat{y} = f(\text{area}, \text{rooms}) = w_1\text{area} + w_2\text{rooms} + b
 \]</span></p>
 <p>هذا النموذج يعادل وجود خطين، حيث يخضع الخط الثاني لقيد يجعله متعامداً على الخط الأول (بزاوية 90 درجة). ونتيجة لذلك، يشكلان معاً <strong>مستوًى</strong>. لذا، يمكن وصف هذه العملية بأنها <strong>ملاءمة مستوى (Plane fitting)</strong> بدلاً من ملاءمة خط (Line fitting).</p>
-<p><a href="./assets/multi-variable_regression.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="./assets/multi-variable_regression.png" class="img-fluid"></a></p>
+<p><a href="./assets/multi-variable_regression.png" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img src="./assets/multi-variable_regression.png" class="img-fluid"></a></p>
 <p>وقس على ذلك زيادة الخصائص إلى ثلاثة وأربعة كإضافة عمر البيت وموقعه مثلاً، وأكثر من ذلك. فإننا قد لا نستطيع تخيُّلَ ذلك إلا أن خوارزميَّة التعلم هي هي: تضبِطُ المعاملات (Parameters) / الأوزان (Weights) بما يقلل الخطأ تدريجيًّا للوصول إلى أقلِّ خطًأ.</p>
 <p><strong>لكن تظهر مشكلة جوهريَّة عندما نحاول اعتبار مجموع متغيرات متفاوتة في القيَم. ما هي هذه المشكلة وكيف نحلها؟ <a href="../../../modules/M1/03_multi/01_scale.html">نتابع في الدرس القادم</a>.</strong></p>
 <hr>
