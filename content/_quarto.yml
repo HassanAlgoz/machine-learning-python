@@ -6,6 +6,7 @@ project:
   output-dir: _site
   resources:
     - "exercises/*.ipynb"
+  brand: _brand.yml
 
 bibliography: references.bib
 
@@ -27,6 +28,18 @@ language: _language_ar.yml
 format:
   html:
     theme: [cosmo, custom.scss]
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: c/t
+    show-slide-number: all
+    transition: slide
+    background-transition: fade
+    chalkboard: true
+    progress: true
+    history: true
+    scrollable: true
+    rtl: true
+    dir: rtl
 
 number-depth: 1
 lightbox: auto

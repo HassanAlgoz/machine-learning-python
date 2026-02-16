@@ -1,5 +1,11 @@
 /*-- scss:defaults --*/
-// quarto-scss-analysis-annotation { "origin": "cosmo (builtin theme)" }
+
+// Fallback variables for non-Bootstrap environments (e.g. Reveal.js)
+$body-bg: #fff !default;
+$body-color: #212529 !default;
+$primary: #0d6efd !default;
+$secondary: #6c757d !default;
+$dark: #212529 !default;
 
 // Options
 
@@ -42,11 +48,48 @@ pre,
 
 // Typography
 
-body[dir="rtl"] {
+body {
+    font-family: $font-family-sans-serif;
+}
+
+// General RTL support (covers body[dir="rtl"] and other contexts)
+[dir="rtl"] {
     -webkit-font-smoothing: antialiased;
-    // direction: rtl; // Set text direction to RTL
-    // text-align: right; // Align text to the right
-    --bs-body-text-align: right;
+    direction: rtl;
+    text-align: right;
+
+    // Main Body Alignment
+    &.reveal,
+    .reveal {
+        text-align: right;
+        font-family: $font-family-sans-serif;
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        div,
+        span,
+        li {
+            text-align: right;
+        }
+
+        // Ensure lists obey direction
+        ul,
+        ol {
+            text-align: right;
+            margin-right: 2em;
+            margin-left: 0;
+        }
+
+        // Fix slides content alignment
+        .slides {
+            text-align: right;
+        }
+    }
 
     div.ltr {
         direction: ltr;
@@ -61,21 +104,12 @@ body[dir="rtl"] {
     }
 
     // RTL-specific styles
-
     .navbar {
         .navbar-nav {
             margin-right: 0;
             margin-left: auto;
         }
     }
-
-    // .progress {
-    //     .progress-bar {
-    //         float: right; // Ensure progress bar starts from the right
-    //     }
-    // }
-
-    // quarto-scss-analysis-annotation { "origin": null }
 
     ul.task-list li input[type="checkbox"] {
         margin: 0;
@@ -92,6 +126,12 @@ body[dir="rtl"] {
     .list-unstyled {
         padding-left: initial !important;
     }
+}
+
+// Explicit reveal overrides in case dir is set on a wrapper or body
+.reveal.rtl {
+    direction: rtl;
+    text-align: right;
 }
 
 // Progress bars
