@@ -1,14 +1,19 @@
 ---
 title: "فهرس"
 format: html
-editor: visual
 ---
 
 | اليوم | الوصف | المواد | التمارين |
 |------------------|-------------------|------------------|------------------|
 | 1 | **مقدمة في علم تعلُّم الآلة** (Machine Learning) | [الدرس](./modules/M1/01_intro/Intro_ML.qmd) <br> [الشرائح](./modules/M1/01_intro/Intro_ML_slides.qmd) |  |
-| 2 | **التعلم بالإشراف** (Supervised Learning) | [الدرس](./modules/M1/02_supervised_learning/supervised_learning.qmd) <br> [الشرائح](./modules/M1/02_supervised_learning/supervised_learning_slides.qmd) | [التمرين الأول: البطاريق](./modules/M1/02_supervised_learning/exercises/01_eda_penguins_ex.ipynb) <br> [التمرين الثاني: الانحدار الخطي](./modules/M1/02_supervised_learning/exercises/02_linear_regression_ex.ipynb) |
+| 2 | **التعلم بالإشراف** (Supervised Learning) | [الدرس](./modules/M1/02_supervised_learning/supervised_learning.qmd) <br> [الشرائح](./modules/M1/02_supervised_learning/supervised_learning_slides.qmd) | [التمرين الأول: استكشاف البطاريق](./modules/M1/02_supervised_learning/exercises/01_eda_penguins_ex.ipynb) <br> [التمرين الثاني: ثلاث علاقات خطية](./modules/M1/02_supervised_learning/exercises/02_linear_regression_ex.ipynb) |
 | 3 | **تقييس المقادير المتصلة** (Scaling) | [الدرس](./modules/M1/03_multi/01_scale.qmd) |  |
 |  | **ترميز المقادير المنفصلة** (Encoding) | [الدرس](./modules/M1/03_multi/02_encode.ipynb) |  |
 |  | **القيم المفقودة** (Missing) | [الدرس](./modules/M1/03_multi/03_impute.qmd) |  |
 |  | **خطوط الإنتاج** (Pipelines) | [الدرس](./modules/M1/04_pipeline/01_pipeline.qmd) |  |
+
+مصادر:
+
+- [CS129: Applied ML | Standford](https://web.stanford.edu/class/cs129/syllabus)
+- [Scikit-learn MOOC](https://inria.github.io/scikit-learn-mooc/)
+- [Hands-on ML | Aurélien Geron](https://github.com/ageron/handson-ml3)
