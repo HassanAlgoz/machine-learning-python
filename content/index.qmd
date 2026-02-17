@@ -1,27 +1,14 @@
 ---
 title: "فهرس"
 format: html
+editor: visual
 ---
 
-<!-- - [مقدمة للدورة](./modules/M1/00_course_intro/Course_Intro.qmd) -->
-- نبدأ بالسؤال الأول: [ما هو علم تعلُّم الآلة؟](./modules/M1/01_intro/Intro_ML.qmd)
-- الموضوع الأول: [التعلم بالإشراف (Supervised Learning)](modules/M1/02_supervised_learning/supervised_learning.qmd) وفيه:
-    - علاقة أحاديَّة (بين متغير تابع ومتغير مستقل واحد)
-    - خوارزمية الانحدار الخطي (LinearRegression)
-    - خوارزمية النزول التدريجي (SGDRegressor)
-    - علاقة مركَّبة من مجموع متغيرات مستقلة
-- مشكلة: [كيف نحل مشكلة تفاوُت قيَم المتغيرات؟](modules/M1/03_multi/01_scale.qmd)
-- سؤال: [كيف نُعمِل المتغيرات الوصفية في النموذج؟](./modules/M1/03_multi/02_encode.ipynb)
-- مشكلة: [ملء الفراغات في البيانات: القيم المفقودة](./modules/M1/03_multi/03_impute.qmd)
-- موضوع: [الحاجة لخط إنتاج التنبؤ](./modules/M1/04_pipeline/01_pipeline.qmd)
-    - تطبيق: [بناء خط إنتاج التنبؤ](./modules/M1/04_pipeline/02_make_pipeline.ipynb)
-
----
-
-دراسة خوارزميَّات خاصَّة:
-
-- العصبون (Perceptron)
-- شجرة القرار وغابة القرار العشوائية (DT)
-- نموذج بايز الساذج (Naive Bayes) للاحتمالات
-- نموذج آلات المتجهات الداعمة (SVM)
-- الأساليب التجميعية (Ensemble Methods)
+| اليوم | الوصف | المواد | التمارين |
+|------------------|-------------------|------------------|------------------|
+| 1 | **مقدمة في علم تعلُّم الآلة** (Machine Learning) | [الدرس](./modules/M1/01_intro/Intro_ML.qmd) <br> [الشرائح](./modules/M1/01_intro/Intro_ML_slides.qmd) |  |
+| 2 | **التعلم بالإشراف** (Supervised Learning) | [الدرس](./modules/M1/02_supervised_learning/supervised_learning.qmd) <br> [الشرائح](./modules/M1/02_supervised_learning/supervised_learning_slides.qmd) | [التمرين الأول: البطاريق](./modules/M1/02_supervised_learning/exercises/01_eda_penguins_ex.ipynb) <br> [التمرين الثاني: الانحدار الخطي](./modules/M1/02_supervised_learning/exercises/02_linear_regression_ex.ipynb) |
+| 3 | **تقييس المقادير المتصلة** (Scaling) | [الدرس](./modules/M1/03_multi/01_scale.qmd) |  |
+|  | **ترميز المقادير المنفصلة** (Encoding) | [الدرس](./modules/M1/03_multi/02_encode.ipynb) |  |
+|  | **القيم المفقودة** (Missing) | [الدرس](./modules/M1/03_multi/03_impute.qmd) |  |
+|  | **خطوط الإنتاج** (Pipelines) | [الدرس](./modules/M1/04_pipeline/01_pipeline.qmd) |  |
