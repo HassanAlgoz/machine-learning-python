@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>تسوية الخصائص (Feature Scaling) – Machine Learning with Python</title>
+<title>تقييس المقادير المتصلة (Scaling) – Machine Learning with Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,6 +24,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
@@ -39,16 +40,16 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-b5fd66f8f47aa271496cf9622bf1ba01.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -103,20 +104,63 @@ window.Quarto = {
 
 </head>
 
-<body class="fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Machine Learning with Python</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="البحث"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="تبديل التنقل" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">الرئيسية</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">المحتويات</h2>
+   
+  <ul>
+  <li><a href="#أهميتها" id="toc-أهميتها" class="nav-link active" data-scroll-target="#أهميتها">أهميتها</a>
+  <ul class="collapse">
+  <li><a href="#في-تفسير-قوة-أثر-المتغيرات-نفسها" id="toc-في-تفسير-قوة-أثر-المتغيرات-نفسها" class="nav-link" data-scroll-target="#في-تفسير-قوة-أثر-المتغيرات-نفسها">في تفسير قوة أثر المتغيرات نفسها</a></li>
+  <li><a href="#في-خوارزمية-النزول-التدريجي-sgd" id="toc-في-خوارزمية-النزول-التدريجي-sgd" class="nav-link" data-scroll-target="#في-خوارزمية-النزول-التدريجي-sgd">في خوارزمية النزول التدريجي (SGD)</a></li>
+  <li><a href="#وفي-خوارزمية-أقرب-جيران-knn" id="toc-وفي-خوارزمية-أقرب-جيران-knn" class="nav-link" data-scroll-target="#وفي-خوارزمية-أقرب-جيران-knn">وفي خوارزمية أقرب جيران (KNN)</a></li>
+  </ul></li>
+  <li><a href="#كيفياتها" id="toc-كيفياتها" class="nav-link" data-scroll-target="#كيفياتها">كيفياتها</a>
+  <ul class="collapse">
+  <li><a href="#أولا-الخطية" id="toc-أولا-الخطية" class="nav-link" data-scroll-target="#أولا-الخطية">أولاً: <strong>الخطية</strong></a></li>
+  <li><a href="#ثانيا-لا-خطية" id="toc-ثانيا-لا-خطية" class="nav-link" data-scroll-target="#ثانيا-لا-خطية">ثانيًا: <strong>لا خطيَّة</strong></a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">تسوية الخصائص (Feature Scaling)</h1>
+<h1 class="title">تقييس المقادير المتصلة (Scaling)</h1>
 </div>
 
 
@@ -133,7 +177,7 @@ window.Quarto = {
 </header>
 
 
-<p><strong>عملية تسوية الخصائص</strong> (Feature Scaling) <strong>توحِّد قيَم المتغيرات المتفاوتة لتكون على مقياس مماثل</strong>.</p>
+<p><strong>عملية تقييس الخصائص</strong> (Feature Scaling) <strong>توحِّد قيَم المتغيرات المتفاوتة لتكون على مقياس مماثل</strong>.</p>
 <p>والحاجة إليها ماسَّة لأنها تعطي المعنى التالي:</p>
 <ul>
 <li>مثل: الوزن <code>100kg</code> والطول <code>100m</code>، لا يستويان من حيث النسبة إلى القيم المحيطة لنفس المتغير.</li>
@@ -321,7 +365,7 @@ z = \frac{x - \mu}{s}
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/HassanAlgoz\.github\.io\/machine-learning-python\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

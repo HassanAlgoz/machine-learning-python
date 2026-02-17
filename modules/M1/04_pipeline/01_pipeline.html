@@ -59,6 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
@@ -74,16 +75,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-b5fd66f8f47aa271496cf9622bf1ba01.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -109,14 +110,55 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Machine Learning with Python</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="البحث"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="تبديل التنقل" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">الرئيسية</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">المحتويات</h2>
+   
+  <ul>
+  <li><a href="#ما-هو-خط-المعالجة-pipeline" id="toc-ما-هو-خط-المعالجة-pipeline" class="nav-link active" data-scroll-target="#ما-هو-خط-المعالجة-pipeline">ما هو خط المعالجة (Pipeline)؟</a>
+  <ul class="collapse">
+  <li><a href="#المقدر-estimator" id="toc-المقدر-estimator" class="nav-link" data-scroll-target="#المقدر-estimator">1. المُقدّر (Estimator)</a></li>
+  <li><a href="#المحول-transformer" id="toc-المحول-transformer" class="nav-link" data-scroll-target="#المحول-transformer">2. المحوّل (Transformer)</a></li>
+  <li><a href="#المتنبئ-predictor" id="toc-المتنبئ-predictor" class="nav-link" data-scroll-target="#المتنبئ-predictor">3. المتنبئ (Predictor)</a></li>
+  <li><a href="#الهيكل-التنظيمي-للمكتبة" id="toc-الهيكل-التنظيمي-للمكتبة" class="nav-link" data-scroll-target="#الهيكل-التنظيمي-للمكتبة">الهيكل التنظيمي للمكتبة</a></li>
+  <li><a href="#خلاصة-المقدرات" id="toc-خلاصة-المقدرات" class="nav-link" data-scroll-target="#خلاصة-المقدرات">خلاصة المقدرات</a></li>
+  </ul></li>
+  <li><a href="#أهمية-خط-المعالجة-في-التعلم-الآلي" id="toc-أهمية-خط-المعالجة-في-التعلم-الآلي" class="nav-link" data-scroll-target="#أهمية-خط-المعالجة-في-التعلم-الآلي">أهمية خط المعالجة في التعلم الآلي</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -313,7 +355,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>الثالثة: <strong>ضبط المسار ككل</strong>: يمكنك البحث عن معلمات جميع المُقدّرات في المسار دفعة واحدة. (يُشرح لاحقاً. انظر: <a href="https://inria.github.io/scikit-learn-mooc/python_scripts/parameter_tuning_grid_search.html">ضبط المعلمات الفوقية بالبحث الشبكي (Hyperparameter tuning by grid-search)</a>).</p>
 <hr>
 <ul>
-<li><a href="../../../modules/M1/04_pipeline/02_make_pipeline.html">عملي: بناء خط معالجة</a></li>
+<li><a href="../../../modules/M1/04_pipeline/make_pipeline.html">عملي: بناء خط معالجة</a></li>
 <li><a href="../../../modules/M1/04_pipeline/exercises/01_pipeline_ex.html">تمرين: بناء خط معالجة</a></li>
 </ul>
 
@@ -394,7 +436,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/HassanAlgoz\.github\.io\/machine-learning-python\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

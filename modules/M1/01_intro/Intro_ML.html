@@ -79,6 +79,7 @@ div.csl-indent {
 
 
 <script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
@@ -94,16 +95,16 @@ div.csl-indent {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-b5fd66f8f47aa271496cf9622bf1ba01.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -158,14 +159,67 @@ window.Quarto = {
 
 </head>
 
-<body class="fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Machine Learning with Python</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="البحث"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="تبديل التنقل" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">الرئيسية</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">المحتويات</h2>
+   
+  <ul>
+  <li><a href="#المبادئ-العشرة" id="toc-المبادئ-العشرة" class="nav-link active" data-scroll-target="#المبادئ-العشرة">المبادئ العشرة</a></li>
+  <li><a href="#الـحد-التعريف" id="toc-الـحد-التعريف" class="nav-link" data-scroll-target="#الـحد-التعريف">1. الـحَدُّ (التعريف)</a></li>
+  <li><a href="#الموضوع" id="toc-الموضوع" class="nav-link" data-scroll-target="#الموضوع">2. المَوْضُوع</a></li>
+  <li><a href="#الـثمرة" id="toc-الـثمرة" class="nav-link" data-scroll-target="#الـثمرة">3. الـثَّمَرَة</a></li>
+  <li><a href="#الـفضل" id="toc-الـفضل" class="nav-link" data-scroll-target="#الـفضل">4. الـفَضْل</a></li>
+  <li><a href="#الـنسبة" id="toc-الـنسبة" class="nav-link" data-scroll-target="#الـنسبة">5. الـنِّسْبَة</a></li>
+  <li><a href="#الاسـتمداد" id="toc-الاسـتمداد" class="nav-link" data-scroll-target="#الاسـتمداد">6. الاسْـتِمْدَادُ</a></li>
+  <li><a href="#الـواضع" id="toc-الـواضع" class="nav-link" data-scroll-target="#الـواضع">7. الـوَاضِع</a></li>
+  <li><a href="#الاسم" id="toc-الاسم" class="nav-link" data-scroll-target="#الاسم">8. الاسْم</a></li>
+  <li><a href="#المـسائل" id="toc-المـسائل" class="nav-link" data-scroll-target="#المـسائل">9. المَـسَائِل</a>
+  <ul class="collapse">
+  <li><a href="#القسم-الأول-التعلم-الإشرافي-supervised-learning" id="toc-القسم-الأول-التعلم-الإشرافي-supervised-learning" class="nav-link" data-scroll-target="#القسم-الأول-التعلم-الإشرافي-supervised-learning">القسم الأول: التعلم الإشرافي (Supervised Learning)</a></li>
+  <li><a href="#القسم-الثاني-التعلم-اللا-إشرافي-unsupervised-learning" id="toc-القسم-الثاني-التعلم-اللا-إشرافي-unsupervised-learning" class="nav-link" data-scroll-target="#القسم-الثاني-التعلم-اللا-إشرافي-unsupervised-learning">القسم الثاني: التعلم اللا إشرافي (Unsupervised Learning)</a></li>
+  <li><a href="#القسم-الثالث-التعلم-التعزيزي-reinforcement-learning" id="toc-القسم-الثالث-التعلم-التعزيزي-reinforcement-learning" class="nav-link" data-scroll-target="#القسم-الثالث-التعلم-التعزيزي-reinforcement-learning">القسم الثالث: التعلم التعزيزي (Reinforcement Learning)</a></li>
+  </ul></li>
+  <li><a href="#مثال-تقريبي-الفرق-بين-الترجمة-بالقواعد-الإجرائية-و-الترجمة-بالإحصاء" id="toc-مثال-تقريبي-الفرق-بين-الترجمة-بالقواعد-الإجرائية-و-الترجمة-بالإحصاء" class="nav-link" data-scroll-target="#مثال-تقريبي-الفرق-بين-الترجمة-بالقواعد-الإجرائية-و-الترجمة-بالإحصاء">مثال تقريبي: الفرق بين الترجمة بالقواعد الإجرائية و الترجمة بالإحصاء</a>
+  <ul class="collapse">
+  <li><a href="#الترجمة-بالقواميس-والقواعد-اللغوية" id="toc-الترجمة-بالقواميس-والقواعد-اللغوية" class="nav-link" data-scroll-target="#الترجمة-بالقواميس-والقواعد-اللغوية">الترجمة بالقواميس والقواعد اللغوية</a></li>
+  <li><a href="#الترجمة-الإحصائية-بالبيانات-المتوازية" id="toc-الترجمة-الإحصائية-بالبيانات-المتوازية" class="nav-link" data-scroll-target="#الترجمة-الإحصائية-بالبيانات-المتوازية">الترجمة الإحصائية بالبيانات المتوازية</a></li>
+  <li><a href="#ملخص-الفرق-في-جدول" id="toc-ملخص-الفرق-في-جدول" class="nav-link" data-scroll-target="#ملخص-الفرق-في-جدول">ملخص الفرق في جدول</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -511,7 +565,7 @@ Shalev-Shwartz, Shai, و Shai Ben-David. 2014. <em>Understanding Machine Learnin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/HassanAlgoz\.github\.io\/machine-learning-python\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

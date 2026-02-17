@@ -59,6 +59,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
@@ -74,16 +75,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-b5fd66f8f47aa271496cf9622bf1ba01.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
+  "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
+  "panel-placement": "end",
+  "type": "overlay",
   "limit": 50,
   "keyboard-shortcut": [
     "f",
@@ -112,14 +113,74 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </head>
 
-<body class="fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Machine Learning with Python</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="البحث"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="تبديل التنقل" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">الرئيسية</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">المحتويات</h2>
+   
+  <ul>
+  <li><a href="#الأهداف-التعليمية" id="toc-الأهداف-التعليمية" class="nav-link active" data-scroll-target="#الأهداف-التعليمية">الأهداف التعليمية</a></li>
+  <li><a href="#التحليل-الاستكشافي-للبيانات-eda-وأهمية-العينات" id="toc-التحليل-الاستكشافي-للبيانات-eda-وأهمية-العينات" class="nav-link" data-scroll-target="#التحليل-الاستكشافي-للبيانات-eda-وأهمية-العينات">1. التحليل الاستكشافي للبيانات (EDA) وأهمية العينات</a>
+  <ul class="collapse">
+  <li><a href="#العمل-على-عينة-ممثلة-representative-sample" id="toc-العمل-على-عينة-ممثلة-representative-sample" class="nav-link" data-scroll-target="#العمل-على-عينة-ممثلة-representative-sample">العمل على عينة ممثلة (Representative Sample)</a></li>
+  </ul></li>
+  <li><a href="#تحميل-البيانات" id="toc-تحميل-البيانات" class="nav-link" data-scroll-target="#تحميل-البيانات">2. تحميل البيانات</a></li>
+  <li><a href="#أخذ-عينة-ممثلة-representative-sampling" id="toc-أخذ-عينة-ممثلة-representative-sampling" class="nav-link" data-scroll-target="#أخذ-عينة-ممثلة-representative-sampling">3. أخذ عينة ممثلة (Representative Sampling)</a></li>
+  <li><a href="#تحليل-توزيع-المتغير-المستهدف-target-analysis" id="toc-تحليل-توزيع-المتغير-المستهدف-target-analysis" class="nav-link" data-scroll-target="#تحليل-توزيع-المتغير-المستهدف-target-analysis">4. تحليل توزيع المتغير المستهدف (Target Analysis)</a></li>
+  <li><a href="#التحقق-من-توازن-الفئات-categorical-imbalance" id="toc-التحقق-من-توازن-الفئات-categorical-imbalance" class="nav-link" data-scroll-target="#التحقق-من-توازن-الفئات-categorical-imbalance">5. التحقق من توازن الفئات (Categorical Imbalance)</a></li>
+  <li><a href="#العلاقة-مع-المتغير-المستهدف" id="toc-العلاقة-مع-المتغير-المستهدف" class="nav-link" data-scroll-target="#العلاقة-مع-المتغير-المستهدف">6. العلاقة مع المتغير المستهدف</a></li>
+  <li><a href="#قياس-التعميم" id="toc-قياس-التعميم" class="nav-link" data-scroll-target="#قياس-التعميم">7. قياس التعميم</a>
+  <ul class="collapse">
+  <li><a href="#أخطاء-شائعة" id="toc-أخطاء-شائعة" class="nav-link" data-scroll-target="#أخطاء-شائعة">أخطاء شائعة</a></li>
+  <li><a href="#وضع-مجموعة-للاختبار" id="toc-وضع-مجموعة-للاختبار" class="nav-link" data-scroll-target="#وضع-مجموعة-للاختبار">وضع مجموعة للاختبار</a></li>
+  </ul></li>
+  <li><a href="#مفاهيم-scikit-learn-الأساسية" id="toc-مفاهيم-scikit-learn-الأساسية" class="nav-link" data-scroll-target="#مفاهيم-scikit-learn-الأساسية">8. مفاهيم Scikit-Learn الأساسية</a>
+  <ul class="collapse">
+  <li><a href="#المقدرات-estimators" id="toc-المقدرات-estimators" class="nav-link" data-scroll-target="#المقدرات-estimators">1. المُقدِّرات (Estimators)</a></li>
+  <li><a href="#المحولات-transformers" id="toc-المحولات-transformers" class="nav-link" data-scroll-target="#المحولات-transformers">2. المُحوِّلات (Transformers)</a></li>
+  <li><a href="#المتنبئات-predictors" id="toc-المتنبئات-predictors" class="nav-link" data-scroll-target="#المتنبئات-predictors">3. المتنبئات (Predictors)</a></li>
+  </ul></li>
+  <li><a href="#المعالجة-الأولية-pre-processing" id="toc-المعالجة-الأولية-pre-processing" class="nav-link" data-scroll-target="#المعالجة-الأولية-pre-processing">9. المعالجة الأولية (Pre-processing)</a>
+  <ul class="collapse">
+  <li><a href="#أ.-التعامل-مع-القيم-المفقودة-imputation" id="toc-أ.-التعامل-مع-القيم-المفقودة-imputation" class="nav-link" data-scroll-target="#أ.-التعامل-مع-القيم-المفقودة-imputation">أ. التعامل مع القيم المفقودة (Imputation)</a></li>
+  <li><a href="#ب.-تحويل-الأعمدة-column-transformers" id="toc-ب.-تحويل-الأعمدة-column-transformers" class="nav-link" data-scroll-target="#ب.-تحويل-الأعمدة-column-transformers">ب. تحويل الأعمدة (Column Transformers)</a></li>
+  </ul></li>
+  <li><a href="#بناء-النموذج-النهائي-the-full-pipeline" id="toc-بناء-النموذج-النهائي-the-full-pipeline" class="nav-link" data-scroll-target="#بناء-النموذج-النهائي-the-full-pipeline">10. بناء النموذج النهائي (The Full Pipeline)</a></li>
+  <li><a href="#تدريب-وتقييم-النموذج" id="toc-تدريب-وتقييم-النموذج" class="nav-link" data-scroll-target="#تدريب-وتقييم-النموذج">7. تدريب وتقييم النموذج</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -2444,7 +2505,7 @@ forceTheme('sk-container-id-3');</script>
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/HassanAlgoz\.github\.io\/machine-learning-python\/");
+        var filterRegex = new RegExp('/' + window.location.host + '/');
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
