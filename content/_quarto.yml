@@ -36,7 +36,7 @@ format:
     background-transition: fade
     chalkboard: true
     progress: true
-    history: true
+    history: false
     scrollable: true
     rtl: true
     dir: rtl
