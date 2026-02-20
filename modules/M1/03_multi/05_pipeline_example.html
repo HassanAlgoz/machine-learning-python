@@ -76,6 +76,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -147,14 +150,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">المحتويات</h2>
    
   <ul>
-  <li><a href="#تحميل-مجموعة-البيانات" id="toc-تحميل-مجموعة-البيانات" class="nav-link active" data-scroll-target="#تحميل-مجموعة-البيانات">1. تحميل مجموعة البيانات</a></li>
-  <li><a href="#أخذ-مجموعة-فرعية-من-الميزات" id="toc-أخذ-مجموعة-فرعية-من-الميزات" class="nav-link" data-scroll-target="#أخذ-مجموعة-فرعية-من-الميزات">2. أخذ مجموعة فرعية من الميزات</a></li>
-  <li><a href="#تعريف-خطوات-المعالجة-المسبقة" id="toc-تعريف-خطوات-المعالجة-المسبقة" class="nav-link" data-scroll-target="#تعريف-خطوات-المعالجة-المسبقة">3. تعريف خطوات المعالجة المسبقة</a></li>
+  <li><a href="#تحميل-مجموعة-البيانات" id="toc-تحميل-مجموعة-البيانات" class="nav-link active" data-scroll-target="#تحميل-مجموعة-البيانات">1. تحميل مجموعة البيانات</a>
+  <ul class="collapse">
+  <li><a href="#تحليل-توزيع-المتغير-المستهدف" id="toc-تحليل-توزيع-المتغير-المستهدف" class="nav-link" data-scroll-target="#تحليل-توزيع-المتغير-المستهدف">تحليل توزيع المتغير المستهدف</a></li>
+  </ul></li>
+  <li><a href="#أخذ-مجموعة-فرعية-من-الميزات" id="toc-أخذ-مجموعة-فرعية-من-الميزات" class="nav-link" data-scroll-target="#أخذ-مجموعة-فرعية-من-الميزات">2. أخذ مجموعة فرعية من الميزات</a>
+  <ul class="collapse">
+  <li><a href="#التحقق-من-توازن-الفئات-categorical-imbalance" id="toc-التحقق-من-توازن-الفئات-categorical-imbalance" class="nav-link" data-scroll-target="#التحقق-من-توازن-الفئات-categorical-imbalance">التحقق من توازن الفئات (Categorical Imbalance)</a></li>
+  </ul></li>
+  <li><a href="#المعالجة-الأولية-pre-processing" id="toc-المعالجة-الأولية-pre-processing" class="nav-link" data-scroll-target="#المعالجة-الأولية-pre-processing">3. المعالجة الأولية (Pre-processing)</a>
+  <ul class="collapse">
+  <li><a href="#أ.-التعامل-مع-القيم-المفقودة-imputation" id="toc-أ.-التعامل-مع-القيم-المفقودة-imputation" class="nav-link" data-scroll-target="#أ.-التعامل-مع-القيم-المفقودة-imputation">أ. التعامل مع القيم المفقودة (Imputation)</a></li>
+  </ul></li>
   <li><a href="#ربط-التحويلات-بالميزات-والهدف" id="toc-ربط-التحويلات-بالميزات-والهدف" class="nav-link" data-scroll-target="#ربط-التحويلات-بالميزات-والهدف">4. ربط التحويلات بالميزات (والهدف)</a></li>
   <li><a href="#تعريف-المسار" id="toc-تعريف-المسار" class="nav-link" data-scroll-target="#تعريف-المسار">5. تعريف المسار</a></li>
-  <li><a href="#تقييم-المسار" id="toc-تقييم-المسار" class="nav-link" data-scroll-target="#تقييم-المسار">6. تقييم المسار</a></li>
+  <li><a href="#قياس-التعميم" id="toc-قياس-التعميم" class="nav-link" data-scroll-target="#قياس-التعميم">قياس التعميم</a>
+  <ul class="collapse">
+  <li><a href="#وضع-مجموعة-للاختبار" id="toc-وضع-مجموعة-للاختبار" class="nav-link" data-scroll-target="#وضع-مجموعة-للاختبار">وضع مجموعة للاختبار</a></li>
+  </ul></li>
+  <li><a href="#تقييم-الأداء-على-بيانات-الاختبار" id="toc-تقييم-الأداء-على-بيانات-الاختبار" class="nav-link" data-scroll-target="#تقييم-الأداء-على-بيانات-الاختبار">6. تقييم الأداء على بيانات الاختبار</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>صيغ أخرى</h2><ul><li><a href="make_pipeline.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>صيغ أخرى</h2><ul><li><a href="05_pipeline_example.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -187,7 +203,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="تحميل-مجموعة-البيانات" class="level2">
 <h2 class="anchored" data-anchor-id="تحميل-مجموعة-البيانات">1. تحميل مجموعة البيانات</h2>
 <p>نحتاج إلى تعريف البيانات والهدف (target). هنا نبني نموذج انحدار (regression model).</p>
-<div id="13286f73" class="cell" data-execution_count="1">
+<div id="13286f73" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> fetch_openml</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>ames_housing <span class="op">=</span> fetch_openml(name<span class="op">=</span><span class="st">"house_prices"</span>, as_frame<span class="op">=</span><span class="va">True</span>)</span>
@@ -195,9 +211,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> ames_housing.target</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>نستعرض الصفوف الأولى من إطار البيانات (dataframe).</p>
-<div id="dc53ab88" class="cell" data-execution_count="2">
+<div id="dc53ab88" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data.head()</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="8">
 <div>
 
 
@@ -356,43 +372,128 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<section id="تحليل-توزيع-المتغير-المستهدف" class="level3">
+<h3 class="anchored" data-anchor-id="تحليل-توزيع-المتغير-المستهدف">تحليل توزيع المتغير المستهدف</h3>
+<p>الخطوة الأولى في EDA لمشاكل الانحدار هي فحص توزيع المتغير المستهدف (<code>SalePrice</code>). إذا كان التوزيع <strong>ملتوياً (Skewed)</strong>، فقد يؤثر ذلك سلباً على أداء النماذج الخطية (مثل SGDRegressor). في هذه الحالة، قد نحتاج إلى تحويله (مثلاً باستخدام اللوغاريتم <code>np.log1p</code>) لجعله أقرب إلى التوزيع الطبيعي.</p>
+<div id="12a28724" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># إعداد نمط الرسم</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>sns.histplot(target, kde<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Target Variable Distribution (SalePrice)'</span>)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Sale Price'</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Skewness: </span><span class="sc">{</span>target<span class="sc">.</span>skew()<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="05_pipeline_example_files/figure-html/cell-4-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="05_pipeline_example_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Skewness: 1.88</code></pre>
+</div>
+</div>
+</section>
 </section>
 <section id="أخذ-مجموعة-فرعية-من-الميزات" class="level2">
 <h2 class="anchored" data-anchor-id="أخذ-مجموعة-فرعية-من-الميزات">2. أخذ مجموعة فرعية من الميزات</h2>
 <p><strong>من أجل البساطة</strong>، يمكننا اختيار بعض الميزات (features) والاكتفاء بهذه المجموعة الفرعية من البيانات:</p>
-<div id="d69321ce" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>numeric_features <span class="op">=</span> [<span class="st">"LotArea"</span>, <span class="st">"FullBath"</span>, <span class="st">"HalfBath"</span>]</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>categorical_features <span class="op">=</span> [<span class="st">"Neighborhood"</span>, <span class="st">"HouseStyle"</span>]</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data[numeric_features <span class="op">+</span> categorical_features]</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="d69321ce" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>numeric_features <span class="op">=</span> [<span class="st">"LotArea"</span>, <span class="st">"FullBath"</span>, <span class="st">"HalfBath"</span>]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>categorical_features <span class="op">=</span> [<span class="st">"Neighborhood"</span>, <span class="st">"HouseStyle"</span>]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> data[numeric_features <span class="op">+</span> categorical_features]</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="التحقق-من-توازن-الفئات-categorical-imbalance" class="level3">
+<h3 class="anchored" data-anchor-id="التحقق-من-توازن-الفئات-categorical-imbalance">التحقق من توازن الفئات (Categorical Imbalance)</h3>
+<p>من المهم جداً فحص المتغيرات الفئوية لمعرفة ما إذا كانت هناك فئات نادرة جداً. وجود فئات نادرة قد يسبب مشاكل أثناء تقسيم البيانات (Train/Test Split) أو أثناء التحقق المتقاطع (Cross-Validation)، حيث قد تظهر الفئة في التدريب ولا تظهر في الاختبار، أو العكس.</p>
+<p><strong>الحل:</strong> إذا وجدنا فئات نادرة، يمكننا دمجها في فئة “Other” أو استخدام معالجة قوية للأخطاء مثل <code>handle_unknown='ignore'</code> في <code>OneHotEncoder</code>.</p>
+<div id="474dee83" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>neighborhood_counts <span class="op">=</span> data[<span class="st">'Neighborhood'</span>].value_counts()</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>sns.barplot(x<span class="op">=</span>neighborhood_counts.index, y<span class="op">=</span>neighborhood_counts.values)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">90</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Neighborhood Counts in Sample'</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Neighborhood'</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Count'</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><a href="05_pipeline_example_files/figure-html/cell-6-output-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="05_pipeline_example_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="3156efa0" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># عرض الفئات النادرة (أقل من 10 مرات ظهور في العينة)</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>rare_threshold <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>rare_neighborhoods <span class="op">=</span> neighborhood_counts[neighborhood_counts <span class="op">&lt;</span> rare_threshold]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Number of rare neighborhoods (&lt; </span><span class="sc">{</span>rare_threshold<span class="sc">}</span><span class="ss">): </span><span class="sc">{</span><span class="bu">len</span>(rare_neighborhoods)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(rare_neighborhoods)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of rare neighborhoods (&lt; 10): 2
+Neighborhood
+NPkVill    9
+Blueste    2
+Name: count, dtype: int64</code></pre>
+</div>
 </div>
 </section>
-<section id="تعريف-خطوات-المعالجة-المسبقة" class="level2">
-<h2 class="anchored" data-anchor-id="تعريف-خطوات-المعالجة-المسبقة">3. تعريف خطوات المعالجة المسبقة</h2>
+</section>
+<section id="المعالجة-الأولية-pre-processing" class="level2">
+<h2 class="anchored" data-anchor-id="المعالجة-الأولية-pre-processing">3. المعالجة الأولية (Pre-processing)</h2>
+<p>نادراً ما تكون البيانات الخام جاهزة للاستخدام الفوري في نماذج تعلم الآلة. نحتاج غالباً إلى خطوات معالجة مثل:</p>
+<ul>
+<li>التعامل مع القيم المفقودة.</li>
+<li>ترميز المتغيرات الفئوية (Categorical Encoding).</li>
+<li>تقييس المتغيرات العددية (Scaling).</li>
+</ul>
+<p>لنسهل الأمر، سنختر مجموعة محددة من الأعمدة للعمل عليها:</p>
+<section id="أ.-التعامل-مع-القيم-المفقودة-imputation" class="level3">
+<h3 class="anchored" data-anchor-id="أ.-التعامل-مع-القيم-المفقودة-imputation">أ. التعامل مع القيم المفقودة (Imputation)</h3>
+<p>القيم المفقودة مشكلة شائعة. لا تقبل معظم الخوارزميات وجود فراغات في البيانات.</p>
+<p><strong>استراتيجيات التعويض (<code>SimpleImputer</code>):</strong></p>
+<ol type="1">
+<li><strong><code>mean</code> (المتوسط):</strong> تُستخدم مع البيانات العددية ذات التوزيع الطبيعي.</li>
+<li><strong><code>median</code> (الوسيط):</strong> الأفضل للبيانات العددية التي تحتوي على قيم شاذة (Outliers).</li>
+<li><strong><code>most_frequent</code> (الأكثر تكراراً):</strong> تُستخدم غالباً مع البيانات الفئوية (Categorical).</li>
+<li><strong><code>constant</code> (قيمة ثابتة):</strong> تعويض القيمة المفقودة بقيمة محددة (مثلاً “Unknown” أو 0).</li>
+</ol>
+<p><strong>كيف ندمجها في خط المعالجة؟</strong> عند استخدام <code>Pipeline</code>، نضمن أن عملية التعويض (<code>imputer.fit</code>) تتم فقط على بيانات التدريب، ثم تُطبق القواعد المستخلصة على بيانات الاختبار. هذا يمنع تسرب المعلومات.</p>
 <section id="الميزات-العددية" class="level4">
 <h4 class="anchored" data-anchor-id="الميزات-العددية">3.1 الميزات العددية</h4>
-<div id="e22f79a3" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> SimpleImputer</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>numeric_transformer <span class="op">=</span> Pipeline(</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    steps<span class="op">=</span>[</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"imputer"</span>, SimpleImputer(strategy<span class="op">=</span><span class="st">"median"</span>)),</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        (</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"scaler"</span>,</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>            StandardScaler(),</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="e22f79a3" class="cell" data-execution_count="13">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> SimpleImputer</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>numeric_transformer <span class="op">=</span> Pipeline(</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    steps<span class="op">=</span>[</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"imputer"</span>, SimpleImputer(strategy<span class="op">=</span><span class="st">"median"</span>)),</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>            <span class="st">"scaler"</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>            StandardScaler(),</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="الميزات-الوصفية" class="level4">
 <h4 class="anchored" data-anchor-id="الميزات-الوصفية">3.2 الميزات الوصفية</h4>
-<div id="b492a77a" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OneHotEncoder</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>categorical_transformer <span class="op">=</span> OneHotEncoder(handle_unknown<span class="op">=</span><span class="st">"ignore"</span>)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="b492a77a" class="cell" data-execution_count="14">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OneHotEncoder</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>categorical_transformer <span class="op">=</span> OneHotEncoder(handle_unknown<span class="op">=</span><span class="st">"ignore"</span>)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</section>
 </section>
 </section>
 <section id="ربط-التحويلات-بالميزات-والهدف" class="level2">
@@ -403,36 +504,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>اتحاد الميزات (FeatureUnion)</strong> <a href="https://scikit-learn.org/stable/modules/compose.html#feature-union">رابط</a> يربط مخرجات المحوّلات في فضاء ميزات مركّب (composite feature space).</li>
 <li>أخيراً، لتحويل الهدف (target) (مثلاً تحويل لوغاريتمي لـ y) استخدم <strong>متنبئ الهدف المحوّل (TransformedTargetRegressor)</strong> <a href="https://scikit-learn.org/stable/modules/compose.html#transformed-target-regressor">رابط</a>.</li>
 </ol>
-<div id="29fa1bb3" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.compose <span class="im">import</span> ColumnTransformer</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>preprocessor <span class="op">=</span> ColumnTransformer(</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    transformers<span class="op">=</span>[</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"num"</span>, numeric_transformer, numeric_features),</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"cat"</span>, categorical_transformer, categorical_features),</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="29fa1bb3" class="cell" data-execution_count="15">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.compose <span class="im">import</span> ColumnTransformer</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>preprocessor <span class="op">=</span> ColumnTransformer(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    transformers<span class="op">=</span>[</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"num"</span>, numeric_transformer, numeric_features),</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"cat"</span>, categorical_transformer, categorical_features),</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="تعريف-المسار" class="level2">
 <h2 class="anchored" data-anchor-id="تعريف-المسار">5. تعريف المسار</h2>
 <p>تعريف نموذج الانحدار (regression model).</p>
 <p>أحياناً نسمّي المسار بالكامل <strong>النموذج (model)</strong>. لذلك نسمي المتنبئ (predictor) بهذا الاسم.</p>
-<div id="b833ae49" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> SGDRegressor</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>predictor <span class="op">=</span> SGDRegressor(loss<span class="op">=</span><span class="st">"squared_error"</span>)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="b833ae49" class="cell" data-execution_count="16">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> SGDRegressor</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>predictor <span class="op">=</span> SGDRegressor(loss<span class="op">=</span><span class="st">"squared_error"</span>)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>ربط الخطوات بالمتنبئ (predictor).</p>
-<div id="5348f639" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Pipeline(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    steps<span class="op">=</span>[</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"preprocessor"</span>, preprocessor),</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"regressor"</span>, predictor),</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>model</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div id="5348f639" class="cell" data-execution_count="17">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Pipeline(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    steps<span class="op">=</span>[</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"preprocessor"</span>, preprocessor),</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>        (<span class="st">"regressor"</span>, predictor),</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>model</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
 <style>#sk-container-id-1 {
   /* Definition of color scheme common for light and dark mode */
   --sklearn-color-text: #000;
@@ -1924,13 +2025,41 @@ function forceTheme(elementId) {
 forceTheme('sk-container-id-1');</script>
 </div>
 </div>
-<ul>
-<li>لنجرِ الملاءمة (fit)!</li>
-<li>لاحظ كيف يتغيّر لون الرسم بعد ملاءمة المُقدّر (estimator).</li>
-</ul>
-<div id="6434eee4" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>model.fit(data, target)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+</section>
+<section id="قياس-التعميم" class="level2">
+<h2 class="anchored" data-anchor-id="قياس-التعميم">قياس التعميم</h2>
+<p>أحد أهم المفاهيم في تعلم الآلة هو قدرة النموذج على <strong>التعميم (Generalization)</strong>، أي أداؤه على بيانات جديدة لم يرها أثناء التدريب.</p>
+<p>يقع الكثير من المبتدئين في خطأ فادح وهو تقييم النموذج على نفس البيانات التي تدرب عليها. هذا يعطي نتائج مضللة وتفاؤلية جداً.</p>
+<div id="73ec2873" class="cell" data-execution_count="18">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WRONG</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># model.fit(data, target)</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="وضع-مجموعة-للاختبار" class="level3">
+<h3 class="anchored" data-anchor-id="وضع-مجموعة-للاختبار">وضع مجموعة للاختبار</h3>
+<p>يجب تقسيم البيانات إلى قسمين:</p>
+<ol type="1">
+<li><strong>مجموعة التدريب (Training Set):</strong> تُستخدم لتدريب النموذج.</li>
+<li><strong>مجموعة الاختبار (Test Set):</strong> تُحجب عن النموذج تماماً، وتُستخدم فقط في النهاية لتقييم أدائه.</li>
+</ol>
+<div id="3eeca89d" class="cell" data-execution_count="19">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># تقسيم البيانات: 80% للتدريب و 20% للاختبار</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    data, target, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Shape of X_train: </span><span class="sc">{</span>X_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Shape of X_test: </span><span class="sc">{</span>X_test<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Shape of X_train: (1168, 5)
+Shape of X_test: (292, 5)</code></pre>
+</div>
+</div>
+<p>والآن: الملاءمة، لاحظ كيف يتغيّر لون الرسم بعد التدريب.</p>
+<div id="6434eee4" class="cell" data-execution_count="20">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
 <style>#sk-container-id-2 {
   /* Definition of color scheme common for light and dark mode */
   --sklearn-color-text: #000;
@@ -3423,39 +3552,34 @@ forceTheme('sk-container-id-2');</script>
 </div>
 </div>
 <p><strong>إضافة</strong>: يمكننا بدلاً من ذلك استخدام واجهة الدوال (functional API): <code>make_column_transformer</code> و <code>make_pipeline</code>، ولا تتطلبان ولا تسمحان بتسمية المُقدّرات يدوياً؛ بل تُعيَّن أسماؤها تلقائياً بأحرف صغيرة من أنواعها.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.compose <span class="im">import</span> make_column_transformer</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>numeric_transformer <span class="op">=</span> make_pipeline(</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    SimpleImputer(strategy<span class="op">=</span><span class="st">"median"</span>), StandardScaler()</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>categorical_transformer <span class="op">=</span> OneHotEncoder(handle_unknown<span class="op">=</span><span class="st">"ignore"</span>)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>preprocessor <span class="op">=</span> make_column_transformer(</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    (numeric_transformer, numeric_features),</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    (categorical_transformer, categorical_features),</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> make_pipeline(preprocessor, SGDRegressor())</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>model.fit(data, target)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.compose <span class="im">import</span> make_column_transformer</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>numeric_transformer <span class="op">=</span> make_pipeline(</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    SimpleImputer(strategy<span class="op">=</span><span class="st">"median"</span>), StandardScaler()</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>categorical_transformer <span class="op">=</span> OneHotEncoder(handle_unknown<span class="op">=</span><span class="st">"ignore"</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>preprocessor <span class="op">=</span> make_column_transformer(</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>    (numeric_transformer, numeric_features),</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    (categorical_transformer, categorical_features),</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> make_pipeline(preprocessor, SGDRegressor())</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="تقييم-المسار" class="level2">
-<h2 class="anchored" data-anchor-id="تقييم-المسار">6. تقييم المسار</h2>
-<p><strong>تقييم النموذج (Model Evaluation)</strong> يحتاج نقاشاً مستقلاً، لكن نعرضه هنا للتكميل.</p>
-<div id="36f89c65" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_validate</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>cv_results <span class="op">=</span> cross_validate(model, data, target, cv<span class="op">=</span><span class="dv">5</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> cv_results[<span class="st">"test_score"</span>]</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"The mean cross-validation accuracy is: "</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>scores<span class="sc">.</span>mean()<span class="sc">:.3f}</span><span class="ss"> ± </span><span class="sc">{</span>scores<span class="sc">.</span>std()<span class="sc">:.3f}</span><span class="ss">"</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="تقييم-الأداء-على-بيانات-الاختبار" class="level2">
+<h2 class="anchored" data-anchor-id="تقييم-الأداء-على-بيانات-الاختبار">6. تقييم الأداء على بيانات الاختبار</h2>
+<div id="509d2f13" class="cell" data-execution_count="21">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> model.score(X_test, y_test)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"R² Score on Test Set: </span><span class="sc">{</span>score<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>The mean cross-validation accuracy is: 0.611 ± 0.024</code></pre>
+<pre><code>R² Score on Test Set: 0.663</code></pre>
 </div>
 </div>
+<p>ملاحظة: <strong>تقييم النموذج (Model Evaluation)</strong> يحتاج نقاشاً مستقلاً، لكن نعرضه هنا للتكميل.</p>
 <hr>
-<p>دفتر مرتبط: <a href="https://scikit-learn.org/stable/auto_examples/compose/plot_column_transformer_mixed_types.html">مسار تعلم آلي تنبؤي مع أنواع بيانات مختلطة (Predictive machine learning pipeline with mixed data types)</a>.</p>
+<p>للمزيد انظر: <a href="https://scikit-learn.org/stable/auto_examples/compose/plot_column_transformer_mixed_types.html">مسار تعلم آلي تنبؤي مع أنواع بيانات مختلطة (Predictive machine learning pipeline with mixed data types)</a>.</p>
 
 
 </section>
@@ -3862,6 +3986,38 @@ forceTheme('sk-container-id-2');</script>
   });
   </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

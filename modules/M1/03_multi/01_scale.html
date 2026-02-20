@@ -200,14 +200,14 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="وفي-خوارزمية-أقرب-جيران-knn">وفي خوارزمية أقرب جيران (KNN)</h3>
 <p>إذْ تعتمد على حساب المسافة بين متغيرات متفاوتة القيَم. كما هو موضح في <a href="https://scikit-learn.org/stable/auto_examples/preprocessing/plot_scaling_importance.html#effect-of-rescaling-on-a-k-neighbors-models">الصورة التالية</a>:</p>
 <p><a href="https://scikit-learn.org/stable/_images/sphx_glr_plot_scaling_importance_001.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://scikit-learn.org/stable/_images/sphx_glr_plot_scaling_importance_001.png" class="img-fluid"></a></p>
-<p>والسبب في أن أماكن النقاط لا يتغير هو أن الرسم يُجري عمليَّة تسوية أصلاً؛ لتظهر جميع النقاط.</p>
+<p>والسبب في أن أماكن النقاط لا يتغير هو أن الرسم يُجري عمليَّة تقييس أصلاً؛ لتظهر جميع النقاط.</p>
 <p>وقد لا تتأثر بعض الخوارزميات بتفاوُت القيَم لكنه أيضًا لا يضرها، مثل: شجرة القرارة (Decision Tree).</p>
-<p>للمزيد راجع: <a href="https://scikit-learn.org/stable/auto_examples/preprocessing/plot_scaling_importance.html">أهميَّة التسوية</a>.</p>
+<p>للمزيد راجع: <a href="https://scikit-learn.org/stable/auto_examples/preprocessing/plot_scaling_importance.html">أهميَّة التقييس</a>.</p>
 </section>
 </section>
 <section id="كيفياتها" class="level2">
 <h2 class="anchored" data-anchor-id="كيفياتها">كيفياتها</h2>
-<p>وهناك طبيعتان لطرق <strong>التسوية</strong>: خطية ولا خطيَّة.</p>
+<p>وهناك طبيعتان لطرق <strong>التقييس</strong>: خطية ولا خطيَّة.</p>
 <section id="أولا-الخطية" class="level3">
 <h3 class="anchored" data-anchor-id="أولا-الخطية">أولاً: <strong>الخطية</strong></h3>
 <p>وهي لا تغيِّرُ نسبة ما بين القيَم نفسها.</p>
@@ -235,7 +235,7 @@ z = \frac{x - \mu}{s}
 \]</span></p>
 <p>حيث تمثل <span class="math inline">\(\mu\)</span> و <span class="math inline">\(s\)</span> المتوسط الحسابي والانحراف المعياري لعينات التدريب، على التوالي.</p>
 <p>مناسب عندما تتبع البيانات <strong>التوزيع الطبيعي</strong> أو قريبًا منه.</p>
-<p><strong>التقليم (Clipping)</strong> هي عملية استبعاد القيَم المتطرفة (Outliers) بهدف التخفيف من أثرها السلبي على أداء النموذج. قد يتحقق ذلك بإزالة أي قيم تقع خارج:</p>
+<p>وبعد التقييس قد يتم <strong>التقليم (Clipping)</strong> هي عملية استبعاد القيَم المتطرفة (Outliers) بهدف التخفيف من أثرها السلبي على أداء النموذج. قد يتحقق ذلك بإزالة أي قيم تقع خارج:</p>
 <ul>
 <li>نطاق -3 إلى +3 درجات معيارية</li>
 <li>أو ما فوق 99% من البيانات وما دون 1% منها</li>
@@ -256,7 +256,7 @@ z = \frac{x - \mu}{s}
 <li><strong>مثال 2:</strong> معظم الكتب تبيع نسخاً قليلة جداً، بينما تحقق كتب (الأكثر مبيعاً) الملايين.</li>
 </ul>
 <p>انظر <a href="https://scikit-learn.org/stable/auto_examples/compose/plot_transformed_target.html">تحويل قيمة الهدف</a>.</p>
-<p><strong>التقسيم (<a href="https://scikit-learn.org/stable/modules/preprocessing.html#discretization">Binning</a>)</strong> هو أحد أساليب <strong>هندسة الميزات</strong> (Feature Engineering) التي تتضمن تجميع القيم الرقمية في فئات أو حاويات (Bins) منفصلة.</p>
+<p><strong>التجميع (<a href="https://scikit-learn.org/stable/modules/preprocessing.html#discretization">Binning</a>)</strong> هو أحد أساليب <strong>هندسة الميزات</strong> (Feature Engineering) التي تتضمن تجميع القيم الرقمية في فئات أو حاويات (Bins) منفصلة.</p>
 <ul>
 <li><strong>مثال:</strong> عدد المتسوقين (زوار المتجر) مقابل درجة الحرارة (حالة الطقس).</li>
 </ul>
@@ -266,7 +266,7 @@ z = \frac{x - \mu}{s}
 <figcaption><strong>شكل 2.</strong> مخطط مبعثر (Scatter plot) يوضح العلاقة بين درجة الحرارة وعدد المتسوقين.</figcaption>
 </figure>
 </div>
-<p>يشير الرسم البياني إلى وجود ثلاث مجموعات (Clusters) ضمن النطاقات الفرعية التالية:</p>
+<p>يشير الرسم البياني إلى وجود ثلاث مجموعات:</p>
 <ul>
 <li><strong>الفئة 1:</strong> نطاق درجة الحرارة من 4 إلى 11.</li>
 <li><strong>الفئة 2:</strong> نطاق درجة الحرارة من 12 إلى 26.</li>
@@ -278,9 +278,9 @@ z = \frac{x - \mu}{s}
 <figcaption><strong>شكل 3.</strong> نفس المخطط المبعثر السابق مع خطين أحمرين يحددان الفواصل بين الفئات الثلاث.</figcaption>
 </figure>
 </div>
-<p>يعتبر التقسيم بديلاً جيدًا لعمليات <strong>التقييس</strong> (Scaling) أو <strong>التقليم</strong> (Clipping) عند تحقق أي من الشرطين التاليين:</p>
+<p>يعتبر <strong>التجميع</strong> بديلاً جيدًا لعمليات <strong>التقييس</strong> أو <strong>التقليم</strong>عند تحقق أي من الشرطين التاليين:</p>
 <ol type="1">
-<li><strong>ضعف العلاقة الخطية</strong>: عندما تكون العلاقة الخطية الإجمالية بين الميزة والوسم (Label) ضعيفة أو منعدمة. (يوضح المثال أعلاه حالة “لا خطية”: حيث يصعد المنحنى ثم يهبط؛ أي أنه منحنى وليس خطاً مستقيماً).</li>
+<li><strong>ضعف العلاقة الخطية</strong>: عندما تكون العلاقة الخطية الإجمالية بين الميزة والوسم ضعيفة أو منعدمة. (يوضح المثال أعلاه حالة “لا خطية”: حيث يصعد المنحنى ثم يهبط؛ أي أنه منحنى وليس خطاً مستقيماً).</li>
 <li><strong>تكتل البيانات</strong>: عندما تكون قيم الميزة متجمعة في كتل أو مجموعات واضحة.</li>
 </ol>
 <hr>
