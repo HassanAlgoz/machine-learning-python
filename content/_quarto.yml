@@ -4,16 +4,19 @@ project:
   preview: 
     port: 4600
   output-dir: _site
-  resources:
-    - "exercises/*.ipynb"
-  brand: _brand.yml
+
+website:
+  navbar:
+    left:
+      - href: index.qmd
+        text: "الرئيسية"
 
 bibliography: references.bib
 
 execute:
   # https://quarto.org/docs/computations/python.html#kernel-daemon
-  daemon: true 
-
+  daemon: 300
+  
   # https://quarto.org/docs/computations/caching.html#jupyter-cache
   cache: true
 
@@ -28,6 +31,11 @@ language: _language_ar.yml
 format:
   html:
     theme: [cosmo, custom.scss]
+    toc: true
+    toc-depth: 3
+    toc-title: "المحتويات"
+    anchor-sections: true
+    
   revealjs:
     theme: [default, custom.scss]
     slide-number: c/t
@@ -40,6 +48,9 @@ format:
     scrollable: true
     rtl: true
     dir: rtl
+    width: 1600
+    height: 900
+    center: false
 
 number-depth: 1
 lightbox: auto

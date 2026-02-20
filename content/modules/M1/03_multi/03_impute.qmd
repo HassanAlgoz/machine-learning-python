@@ -59,4 +59,6 @@ X_transformed
 
 ---
 
-انظر: [ملء القيم المفقودة](https://scikit-learn.org/stable/modules/impute.html).
+للمزيد راجع: [ملء القيم المفقودة](https://scikit-learn.org/stable/modules/impute.html).
+
+تمرين: [الانحدار الخطي باعتبار عدة خصائص](./exercises/02_regression_ex.ipynb)

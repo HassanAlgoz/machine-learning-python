@@ -174,5 +174,5 @@ model.predict(X_new)
 
 ---
 
-- [عملي: بناء خط معالجة](./02_make_pipeline.ipynb)
-- [تمرين: بناء خط معالجة](./exercises/01_pipeline_ex.ipynb)
+- [مثال: بناء خط معالجة](./05_pipeline_example.ipynb)
+- [تمرين: بناء خط معالجة](./exercises/03_pipeline_ex.ipynb)
