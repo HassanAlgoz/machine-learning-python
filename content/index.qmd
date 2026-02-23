@@ -9,7 +9,7 @@ format: html
 | 2 | **التعلم بالإشراف** (Supervised Learning) | [الدرس](./modules/M1/02_supervised_learning/supervised_learning.qmd) <br> [الشرائح](./modules/M1/02_supervised_learning/supervised_learning_slides.qmd) | [التمرين الأول: استكشاف البطاريق](./modules/M1/02_supervised_learning/exercises/01_eda_penguins_ex.ipynb) <br> [التمرين الثاني: ثلاث علاقات خطية](./modules/M1/02_supervised_learning/exercises/02_linear_regression_ex.ipynb) |
 | 3 | **تقييس المقادير المتصلة** (Scaling) | [الدرس](./modules/M1/03_multi/01_scale.qmd) |  |
 |  | **ترميز المقادير المنفصلة** (Encoding) | [الدرس](./modules/M1/03_multi/02_encode.ipynb) | [التمرين: ترميز المقادير المنفصلة](./modules/M1/03_multi/exercises/01_categorical_encoding_ex.ipynb) |
-|  | **القيم المفقودة** (Missing) | [الدرس](./modules/M1/03_multi/03_impute.qmd) | [التمرين: الانحدار الخطي باعتبار عدة عوامل](./modules/M1/03_multi/exercises/02_regression_ex.ipynb) |
+|  | **القيم المفقودة** (Missing) | [الدرس](./modules/M1/03_multi/03_impute.ipynb) | [التمرين: الانحدار الخطي باعتبار عدة عوامل](./modules/M1/03_multi/exercises/02_regression_ex.ipynb) |
 |  | **خطوط الإنتاج** (Pipelines) | [الدرس](./modules/M1/03_multi/04_pipeline.qmd) [المثال](./modules/M1/03_multi/05_pipeline_example.ipynb) | [التمرين: خطوط الإنتاج](./modules/M1/03_multi/exercises/03_pipeline_ex.ipynb)  |
 | 4 | **خوارزمية البيرسيبترون** (Perceptron Algorithm) |  |  |
 |  | **أشجار القرار** (Decision Trees) |  |  |
