@@ -58,7 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -103,6 +103,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "البحث"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -145,7 +148,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#المشكلة" id="toc-المشكلة" class="nav-link active" data-scroll-target="#المشكلة">المشكلة</a></li>
-  <li><a href="#طريقة-الحل" id="toc-طريقة-الحل" class="nav-link" data-scroll-target="#طريقة-الحل">طريقة الحل</a></li>
+  <li><a href="#عينة-من-البيانات" id="toc-عينة-من-البيانات" class="nav-link" data-scroll-target="#عينة-من-البيانات">عينة من البيانات</a></li>
+  <li><a href="#طرق-الملء" id="toc-طرق-الملء" class="nav-link" data-scroll-target="#طرق-الملء">طرق الملء</a></li>
+  <li><a href="#الأولى-التقدير-البسيط-simpleimputer" id="toc-الأولى-التقدير-البسيط-simpleimputer" class="nav-link" data-scroll-target="#الأولى-التقدير-البسيط-simpleimputer">الأولى: التقدير البسيط (SimpleImputer)</a></li>
+  <li><a href="#الثانية-التقدير-بأقرب-الجيران-knnimputer" id="toc-الثانية-التقدير-بأقرب-الجيران-knnimputer" class="nav-link" data-scroll-target="#الثانية-التقدير-بأقرب-الجيران-knnimputer">الثانية: التقدير بأقرب الجيران (KNNImputer)</a></li>
   </ul>
 </nav>
     </div>
@@ -186,39 +192,596 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ul>
 </section>
-<section id="طريقة-الحل" class="level2">
-<h2 class="anchored" data-anchor-id="طريقة-الحل">طريقة الحل</h2>
-<p>لو تصوَّرنا البيانات في جدوَل، فإن الحل البسيط قد يكون بإزالة تلك الصفوف ذات القيَم المفقودة. لكن ذلك يؤدي لخسارة المعلومات الأخرى الموجودة في نفس الصف. والأفضل أن نقوم <strong>باستكمال</strong> (Impute) القيم المفقودة، أي: استنتاجها من الجزء المعلوم من البيانات.</p>
+<section id="عينة-من-البيانات" class="level2">
+<h2 class="anchored" data-anchor-id="عينة-من-البيانات">عينة من البيانات</h2>
+<p>نستخدم مجموعة صغيرة من قياسات صحية (عمر، ضغط دم انقباضي، كولسترول، مؤشر كتلة الجسم) مع قيم مفقودة. نرى أولاً كيف تبدو البيانات، ثم ماذا يحدث إذا حذفنا الصفوف التي تحتوي على قيم مفقودة.</p>
+<div id="68f2e97e" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> SimpleImputer, KNNImputer</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="cc95f80e" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># بيانات واقعية: قياسات لمرضى (عمر، ضغط دم انقباضي mmHg، كولسترول mg/dL، مؤشر كتلة الجسم)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">12</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>age <span class="op">=</span> np.random.randint(<span class="dv">35</span>, <span class="dv">70</span>, size<span class="op">=</span>n)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>systolic_bp <span class="op">=</span> <span class="dv">100</span> <span class="op">+</span> <span class="fl">0.5</span> <span class="op">*</span> age <span class="op">+</span> np.random.randn(n) <span class="op">*</span> <span class="dv">8</span>  <span class="co"># علاقة تقريبية مع العمر</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>cholesterol <span class="op">=</span> <span class="dv">150</span> <span class="op">+</span> <span class="fl">0.8</span> <span class="op">*</span> age <span class="op">+</span> np.random.randn(n) <span class="op">*</span> <span class="dv">15</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>bmi <span class="op">=</span> <span class="dv">22</span> <span class="op">+</span> <span class="fl">0.1</span> <span class="op">*</span> age <span class="op">+</span> np.random.randn(n) <span class="op">*</span> <span class="dv">2</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"عمر"</span>: age.astype(<span class="bu">float</span>),</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ضغط_دم"</span>: systolic_bp,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"كولسترول"</span>: cholesterol,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"مؤشر_كتلة_الجسم"</span>: bmi,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># إدخال قيم مفقودة بشكل واقعي (مثلاً: مريض لم يُسجّل ضغطه، آخر لم يُسجّل الكولسترول)</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>df.loc[<span class="dv">1</span>, <span class="st">"ضغط_دم"</span>] <span class="op">=</span> np.nan</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>df.loc[<span class="dv">3</span>, <span class="st">"كولسترول"</span>] <span class="op">=</span> np.nan</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>df.loc[<span class="dv">5</span>, <span class="st">"عمر"</span>] <span class="op">=</span> np.nan</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>df.loc[<span class="dv">7</span>, <span class="st">"مؤشر_كتلة_الجسم"</span>] <span class="op">=</span> np.nan</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>df.loc[<span class="dv">9</span>, <span class="st">"ضغط_دم"</span>] <span class="op">=</span> np.nan</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>df.loc[<span class="dv">9</span>, <span class="st">"كولسترول"</span>] <span class="op">=</span> np.nan</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"البيانات مع القيم المفقودة (NaN):"</span>)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>display(df)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>البيانات مع القيم المفقودة (NaN):</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">عمر</th>
+<th data-quarto-table-cell-role="th">ضغط_دم</th>
+<th data-quarto-table-cell-role="th">كولسترول</th>
+<th data-quarto-table-cell-role="th">مؤشر_كتلة_الجسم</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>63.0</td>
+<td>132.138654</td>
+<td>192.523157</td>
+<td>25.544121</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>49.0</td>
+<td>NaN</td>
+<td>217.891569</td>
+<td>26.193767</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>42.0</td>
+<td>121.177775</td>
+<td>153.199206</td>
+<td>25.277069</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>55.0</td>
+<td>124.077657</td>
+<td>NaN</td>
+<td>27.633315</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>53.0</td>
+<td>122.245461</td>
+<td>204.087890</td>
+<td>26.947429</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>NaN</td>
+<td>127.560196</td>
+<td>179.083534</td>
+<td>30.101786</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>45.0</td>
+<td>124.276631</td>
+<td>202.953423</td>
+<td>27.896798</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>45.0</td>
+<td>116.356188</td>
+<td>191.596784</td>
+<td>NaN</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>58.0</td>
+<td>130.139717</td>
+<td>190.602906</td>
+<td>25.985627</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>58.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>30.177251</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>37.0</td>
+<td>127.574714</td>
+<td>188.091692</td>
+<td>27.271064</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>56.0</td>
+<td>127.162036</td>
+<td>184.233198</td>
+<td>32.912020</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>الحل السهل: حذف الصفوف التي تحتوي على أي قيمة مفقودة</p>
+<div id="497d6d6a" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_dropped <span class="op">=</span> df.dropna()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"عدد الصفوف الأصلي: </span><span class="sc">{</span><span class="bu">len</span>(df)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"بعد حذف الصفوف ذات القيم المفقودة: </span><span class="sc">{</span><span class="bu">len</span>(df_dropped)<span class="sc">}</span><span class="ss"> صف"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"→ خسرنا معلومات من صفوف كاملة بسبب قيمة واحدة مفقودة في كل صف."</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>display(df_dropped)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>عدد الصفوف الأصلي: 12
+بعد حذف الصفوف ذات القيم المفقودة: 7 صف
+→ خسرنا معلومات من صفوف كاملة بسبب قيمة واحدة مفقودة في كل صف.</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">عمر</th>
+<th data-quarto-table-cell-role="th">ضغط_دم</th>
+<th data-quarto-table-cell-role="th">كولسترول</th>
+<th data-quarto-table-cell-role="th">مؤشر_كتلة_الجسم</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>63.0</td>
+<td>132.138654</td>
+<td>192.523157</td>
+<td>25.544121</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2</th>
+<td>42.0</td>
+<td>121.177775</td>
+<td>153.199206</td>
+<td>25.277069</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>53.0</td>
+<td>122.245461</td>
+<td>204.087890</td>
+<td>26.947429</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">6</th>
+<td>45.0</td>
+<td>124.276631</td>
+<td>202.953423</td>
+<td>27.896798</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>58.0</td>
+<td>130.139717</td>
+<td>190.602906</td>
+<td>25.985627</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">10</th>
+<td>37.0</td>
+<td>127.574714</td>
+<td>188.091692</td>
+<td>27.271064</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">11</th>
+<td>56.0</td>
+<td>127.162036</td>
+<td>184.233198</td>
+<td>32.912020</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="طرق-الملء" class="level2">
+<h2 class="anchored" data-anchor-id="طرق-الملء">طرق الملء</h2>
+<p>لو تصوَّرنا البيانات في جدوَل، فإن الحل البسيط قد يكون بإزالة تلك الصفوف ذات القيَم المفقودة. لكن ذلك يؤدي لخسارة المعلومات الأخرى الموجودة في نفس الصف. والأفضل أن نقوم <strong>باستكمال</strong> (Impute) القيم المفقودة، أي: استنتاجها من الجزء المعلوم من البيانات.</p>
 <p>واستنتاجُها يكون بأحد طريقين:</p>
-<p>الأول: <strong>من القيَم الأخرى لنفس المتغيِّر</strong> (<a href="https://scikit-learn.org/stable/modules/impute.html#univariate-feature-imputation"><code>SimpleImputer</code></a>). كحساب المتوسط أو الوسيط أو الأكثر تكرارًا أو قيمة ثابتة.</p>
-<p>الثاني: <strong>باعتبار المتغيرات الأخرى</strong> (<a href="https://scikit-learn.org/stable/modules/impute.html#multivariate-feature-imputation">مثل: <code>IterativeImputer</code></a>). ويكون بذلك مسألة تنبؤ: انحدار (Regression) أو تصنيف (Classification) بحسب نوع المتغيِّر ذي القيمة المفقودة.</p>
 <ul>
-<li>بيانات تجريبية تحتوي على قيم مفقودة (NaN)</li>
+<li><strong>الأول:</strong> من القيَم الأخرى لنفس المتغيِّر (<a href="https://scikit-learn.org/stable/modules/impute.html#univariate-feature-imputation"><code>SimpleImputer</code></a>). كحساب المتوسط أو الوسيط أو الأكثر تكرارًا أو قيمة ثابتة.</li>
+<li><strong>الثاني:</strong> باعتبار المتغيرات الأخرى (<a href="https://scikit-learn.org/stable/modules/impute.html#multivariate-feature-imputation">مثل: <code>IterativeImputer</code></a>). ويكون بذلك مسألة تنبؤ: انحدار (Regression) أو تصنيف (Classification) بحسب نوع المتغيِّر ذي القيمة المفقودة.</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> [[<span class="dv">1</span>, <span class="dv">2</span>, np.nan], </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>     [<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">3</span>], </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>     [np.nan, <span class="dv">6</span>, <span class="dv">5</span>], </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>     [<span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">7</span>]]</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li>التقدير البسيط (Mean)</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> SimpleImputer</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>mean_imputer <span class="op">=</span> SimpleImputer(strategy<span class="op">=</span><span class="st">'mean'</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>X_transformed <span class="op">=</span> mean_imputer.fit_transform(X)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>X_transformed</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-<ul>
-<li>التقدير باستخدام خوارزمية التعلم: <strong>أقرب الجيران (KNN)</strong>:</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> KNNImputer</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>knn_imputer <span class="op">=</span> KNNImputer(n_neighbors<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>X_transformed <span class="op">=</span> knn_imputer.fit_transform(X)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>X_transformed</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="الأولى-التقدير-البسيط-simpleimputer" class="level2">
+<h2 class="anchored" data-anchor-id="الأولى-التقدير-البسيط-simpleimputer">الأولى: التقدير البسيط (SimpleImputer)</h2>
+<p>استكمال القيم المفقودة من نفس المتغيّر فقط: المتوسط، الوسيط، الأكثر تكراراً، أو قيمة ثابتة.</p>
+<div id="simple-mean" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df.values</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>mean_imputer <span class="op">=</span> SimpleImputer(strategy<span class="op">=</span><span class="st">"mean"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>X_mean <span class="op">=</span> mean_imputer.fit_transform(X)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>df_mean <span class="op">=</span> pd.DataFrame(X_mean, columns<span class="op">=</span>df.columns, index<span class="op">=</span>df.index)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"بعد الاستكمال بالمتوسط (mean):"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>display(df_mean.<span class="bu">round</span>(<span class="dv">2</span>))</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>بعد الاستكمال بالمتوسط (mean):</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">عمر</th>
+<th data-quarto-table-cell-role="th">ضغط_دم</th>
+<th data-quarto-table-cell-role="th">كولسترول</th>
+<th data-quarto-table-cell-role="th">مؤشر_كتلة_الجسم</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>63.0</td>
+<td>132.14</td>
+<td>192.52</td>
+<td>25.54</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>49.0</td>
+<td>125.27</td>
+<td>217.89</td>
+<td>26.19</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>42.0</td>
+<td>121.18</td>
+<td>153.20</td>
+<td>25.28</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>55.0</td>
+<td>124.08</td>
+<td>190.43</td>
+<td>27.63</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>53.0</td>
+<td>122.25</td>
+<td>204.09</td>
+<td>26.95</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>51.0</td>
+<td>127.56</td>
+<td>179.08</td>
+<td>30.10</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>45.0</td>
+<td>124.28</td>
+<td>202.95</td>
+<td>27.90</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>45.0</td>
+<td>116.36</td>
+<td>191.60</td>
+<td>27.81</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>58.0</td>
+<td>130.14</td>
+<td>190.60</td>
+<td>25.99</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>58.0</td>
+<td>125.27</td>
+<td>190.43</td>
+<td>30.18</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>37.0</td>
+<td>127.57</td>
+<td>188.09</td>
+<td>27.27</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>56.0</td>
+<td>127.16</td>
+<td>184.23</td>
+<td>32.91</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="simple-median" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>median_imputer <span class="op">=</span> SimpleImputer(strategy<span class="op">=</span><span class="st">"median"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>X_median <span class="op">=</span> median_imputer.fit_transform(X)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>df_median <span class="op">=</span> pd.DataFrame(X_median, columns<span class="op">=</span>df.columns, index<span class="op">=</span>df.index)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"بعد الاستكمال بالوسيط (median):"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>display(df_median.<span class="bu">round</span>(<span class="dv">2</span>))</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>بعد الاستكمال بالوسيط (median):</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">عمر</th>
+<th data-quarto-table-cell-role="th">ضغط_دم</th>
+<th data-quarto-table-cell-role="th">كولسترول</th>
+<th data-quarto-table-cell-role="th">مؤشر_كتلة_الجسم</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>63.0</td>
+<td>132.14</td>
+<td>192.52</td>
+<td>25.54</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>49.0</td>
+<td>125.72</td>
+<td>217.89</td>
+<td>26.19</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>42.0</td>
+<td>121.18</td>
+<td>153.20</td>
+<td>25.28</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>55.0</td>
+<td>124.08</td>
+<td>191.10</td>
+<td>27.63</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>53.0</td>
+<td>122.25</td>
+<td>204.09</td>
+<td>26.95</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>53.0</td>
+<td>127.56</td>
+<td>179.08</td>
+<td>30.10</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>45.0</td>
+<td>124.28</td>
+<td>202.95</td>
+<td>27.90</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>45.0</td>
+<td>116.36</td>
+<td>191.60</td>
+<td>27.27</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>58.0</td>
+<td>130.14</td>
+<td>190.60</td>
+<td>25.99</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>58.0</td>
+<td>125.72</td>
+<td>191.10</td>
+<td>30.18</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>37.0</td>
+<td>127.57</td>
+<td>188.09</td>
+<td>27.27</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>56.0</td>
+<td>127.16</td>
+<td>184.23</td>
+<td>32.91</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="الثانية-التقدير-بأقرب-الجيران-knnimputer" class="level2">
+<h2 class="anchored" data-anchor-id="الثانية-التقدير-بأقرب-الجيران-knnimputer">الثانية: التقدير بأقرب الجيران (KNNImputer)</h2>
+<p>يستكمل القيمة المفقودة بناءً على أقرب العينات في المسافة (مع تجاهل القيم المفقودة في حساب المسافة).</p>
+<div id="knn-impute" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>knn_imputer <span class="op">=</span> KNNImputer(n_neighbors<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>X_knn <span class="op">=</span> knn_imputer.fit_transform(X)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>df_knn <span class="op">=</span> pd.DataFrame(X_knn, columns<span class="op">=</span>df.columns, index<span class="op">=</span>df.index)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"بعد الاستكمال بـ KNN (n_neighbors=3):"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>display(df_knn.<span class="bu">round</span>(<span class="dv">2</span>))</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>بعد الاستكمال بـ KNN (n_neighbors=3):</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">عمر</th>
+<th data-quarto-table-cell-role="th">ضغط_دم</th>
+<th data-quarto-table-cell-role="th">كولسترول</th>
+<th data-quarto-table-cell-role="th">مؤشر_كتلة_الجسم</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>63.00</td>
+<td>132.14</td>
+<td>192.52</td>
+<td>25.54</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>49.00</td>
+<td>123.53</td>
+<td>217.89</td>
+<td>26.19</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>42.00</td>
+<td>121.18</td>
+<td>153.20</td>
+<td>25.28</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>55.00</td>
+<td>124.08</td>
+<td>189.13</td>
+<td>27.63</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>53.00</td>
+<td>122.25</td>
+<td>204.09</td>
+<td>26.95</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>56.33</td>
+<td>127.56</td>
+<td>179.08</td>
+<td>30.10</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>45.00</td>
+<td>124.28</td>
+<td>202.95</td>
+<td>27.90</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>45.00</td>
+<td>116.36</td>
+<td>191.60</td>
+<td>27.60</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>58.00</td>
+<td>130.14</td>
+<td>190.60</td>
+<td>25.99</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>58.00</td>
+<td>126.27</td>
+<td>184.64</td>
+<td>30.18</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>37.00</td>
+<td>127.57</td>
+<td>188.09</td>
+<td>27.27</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>56.00</td>
+<td>127.16</td>
+<td>184.23</td>
+<td>32.91</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
 <hr>
-<p>للمزيد راجع: <a href="https://scikit-learn.org/stable/modules/impute.html">ملء القيم المفقودة</a>.</p>
-<p>تمرين: <a href="../../../modules/M1/03_multi/exercises/02_regression_ex.html">الانحدار الخطي باعتبار عدة خصائص</a></p>
+<ul>
+<li>للمزيد راجع: <a href="https://scikit-learn.org/stable/modules/impute.html">7.4. Imputation of missing values</a>.</li>
+<li><a href="../../../modules/M1/03_multi/04_pipeline.html">التالي: خط المعالجة</a></li>
+</ul>
 
 
 </section>

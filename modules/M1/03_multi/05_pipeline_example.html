@@ -413,7 +413,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="التحقق-من-توازن-الفئات-categorical-imbalance" class="level3">
 <h3 class="anchored" data-anchor-id="التحقق-من-توازن-الفئات-categorical-imbalance">التحقق من توازن الفئات (Categorical Imbalance)</h3>
-<p>من المهم جداً فحص المتغيرات الفئوية لمعرفة ما إذا كانت هناك فئات نادرة جداً. وجود فئات نادرة قد يسبب مشاكل أثناء تقسيم البيانات (Train/Test Split) أو أثناء التحقق المتقاطع (Cross-Validation)، حيث قد تظهر الفئة في التدريب ولا تظهر في الاختبار، أو العكس.</p>
+<p>من المهم جداً فحص المتغيرات الوصفية لمعرفة ما إذا كانت هناك فئات نادرة جداً. وجود فئات نادرة قد يسبب مشاكل أثناء تقسيم البيانات (Train/Test Split) أو أثناء التحقق المتقاطع (Cross-Validation)، حيث قد تظهر الفئة في التدريب ولا تظهر في الاختبار، أو العكس.</p>
 <p><strong>الحل:</strong> إذا وجدنا فئات نادرة، يمكننا دمجها في فئة “Other” أو استخدام معالجة قوية للأخطاء مثل <code>handle_unknown='ignore'</code> في <code>OneHotEncoder</code>.</p>
 <div id="474dee83" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
@@ -453,7 +453,7 @@ Name: count, dtype: int64</code></pre>
 <p>نادراً ما تكون البيانات الخام جاهزة للاستخدام الفوري في نماذج تعلم الآلة. نحتاج غالباً إلى خطوات معالجة مثل:</p>
 <ul>
 <li>التعامل مع القيم المفقودة.</li>
-<li>ترميز المتغيرات الفئوية (Categorical Encoding).</li>
+<li>ترميز المتغيرات الوصفية (Categorical Encoding).</li>
 <li>تقييس المتغيرات العددية (Scaling).</li>
 </ul>
 <p>لنسهل الأمر، سنختر مجموعة محددة من الأعمدة للعمل عليها:</p>
@@ -464,7 +464,7 @@ Name: count, dtype: int64</code></pre>
 <ol type="1">
 <li><strong><code>mean</code> (المتوسط):</strong> تُستخدم مع البيانات العددية ذات التوزيع الطبيعي.</li>
 <li><strong><code>median</code> (الوسيط):</strong> الأفضل للبيانات العددية التي تحتوي على قيم شاذة (Outliers).</li>
-<li><strong><code>most_frequent</code> (الأكثر تكراراً):</strong> تُستخدم غالباً مع البيانات الفئوية (Categorical).</li>
+<li><strong><code>most_frequent</code> (الأكثر تكراراً):</strong> تُستخدم غالباً مع البيانات الوصفية (Categorical).</li>
 <li><strong><code>constant</code> (قيمة ثابتة):</strong> تعويض القيمة المفقودة بقيمة محددة (مثلاً “Unknown” أو 0).</li>
 </ol>
 <p><strong>كيف ندمجها في خط المعالجة؟</strong> عند استخدام <code>Pipeline</code>، نضمن أن عملية التعويض (<code>imputer.fit</code>) تتم فقط على بيانات التدريب، ثم تُطبق القواعد المستخلصة على بيانات الاختبار. هذا يمنع تسرب المعلومات.</p>
@@ -3579,7 +3579,7 @@ forceTheme('sk-container-id-2');</script>
 </div>
 <p>ملاحظة: <strong>تقييم النموذج (Model Evaluation)</strong> يحتاج نقاشاً مستقلاً، لكن نعرضه هنا للتكميل.</p>
 <hr>
-<p>للمزيد انظر: <a href="https://scikit-learn.org/stable/auto_examples/compose/plot_column_transformer_mixed_types.html">مسار تعلم آلي تنبؤي مع أنواع بيانات مختلطة (Predictive machine learning pipeline with mixed data types)</a>.</p>
+<p>للمزيد انظر: <a href="https://scikit-learn.org/stable/auto_examples/compose/plot_column_transformer_mixed_types.html">Predictive machine learning pipeline with mixed data types</a>.</p>
 
 
 </section>

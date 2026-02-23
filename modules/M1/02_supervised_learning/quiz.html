@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>العلاقات اللاخطية (Non-linear Relationships) – Machine Learning with Python</title>
+<title>quiz – Machine Learning with Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,65 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -107,35 +69,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -146,7 +79,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Machine Learning with Python</span>
     </a>
   </div>
@@ -157,7 +90,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">الرئيسية</span></a>
   </li>  
 </ul>
@@ -172,104 +105,17 @@ window.Quarto = {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">المحتويات</h2>
-   
-  <ul>
-  <li><a href="#العلاقات-اللاخطية-non-linear-relationships" id="toc-العلاقات-اللاخطية-non-linear-relationships" class="nav-link active" data-scroll-target="#العلاقات-اللاخطية-non-linear-relationships">العلاقات اللاخطية (Non-linear Relationships)</a></li>
-  <li><a href="#العلاقة-التربيعية-quadratic-relationship" id="toc-العلاقة-التربيعية-quadratic-relationship" class="nav-link" data-scroll-target="#العلاقة-التربيعية-quadratic-relationship">1. العلاقة التربيعية (Quadratic Relationship)</a></li>
-  <li><a href="#العلاقة-التكعيبية-cubic-relationship" id="toc-العلاقة-التكعيبية-cubic-relationship" class="nav-link" data-scroll-target="#العلاقة-التكعيبية-cubic-relationship">2. العلاقة التكعيبية (Cubic Relationship)</a></li>
-  <li><a href="#كيفية-التعامل-مع-العلاقات-اللاخطية-في-بايثون" id="toc-كيفية-التعامل-مع-العلاقات-اللاخطية-في-بايثون" class="nav-link" data-scroll-target="#كيفية-التعامل-مع-العلاقات-اللاخطية-في-بايثون">كيفية التعامل مع العلاقات اللاخطية في بايثون</a></li>
-  <li><a href="#العلاقة-الأسية-exponential-relationship" id="toc-العلاقة-الأسية-exponential-relationship" class="nav-link" data-scroll-target="#العلاقة-الأسية-exponential-relationship">3. العلاقة الأسية (Exponential Relationship)</a></li>
-  <li><a href="#العلاقة-اللوغاريتمية-logarithmic-relationship" id="toc-العلاقة-اللوغاريتمية-logarithmic-relationship" class="nav-link" data-scroll-target="#العلاقة-اللوغاريتمية-logarithmic-relationship">4. العلاقة اللوغاريتمية (Logarithmic Relationship)</a></li>
-  </ul>
-</nav>
-    </div>
+        
+    <div class="quarto-alternate-formats"><h2>صيغ أخرى</h2><ul><li><a href="quiz.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">العلاقات اللاخطية (Non-linear Relationships)</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
+<p>https://docs.google.com/forms/d/e/1FAIpQLSfJ6HXj3avRjAg1CsdM_Cdc6lr_9jHqoNraVyP8DDAJRizljA/viewform?usp=publish-editor</p>
 
 
-</header>
-
-
-<p>بسم الله الرحمن الرحيم.</p>
-<section id="العلاقات-اللاخطية-non-linear-relationships" class="level2">
-<h2 class="anchored" data-anchor-id="العلاقات-اللاخطية-non-linear-relationships">العلاقات اللاخطية (Non-linear Relationships)</h2>
-<p><strong>العلاقة اللاخطية</strong> (Non-linear Relationship) هي العلاقة التي لا يكون فيها التغير في المتغير التابع (<span class="math inline">\(y\)</span>) متناسباً طردياً أو عكسياً بشكل ثابت مع التغير في المتغير المستقل (<span class="math inline">\(x\)</span>). بعبارة أخرى، إذا قمت بتمثيلها بيانياً، فلن تحصل على خط مستقيم، بل على منحنى.</p>
-<p>في العلاقة الخطية، يكون الاشتقاق (Derivative) -أي: الميل- ثابتاً دائماً. أما في العلاقة اللاخطية، فإن الميل يتغير عند كل نقطة.</p>
-<ul>
-<li><strong>المعادلة الخطية:</strong> <span class="math inline">\(y = mx + b\)</span> (الميل <span class="math inline">\(m\)</span> ثابت).</li>
-<li><strong>المعادلة اللاخطية:</strong> قد تحتوي على أسس، لوغاريتمات، أو دوال مثلثية، مثل:
-<ul>
-<li>التربيعية: <span class="math inline">\(y = ax^2 + bx + c\)</span><br>
-</li>
-<li>الأسية: <span class="math inline">\(y = ab^x\)</span></li>
-</ul></li>
-</ul>
-<p>وفيما يلي أسماء لهذه العلاقات وأمثلة لتحققها في الظواهر الطبيعية.</p>
-</section>
-<section id="العلاقة-التربيعية-quadratic-relationship" class="level2">
-<h2 class="anchored" data-anchor-id="العلاقة-التربيعية-quadratic-relationship">1. العلاقة التربيعية (Quadratic Relationship)</h2>
-<p>تأخذ هذه العلاقة غالباً شكل حرف <strong>“U” مقلوب</strong>. ومن الأمثلة الشائعة عليها العلاقة بين <strong>ساعات العمل في الأسبوع مقابل الإنتاجية</strong>؛ حيث تزداد الإنتاجية حتى نقطة معينة، ثم تبدأ في الانخفاض نتيجة للإجهاد.</p>
-<p><img src="./assets/quadratic.png" class="img-fluid"> كذلك:</p>
-<ul>
-<li><strong>طاقة الجسم المتحرك وسرعته:</strong> تزداد الطاقة الحركية بمربع السرعة (<span class="math inline">\(K.E = \frac{1}{2}mv^2\)</span>).</li>
-<li><strong>مساحة المربع وطول الضلع:</strong> المساحة تزيد تربيعيًا بالنسبة للضلع (<span class="math inline">\(Area = s^2\)</span>).<br>
-</li>
-<li><strong>مساحة الدائرة ونصف القطر:</strong> تتبع علاقة تربيعية (<span class="math inline">\(Area = \pi r^2\)</span>).</li>
-</ul>
-</section>
-<section id="العلاقة-التكعيبية-cubic-relationship" class="level2">
-<h2 class="anchored" data-anchor-id="العلاقة-التكعيبية-cubic-relationship">2. العلاقة التكعيبية (Cubic Relationship)</h2>
-<p>تتميز العلاقة التكعيبية بشكل حرف <strong>“S”</strong> وبوجود منحنيين أو انعطافين متمايزين. تظهر هذه الأنماط بشكل متكرر في:</p>
-<ul>
-<li><strong>حجم البالون ونصف القطر:</strong> العلاقة بين حجم الكرة ونصف قطرها تكعيبية (<span class="math inline">\(V = \frac{4}{3}\pi r^3\)</span>).</li>
-<li><strong>الديناميكا الحرارية:</strong> تظهر هذه العلاقة بكثرة بين المتغيرات الفيزيائية في هذا المجال.</li>
-</ul>
-<p><a href="./assets/cubic.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="./assets/cubic.png" class="img-fluid"></a></p>
-</section>
-<section id="كيفية-التعامل-مع-العلاقات-اللاخطية-في-بايثون" class="level2">
-<h2 class="anchored" data-anchor-id="كيفية-التعامل-مع-العلاقات-اللاخطية-في-بايثون">كيفية التعامل مع العلاقات اللاخطية في بايثون</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> PolynomialFeatures</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-<p>أولاً: <strong><code>PolynomialFeatures(degree=2)</code></strong>: تحويل الميزة <span class="math inline">\(x\)</span> إلى ميزات إضافية تشمل المربع (<span class="math inline">\(x^2\)</span>) والتفاعل بين الميزات. رياضياً، يحول المعادلة من خطية <span class="math inline">\(y = wx + b\)</span> إلى منحنى من الدرجة الثانية: <span class="math display">\[y = w_0 + w_1x + w_2x^2\]</span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>poly <span class="op">=</span> PolynomialFeatures(degree<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>X_poly <span class="op">=</span> poly.fit_transform(X)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-<p>ثانيًا: <strong><code>LinearRegression()</code></strong>: خوارزمية الانحدار الخطي العادية التي ستتعلم الأوزان (<span class="math inline">\(w\)</span>) بناءً على الميزات الجديدة الناتجة.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression()</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>model.fit(X_poly, y)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="العلاقة-الأسية-exponential-relationship" class="level2">
-<h2 class="anchored" data-anchor-id="العلاقة-الأسية-exponential-relationship">3. العلاقة الأسية (Exponential Relationship)</h2>
-<p>في العلاقة الأسية، ينمو المتغير التابع بمعدل يتزايد بسرعة فائقة. ونرى ذلك بوضوح في <strong>النمو السكاني</strong> أو في <strong>الانفجار السريع لطول نبات الخيزران</strong> بعد مرحلة أولية من النمو البطيء.</p>
-<p><a href="./assets/exponential.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="./assets/exponential.png" class="img-fluid"></a></p>
-</section>
-<section id="العلاقة-اللوغاريتمية-logarithmic-relationship" class="level2">
-<h2 class="anchored" data-anchor-id="العلاقة-اللوغاريتمية-logarithmic-relationship">4. العلاقة اللوغاريتمية (Logarithmic Relationship)</h2>
-<p>هي العلاقة التي تشهد نمواً هائلاً في البداية، ثم يتباطأ هذا النمو بشكل كبير مع مرور الوقت أو زيادة المدخلات، فيما يُعرف بمبدأ <strong>تناقص العائدات</strong> (Diminishing Returns).</p>
-<ul>
-<li>مثلاً: في الفيزياء، استجابة أذن الإنسان لشدة الصوت ليست خطية بل لوغاريتمية. إذا ضاعفت كمية الطاقة الصوتية، فلن تشعر بأن الصوت أصبح ضِعف العلو، بل تشعر بزيادة بسيطة فقط.</li>
-</ul>
-<p><a href="./assets/logarithmic.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="./assets/logarithmic.png" class="img-fluid"></a></p>
-<p>راجع: <a href="https://scikit-learn.org/stable/modules/preprocessing.html#non-linear-transformation">التحويلات اللاخطية</a></p>
-
-
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -673,38 +519,6 @@ window.Quarto = {
   });
   </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
-(function() {
-  let previousOnload = window.onload;
-  window.onload = () => {
-    if (previousOnload) {
-      previousOnload();
-    }
-    lightboxQuarto.on('slide_before_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      const href = trigger.getAttribute('href');
-      if (href !== null) {
-        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-        if (imgEl !== null) {
-          const srcAttr = imgEl.getAttribute("src");
-          if (srcAttr && srcAttr.startsWith("data:")) {
-            slideConfig.href = srcAttr;
-          }
-        }
-      } 
-    });
-  
-    lightboxQuarto.on('slide_after_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(slideNode);
-      }
-    });
-  
-  };
-  
-})();
-          </script>
 
 
 

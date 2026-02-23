@@ -147,15 +147,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">المحتويات</h2>
    
   <ul>
-  <li><a href="#ما-هو-خط-المعالجة-pipeline" id="toc-ما-هو-خط-المعالجة-pipeline" class="nav-link active" data-scroll-target="#ما-هو-خط-المعالجة-pipeline">ما هو خط المعالجة (Pipeline)؟</a>
+  <li><a href="#ما-هي-فلسفة-مكونات-خط-المعالجة-pipeline" id="toc-ما-هي-فلسفة-مكونات-خط-المعالجة-pipeline" class="nav-link active" data-scroll-target="#ما-هي-فلسفة-مكونات-خط-المعالجة-pipeline">ما هي فلسفة مكونات خط المعالجة (Pipeline)؟</a>
   <ul class="collapse">
-  <li><a href="#المقدر-estimator" id="toc-المقدر-estimator" class="nav-link" data-scroll-target="#المقدر-estimator">1. المُقدّر (Estimator)</a></li>
-  <li><a href="#المحول-transformer" id="toc-المحول-transformer" class="nav-link" data-scroll-target="#المحول-transformer">2. المحوّل (Transformer)</a></li>
-  <li><a href="#المتنبئ-predictor" id="toc-المتنبئ-predictor" class="nav-link" data-scroll-target="#المتنبئ-predictor">3. المتنبئ (Predictor)</a></li>
+  <li><a href="#المحول-transformer" id="toc-المحول-transformer" class="nav-link" data-scroll-target="#المحول-transformer">المحوّل (Transformer)</a></li>
+  <li><a href="#المتنبئ-predictor" id="toc-المتنبئ-predictor" class="nav-link" data-scroll-target="#المتنبئ-predictor">المتنبئ (Predictor)</a></li>
   <li><a href="#الهيكل-التنظيمي-للمكتبة" id="toc-الهيكل-التنظيمي-للمكتبة" class="nav-link" data-scroll-target="#الهيكل-التنظيمي-للمكتبة">الهيكل التنظيمي للمكتبة</a></li>
-  <li><a href="#خلاصة-المقدرات" id="toc-خلاصة-المقدرات" class="nav-link" data-scroll-target="#خلاصة-المقدرات">خلاصة المقدرات</a></li>
+  <li><a href="#الخلاصة" id="toc-الخلاصة" class="nav-link" data-scroll-target="#الخلاصة">الخلاصة</a></li>
   </ul></li>
-  <li><a href="#أهمية-خط-المعالجة-في-التعلم-الآلي" id="toc-أهمية-خط-المعالجة-في-التعلم-الآلي" class="nav-link" data-scroll-target="#أهمية-خط-المعالجة-في-التعلم-الآلي">أهمية خط المعالجة في التعلم الآلي</a></li>
   </ul>
 </nav>
     </div>
@@ -181,94 +179,102 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>نتعلم في هذا الدرس: الانتقال من النموذج إلى <strong>خط المعالجة</strong> (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html">Pipeline</a>) ومكوناته هي:</p>
-<ol type="1">
-<li><strong>المُقدّر (Estimator)</strong></li>
-<li><strong>المحوّل (Transformer)</strong></li>
-<li><strong>المتنبئ (Predictor)</strong></li>
-</ol>
-<section id="ما-هو-خط-المعالجة-pipeline" class="level2">
-<h2 class="anchored" data-anchor-id="ما-هو-خط-المعالجة-pipeline">ما هو خط المعالجة (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html">Pipeline</a>)؟</h2>
 <p>هو <strong>الخط</strong> أو <strong>المسار</strong> السابق لدخول البيانات إلى خوارزمية التعلم. وذلك ليتم ضبط النموذج مع جميع المعالجات القبليَّة له جُملَةً واحدة؛ فالتغيير فيها أو في عوامل النموذج، كلاهُما يؤثر في نتيجة التنبؤ.</p>
-<p>في مكتبة sklearn تم تسمية الوِحدة والقِطعة الواحدة في مسار المعالجة باسم <strong>المقدِّر</strong> (Estimator)، وهي إما:</p>
+<p>أولها: <strong>الإجمال (عكس التفصيل):</strong> فبدلاً من كتابة كود طويل لكل خطوة كهذا:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>step_1 <span class="op">=</span> SimpleImputer()</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> step_1.fit_transform(X_train)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>step_2 <span class="op">=</span> StandardScaler()</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> step_2.fit_transform(X_train)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> SGDRegressor()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<p>.. المسار يجمع الخطوات في سلسلة واحدة، يتم فيها تسمية كل خطوة، ووضع المقدِّر الخاص بها، على النحو التالي</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pipe <span class="op">=</span> Pipeline(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    steps<span class="op">=</span>[</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'imputer'</span>, SimpleImputer()),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'scaler'</span>, StandardScaler()),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'regressor'</span>, SGDRegressor()),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<p>.. فيكفي استدعاء <code>fit()</code> مرة واحدة على بياناتك لملاءمة سلسلة المقدرات جملةً واحدة:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pipe.fit(X_train, y_train)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<p>أما <code>transform()</code> فيتم استدعاؤها عند الحاجة: عند التنبؤ أو التقييم.</p>
+<p>وكذلك عند التنبؤ، لا حاجة لمعرفة تفاصيل التحويلات ثم كتابتها واحدة واحدة، بل هي محفوظة كقطعة متكاملة:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pipe.predict(X_new)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<p>وكذلك التقييم:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>pipe.score(X_test, y_test)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="ما-هي-فلسفة-مكونات-خط-المعالجة-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="ما-هي-فلسفة-مكونات-خط-المعالجة-pipeline">ما هي فلسفة مكونات خط المعالجة (Pipeline)؟</h2>
+<p>نتعلم في هذا الدرس: الانتقال من النموذج إلى <strong>خط المعالجة</strong> (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html">Pipeline</a>)، حيث جميع خطواته هي أحد أمرين لا ثالث لهما. ففي مكتبة sklearn تم تسمية الوحدة في مسار المعالجة باسم <strong>المقدِّر (<a href="https://scikit-learn.org/stable/glossary.html#term-estimator">Estimator</a>)</strong>، وهي إما:</p>
 <ol type="1">
-<li><strong>محوِّل</strong> (Transformer) وهي خطوات المعالجة التي تحصي من البيانات ثم تحولها.</li>
-<li><strong>متنبئ</strong> (Predictor) وهي النموذج المتعلم من بيانات التدريب، القادر على التنبؤ.</li>
+<li><strong>محوِّل (<a href="https://scikit-learn.org/stable/glossary.html#term-transformer">Transformer</a>)</strong>:
+<ul>
+<li>يُحصي مقادير من البيانات: <code>.fit(X)</code></li>
+<li>يُحوِّل البيانات بناءً على المقادير المحسوبة: <code>.transform(X)</code></li>
+</ul></li>
+<li><strong>متنبئ (<a href="https://scikit-learn.org/stable/glossary.html#term-predictor">Predictor</a>)</strong>:
+<ul>
+<li>يلائم البيانات: <code>.fit(X, y)</code></li>
+<li>يتنبأ بالنتائج: <code>.predict(X)</code></li>
+<li>يُقيَّم: <code>.score(X, y)</code></li>
+</ul></li>
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="./assets/estimator_transformer_predictor.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="الثالوث: المُقدّر، المحوّل، المتنبئ (Estimator, Transformer, Predictor)"><img src="./assets/estimator_transformer_predictor.png" class="img-fluid figure-img" alt="الثالوث: المُقدّر، المحوّل، المتنبئ (Estimator, Transformer, Predictor)"></a></p>
-<figcaption>الثالوث: المُقدّر، المحوّل، المتنبئ (Estimator, Transformer, Predictor)</figcaption>
+<p><a href="./assets/estimator_transformer_predictor.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="صورة توضح كون المحول والمتبنئ كلاهما مقدران"><img src="./assets/estimator_transformer_predictor.png" class="img-fluid figure-img" alt="صورة توضح كون المحول والمتبنئ كلاهما مقدران"></a></p>
+<figcaption>صورة توضح كون المحول والمتبنئ كلاهما مقدران</figcaption>
 </figure>
 </div>
 <p>لنفصّل الأمر:</p>
-<section id="المقدر-estimator" class="level3">
-<h3 class="anchored" data-anchor-id="المقدر-estimator">1. المُقدّر (Estimator)</h3>
-<p>يتيميَّز بالإجراء <code>fit()</code> الذي إنما يحسب مقادير من البيانات؛ ولا يغير البيانات نفسها.</p>
-<p>وهذا <strong>الصنف مجرَّد</strong> (Abstract Class) ؛ إذْ لا وجود لمقدِّر غير محول ولا متنبئ. بل لابد أن يكون أحدهما.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>estimator <span class="op">=</span> estimator.fit(data, targets)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-<p>أو</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>estimator <span class="op">=</span> estimator.fit(data)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
 <section id="المحول-transformer" class="level3">
-<h3 class="anchored" data-anchor-id="المحول-transformer">2. المحوّل (Transformer)</h3>
-<p>يضيف إلى التقدير، الإجراء <code>transform()</code> الذي يغير البيانات بناءً على المقادير التي تم حسابها من بيانات التدريب.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>new_data <span class="op">=</span> transformer.transform(data)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-<p>عندما يمكن تنفيذ عمليتي الملاءمة والتحويل معاً بكفاءة أعلى بكثير مما لو تم تنفيذهما بشكل منفصل، يتم تنفيذ: <a href="https://scikit-learn.org/stable/modules/generated/sklearn.base.TransformerMixin.html#sklearn.base.TransformerMixin.fit_transform"><code>fit_transform()</code></a></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>new_data <span class="op">=</span> transformer.fit_transform(data)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-<p>وإليك أمثلة للمحولات وعمل كلا الإجرائين فيه:</p>
+<h3 class="anchored" data-anchor-id="المحول-transformer">المحوّل (Transformer)</h3>
+<p>ملاحظة: قد تضيف المحولات أعمدة أو تزيلها. لكنها لا تضيف بيانات جديدة (صفوف) أو تزيلها.</p>
+<p>وإليك أمثلة للمحولات وعمل كلا الإجرائين فيها:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
 <th style="text-align: right;"><strong>المحول</strong></th>
-<th style="text-align: right;"><strong>التقدير: <code>fit()</code></strong></th>
-<th style="text-align: right;"><strong>التحويل: <code>transform()</code></strong></th>
+<th style="text-align: right;"><strong>التقدير: <code>fit</code></strong></th>
+<th style="text-align: right;"><strong>التحويل: <code>transform</code></strong></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;"><a href="https://www.google.com/search?q=%5Bhttps://scikit-learn.org/stable/modules/generated/sklearn.impute.SimpleImputer.html%5D(https://scikit-learn.org/stable/modules/generated/sklearn.impute.SimpleImputer.html)"><code>SimpleImputer</code></a></td>
-<td style="text-align: right;">يحصي <strong>القيمة المحددة حسب الاستراتيجية</strong> لبيانات التدريب.</td>
-<td style="text-align: right;">يملأ القيم المفقودة في البيانات باستخدام القيمة المحسوبة.</td>
+<td style="text-align: right;"><a href="https://scikit-learn.org/stable/modules/generated/sklearn.impute.SimpleImputer.html"><code>SimpleImputer('mean')</code></a></td>
+<td style="text-align: right;">يحصي المتوسط.</td>
+<td style="text-align: right;">يملأ الفراغات بالمتوسط.</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;"><a href="https://www.google.com/search?q=%5Bhttps://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html%5D(https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html)"><code>StandardScaler</code></a></td>
-<td style="text-align: right;">يحسب <strong>المتوسط الحسابي</strong> و<strong>الانحراف المعياري</strong> لبيانات التدريب.</td>
-<td style="text-align: right;">يطبق التحويل لتوحيد قياس البيانات.</td>
+<td style="text-align: right;"><a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html"><code>StandardScaler</code></a></td>
+<td style="text-align: right;">يحسب <strong>المتوسط والانحراف المعياري</strong>.</td>
+<td style="text-align: right;">يحول البيانات بالمقياس الطبيعي.</td>
 </tr>
 <tr class="odd">
-<td style="text-align: right;"><a href="https://www.google.com/search?q=%5Bhttps://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html%5D(https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html)"><code>OneHotEncoder</code></a></td>
+<td style="text-align: right;"><a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html"><code>OneHotEncoder</code></a></td>
 <td style="text-align: right;">يحدد الصفات الفريدة ويخصص ترميزاً أحاديًّا لكل منها.</td>
 <td style="text-align: right;">يطبق الترميزات على العينات ليحولها إلى أعمدة أحادية.</td>
 </tr>
 <tr class="even">
-<td style="text-align: right;"><a href="https://www.google.com/search?q=%5Bhttps://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OrdinalEncoder.html%5D(https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OrdinalEncoder.html)"><code>OrdinalEncoder</code></a></td>
+<td style="text-align: right;"><a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OrdinalEncoder.html"><code>OrdinalEncoder</code></a></td>
 <td style="text-align: right;">يحدد الصفات الفريدة ويخصص لها ترتيباً عدديًا.</td>
 <td style="text-align: right;">يطبق الترميز ويحول الصفات إلى قيم عددية مرتبة.</td>
 </tr>
 </tbody>
 </table>
-<p>يُستخدم لتعديل البيانات بطريقة تعليم خاضع للإشراف أو غير خاضع للإشراف (على سبيل المثال: إضافة أعمدة، أو تغييرها، أو إزالتها، ولكن ليس إضافة أو إزالة الصفوف). وينفذ كما يلي:</p>
 </section>
 <section id="المتنبئ-predictor" class="level3">
-<h3 class="anchored" data-anchor-id="المتنبئ-predictor">3. المتنبئ (Predictor)</h3>
+<h3 class="anchored" data-anchor-id="المتنبئ-predictor">المتنبئ (Predictor)</h3>
 <p>مثل النماذج: <code>LinearRegression</code>, <code>SGDRegressor</code>, <code>KNeighborsClassifier</code></p>
 <p>فأما إجراءاته فهي:</p>
 <ol type="1">
-<li><p>التقدير: <code>fit(X)</code> وهي ملاءمة النموذج للبيانات وفق خوارزمية التعلم الآلي المحددة. وهنا يحصل التعليم / التدريب.</p></li>
-<li><p>التنبؤ: <code>predict(new_X)</code> تطبّق النموذج على الحالات الجديدة فقط. prediction = predictor.predict(data) كما تضيف خوارزميات التصنيف احتماليَّة الصنف قبل الجزم، بإحدى الطريقتين:</p></li>
-<li><p><a href="https://scikit-learn.org/stable/glossary.html#term-predict_proba"><code>predict_proba(new_X)</code></a> تعيد احتمالية الصنف لكل حالة.</p></li>
-<li><p><a href="https://scikit-learn.org/stable/glossary.html#term-decision_function"><code>decision_function(new_X)</code></a> تعيد قيمة تقريبية لاحتمال الصنف.</p></li>
+<li>التقدير: <code>fit(X)</code> وهي ملاءمة النموذج للبيانات وفق خوارزمية التعلم الآلي المحددة. وهنا يحصل التعليم / التدريب.</li>
+<li>التنبؤ: <code>predict(new_X)</code> تطبّق النموذج على الحالات الجديدة فقط.</li>
 </ol>
-<section id="التقييم" class="level4">
-<h4 class="anchored" data-anchor-id="التقييم">التقييم</h4>
-<p>يمكن قياس <a href="https://en.wikipedia.org/wiki/Goodness_of_fit">جودة الملاءمة</a> أو احتمالية البيانات التي لم يسبق له رؤيتها في التدريب، كما يلي (كلما كانت القيمة أعلى، كان ذلك أفضل): <a href="https://scikit-learn.org/stable/modules/generated/sklearn.base.RegressorMixin.html#sklearn.base.RegressorMixin.score"><code>score()</code></a></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> model.score(data)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
 </section>
 <section id="الهيكل-التنظيمي-للمكتبة" class="level3">
 <h3 class="anchored" data-anchor-id="الهيكل-التنظيمي-للمكتبة">الهيكل التنظيمي للمكتبة</h3>
-<p>وهذا تقريب لشكل المكتبة، يبيِّنُ أنواع المقدرات: المحولات والمتنبئات.</p>
+<p>وبهذا يتبيَّنُ لك كيف تم تقسيم المكتبة على نحو هذا الشكل:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">sklearn/</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">├── preprocessing/       &lt;-- (Transformers)</span></span>
@@ -289,8 +295,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="خلاصة-المقدرات" class="level3">
-<h3 class="anchored" data-anchor-id="خلاصة-المقدرات">خلاصة المقدرات</h3>
+<section id="الخلاصة" class="level3">
+<h3 class="anchored" data-anchor-id="الخلاصة">الخلاصة</h3>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -301,7 +307,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: right;"><a href="https://scikit-learn.org/stable/glossary.html#term-estimator">المُقدِّر (Estimator)</a></td>
+<td style="text-align: right;"><a href="">المُقدِّر (Estimator)</a></td>
 <td style="text-align: right;"><a href="https://scikit-learn.org/stable/glossary.html#term-fit"><code>fit()</code></a></td>
 <td style="text-align: right;">لملاءمة المعاملات من البيانات.</td>
 </tr>
@@ -322,44 +328,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p><em>المصدر: <a href="https://scikit-learn.org/stable/developers/develop.html">توثيق scikit-learn الرسمي لتصميم الواجهة البرمجية</a>.</em></p>
-</section>
-</section>
-<section id="أهمية-خط-المعالجة-في-التعلم-الآلي" class="level2">
-<h2 class="anchored" data-anchor-id="أهمية-خط-المعالجة-في-التعلم-الآلي">أهمية خط المعالجة في التعلم الآلي</h2>
-<p>أولها: <strong>الإجمال (عكس التفصيل):</strong> فبدلاً من كتابة كود طويل لكل خطوة كهذا:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>step_1 <span class="op">=</span> SimpleImputer()</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> step_1.fit_transform(X_train)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>step_2 <span class="op">=</span> StandardScaler()</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> step_2.fit_transform(X_train)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>step_3 <span class="op">=</span> SGDRegressor()</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> step_3.fit_transform(X_train)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-<p>.. المسار يجمع الخطوات في سلسلة واحدة، يتم فيها تسمية كل خطوة، ووضع المقدِّر الخاص بها، على النحو التالي</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> Pipeline(</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    steps<span class="op">=</span>[</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'imputer'</span>, SimpleImputer()),</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'scaler'</span>, StandardScaler()),</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        (<span class="st">'regressor'</span>, SGDRegressor()),</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-<p>.. فيكفي استدعاء <code>fit()</code> مرة واحدة على بياناتك لملاءمة سلسلة المقدرات جملةً واحدة:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>model.fit(X_train, y_train)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-<p>وكذلك عند التنبؤ، لا حاجة لمعرفة تفاصيل التحويلات ثم كتابتها واحدة واحدة، بل هي محفوظة كقطعة متكاملة:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>model.predict(X_new)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
-<p>أما الفائدة الثانية والثالثة، فتتضحان ندخل في موضوع <strong>التقييم والتقويم</strong>، ونذكرهما هنا من غير تعقيب:</p>
-<p>الثانية: تابعٌ للأوَّل، وهو <strong>الأمان (Safety)</strong>، فخط المعالجة يساعد على تجنب تسرب إحصاءات بيانات الاختبار إلى النموذج المدرب في التحقق المتقاطع (cross-validation)، بضمان استخدام نفس العينات لتدريب المحوّلات والمتنبئات كليهما.</p>
-<p>الثالثة: <strong>ضبط المسار ككل</strong>: يمكنك البحث عن معلمات جميع المُقدّرات في المسار دفعة واحدة. (يُشرح لاحقاً. انظر: <a href="https://inria.github.io/scikit-learn-mooc/python_scripts/parameter_tuning_grid_search.html">ضبط المعلمات الفوقية بالبحث الشبكي (Hyperparameter tuning by grid-search)</a>).</p>
 <hr>
 <ul>
+<li>المصدر: <a href="https://scikit-learn.org/stable/developers/develop.html">توثيق scikit-learn الرسمي لتصميم الواجهة البرمجية</a></li>
 <li><a href="../../../modules/M1/03_multi/05_pipeline_example.html">مثال: بناء خط معالجة</a></li>
 <li><a href="../../../modules/M1/03_multi/exercises/03_pipeline_ex.html">تمرين: بناء خط معالجة</a></li>
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
