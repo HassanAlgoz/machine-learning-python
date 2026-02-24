@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="ar" xml:lang="ar" dir="rtl"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ar" xml:lang="ar" dir="ltr"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.26">
@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>تقييس المقادير المتصلة (Scaling) – Machine Learning with Python</title>
+<title>Exercise: Multi-variable Regression 1 – Machine Learning with Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,30 +20,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../">
-<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,36 +103,10 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "البحث"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -111,7 +117,7 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../../index.html">
+    <a class="navbar-brand" href="../../../../index.html">
     <span class="navbar-title">Machine Learning with Python</span>
     </a>
   </div>
@@ -122,7 +128,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../index.html"> 
+    <a class="nav-link" href="../../../../index.html"> 
 <span class="menu-text">الرئيسية</span></a>
   </li>  
 </ul>
@@ -141,22 +147,17 @@ window.Quarto = {
     <h2 id="toc-title">المحتويات</h2>
    
   <ul>
-  <li><a href="#أهميتها" id="toc-أهميتها" class="nav-link active" data-scroll-target="#أهميتها">أهميتها</a></li>
-  <li><a href="#كيفياتها" id="toc-كيفياتها" class="nav-link" data-scroll-target="#كيفياتها">كيفياتها</a>
-  <ul class="collapse">
-  <li><a href="#أولا-الخطية" id="toc-أولا-الخطية" class="nav-link" data-scroll-target="#أولا-الخطية">أولاً: <strong>الخطية</strong></a></li>
-  <li><a href="#ثانيا-لا-خطية" id="toc-ثانيا-لا-خطية" class="nav-link" data-scroll-target="#ثانيا-لا-خطية">ثانيًا: <strong>لا خطيَّة</strong></a></li>
-  </ul></li>
-  <li><a href="#التجميع-binning" id="toc-التجميع-binning" class="nav-link" data-scroll-target="#التجميع-binning">التجميع (Binning)</a></li>
+  <li><a href="#advertising-dataset" id="toc-advertising-dataset" class="nav-link active" data-scroll-target="#advertising-dataset">1. Advertising Dataset</a></li>
+  <li><a href="#auto-mpg-dataset" id="toc-auto-mpg-dataset" class="nav-link" data-scroll-target="#auto-mpg-dataset">2. Auto MPG Dataset</a></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>صيغ أخرى</h2><ul><li><a href="02_regression_ex_1.out.ipynb" download="02_regression_ex_1.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">تقييس المقادير المتصلة (Scaling)</h1>
+<h1 class="title">Exercise: Multi-variable Regression 1</h1>
 </div>
 
 
@@ -173,104 +174,205 @@ window.Quarto = {
 </header>
 
 
-<p><strong>عملية تقييس الخصائص</strong> (Feature Scaling) <strong>توحِّد قيَم المتغيرات المتفاوتة لتكون على مقياس مماثل</strong>.</p>
-<p>مثال: عدد الغرف يتراوح بين 1 - 10 بينما تتراوح مساحة المنزل بين 100 - 1000 متر مربع.</p>
-<ul>
-<li>ونريد للنموذج أن يفهم أن 10 في عدد الغرف شيء كبير، كما أن 1000 في مساحة المنزل شيء كبير أيضًا بالمقارنة. ونريده أن يفهم العكس كذلك: أن 1 صغير في عدد الغرف و 100 في مساحة المنزل شيء صغير بالمقارنة.</li>
-<li>كما أننا لا نريد للنموذج أن يُهمِلَ الأعداد 1 - 10 لكونها قليلة في الحساب عند مقارنتها مع المساحة التي تتراوح بين 100 - 1000.</li>
-</ul>
-<section id="أهميتها" class="level2">
-<h2 class="anchored" data-anchor-id="أهميتها">أهميتها</h2>
-<p>تظهر أهمية ذلك في خوارزمية النزول التدريجي (SGD). إذْ تتأثر الخطوة -في اتجاه تقليل الخطأ- بتفاوت قيَم المتغيرات.</p>
-<p>يظهر في الشكل هذه الدوائر التي تمثل كلُّ منها قيمة ثابتة للخسارة، ويمثل المركز قاع دالة الخطأ.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="./assets/gradient_descent_2_params_unscaled_vs_scaled.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="دالة الخطأ لعاملين قبل وبعد التقييس"><img src="./assets/gradient_descent_2_params_unscaled_vs_scaled.png" class="img-fluid figure-img" alt="دالة الخطأ لعاملين قبل وبعد التقييس"></a></p>
-<figcaption>دالة الخطأ لعاملين قبل وبعد التقييس</figcaption>
-</figure>
-</div>
-<p>الحالة اليسرى: (<span class="math inline">\(x_1 &gt;&gt; x_2\)</span>) وتعني أن قيَم المتغير الأول أكبر بكثير مقارنةً بقيَم المتغير الثاني. تصبح تضاريس دالة الخطأ <span class="math inline">\(J(w)\)</span> (وهي: <span class="math inline">\(MSE\)</span>) غير متناسقة؛ مما يظهر في أن أي تغيير بسيط في المعامل <span class="math inline">\(w_1\)</span> (المرتبط بالمتغير الكبير) يؤدي إلى قفزة هائلة في دالة الخطأ، بينما التغيير في <span class="math inline">\(w_2\)</span> لا يكاد يُذكر.</p>
-<p>الحالة اليمنى: بمجرد وضع المتغيرات على نفس المقياس، تتحول تضاريس دالة الخطأ إلى <strong>دوائر متمركزة</strong>. تصبح الحساسية تجاه <span class="math inline">\(w_1\)</span> و <span class="math inline">\(w_2\)</span> متساوية تقريباً.</p>
-<p><strong>النتيجة:</strong> الخط الأحمر الآن ينطلق <strong>كالسهم مباشرة نحو المركز</strong>. لا يوجد تذبذب ولا ضياع للوقت؛ الخوارزمية تجد أقصر طريق ممكن لتقليل الخسارة.</p>
-<p>للمزيد راجع: <a href="https://scikit-learn.org/stable/auto_examples/preprocessing/plot_scaling_importance.html">أهميَّة التقييس</a>.</p>
-</section>
-<section id="كيفياتها" class="level2">
-<h2 class="anchored" data-anchor-id="كيفياتها">كيفياتها</h2>
-<p>وهناك طبيعتان لطرق <strong>التقييس</strong>: خطية ولا خطيَّة.</p>
-<section id="أولا-الخطية" class="level3">
-<h3 class="anchored" data-anchor-id="أولا-الخطية">أولاً: <strong>الخطية</strong></h3>
-<p>وهي لا تغيِّرُ نسبة ما بين القيَم نفسها.</p>
-<p>ولها طريقتان معروفتان:</p>
-<section id="الطريقة-الأولى-تقييس-النطاق-بالمقياس-الطبيعي" class="level4">
-<h4 class="anchored" data-anchor-id="الطريقة-الأولى-تقييس-النطاق-بالمقياس-الطبيعي">الطريقة الأولى: تقييس النطاق بالمقياس الطبيعي</h4>
-<p>في المكتبة (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html"><code>StandardScaler</code></a>)، إذْ يتم مركزة القيَم حوْلَ الصفر (بطرحها من المتوسط)، وتكون القيَم بين ثلاث درجات بالنسبة للانحراف المعياري (بقسمتها عليه).</p>
-<p>يتم حساب الدرجة المعيارية <span class="math inline">\(z\)</span> لعينة <span class="math inline">\(x\)</span> كما يلي:</p>
-<p><span class="math display">\[
-z = \frac{x - \mu}{s}
-\]</span></p>
-<p>حيث تمثل <span class="math inline">\(\mu\)</span> و <span class="math inline">\(s\)</span> المتوسط الحسابي والانحراف المعياري لعينات التدريب، على التوالي.</p>
-<p>مناسب عندما تتبع البيانات <strong>التوزيع الطبيعي</strong> أو قريبًا منه. وفي مثله يتم اعتبار البيانات التي تقع خارج نطاق -3 إلى +3 درجات معيارية كـ <strong>قيم متطرفة (Outliers)</strong>. وقد يتم إزالتها إن كان لها أثر سلبي على أداء النموذج، ضمن خطوات المعالجة.</p>
-</section>
-<section id="الطريقة-الثانية-تقييس-النطاق-بين-الصفر-والواحد" class="level4">
-<h4 class="anchored" data-anchor-id="الطريقة-الثانية-تقييس-النطاق-بين-الصفر-والواحد">الطريقة الثانية: تقييس النطاق بين الصفر والواحد</h4>
-<p>في المكتبة (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html"><code>MinMaxScaler</code></a>)، وتعني تحويل القيم من نطاقها الأصلي إلى نطاق ثابت، عادةً من 0 إلى 1.</p>
-<p><span class="math display">\[
-x_\text{scaled} = \frac{x - x_\text{min}}{x_\text{max} - x_\text{min}}
-\]</span></p>
-<p><strong>الاستخدام</strong>: يكون التقييس الخطي فعالاً عند تحقق شروط، نمثل لها بعمر الإنسان:</p>
+<p>The dataset progressively gets more complex:</p>
 <ol type="1">
-<li><strong>حدود مستقرة:</strong> القيم الدنيا والقصوى للميزة تظل ثابتة (عادةً من 0 إلى 100 عام)</li>
-<li><strong>تشبع النطاق:</strong> يوجد عدد جيد من البيانات لجميع الفئات العمرية.</li>
-<li><strong>قلة القيم المتطرفة</strong>: نسبة ضئيلة جداً تعيش بعد 100 عام.</li>
+<li><a href="https://www.statlearning.com/s/Advertising.csv">The Advertising Dataset</a> has only <code>3</code> numerical features, with <code>200</code> samples</li>
+<li><a href="https://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/auto-mpg.data">The Auto MPG Dataset</a> has <code>5</code> numerical features and <code>3</code> categorical features, with <code>398</code> samples</li>
 </ol>
-</section>
-</section>
-<section id="ثانيا-لا-خطية" class="level3">
-<h3 class="anchored" data-anchor-id="ثانيا-لا-خطية">ثانيًا: <strong>لا خطيَّة</strong></h3>
-<p>إذْ تغيِّرُ نسبة ما بين القيَم. ومنها:</p>
-<section id="الطريقة-الأولى-تقييس-لوغارتمي-log-scaling" class="level4">
-<h4 class="anchored" data-anchor-id="الطريقة-الأولى-تقييس-لوغارتمي-log-scaling">الطريقة الأولى: تقييس لوغارتمي (Log Scaling)</h4>
-<p>فهي تحوِّل التوزيع غير الطبيعي، المنحاز إلى أحد الجانبين -الموجب أو السالب- إلى <strong>توزيع طبيعي</strong> (Normal Distribution) متناظر باستعمال اللوغاريتم الطبيعي:</p>
-<p><span class="math display">\[
-x_\text{normalized} = \ln(x)
-\]</span></p>
-<p>كما هو موضح في الصورة التالية:</p>
-<p><a href="https://scikit-learn.org/stable/_images/sphx_glr_plot_transformed_target_001.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="https://scikit-learn.org/stable/_images/sphx_glr_plot_transformed_target_001.png" class="img-fluid"></a></p>
-<p>مفيدة للبيانات التي تتبع <strong>توزيع قانون القوة (Power Law Distribution)</strong>، والذي يتميز بوجود قلة من نقاط البيانات ذات القيم العالية جداً وكثير من النقاط ذات القيم المنخفضة.</p>
+<p>Your task is to do the following:</p>
+<ol type="1">
+<li>Load the data: <a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html"><code>pd.read_csv()</code></a></li>
+<li>Identify the features and their types: <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.info.html"><code>df.info()</code></a></li>
+<li>Identify the target and its type: <code>target_col = ...</code></li>
+<li>Explore the data: stats (<a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.describe.html"><code>df.describe()</code></a>) and visuals (<code>import seaborn as sns</code>)</li>
+<li>Initialize a regression model: <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html"><code>SGDRegressor</code></a></li>
+<li>Train the model: <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor.fit"><code>.fit()</code></a></li>
+<li>Evaluate the model: <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor.score"><code>.score()</code></a></li>
+<li>Inspect the model weights:
 <ul>
-<li><strong>مثال 1:</strong> عدد قليل من الأفلام يشتهر بقوَّة، بينما الغالبية العظمى تحصل على القليل من الانتباه.</li>
-<li><strong>مثال 2:</strong> معظم الكتب تبيع نسخاً قليلة جداً، بينما تحقق كتب (الأكثر مبيعاً) الملايين.</li>
-</ul>
-<p>انظر <a href="https://scikit-learn.org/stable/auto_examples/compose/plot_transformed_target.html">تحويل قيمة الهدف</a>.</p>
-</section>
-</section>
-</section>
-<section id="التجميع-binning" class="level2">
-<h2 class="anchored" data-anchor-id="التجميع-binning">التجميع (Binning)</h2>
-<p><strong>التجميع (<a href="https://scikit-learn.org/stable/modules/preprocessing.html#discretization">Binning</a>)</strong> حيث نقسم القيَم ونضعها في فئات منفصلة.</p>
-<ul>
-<li><strong>مثال:</strong> عدد المتسوقين (زوار المتجر) مقابل درجة الحرارة (حالة الطقس).</li>
-</ul>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="./assets/scatter_temp_vs_shoppers.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="شكل 2. مخطط مبعثر (Scatter plot) يوضح العلاقة بين درجة الحرارة وعدد المتسوقين."><img src="./assets/scatter_temp_vs_shoppers.png" class="img-fluid figure-img" alt="شكل 2. مخطط مبعثر (Scatter plot) يوضح العلاقة بين درجة الحرارة وعدد المتسوقين."></a></p>
-<figcaption><strong>شكل 2.</strong> مخطط مبعثر (Scatter plot) يوضح العلاقة بين درجة الحرارة وعدد المتسوقين.</figcaption>
-</figure>
+<li>Hint: you must pre-process the numerical data to get calibrated weights (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html"><code>StandardScaler</code></a>)</li>
+<li>Example: how much does spending on TV ads contributes to Sales? (Hint: <code>model.coef_</code>)</li>
+<li>Example: how much the factors leave unexplained on what affects Sales? (Hint: <code>model.intercept_</code>)</li>
+</ul></li>
+<li>Make predictions on new cases of your choice: <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor.predict"><code>.predict()</code></a></li>
+</ol>
+<div id="ef8815ba" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>يشير الرسم البياني إلى وجود ثلاث مجموعات:</p>
+<section id="advertising-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="advertising-dataset">1. Advertising Dataset</h2>
+<p>The Advertising Dataset is a fundamental resource in statistical learning and regression analysis. It is primarily known for its use in the first chapter of the seminal textbook “An Introduction to Statistical Learning” (ISLR) by Gareth James, Daniela Witten, Trevor Hastie, and Robert Tibshirani.</p>
+<p>The dataset is used to illustrate the relationship between advertising budgets across different media and the resulting product sales.</p>
 <ul>
-<li><strong>الفئة 1:</strong> نطاق درجة الحرارة من 4 إلى 11.</li>
-<li><strong>الفئة 2:</strong> نطاق درجة الحرارة من 12 إلى 26.</li>
-<li><strong>الفئة 3:</strong> نطاق درجة الحرارة من 27 إلى 36.</li>
+<li>Features: <code>3</code> numerical</li>
+<li>Target: <code>sales</code> of the product (in thousands of units).</li>
+<li>Size: <code>200</code> samples.</li>
+<li>Source: <a href="https://www.statlearning.com/s/Advertising.csv">Advertising Dataset</a></li>
 </ul>
-<p>حيث نلاحظ أن العلاقة لا خطيَّة: إذ يكون عدد الزوار مرتفعًا في درجات الحرارة المعتدلة، ومنخفضًا في درجات الحرارة القصوى والدنيا.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><a href="./assets/scatter_temp_vs_shoppers_binned.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="شكل 3. نفس المخطط المبعثر السابق مع خطين أحمرين يحددان الفواصل بين الفئات الثلاث."><img src="./assets/scatter_temp_vs_shoppers_binned.png" class="img-fluid figure-img" alt="شكل 3. نفس المخطط المبعثر السابق مع خطين أحمرين يحددان الفواصل بين الفئات الثلاث."></a></p>
-<figcaption><strong>شكل 3.</strong> نفس المخطط المبعثر السابق مع خطين أحمرين يحددان الفواصل بين الفئات الثلاث.</figcaption>
-</figure>
+<div id="21cd337c" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pd.read_csv(<span class="st">"../datasets/advertising.csv"</span>).head()</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">TV</th>
+<th data-quarto-table-cell-role="th">Radio</th>
+<th data-quarto-table-cell-role="th">Newspaper</th>
+<th data-quarto-table-cell-role="th">Sales</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>230.1</td>
+<td>37.8</td>
+<td>69.2</td>
+<td>22.1</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>44.5</td>
+<td>39.3</td>
+<td>45.1</td>
+<td>10.4</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>17.2</td>
+<td>45.9</td>
+<td>69.3</td>
+<td>12.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>151.5</td>
+<td>41.3</td>
+<td>58.5</td>
+<td>16.5</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>180.8</td>
+<td>10.8</td>
+<td>58.4</td>
+<td>17.9</td>
+</tr>
+</tbody>
+</table>
+
 </div>
-<hr>
+</div>
+</div>
+<div id="d863bd40" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># INSERT YOUR CODE</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="auto-mpg-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="auto-mpg-dataset">2. Auto MPG Dataset</h2>
+<p>The Auto MPG Dataset is a classic benchmark for regression analysis in machine learning. It originally appeared in the 1983 American Statistical Association (ASA) Exposition and was later donated to the UCI Machine Learning Repository by Ross Quinlan in 1993.</p>
+<p>The data consists of technical specifications for various car models from the late 1970s and early 1980s, primarily used to predict fuel efficiency (MPG).</p>
+<ul>
+<li>Features: <code>5</code> numerical, <code>3</code> categorical</li>
+<li>Target: <code>mpg</code> (miles per gallon)</li>
+<li>Size: <code>398</code> samples</li>
+<li>Source: <a href="https://archive.ics.uci.edu/dataset/9/auto+mpg">Auto MPG Dataset</a></li>
+</ul>
+<div id="6c60a58a" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pd.read_csv(<span class="st">"../datasets/auto-mpg.csv"</span>).head()</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">mpg</th>
+<th data-quarto-table-cell-role="th">cylinders</th>
+<th data-quarto-table-cell-role="th">displacement</th>
+<th data-quarto-table-cell-role="th">horsepower</th>
+<th data-quarto-table-cell-role="th">weight</th>
+<th data-quarto-table-cell-role="th">acceleration</th>
+<th data-quarto-table-cell-role="th">model year</th>
+<th data-quarto-table-cell-role="th">origin</th>
+<th data-quarto-table-cell-role="th">car name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>18.0</td>
+<td>8</td>
+<td>307.0</td>
+<td>130</td>
+<td>3504</td>
+<td>12.0</td>
+<td>70</td>
+<td>1</td>
+<td>chevrolet chevelle malibu</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>15.0</td>
+<td>8</td>
+<td>350.0</td>
+<td>165</td>
+<td>3693</td>
+<td>11.5</td>
+<td>70</td>
+<td>1</td>
+<td>buick skylark 320</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>18.0</td>
+<td>8</td>
+<td>318.0</td>
+<td>150</td>
+<td>3436</td>
+<td>11.0</td>
+<td>70</td>
+<td>1</td>
+<td>plymouth satellite</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>16.0</td>
+<td>8</td>
+<td>304.0</td>
+<td>150</td>
+<td>3433</td>
+<td>12.0</td>
+<td>70</td>
+<td>1</td>
+<td>amc rebel sst</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>17.0</td>
+<td>8</td>
+<td>302.0</td>
+<td>140</td>
+<td>3449</td>
+<td>10.5</td>
+<td>70</td>
+<td>1</td>
+<td>ford torino</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="26d8bed9" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># INSERT YOUR CODE</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Find more datasets on <a href="https://archive.ics.uci.edu/datasets">UCI Machine Learning Repository</a>.</p>
 
 
 </section>
@@ -677,38 +779,6 @@ x_\text{normalized} = \ln(x)
   });
   </script>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
-(function() {
-  let previousOnload = window.onload;
-  window.onload = () => {
-    if (previousOnload) {
-      previousOnload();
-    }
-    lightboxQuarto.on('slide_before_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      const href = trigger.getAttribute('href');
-      if (href !== null) {
-        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-        if (imgEl !== null) {
-          const srcAttr = imgEl.getAttribute("src");
-          if (srcAttr && srcAttr.startsWith("data:")) {
-            slideConfig.href = srcAttr;
-          }
-        }
-      } 
-    });
-  
-    lightboxQuarto.on('slide_after_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(slideNode);
-      }
-    });
-  
-  };
-  
-})();
-          </script>
 
 
 
