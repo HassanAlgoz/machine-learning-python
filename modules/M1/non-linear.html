@@ -182,6 +182,7 @@ window.Quarto = {
   <li><a href="#كيفية-التعامل-مع-العلاقات-اللاخطية-في-بايثون" id="toc-كيفية-التعامل-مع-العلاقات-اللاخطية-في-بايثون" class="nav-link" data-scroll-target="#كيفية-التعامل-مع-العلاقات-اللاخطية-في-بايثون">كيفية التعامل مع العلاقات اللاخطية في بايثون</a></li>
   <li><a href="#العلاقة-الأسية-exponential-relationship" id="toc-العلاقة-الأسية-exponential-relationship" class="nav-link" data-scroll-target="#العلاقة-الأسية-exponential-relationship">3. العلاقة الأسية (Exponential Relationship)</a></li>
   <li><a href="#العلاقة-اللوغاريتمية-logarithmic-relationship" id="toc-العلاقة-اللوغاريتمية-logarithmic-relationship" class="nav-link" data-scroll-target="#العلاقة-اللوغاريتمية-logarithmic-relationship">4. العلاقة اللوغاريتمية (Logarithmic Relationship)</a></li>
+  <li><a href="#التجميع-binning" id="toc-التجميع-binning" class="nav-link" data-scroll-target="#التجميع-binning">التجميع (Binning)</a></li>
   </ul>
 </nav>
     </div>
@@ -267,6 +268,32 @@ window.Quarto = {
 </ul>
 <p><a href="./assets/logarithmic.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="./assets/logarithmic.png" class="img-fluid"></a></p>
 <p>راجع: <a href="https://scikit-learn.org/stable/modules/preprocessing.html#non-linear-transformation">التحويلات اللاخطية</a></p>
+</section>
+<section id="التجميع-binning" class="level2">
+<h2 class="anchored" data-anchor-id="التجميع-binning">التجميع (Binning)</h2>
+<p><strong>التجميع (<a href="https://scikit-learn.org/stable/modules/preprocessing.html#discretization">Binning</a>)</strong> حيث نقسم القيَم ونضعها في فئات منفصلة.</p>
+<ul>
+<li><strong>مثال:</strong> عدد المتسوقين (زوار المتجر) مقابل درجة الحرارة (حالة الطقس).</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./assets/scatter_temp_vs_shoppers.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="شكل 2. مخطط مبعثر (Scatter plot) يوضح العلاقة بين درجة الحرارة وعدد المتسوقين."><img src="./assets/scatter_temp_vs_shoppers.png" class="img-fluid figure-img" alt="شكل 2. مخطط مبعثر (Scatter plot) يوضح العلاقة بين درجة الحرارة وعدد المتسوقين."></a></p>
+<figcaption><strong>شكل 2.</strong> مخطط مبعثر (Scatter plot) يوضح العلاقة بين درجة الحرارة وعدد المتسوقين.</figcaption>
+</figure>
+</div>
+<p>يشير الرسم البياني إلى وجود ثلاث مجموعات:</p>
+<ul>
+<li><strong>الفئة 1:</strong> نطاق درجة الحرارة من 4 إلى 11.</li>
+<li><strong>الفئة 2:</strong> نطاق درجة الحرارة من 12 إلى 26.</li>
+<li><strong>الفئة 3:</strong> نطاق درجة الحرارة من 27 إلى 36.</li>
+</ul>
+<p>حيث نلاحظ أن العلاقة لا خطيَّة: إذ يكون عدد الزوار مرتفعًا في درجات الحرارة المعتدلة، ومنخفضًا في درجات الحرارة القصوى والدنيا.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./assets/scatter_temp_vs_shoppers_binned.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="شكل 3. نفس المخطط المبعثر السابق مع خطين أحمرين يحددان الفواصل بين الفئات الثلاث."><img src="./assets/scatter_temp_vs_shoppers_binned.png" class="img-fluid figure-img" alt="شكل 3. نفس المخطط المبعثر السابق مع خطين أحمرين يحددان الفواصل بين الفئات الثلاث."></a></p>
+<figcaption><strong>شكل 3.</strong> نفس المخطط المبعثر السابق مع خطين أحمرين يحددان الفواصل بين الفئات الثلاث.</figcaption>
+</figure>
+</div>
 
 
 </section>

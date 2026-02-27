@@ -172,6 +172,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#وضع-مجموعة-للاختبار" id="toc-وضع-مجموعة-للاختبار" class="nav-link" data-scroll-target="#وضع-مجموعة-للاختبار">وضع مجموعة للاختبار</a></li>
   </ul></li>
   <li><a href="#تقييم-الأداء-على-بيانات-الاختبار" id="toc-تقييم-الأداء-على-بيانات-الاختبار" class="nav-link" data-scroll-target="#تقييم-الأداء-على-بيانات-الاختبار">6. تقييم الأداء على بيانات الاختبار</a></li>
+  <li><a href="#طريقة-أخرى-لإنشاء-خط-الإنتاج-make_pipeline" id="toc-طريقة-أخرى-لإنشاء-خط-الإنتاج-make_pipeline" class="nav-link" data-scroll-target="#طريقة-أخرى-لإنشاء-خط-الإنتاج-make_pipeline">طريقة أخرى لإنشاء خط الإنتاج: <code>make_pipeline</code></a></li>
   </ul>
 </nav>
     </div>
@@ -299,7 +300,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>مثل النماذج: <code>LinearRegression</code>, <code>SGDRegressor</code>, <code>KNeighborsClassifier</code></p>
 <p>فأما إجراءاته فهي:</p>
 <ol type="1">
-<li><strong>التقدير</strong>: <code>fit(X)</code> وهي ملاءمة النموذج للبيانات وفق خوارزمية التعلم الآلي المحددة. وهنا يحصل التعليم / التدريب.</li>
+<li><strong>التقدير</strong>: <code>fit(X, y)</code> وهي ملاءمة النموذج للبيانات وفق خوارزمية التعلم الآلي المحددة. وهنا يحصل التعليم / التدريب.</li>
 <li><strong>التنبؤ</strong>: <code>predict(X)</code> تطبّق النموذج على الحالات الجديدة فقط.</li>
 </ol>
 </section>
@@ -3655,38 +3656,40 @@ function forceTheme(elementId) {
 forceTheme('sk-container-id-2');</script>
 </div>
 </div>
-<p><strong>إضافة</strong>: يمكننا بدلاً من ذلك استخدام واجهة الدوال (functional API): <code>make_column_transformer</code> و <code>make_pipeline</code>، ولا تتطلبان ولا تسمحان بتسمية المُقدّرات يدوياً؛ بل تُعيَّن أسماؤها تلقائياً بأحرف صغيرة من أنواعها.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.compose <span class="im">import</span> make_column_transformer</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>numeric_transformer <span class="op">=</span> make_pipeline(</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    SimpleImputer(strategy<span class="op">=</span><span class="st">"median"</span>), StandardScaler()</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>categorical_transformer <span class="op">=</span> OneHotEncoder(handle_unknown<span class="op">=</span><span class="st">"ignore"</span>)</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>preprocessor <span class="op">=</span> make_column_transformer(</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    (numeric_transformer, numeric_features),</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    (categorical_transformer, categorical_features),</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>pipe <span class="op">=</span> make_pipeline(preprocessor, SGDRegressor())</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>pipe.fit(X_train, y_train)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
 <section id="تقييم-الأداء-على-بيانات-الاختبار" class="level2">
 <h2 class="anchored" data-anchor-id="تقييم-الأداء-على-بيانات-الاختبار">6. تقييم الأداء على بيانات الاختبار</h2>
 <div id="509d2f13" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> pipe.score(X_test, y_test)</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"R² Score on Test Set: </span><span class="sc">{</span>score<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>score <span class="op">=</span> pipe.score(X_test, y_test)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"R² Score on Test Set: </span><span class="sc">{</span>score<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>R² Score on Test Set: 0.663</code></pre>
 </div>
 </div>
 <p>ملاحظة: <strong>تقييم النموذج (Model Evaluation)</strong> يحتاج نقاشاً مستقلاً، لكن نعرضه هنا للتكميل.</p>
+</section>
+<section id="طريقة-أخرى-لإنشاء-خط-الإنتاج-make_pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="طريقة-أخرى-لإنشاء-خط-الإنتاج-make_pipeline">طريقة أخرى لإنشاء خط الإنتاج: <code>make_pipeline</code></h2>
+<p><strong>إضافة</strong>: يمكننا بدلاً من ذلك استخدام واجهة الدوال (functional API): <code>make_column_transformer</code> و <code>make_pipeline</code>، ولا تتطلبان ولا تسمحان بتسمية المُقدّرات يدوياً؛ بل تُعيَّن أسماؤها تلقائياً بأحرف صغيرة من أنواعها.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.compose <span class="im">import</span> make_column_transformer</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> make_pipeline</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>numeric_transformer <span class="op">=</span> make_pipeline(</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    SimpleImputer(strategy<span class="op">=</span><span class="st">"median"</span>), StandardScaler()</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>categorical_transformer <span class="op">=</span> OneHotEncoder(handle_unknown<span class="op">=</span><span class="st">"ignore"</span>)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>preprocessor <span class="op">=</span> make_column_transformer(</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    (numeric_transformer, numeric_features),</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    (categorical_transformer, categorical_features),</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>pipe <span class="op">=</span> make_pipeline(preprocessor, SGDRegressor())</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>pipe.fit(X_train, y_train)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
 <hr>
 <ul>
 <li>المصدر: <a href="https://scikit-learn.org/stable/developers/develop.html">توثيق scikit-learn الرسمي لتصميم الواجهة البرمجية</a></li>
 <li>للمزيد انظر: <a href="https://scikit-learn.org/stable/auto_examples/compose/plot_column_transformer_mixed_types.html">Predictive machine learning pipeline with mixed data types</a>.</li>
-<li><a href="./exercises/03_pipeline_ex.ipynb">تمرين: بناء خط معالجة</a></li>
 </ul>
 
 
