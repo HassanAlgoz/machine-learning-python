@@ -109,7 +109,44 @@ $$
 
 فمثلاً: $m=2$ و $b=1$ تكون المعادلة $y = 2x + 1$. (خط مزاح للأعلى بمقدار وحدة واحدة، ويرتفع بمقدار وحدتين كلما اتجهنا أفقيًا في اتجاه الموجب).
 
-ويمكن أن نخط هذا النموذج ([ولك أن تجرب في ديسموس](https://www.desmos.com/calculator)):
+ويمكن أن نخط هذا النموذج ([ولك أن تجرب في ديسموس](https://www.desmos.com/calculator)) أو هنا مباشرة:
+
+<div dir="ltr">
+
+```{ojs}
+//| echo: false
+//| panel: sidebar
+viewof m = Inputs.range([-10, 10], {value: 1, step: 0.1, label: "Slope (m)"})
+viewof b = Inputs.range([-10, 10], {value: 0, step: 0.1, label: "Intercept (b)"})
+
+html`<b>Current Equation:</b> $y = ${m.toFixed(1)}x + ${b.toFixed(1)}$`
+```
+
+</div>
+
+<div dir="ltr">
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  grid: true,
+  x: { domain: [-10, 10], label: "x" },
+  y: { domain: [-10, 10], label: "y" },
+  marks: [
+    // The Line: defined by the function y = mx + b
+    Plot.ruleY([0], {strokeOpacity: 0.2}),
+    Plot.ruleX([0], {strokeOpacity: 0.2}),
+    Plot.line(d3.range(-10, 11, 0.1), {
+      x: d => d,
+      y: d => m * d + b,
+      stroke: "steelblue",
+      strokeWidth: 2
+    })
+  ]
+})
+```
+
+</div>
 
 ![](./assets/y_2x_plus_1.png)
 
@@ -337,7 +374,6 @@ for i in num_steps:
 الأيمن: **رسم بياني وخطي (Line Graph)**  فيه المتغير المستقل في المحور الأفقي ($x$) والمتغير التابع في المحور العمودي ($y$) ويظهر فيه اقتراب النموذج -الخطي- شيئًا فشيئًا من مجموع البيانات ليلائم نمطها.
 
 الأيسر: **مُنحنى الخسارة (Loss Curve)**: فيه أحد المعاملات -الذي هو الميل- على المحور الأفقي، مقابل دالة حساب الخطأ (MSE) على المحور العمودي. واشتقاق هذه الدالة بالنسبة للميل؛ يعطيِنَا اتجاه النزول الذي يجب أن نعدِّلَ الميل ليحصل. ويكون هذا بالتدرُّجِ خطوة خطوة.
-
 
 ## علاقة مركَّبة من مجموع متغيرات مستقلة
 
