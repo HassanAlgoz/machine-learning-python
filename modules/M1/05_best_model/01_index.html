@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="ar" xml:lang="ar" dir="rtl"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ar" xml:lang="ar" dir="ltr"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.26">
@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>فهرس – Machine Learning with Python</title>
+<title>Model selection and evaluation – Machine Learning with Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +23,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -79,7 +79,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Machine Learning with Python</span>
     </a>
   </div>
@@ -90,7 +90,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">الرئيسية</span></a>
   </li>  
 </ul>
@@ -112,7 +112,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">فهرس</h1>
+<h1 class="title">Model selection and evaluation</h1>
 </div>
 
 
@@ -129,95 +129,40 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>اليوم</th>
-<th>الوصف</th>
-<th>المواد</th>
-<th>التمارين</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td><strong>مقدمة في علم تعلُّم الآلة</strong> (Machine Learning)</td>
-<td><a href="./modules/M1/01_intro/Intro_ML.html">الدرس</a> <br> <a href="./modules/M1/01_intro/Intro_ML_slides.html">الشرائح</a></td>
-<td><a href="./modules/M1/01_intro/exercises/01_eda_penguins_ex.html">التمرين: استكشاف البطاريق</a> <a href="./modules/M1/01_intro/exercises/01_eda_penguins_sol.html">الحل</a></td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td><strong>التعلم بالإشراف</strong> (Supervised Learning)</td>
-<td><a href="./modules/M1/02_supervised_learning/supervised_learning.html">الدرس</a></td>
-<td><a href="./modules/M1/02_supervised_learning/exercises/02_linear_regression_ex.html">التمرين</a></td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td><strong>القيم المفقودة</strong> (Missing)</td>
-<td><a href="./modules/M1/03_multi/01_impute.html">الدرس</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><strong>تقييس المقادير المتصلة</strong> (Scaling)</td>
-<td><a href="./modules/M1/03_multi/02_scale.html">الدرس</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><strong>ترميز المقادير المنفصلة</strong> (Encoding)</td>
-<td><a href="./modules/M1/03_multi/03_encode.html">الدرس</a></td>
-<td><a href="./modules/M1/03_multi/exercises/01_categorical_encoding_ex.html">التمرين</a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><strong>خطوط الإنتاج</strong> (Pipelines)</td>
-<td><a href="./modules/M1/03_multi/04_pipeline.html">الدرس</a></td>
-<td><a href="./modules/M1/03_multi/exercises/02_regression_ex_1.html">التمرين الأول</a><br><a href="./modules/M1/03_multi/exercises/03_regression_ex_2.html">التمرين الثاني</a></td>
-</tr>
-<tr class="odd">
-<td>4</td>
-<td>Logistic Regression</td>
-<td><a href="./modules/M1/04_class/01_logistic_regression.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Decision Tree</td>
-<td><a href="./modules/M1/04_class/02_decision_trees.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Naive Bayes</td>
-<td><a href="https://scikit-learn.org/stable/modules/naive_bayes.html">1.9. Naive Bayes</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>5</td>
-<td>Model selection and evaluation</td>
-<td><a href="./modules/M1/05_best_model/01_index.html">Reading List</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Support Vector Machines</td>
-<td><a href="https://scikit-learn.org/stable/auto_examples/svm/index.html">Support Vector Machines</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Ensemble Methods</td>
-<td><a href="https://scikit-learn.org/stable/auto_examples/ensemble/plot_stack_predictors.html">Combine predictors using stacking</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>مصادر:</p>
+<p><a href="https://scikit-learn.org/stable/model_selection.html">Main source: https://scikit-learn.org/stable/model_selection.html</a>.</p>
+<p>Reading items:</p>
 <ul>
-<li><a href="https://web.stanford.edu/class/cs129/syllabus">CS129: Applied ML | Standford</a></li>
-<li><a href="https://inria.github.io/scikit-learn-mooc/">Scikit-learn MOOC</a></li>
-<li><a href="https://github.com/ageron/handson-ml3">Hands-on ML | Aurélien Geron</a></li>
+<li><a href="../../../modules/M1/05_best_model/02_cv_regressor.html">Bias-Variance Trdeoff: Regression</a></li>
+<li><a href="../../../modules/M1/05_best_model/03_cv_classifier.html">Bias-Variance Trdeoff: Classification</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-evaluating-estimator-performance">3.1. Cross-validation: evaluating estimator performance</a>
+<ul>
+<li><a href="https://scikit-learn.org/stable/modules/cross_validation.html#computing-cross-validated-metrics">3.1.1. Computing cross-validated metrics</a></li>
+<li><a href="https://scikit-learn.org/stable/auto_examples/model_selection/plot_cv_predict.html">Plotting Cross-Validated Predictions</a></li>
+<li><a href="https://scikit-learn.org/stable/auto_examples/model_selection/plot_learning_curve.html">Plotting Learning Curves and Checking Models’ Scalability</a></li>
+</ul></li>
+<li><a href="https://scikit-learn.org/stable/modules/grid_search.html#tuning-the-hyper-parameters-of-an-estimator">3.2. Tuning the hyper-parameters of an estimator</a>
+<ul>
+<li><a href="https://scikit-learn.org/stable/modules/grid_search.html#exhaustive-grid-search">3.2.1. Exhaustive Grid Search</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/grid_search.html#randomized-parameter-optimization">3.2.2. Randomized Parameter Optimization</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/grid_search.html#tips-for-parameter-search">3.2.4. Tips for parameter search</a></li>
+<li>Search with Pipelines <a href="https://scikit-learn.org/stable/modules/grid_search.html#composite-estimators-and-parameter-spaces">3.2.4.3. Composite estimators and parameter spaces</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/grid_search.html#model-selection-development-and-evaluation">3.2.4.4. Model selection: development and evaluation</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/grid_search.html#alternatives-to-brute-force-parameter-search">3.2.5. Alternatives to brute force parameter search</a></li>
+</ul></li>
+<li><a href="https://scikit-learn.org/stable/modules/classification_threshold.html">3.3. Tuning the decision threshold for class prediction</a>
+<ul>
+<li><a href="https://scikit-learn.org/stable/modules/classification_threshold.html#post-tuning-the-decision-threshold">3.3.1. Post-tuning the decision threshold</a></li>
+<li>3.3.1.4.&nbsp;Examples
+<ul>
+<li>See the example entitled&nbsp;<a href="https://scikit-learn.org/stable/auto_examples/model_selection/plot_tuned_decision_threshold.html#sphx-glr-auto-examples-model-selection-plot-tuned-decision-threshold-py">Post-hoc tuning the cut-off point of decision function</a>, to get insights on the post-tuning of the decision threshold.</li>
+<li>See the example entitled&nbsp;<a href="https://scikit-learn.org/stable/auto_examples/model_selection/plot_cost_sensitive_learning.html#sphx-glr-auto-examples-model-selection-plot-cost-sensitive-learning-py">Post-tuning the decision threshold for cost-sensitive learning</a>, to learn about cost-sensitive learning and decision threshold tuning.</li>
+</ul></li>
+</ul></li>
+<li><a href="https://scikit-learn.org/stable/modules/model_evaluation.html#metrics-and-scoring-quantifying-the-quality-of-predictions">3.4. Metrics and scoring: quantifying the quality of predictions</a>
+<ul>
+<li><a href="https://scikit-learn.org/stable/modules/model_evaluation.html#which-scoring-function-should-i-use">3.4.1. Which scoring function should I use?</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/model_evaluation.html#dummy-estimators">3.4.8. Dummy estimators</a></li>
+</ul></li>
 </ul>
 
 

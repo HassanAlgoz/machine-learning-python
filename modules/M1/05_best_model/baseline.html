@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>فهرس – Machine Learning with Python</title>
+<title>Objectives – Machine Learning with Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,6 +103,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "البحث"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -79,7 +117,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Machine Learning with Python</span>
     </a>
   </div>
@@ -90,7 +128,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">الرئيسية</span></a>
   </li>  
 </ul>
@@ -104,15 +142,15 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    </div>
+    <div class="quarto-alternate-formats"><h2>صيغ أخرى</h2><ul><li><a href="baseline.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">فهرس</h1>
+<h1 class="title">Objectives</h1>
 </div>
 
 
@@ -129,96 +167,203 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<table class="caption-top table">
+<p>The objective in the module are the following:</p>
+<ol type="1">
+<li><p>understand the differences between metrics.</p></li>
+<li><p>understand the differences between regression and classification metrics;</p></li>
+<li><p>get the intuitions behind comparing a model with some basic models that can be used as baseline;</p></li>
+<li><p>understand the necessity of using an appropriate cross-validation strategy depending on the data;</p></li>
+<li><p>understand the principles behind using nested cross-validation when the model needs to be evaluated as well as optimized;</p></li>
+<li><p>the evaluation metrics</p></li>
+<li><p>compare against a baseline</p></li>
+<li><p>the cross-validation strategy</p></li>
+</ol>
+<p>Establishing a baseline is necessary to prove whether an algorithm actually extracts usable information from the input data. Since a predictive model is only valuable if it outperforms a trivial rule (like always guessing the historical average).</p>
+<div id="aeba2b79" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'./datasets/california_housing.csv'</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
-<th>اليوم</th>
-<th>الوصف</th>
-<th>المواد</th>
-<th>التمارين</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">longitude</th>
+<th data-quarto-table-cell-role="th">latitude</th>
+<th data-quarto-table-cell-role="th">housing_median_age</th>
+<th data-quarto-table-cell-role="th">total_rooms</th>
+<th data-quarto-table-cell-role="th">total_bedrooms</th>
+<th data-quarto-table-cell-role="th">population</th>
+<th data-quarto-table-cell-role="th">households</th>
+<th data-quarto-table-cell-role="th">median_income</th>
+<th data-quarto-table-cell-role="th">median_house_value</th>
+<th data-quarto-table-cell-role="th">ocean_proximity</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>1</td>
-<td><strong>مقدمة في علم تعلُّم الآلة</strong> (Machine Learning)</td>
-<td><a href="./modules/M1/01_intro/Intro_ML.html">الدرس</a> <br> <a href="./modules/M1/01_intro/Intro_ML_slides.html">الشرائح</a></td>
-<td><a href="./modules/M1/01_intro/exercises/01_eda_penguins_ex.html">التمرين: استكشاف البطاريق</a> <a href="./modules/M1/01_intro/exercises/01_eda_penguins_sol.html">الحل</a></td>
+<th data-quarto-table-cell-role="th">0</th>
+<td>-122.23</td>
+<td>37.88</td>
+<td>41.0</td>
+<td>880.0</td>
+<td>129.0</td>
+<td>322.0</td>
+<td>126.0</td>
+<td>8.3252</td>
+<td>452600.0</td>
+<td>NEAR BAY</td>
 </tr>
 <tr class="even">
-<td>2</td>
-<td><strong>التعلم بالإشراف</strong> (Supervised Learning)</td>
-<td><a href="./modules/M1/02_supervised_learning/supervised_learning.html">الدرس</a></td>
-<td><a href="./modules/M1/02_supervised_learning/exercises/02_linear_regression_ex.html">التمرين</a></td>
+<th data-quarto-table-cell-role="th">1</th>
+<td>-122.22</td>
+<td>37.86</td>
+<td>21.0</td>
+<td>7099.0</td>
+<td>1106.0</td>
+<td>2401.0</td>
+<td>1138.0</td>
+<td>8.3014</td>
+<td>358500.0</td>
+<td>NEAR BAY</td>
 </tr>
 <tr class="odd">
-<td>3</td>
-<td><strong>القيم المفقودة</strong> (Missing)</td>
-<td><a href="./modules/M1/03_multi/01_impute.html">الدرس</a></td>
-<td></td>
+<th data-quarto-table-cell-role="th">2</th>
+<td>-122.24</td>
+<td>37.85</td>
+<td>52.0</td>
+<td>1467.0</td>
+<td>190.0</td>
+<td>496.0</td>
+<td>177.0</td>
+<td>7.2574</td>
+<td>352100.0</td>
+<td>NEAR BAY</td>
 </tr>
 <tr class="even">
-<td></td>
-<td><strong>تقييس المقادير المتصلة</strong> (Scaling)</td>
-<td><a href="./modules/M1/03_multi/02_scale.html">الدرس</a></td>
-<td></td>
+<th data-quarto-table-cell-role="th">3</th>
+<td>-122.25</td>
+<td>37.85</td>
+<td>52.0</td>
+<td>1274.0</td>
+<td>235.0</td>
+<td>558.0</td>
+<td>219.0</td>
+<td>5.6431</td>
+<td>341300.0</td>
+<td>NEAR BAY</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td><strong>ترميز المقادير المنفصلة</strong> (Encoding)</td>
-<td><a href="./modules/M1/03_multi/03_encode.html">الدرس</a></td>
-<td><a href="./modules/M1/03_multi/exercises/01_categorical_encoding_ex.html">التمرين</a></td>
+<th data-quarto-table-cell-role="th">4</th>
+<td>-122.25</td>
+<td>37.85</td>
+<td>52.0</td>
+<td>1627.0</td>
+<td>280.0</td>
+<td>565.0</td>
+<td>259.0</td>
+<td>3.8462</td>
+<td>342200.0</td>
+<td>NEAR BAY</td>
 </tr>
 <tr class="even">
-<td></td>
-<td><strong>خطوط الإنتاج</strong> (Pipelines)</td>
-<td><a href="./modules/M1/03_multi/04_pipeline.html">الدرس</a></td>
-<td><a href="./modules/M1/03_multi/exercises/02_regression_ex_1.html">التمرين الأول</a><br><a href="./modules/M1/03_multi/exercises/03_regression_ex_2.html">التمرين الثاني</a></td>
+<th data-quarto-table-cell-role="th">...</th>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
 </tr>
 <tr class="odd">
-<td>4</td>
-<td>Logistic Regression</td>
-<td><a href="./modules/M1/04_class/01_logistic_regression.html">Lesson</a></td>
-<td></td>
+<th data-quarto-table-cell-role="th">20635</th>
+<td>-121.09</td>
+<td>39.48</td>
+<td>25.0</td>
+<td>1665.0</td>
+<td>374.0</td>
+<td>845.0</td>
+<td>330.0</td>
+<td>1.5603</td>
+<td>78100.0</td>
+<td>INLAND</td>
 </tr>
 <tr class="even">
-<td></td>
-<td>Decision Tree</td>
-<td><a href="./modules/M1/04_class/02_decision_trees.html">Lesson</a></td>
-<td></td>
+<th data-quarto-table-cell-role="th">20636</th>
+<td>-121.21</td>
+<td>39.49</td>
+<td>18.0</td>
+<td>697.0</td>
+<td>150.0</td>
+<td>356.0</td>
+<td>114.0</td>
+<td>2.5568</td>
+<td>77100.0</td>
+<td>INLAND</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td>Naive Bayes</td>
-<td><a href="https://scikit-learn.org/stable/modules/naive_bayes.html">1.9. Naive Bayes</a></td>
-<td></td>
+<th data-quarto-table-cell-role="th">20637</th>
+<td>-121.22</td>
+<td>39.43</td>
+<td>17.0</td>
+<td>2254.0</td>
+<td>485.0</td>
+<td>1007.0</td>
+<td>433.0</td>
+<td>1.7000</td>
+<td>92300.0</td>
+<td>INLAND</td>
 </tr>
 <tr class="even">
-<td>5</td>
-<td>Model selection and evaluation</td>
-<td><a href="./modules/M1/05_best_model/01_index.html">Reading List</a></td>
-<td></td>
+<th data-quarto-table-cell-role="th">20638</th>
+<td>-121.32</td>
+<td>39.43</td>
+<td>18.0</td>
+<td>1860.0</td>
+<td>409.0</td>
+<td>741.0</td>
+<td>349.0</td>
+<td>1.8672</td>
+<td>84700.0</td>
+<td>INLAND</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td>Support Vector Machines</td>
-<td><a href="https://scikit-learn.org/stable/auto_examples/svm/index.html">Support Vector Machines</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Ensemble Methods</td>
-<td><a href="https://scikit-learn.org/stable/auto_examples/ensemble/plot_stack_predictors.html">Combine predictors using stacking</a></td>
-<td></td>
+<th data-quarto-table-cell-role="th">20639</th>
+<td>-121.24</td>
+<td>39.37</td>
+<td>16.0</td>
+<td>2785.0</td>
+<td>616.0</td>
+<td>1387.0</td>
+<td>530.0</td>
+<td>2.3886</td>
+<td>89400.0</td>
+<td>INLAND</td>
 </tr>
 </tbody>
 </table>
-<p>مصادر:</p>
-<ul>
-<li><a href="https://web.stanford.edu/class/cs129/syllabus">CS129: Applied ML | Standford</a></li>
-<li><a href="https://inria.github.io/scikit-learn-mooc/">Scikit-learn MOOC</a></li>
-<li><a href="https://github.com/ageron/handson-ml3">Hands-on ML | Aurélien Geron</a></li>
-</ul>
+
+<p>20640 rows × 10 columns</p>
+</div>
+</div>
+</div>
+<div id="c818128e" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>target_name <span class="op">=</span> <span class="st">'median_income'</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> df.drop(columns<span class="op">=</span>[target_name])</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> df[target_name]</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div id="95b0aede" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># rescale the target in k$</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">*=</span> <span class="dv">100</span></span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 
 
 
