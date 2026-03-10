@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="ar" xml:lang="ar" dir="ltr"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ar" xml:lang="ar" dir="rtl"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.26">
@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Model selection and evaluation – Machine Learning with Python</title>
+<title>اختيار النموذج وتقييمه (Model Selection and Evaluation) – Machine Learning with Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -104,15 +104,25 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">المحتويات</h2>
+   
+  <ul>
+  <li><a href="#قائمة-القراءة" id="toc-قائمة-القراءة" class="nav-link active" data-scroll-target="#قائمة-القراءة">قائمة القراءة</a>
+  <ul class="collapse">
+  <li><a href="#لماذا-نهتم-بالتقييم" id="toc-لماذا-نهتم-بالتقييم" class="nav-link" data-scroll-target="#لماذا-نهتم-بالتقييم">لماذا نهتم بالتقييم؟</a></li>
+  <li><a href="#موارد-إضافية" id="toc-موارد-إضافية" class="nav-link" data-scroll-target="#موارد-إضافية">موارد إضافية</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Model selection and evaluation</h1>
+<h1 class="title">اختيار النموذج وتقييمه (Model Selection and Evaluation)</h1>
 </div>
 
 
@@ -129,43 +139,72 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><a href="https://scikit-learn.org/stable/model_selection.html">Main source: https://scikit-learn.org/stable/model_selection.html</a>.</p>
-<p>Reading items:</p>
+<section id="قائمة-القراءة" class="level1">
+<h1>قائمة القراءة</h1>
+<p>كيف نقيّم ملاءمة نموذجنا؟ في هذه الوحدة نتعامل مع الأسئلة التالية، وكل درس يوضح جزءاً منها.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>الموضوع</th>
+<th>الدرس</th>
+<th>التمارين / الموارد</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>كيف نقيّم ملاءمة النموذج؟</strong> — الخطأ والمقياس، الخط القاعدي، التقسيم تدريب/اختبار، عدم الملاءمة والملاءمة الزائدة، منحنى التعلم</td>
+<td><a href="../../../modules/M1/05_best_model/02_baseline_splits.html">الخط القاعدي والتقسيم</a></td>
+<td><a href="./02_cv_regressor.ipynb">02_cv_regressor.ipynb</a> — <a href="./03_cv_classifier.ipynb">03_cv_classifier.ipynb</a></td>
+</tr>
+<tr class="even">
+<td><strong>هل الصدفة لعبت دوراً كبيراً؟</strong> — إطار التحقق المتقاطع</td>
+<td><a href="../../../modules/M1/05_best_model/03_cross_validation.html">التحقق المتقاطع</a></td>
+<td><a href="https://inria.github.io/scikit-learn-mooc/evaluation/cross_validation_choices_index.html">Choice of cross-validation</a></td>
+</tr>
+<tr class="odd">
+<td><strong>مقاييس الانحدار</strong> — المقياس، تحليل الخطأ، معامل التحديد، رسم البواقي</td>
+<td><a href="../../../modules/M1/05_best_model/04_regression_metrics.html">مقاييس الانحدار</a></td>
+<td><a href="https://inria.github.io/scikit-learn-mooc/python_scripts/metrics_regression.html">Regression Metrics</a></td>
+</tr>
+<tr class="even">
+<td><strong>مقاييس التصنيف</strong> — مصفوفة الالتباس، الدقة، عدم التوازن، ربط المقاييس بالمخاطر</td>
+<td><a href="../../../modules/M1/05_best_model/05_classification_metrics.html">مقاييس التصنيف</a></td>
+<td><a href="https://inria.github.io/scikit-learn-mooc/python_scripts/metrics_classification.html">Classification Metrics</a></td>
+</tr>
+<tr class="odd">
+<td><strong>كيف نحصل على نماذج أفضل؟</strong> — ضبط المعلمات الفوقية</td>
+<td><a href="../../../modules/M1/05_best_model/06_tuning.html">ضبط المعلمات</a></td>
+<td><a href="https://scikit-learn.org/stable/modules/grid_search.html">Grid Search</a></td>
+</tr>
+<tr class="even">
+<td><strong>بعد الضبط</strong> — عتبة القرار والتعلم حساس التكلفة</td>
+<td><a href="../../../modules/M1/05_best_model/07_post_tuning.html">ضبط عتبة القرار</a></td>
+<td><a href="https://scikit-learn.org/stable/modules/classification_threshold.html">Tuning the decision threshold</a></td>
+</tr>
+</tbody>
+</table>
+<section id="لماذا-نهتم-بالتقييم" class="level2">
+<h2 class="anchored" data-anchor-id="لماذا-نهتم-بالتقييم">لماذا نهتم بالتقييم؟</h2>
 <ul>
-<li><a href="../../../modules/M1/05_best_model/02_cv_regressor.html">Bias-Variance Trdeoff: Regression</a></li>
-<li><a href="../../../modules/M1/05_best_model/03_cv_classifier.html">Bias-Variance Trdeoff: Classification</a></li>
-<li><a href="https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-evaluating-estimator-performance">3.1. Cross-validation: evaluating estimator performance</a>
+<li><strong>الخط القاعدي (Baseline):</strong> هل نموذجنا أفضل من تخمين بسيط؟ نستخدم مقدرات وهمية (Dummy) للمقارنة.</li>
+<li><strong>التقسيم تدريب/اختبار:</strong> لماذا نفصل البيانات؟ لتجنب الملاءمة الزائدة (Overfitting) وقياس التعميم.</li>
+<li><strong>التحقق المتقاطع (Cross-validation):</strong> هل النتيجة مستقرة أم أن الصدفة لعبت دوراً؟ نقدّر الأداء على عدة تقسيمات.</li>
+<li><strong>المقاييس:</strong> حسب المهمة (انحدار أو تصنيف) نختار مقياساً متسقاً مع الهدف، وأحياناً نربط بين مقياس النموذج ومخاطر العمل.</li>
+</ul>
+</section>
+<section id="موارد-إضافية" class="level2">
+<h2 class="anchored" data-anchor-id="موارد-إضافية">موارد إضافية</h2>
 <ul>
-<li><a href="https://scikit-learn.org/stable/modules/cross_validation.html#computing-cross-validated-metrics">3.1.1. Computing cross-validated metrics</a></li>
-<li><a href="https://scikit-learn.org/stable/auto_examples/model_selection/plot_cv_predict.html">Plotting Cross-Validated Predictions</a></li>
-<li><a href="https://scikit-learn.org/stable/auto_examples/model_selection/plot_learning_curve.html">Plotting Learning Curves and Checking Models’ Scalability</a></li>
-</ul></li>
-<li><a href="https://scikit-learn.org/stable/modules/grid_search.html#tuning-the-hyper-parameters-of-an-estimator">3.2. Tuning the hyper-parameters of an estimator</a>
-<ul>
-<li><a href="https://scikit-learn.org/stable/modules/grid_search.html#exhaustive-grid-search">3.2.1. Exhaustive Grid Search</a></li>
-<li><a href="https://scikit-learn.org/stable/modules/grid_search.html#randomized-parameter-optimization">3.2.2. Randomized Parameter Optimization</a></li>
-<li><a href="https://scikit-learn.org/stable/modules/grid_search.html#tips-for-parameter-search">3.2.4. Tips for parameter search</a></li>
-<li>Search with Pipelines <a href="https://scikit-learn.org/stable/modules/grid_search.html#composite-estimators-and-parameter-spaces">3.2.4.3. Composite estimators and parameter spaces</a></li>
-<li><a href="https://scikit-learn.org/stable/modules/grid_search.html#model-selection-development-and-evaluation">3.2.4.4. Model selection: development and evaluation</a></li>
-<li><a href="https://scikit-learn.org/stable/modules/grid_search.html#alternatives-to-brute-force-parameter-search">3.2.5. Alternatives to brute force parameter search</a></li>
-</ul></li>
-<li><a href="https://scikit-learn.org/stable/modules/classification_threshold.html">3.3. Tuning the decision threshold for class prediction</a>
-<ul>
-<li><a href="https://scikit-learn.org/stable/modules/classification_threshold.html#post-tuning-the-decision-threshold">3.3.1. Post-tuning the decision threshold</a></li>
-<li>3.3.1.4.&nbsp;Examples
-<ul>
-<li>See the example entitled&nbsp;<a href="https://scikit-learn.org/stable/auto_examples/model_selection/plot_tuned_decision_threshold.html#sphx-glr-auto-examples-model-selection-plot-tuned-decision-threshold-py">Post-hoc tuning the cut-off point of decision function</a>, to get insights on the post-tuning of the decision threshold.</li>
-<li>See the example entitled&nbsp;<a href="https://scikit-learn.org/stable/auto_examples/model_selection/plot_cost_sensitive_learning.html#sphx-glr-auto-examples-model-selection-plot-cost-sensitive-learning-py">Post-tuning the decision threshold for cost-sensitive learning</a>, to learn about cost-sensitive learning and decision threshold tuning.</li>
-</ul></li>
-</ul></li>
-<li><a href="https://scikit-learn.org/stable/modules/model_evaluation.html#metrics-and-scoring-quantifying-the-quality-of-predictions">3.4. Metrics and scoring: quantifying the quality of predictions</a>
-<ul>
-<li><a href="https://scikit-learn.org/stable/modules/model_evaluation.html#which-scoring-function-should-i-use">3.4.1. Which scoring function should I use?</a></li>
-<li><a href="https://scikit-learn.org/stable/modules/model_evaluation.html#dummy-estimators">3.4.8. Dummy estimators</a></li>
-</ul></li>
+<li><a href="https://scikit-learn.org/stable/modules/model_evaluation.html">3.4. Metrics and scoring</a> — scikit-learn</li>
+<li><a href="https://scikit-learn.org/stable/modules/cross_validation.html">3.1. Cross-validation</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/learning_curve.html">3.5. Validation curves and learning curves</a></li>
+<li><a href="https://inria.github.io/scikit-learn-mooc/overfit/bias_vs_variance_slides.html">Bias vs Variance</a> — Scikit-learn MOOC</li>
+<li><a href="https://scikit-learn.org/stable/auto_examples/model_selection/plot_underfitting_overfitting.html">Underfitting vs.&nbsp;Overfitting</a></li>
 </ul>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

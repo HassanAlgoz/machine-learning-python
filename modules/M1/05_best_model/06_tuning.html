@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>فهرس – Machine Learning with Python</title>
+<title>ضبط المعلمات الفوقية (Hyperparameter Tuning) – Machine Learning with Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,6 +104,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -79,7 +143,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Machine Learning with Python</span>
     </a>
   </div>
@@ -90,7 +154,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">الرئيسية</span></a>
   </li>  
 </ul>
@@ -104,15 +168,29 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">المحتويات</h2>
+   
+  <ul>
+  <li><a href="#كيف-نحصل-على-نماذج-أفضل-بشكل-منهجي" id="toc-كيف-نحصل-على-نماذج-أفضل-بشكل-منهجي" class="nav-link active" data-scroll-target="#كيف-نحصل-على-نماذج-أفضل-بشكل-منهجي">كيف نحصل على نماذج أفضل بشكل منهجي؟</a>
+  <ul class="collapse">
+  <li><a href="#المعلمات-الفوقية-مقابل-المعلمات-المتعلمة" id="toc-المعلمات-الفوقية-مقابل-المعلمات-المتعلمة" class="nav-link" data-scroll-target="#المعلمات-الفوقية-مقابل-المعلمات-المتعلمة">المعلمات الفوقية مقابل المعلمات المُتعلَّمة</a></li>
+  <li><a href="#البحث-الشامل-على-الشبكة-grid-search" id="toc-البحث-الشامل-على-الشبكة-grid-search" class="nav-link" data-scroll-target="#البحث-الشامل-على-الشبكة-grid-search">البحث الشامل على الشبكة (Grid Search)</a></li>
+  <li><a href="#البحث-العشوائي-randomized-parameter-optimization" id="toc-البحث-العشوائي-randomized-parameter-optimization" class="nav-link" data-scroll-target="#البحث-العشوائي-randomized-parameter-optimization">البحث العشوائي (Randomized Parameter Optimization)</a></li>
+  <li><a href="#التطوير-والتقييم-development-and-evaluation" id="toc-التطوير-والتقييم-development-and-evaluation" class="nav-link" data-scroll-target="#التطوير-والتقييم-development-and-evaluation">التطوير والتقييم (Development and Evaluation)</a></li>
+  <li><a href="#بدائل-البحث-المكثف" id="toc-بدائل-البحث-المكثف" class="nav-link" data-scroll-target="#بدائل-البحث-المكثف">بدائل البحث المكثف</a></li>
+  <li><a href="#خلاصة" id="toc-خلاصة" class="nav-link" data-scroll-target="#خلاصة">خلاصة</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">فهرس</h1>
+<h1 class="title">ضبط المعلمات الفوقية (Hyperparameter Tuning)</h1>
 </div>
 
 
@@ -129,86 +207,116 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="كيف-نحصل-على-نماذج-أفضل-بشكل-منهجي" class="level1">
+<h1>كيف نحصل على نماذج أفضل بشكل منهجي؟</h1>
+<section id="المعلمات-الفوقية-مقابل-المعلمات-المتعلمة" class="level2">
+<h2 class="anchored" data-anchor-id="المعلمات-الفوقية-مقابل-المعلمات-المتعلمة">المعلمات الفوقية مقابل المعلمات المُتعلَّمة</h2>
+<p><strong>بلغة بسيطة:</strong> المعلمات التي تتعلّمها الخوارزمية من البيانات (مثل معاملات الانحدار الخطي) تختلف عن <strong>المعلمات الفوقية</strong> التي نحددها نحن قبل التدريب — مثل عمق الشجرة، <span class="math inline">\(C\)</span> و kernel في SVM، أو قوة التنظيم. اختيار قيم جيدة لهذه المعلمات يسمّى <strong>ضبط المعلمات</strong> (tuning).</p>
+<p><strong>تقني:</strong> في scikit-learn تُمرَّر المعلمات الفوقية إلى منشئ المقدر (constructor). لمعرفة أسماء المعلمات وقيمها الحالية: <code>estimator.get_params()</code>. راجع <a href="https://scikit-learn.org/stable/modules/grid_search.html">Tuning the hyper-parameters of an estimator</a>.</p>
+<hr>
+</section>
+<section id="البحث-الشامل-على-الشبكة-grid-search" class="level2">
+<h2 class="anchored" data-anchor-id="البحث-الشامل-على-الشبكة-grid-search">البحث الشامل على الشبكة (Grid Search)</h2>
+<p><strong>مثال عملي:</strong> كيف نجد أفضل “عمق” و”عدد أشجار” لنموذج الغابة العشوائية؟ نجرّب كل التركيبات!</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. تحديد النموذج والشبكة (الخيارات المتاحة لكل معلمة)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> RandomForestClassifier(random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>param_grid <span class="op">=</span> {</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'n_estimators'</span>: [<span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">200</span>],</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'max_depth'</span>: [<span class="dv">10</span>, <span class="dv">20</span>, <span class="va">None</span>]</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. إعداد البحث: سيتم تجربة 3 × 3 = 9 تركيبات، كل واحدة يتم تقييمها 5 مرات عبر CV</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>grid_search <span class="op">=</span> GridSearchCV(model, param_grid, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">'accuracy'</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. تشغيل البحث</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>grid_search.fit(X_train, y_train)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. النتيجة</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best Parameters: </span><span class="sc">{</span>grid_search<span class="sc">.</span>best_params_<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best Cross-Validation Accuracy: </span><span class="sc">{</span>grid_search<span class="sc">.</span>best_score_<span class="sc">:.2f}</span><span class="ss">"</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># النموذج الأفضل جاهز للاستخدام مباشرة (تم تدريبه على كامل X_train)</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>best_model <span class="op">=</span> grid_search.best_estimator_</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>فهم الطريقة:</strong> يقوم <code>GridSearchCV</code> بتجربة كل تركيبة ممكنة (مثلاً 50 شجرة مع عمق 10، ثم 50 مع 20…). يقدر كفاءة كل تركيبة باستخدام التحقق المتقاطع (لحماية النتيجة الحقيقية)، ومن ثم يعيد النموذج تدريب نفسه تلقائياً بأفضل الأعداد التي وجدها!</p>
+<hr>
+</section>
+<section id="البحث-العشوائي-randomized-parameter-optimization" class="level2">
+<h2 class="anchored" data-anchor-id="البحث-العشوائي-randomized-parameter-optimization">البحث العشوائي (Randomized Parameter Optimization)</h2>
+<p><strong>مثال عملي:</strong> ماذا لو كانت الخيارات كثيرة لدرجة لا تسمح بتجربتها كلها؟ نستخدم البحث العشوائي لتوفير الوقت.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> RandomizedSearchCV</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># نفس النموذج لكن بشبكة هائلة!</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>param_dist <span class="op">=</span> {</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'n_estimators'</span>: stats.randint(<span class="dv">50</span>, <span class="dv">500</span>), <span class="co"># أي رقم بين 50 و 500</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'max_depth'</span>: stats.randint(<span class="dv">5</span>, <span class="dv">50</span>),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'min_samples_split'</span>: stats.uniform(<span class="fl">0.01</span>, <span class="fl">0.1</span>) <span class="co"># نسب بين 1% و 10%</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># نحدد ميزانية المحاولات (n_iter=20 محاولة عشوائية فقط)</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>random_search <span class="op">=</span> RandomizedSearchCV(</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    model, param_dist, n_iter<span class="op">=</span><span class="dv">20</span>, cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">'accuracy'</span>, random_state<span class="op">=</span><span class="dv">42</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>random_search.fit(X_train, y_train)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Best Parameters Found Randomly: </span><span class="sc">{</span>random_search<span class="sc">.</span>best_params_<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>لماذا هو مفيد؟</strong> <code>RandomizedSearchCV</code> يختار عيّنات عشوائية من فضاء معلمات واسع بدلاً من تجربة كل شيء خطوة بخطوة. مفيد جداً عندما تزيد التكاليف أو تكون الموارد (والوقت المتاح للنموذج) محدودة.</p>
+<hr>
+</section>
+<section id="التطوير-والتقييم-development-and-evaluation" class="level2">
+<h2 class="anchored" data-anchor-id="التطوير-والتقييم-development-and-evaluation">التطوير والتقييم (Development and Evaluation)</h2>
+<p><strong>مهم:</strong> عند استخدام تحقق متقاطع داخلي لاختيار المعلمات، تقدير الأداء على نفس بيانات التحقق يكون متفائلاً. للتقييم غير المنحاز نستخدم إما:</p>
+<ul>
+<li><strong>مجموعة اختبار مستقلة</strong> لم تُستخدم في أي ضبط، أو</li>
+<li><strong>تحقق متقاطع متداخل (Nested CV):</strong> حلقة خارجية للتقييم، وحلقة داخلية لضبط المعلمات. راجع <a href="https://scikit-learn.org/stable/modules/grid_search.html#model-selection-development-and-evaluation">Model selection: development and evaluation</a> و<a href="https://inria.github.io/scikit-learn-mooc/python_scripts/cross_validation_nested.html">Nested Cross-validation</a>.</li>
+</ul>
+<hr>
+</section>
+<section id="بدائل-البحث-المكثف" class="level2">
+<h2 class="anchored" data-anchor-id="بدائل-البحث-المكثف">بدائل البحث المكثف</h2>
+<p>لبعض المقدرات توجد طرق أسرع من البحث الشامل أو العشوائي، مثل طرق التحسين المتتابع (successive halving) أو خوارزميات مخصصة. راجع <a href="https://scikit-learn.org/stable/modules/grid_search.html#alternatives-to-brute-force-parameter-search">Alternatives to brute force parameter search</a>.</p>
+<hr>
+</section>
+<section id="خلاصة" class="level2">
+<h2 class="anchored" data-anchor-id="خلاصة">خلاصة</h2>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 42%">
+<col style="width: 57%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>اليوم</th>
-<th>الوصف</th>
-<th>المواد</th>
-<th>التمارين</th>
+<th>الأداة</th>
+<th>الاستخدام</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>1</td>
-<td><strong>مقدمة في علم تعلُّم الآلة</strong> (Machine Learning)</td>
-<td><a href="./modules/M1/01_intro/Intro_ML.html">الدرس</a> <br> <a href="./modules/M1/01_intro/Intro_ML_slides.html">الشرائح</a></td>
-<td><a href="./modules/M1/01_intro/exercises/01_eda_penguins_ex.html">التمرين: استكشاف البطاريق</a> <a href="./modules/M1/01_intro/exercises/01_eda_penguins_sol.html">الحل</a></td>
+<td><code>GridSearchCV</code></td>
+<td>فضاء معلمات صغير/متوسط؛ نريد تجربة كل التركيبات (أو شبكة محددة)</td>
 </tr>
 <tr class="even">
-<td>2</td>
-<td><strong>التعلم بالإشراف</strong> (Supervised Learning)</td>
-<td><a href="./modules/M1/02_supervised_learning/supervised_learning.html">الدرس</a></td>
-<td><a href="./modules/M1/02_supervised_learning/exercises/02_linear_regression_ex.html">التمرين</a></td>
+<td><code>RandomizedSearchCV</code></td>
+<td>فضاء كبير؛ ميزانية ثابتة بعدد المحاولات</td>
 </tr>
 <tr class="odd">
-<td>3</td>
-<td><strong>القيم المفقودة</strong> (Missing)</td>
-<td><a href="./modules/M1/03_multi/01_impute.html">الدرس</a></td>
-<td></td>
+<td>Nested CV / test set</td>
+<td>تقدير تعميم غير منحاز عند ضبط المعلمات</td>
 </tr>
 <tr class="even">
-<td></td>
-<td><strong>تقييس المقادير المتصلة</strong> (Scaling)</td>
-<td><a href="./modules/M1/03_multi/02_scale.html">الدرس</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><strong>ترميز المقادير المنفصلة</strong> (Encoding)</td>
-<td><a href="./modules/M1/03_multi/03_encode.html">الدرس</a></td>
-<td><a href="./modules/M1/03_multi/exercises/01_categorical_encoding_ex.html">التمرين</a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><strong>خطوط الإنتاج</strong> (Pipelines)</td>
-<td><a href="./modules/M1/03_multi/04_pipeline.html">الدرس</a></td>
-<td><a href="./modules/M1/03_multi/exercises/02_regression_ex_1.html">التمرين الأول</a><br><a href="./modules/M1/03_multi/exercises/03_regression_ex_2.html">التمرين الثاني</a></td>
-</tr>
-<tr class="odd">
-<td>4</td>
-<td>Logistic Regression</td>
-<td><a href="./modules/M1/04_class/01_logistic_regression.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Decision Tree</td>
-<td><a href="./modules/M1/04_class/02_decision_trees.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>Model selection and evaluation</td>
-<td><a href="./modules/M1/05_best_model/lesson.html">Lesson</a></td>
-<td></td>
+<td><code>Pipeline</code> + <code>param_grid</code></td>
+<td>ضبط معلمات المعالج والمقدر معاً</td>
 </tr>
 </tbody>
 </table>
-<p>Resources:</p>
-<ul>
-<li>Naive Bayes | <a href="https://scikit-learn.org/stable/modules/naive_bayes.html">1.9. Naive Bayes</a></li>
-<li>Support Vector Machines | <a href="https://scikit-learn.org/stable/auto_examples/svm/index.html">Support Vector Machines</a></li>
-<li>Ensemble Methods | <a href="https://scikit-learn.org/stable/auto_examples/ensemble/plot_stack_predictors.html">Combine predictors using stacking</a></li>
-</ul>
-<p>مصادر:</p>
-<ul>
-<li><a href="https://web.stanford.edu/class/cs129/syllabus">CS129: Applied ML | Standford</a></li>
-<li><a href="https://inria.github.io/scikit-learn-mooc/">Scikit-learn MOOC</a></li>
-<li><a href="https://github.com/ageron/handson-ml3">Hands-on ML | Aurélien Geron</a></li>
-</ul>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

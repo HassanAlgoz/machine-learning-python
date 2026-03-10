@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>فهرس – Machine Learning with Python</title>
+<title>مقاييس الانحدار (Regression Metrics) – Machine Learning with Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,6 +104,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -79,7 +143,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Machine Learning with Python</span>
     </a>
   </div>
@@ -90,7 +154,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">الرئيسية</span></a>
   </li>  
 </ul>
@@ -104,15 +168,29 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">المحتويات</h2>
+   
+  <ul>
+  <li><a href="#كيف-نقيس-جودة-توقعات-القيم-العددية" id="toc-كيف-نقيس-جودة-توقعات-القيم-العددية" class="nav-link active" data-scroll-target="#كيف-نقيس-جودة-توقعات-القيم-العددية">كيف نقيس جودة توقعات القيم العددية؟</a>
+  <ul class="collapse">
+  <li><a href="#المقياس-والوحدة-scale" id="toc-المقياس-والوحدة-scale" class="nav-link" data-scroll-target="#المقياس-والوحدة-scale">المقياس والوحدة (Scale)</a></li>
+  <li><a href="#المقياس-والوحدة-scale-1" id="toc-المقياس-والوحدة-scale-1" class="nav-link" data-scroll-target="#المقياس-والوحدة-scale-1">المقياس والوحدة (Scale)</a></li>
+  <li><a href="#معامل-التحديد-coefficient-of-determination-r2" id="toc-معامل-التحديد-coefficient-of-determination-r2" class="nav-link" data-scroll-target="#معامل-التحديد-coefficient-of-determination-r2">معامل التحديد (Coefficient of Determination, <span class="math inline">\(R^2\)</span>)</a></li>
+  <li><a href="#تحليل-الخطأ-ورسم-البواقي-residual-plot" id="toc-تحليل-الخطأ-ورسم-البواقي-residual-plot" class="nav-link" data-scroll-target="#تحليل-الخطأ-ورسم-البواقي-residual-plot">تحليل الخطأ ورسم البواقي (Residual plot)</a></li>
+  <li><a href="#تحليل-الخطأ-ورسم-البواقي-residual-plot-1" id="toc-تحليل-الخطأ-ورسم-البواقي-residual-plot-1" class="nav-link" data-scroll-target="#تحليل-الخطأ-ورسم-البواقي-residual-plot-1">تحليل الخطأ ورسم البواقي (Residual plot)</a></li>
+  <li><a href="#خلاصة" id="toc-خلاصة" class="nav-link" data-scroll-target="#خلاصة">خلاصة</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">فهرس</h1>
+<h1 class="title">مقاييس الانحدار (Regression Metrics)</h1>
 </div>
 
 
@@ -129,86 +207,101 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="كيف-نقيس-جودة-توقعات-القيم-العددية" class="level1">
+<h1>كيف نقيس جودة توقعات القيم العددية؟</h1>
+<section id="المقياس-والوحدة-scale" class="level2">
+<h2 class="anchored" data-anchor-id="المقياس-والوحدة-scale">المقياس والوحدة (Scale)</h2>
+</section>
+<section id="المقياس-والوحدة-scale-1" class="level2">
+<h2 class="anchored" data-anchor-id="المقياس-والوحدة-scale-1">المقياس والوحدة (Scale)</h2>
+<p><strong>مثال عملي:</strong> كيف نقيس أداء نموذج يتنبأ بأسعار المنازل (بالدولار)؟</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error, mean_absolute_error, r2_score</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># تدريب نموذج انحدار وهمي للتوضيح (بافتراض وجود X_train, y_train, X_test)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> LinearRegression().fit(X_train, y_train)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> model.predict(X_test)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. متوسط الخطأ المطلق (MAE) - يعطينا الخطأ الفعلي بمتوسط عدد الدولارات</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>mae <span class="op">=</span> mean_absolute_error(y_test, y_pred)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"MAE: $</span><span class="sc">{</span>mae<span class="sc">:,.2f}</span><span class="ss">"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. جذر متوسط مربع الخطأ (RMSE) - يعاقب الأخطاء الكبيرة بشدة</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>rmse <span class="op">=</span> np.sqrt(mean_squared_error(y_test, y_pred))</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># أو في الإصدارات الحديثة من sklearn: root_mean_squared_error(y_test, y_pred)</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"RMSE: $</span><span class="sc">{</span>rmse<span class="sc">:,.2f}</span><span class="ss">"</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. معامل التحديد (R2 Score) - نسبة التفسير (أعلى = أفضل، 1 ممتاز، 0 سيء)</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>r2 <span class="op">=</span> r2_score(y_test, y_pred)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"R^2 Score: </span><span class="sc">{</span>r2<span class="sc">:.3f}</span><span class="ss">"</span>)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>بلغة بسيطة:</strong> نستخدم <code>MAE</code> لأن فهمه سهل للمدراء (مثلاً: النموذج يخطئ بـ 5000 دولار في المتوسط). نستخدم <code>RMSE</code> عندما نريد الانتباه بشدة للأخطاء الفادحة (outliers). ونستخدم <span class="math inline">\(R^2\)</span> لنفهم ما إذا كان النموذج أفضل من مجرد توقع متوسط الأسعار للجميع.</p>
+<p><em>ملاحظة: في دوال التحقق المتقاطع (CV)، نستخدم المصطلحات السلبية مثل <code>neg_mean_squared_error</code> لأن تلك الدوال تفترض دائماً أن “القيمة الأعلى تعني أداءً أفضل”.</em></p>
+<hr>
+</section>
+<section id="معامل-التحديد-coefficient-of-determination-r2" class="level2">
+<h2 class="anchored" data-anchor-id="معامل-التحديد-coefficient-of-determination-r2">معامل التحديد (Coefficient of Determination, <span class="math inline">\(R^2\)</span>)</h2>
+<p><strong>تشبيه:</strong> <span class="math inline">\(R^2\)</span> يجاوب: “ما نسبة تغيّر <span class="math inline">\(y\)</span> الذي يفسره النموذج؟” خط أساس بسيط هو التوقع بمتوسط <span class="math inline">\(y\)</span>. <span class="math inline">\(R^2 = 1\)</span> يعني أن النموذج يطابق البيانات تماماً (في عينة التقييم)، و<span class="math inline">\(R^2 = 0\)</span> يعني أن النموذج لا يزيد عن التوقع بالمتوسط.</p>
+<p><strong>تقني:</strong> <span class="math display">\[R^2 = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2}.\]</span> يمكن أن يكون سالباً إذا كان النموذج أسوأ من التوقع بالمتوسط. نفس ترتيب النماذج يعطيه MSE (أو neg_MSE)؛ <span class="math inline">\(R^2\)</span> أسهل تفسيراً كـ “نسبة التفسير”.</p>
+<hr>
+</section>
+<section id="تحليل-الخطأ-ورسم-البواقي-residual-plot" class="level2">
+<h2 class="anchored" data-anchor-id="تحليل-الخطأ-ورسم-البواقي-residual-plot">تحليل الخطأ ورسم البواقي (Residual plot)</h2>
+</section>
+<section id="تحليل-الخطأ-ورسم-البواقي-residual-plot-1" class="level2">
+<h2 class="anchored" data-anchor-id="تحليل-الخطأ-ورسم-البواقي-residual-plot-1">تحليل الخطأ ورسم البواقي (Residual plot)</h2>
+<p><strong>مثال عملي:</strong> هل يخطئ النموذج أكثر كلما زاد السعر الفعلي للمنزل؟ الرسم البياني للبواقي يكشف ذلك.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> PredictionErrorDisplay</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># استخدام دالة جاهزة من sklearn لرسم البواقي</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>PredictionErrorDisplay.from_predictions(</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    y_true<span class="op">=</span>y_test, </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    y_pred<span class="op">=</span>y_pred, </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    kind<span class="op">=</span><span class="st">"residual_vs_predicted"</span>, </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>ax, </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    scatter_kwargs<span class="op">=</span>{<span class="st">'alpha'</span>: <span class="fl">0.5</span>}</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Residuals vs. Predicted Values"</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>ماذا نبحث في هذا الرسم؟</strong> - <strong>النموذج المثالي:</strong> النقاط متناثرة بشكل عشوائي تماماً حول خط الصفر <span class="math inline">\(0\)</span>. - <strong>خطأ التحيز:</strong> إذا كانت أغلب النقاط فوق الخط أو تحته، فالنموذج يميل لتقدير الأسعار بأقل أو بأكثر من الحقيقة دائماً. - <strong>مشكلة التباين غير الثابت (Heteroscedasticity):</strong> إذا شَكّلت النقاط شكلاً يشبه “المخروط” (تزداد المسافة بين النقاط كلما اتجهنا يميناً)، فهذا يعني أن ثقة النموذج وفعاليته تقل بشكل ملحوظ عندما تكون التوقعات عالية القيمة.</p>
+<hr>
+</section>
+<section id="خلاصة" class="level2">
+<h2 class="anchored" data-anchor-id="خلاصة">خلاصة</h2>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>اليوم</th>
-<th>الوصف</th>
-<th>المواد</th>
-<th>التمارين</th>
+<th>المقياس</th>
+<th>الاستخدام</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>1</td>
-<td><strong>مقدمة في علم تعلُّم الآلة</strong> (Machine Learning)</td>
-<td><a href="./modules/M1/01_intro/Intro_ML.html">الدرس</a> <br> <a href="./modules/M1/01_intro/Intro_ML_slides.html">الشرائح</a></td>
-<td><a href="./modules/M1/01_intro/exercises/01_eda_penguins_ex.html">التمرين: استكشاف البطاريق</a> <a href="./modules/M1/01_intro/exercises/01_eda_penguins_sol.html">الحل</a></td>
+<td>MSE / neg_MSE</td>
+<td>تدريب وتقييم؛ حساس للقيم الشاذة</td>
 </tr>
 <tr class="even">
-<td>2</td>
-<td><strong>التعلم بالإشراف</strong> (Supervised Learning)</td>
-<td><a href="./modules/M1/02_supervised_learning/supervised_learning.html">الدرس</a></td>
-<td><a href="./modules/M1/02_supervised_learning/exercises/02_linear_regression_ex.html">التمرين</a></td>
+<td>MAE / neg_MAE</td>
+<td>تقييم عندما نريد خطأً أقل حساسية للشواذ</td>
 </tr>
 <tr class="odd">
-<td>3</td>
-<td><strong>القيم المفقودة</strong> (Missing)</td>
-<td><a href="./modules/M1/03_multi/01_impute.html">الدرس</a></td>
-<td></td>
+<td><span class="math inline">\(R^2\)</span></td>
+<td>تقرير “نسبة التفسير”؛ بلا أبعاد</td>
 </tr>
 <tr class="even">
-<td></td>
-<td><strong>تقييس المقادير المتصلة</strong> (Scaling)</td>
-<td><a href="./modules/M1/03_multi/02_scale.html">الدرس</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td><strong>ترميز المقادير المنفصلة</strong> (Encoding)</td>
-<td><a href="./modules/M1/03_multi/03_encode.html">الدرس</a></td>
-<td><a href="./modules/M1/03_multi/exercises/01_categorical_encoding_ex.html">التمرين</a></td>
-</tr>
-<tr class="even">
-<td></td>
-<td><strong>خطوط الإنتاج</strong> (Pipelines)</td>
-<td><a href="./modules/M1/03_multi/04_pipeline.html">الدرس</a></td>
-<td><a href="./modules/M1/03_multi/exercises/02_regression_ex_1.html">التمرين الأول</a><br><a href="./modules/M1/03_multi/exercises/03_regression_ex_2.html">التمرين الثاني</a></td>
-</tr>
-<tr class="odd">
-<td>4</td>
-<td>Logistic Regression</td>
-<td><a href="./modules/M1/04_class/01_logistic_regression.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Decision Tree</td>
-<td><a href="./modules/M1/04_class/02_decision_trees.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>Model selection and evaluation</td>
-<td><a href="./modules/M1/05_best_model/lesson.html">Lesson</a></td>
-<td></td>
+<td>رسم البواقي</td>
+<td>تشخيص تحيز، تباين غير ثابت، علاقات غير ملوّنة</td>
 </tr>
 </tbody>
 </table>
-<p>Resources:</p>
-<ul>
-<li>Naive Bayes | <a href="https://scikit-learn.org/stable/modules/naive_bayes.html">1.9. Naive Bayes</a></li>
-<li>Support Vector Machines | <a href="https://scikit-learn.org/stable/auto_examples/svm/index.html">Support Vector Machines</a></li>
-<li>Ensemble Methods | <a href="https://scikit-learn.org/stable/auto_examples/ensemble/plot_stack_predictors.html">Combine predictors using stacking</a></li>
-</ul>
-<p>مصادر:</p>
-<ul>
-<li><a href="https://web.stanford.edu/class/cs129/syllabus">CS129: Applied ML | Standford</a></li>
-<li><a href="https://inria.github.io/scikit-learn-mooc/">Scikit-learn MOOC</a></li>
-<li><a href="https://github.com/ageron/handson-ml3">Hands-on ML | Aurélien Geron</a></li>
-</ul>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

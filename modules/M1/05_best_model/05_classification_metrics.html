@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>فهرس – Machine Learning with Python</title>
+<title>مقاييس التصنيف (Classification Metrics) – Machine Learning with Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,6 +104,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -79,7 +143,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Machine Learning with Python</span>
     </a>
   </div>
@@ -90,7 +154,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">الرئيسية</span></a>
   </li>  
 </ul>
@@ -104,15 +168,28 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">المحتويات</h2>
+   
+  <ul>
+  <li><a href="#كيف-نقيس-جودة-التصنيف" id="toc-كيف-نقيس-جودة-التصنيف" class="nav-link active" data-scroll-target="#كيف-نقيس-جودة-التصنيف">كيف نقيس جودة التصنيف؟</a>
+  <ul class="collapse">
+  <li><a href="#مصفوفة-الالتباس-confusion-matrix" id="toc-مصفوفة-الالتباس-confusion-matrix" class="nav-link" data-scroll-target="#مصفوفة-الالتباس-confusion-matrix">مصفوفة الالتباس (Confusion Matrix)</a></li>
+  <li><a href="#الدقة-accuracy" id="toc-الدقة-accuracy" class="nav-link" data-scroll-target="#الدقة-accuracy">الدقة (Accuracy)</a></li>
+  <li><a href="#عدم-توازن-الفئات-balanced_accuracy-precision-recall-f1" id="toc-عدم-توازن-الفئات-balanced_accuracy-precision-recall-f1" class="nav-link" data-scroll-target="#عدم-توازن-الفئات-balanced_accuracy-precision-recall-f1">عدم توازن الفئات: balanced_accuracy, precision, recall, F1</a></li>
+  <li><a href="#ربط-مقاييس-النموذج-بمقاييس-العمل-والمخاطر" id="toc-ربط-مقاييس-النموذج-بمقاييس-العمل-والمخاطر" class="nav-link" data-scroll-target="#ربط-مقاييس-النموذج-بمقاييس-العمل-والمخاطر">ربط مقاييس النموذج بمقاييس العمل والمخاطر</a></li>
+  <li><a href="#خلاصة" id="toc-خلاصة" class="nav-link" data-scroll-target="#خلاصة">خلاصة</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">فهرس</h1>
+<h1 class="title">مقاييس التصنيف (Classification Metrics)</h1>
 </div>
 
 
@@ -129,86 +206,103 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="كيف-نقيس-جودة-التصنيف" class="level1">
+<h1>كيف نقيس جودة التصنيف؟</h1>
+<section id="مصفوفة-الالتباس-confusion-matrix" class="level2">
+<h2 class="anchored" data-anchor-id="مصفوفة-الالتباس-confusion-matrix">مصفوفة الالتباس (Confusion Matrix)</h2>
+<p><strong>مثال عملي:</strong> كيف نرى ما أخطأ فيه النموذج بالضبط، وليس فقط دقة عامة؟ نستعرض مصفوفة الالتباس.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> ConfusionMatrixDisplay</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># بافتراض تدريب نموذج والحصول على التوقعات</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> RandomForestClassifier().fit(X_train, y_train)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> model.predict(X_test)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># رسم المصفوفة لفهم الأخطاء</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>ConfusionMatrixDisplay.from_predictions(</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    y_test, y_pred, </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"Blues"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    display_labels<span class="op">=</span>[<span class="st">"Healthy (0)"</span>, <span class="st">"Sick (1)"</span>]</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Confusion Matrix"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>كيف نقرأها؟</strong> - المحور الصادي (True Label) هو الحقيقة. - المحور السيني (Predicted Label) هو توقع النموذج. - <strong>في القطر الرئيسي</strong> (أعلى اليسار، وأسفل اليمين) نرى التوقعات الصحيحة (<span class="math inline">\(TP\)</span> للموجب و <span class="math inline">\(TN\)</span> للسالب). - <strong>باقي المربعات</strong> هي الأخطاء: مريض قلنا أنه سليم (False Negative - أسفل اليسار) أو سليم وقلنا أنه مريض (False Positive - أعلى اليمين). —</p>
+</section>
+<section id="الدقة-accuracy" class="level2">
+<h2 class="anchored" data-anchor-id="الدقة-accuracy">الدقة (Accuracy)</h2>
+<p><strong>بلغة بسيطة:</strong> نسبة التوقعات الصحيحة من إجمالي العينات. مناسبة عندما تكون الفئات متوازنة. في وجود اختلال كبير (مثلاً 95% فئة سلبية)، نموذج يوقع “سالب دائماً” يحصل على دقة 95% دون أن يكتشف الموجب أبداً — لذلك نضيف مقاييس أخرى.</p>
+<hr>
+</section>
+<section id="عدم-توازن-الفئات-balanced_accuracy-precision-recall-f1" class="level2">
+<h2 class="anchored" data-anchor-id="عدم-توازن-الفئات-balanced_accuracy-precision-recall-f1">عدم توازن الفئات: balanced_accuracy, precision, recall, F1</h2>
+<p><strong>مثال عملي:</strong> متى تكون دقة النموذج “Accuracy” مضللة؟ حين تكون البيانات غير متوازنة (مثلا 95% سليم و 5% مريض). هنا نلجأ لمقاييس أدق.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> classification_report, balanced_accuracy_score</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># طباعة تقرير شامل للمقاييس لكل فئة</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>report <span class="op">=</span> classification_report(y_test, y_pred, target_names<span class="op">=</span>[<span class="st">"Healthy"</span>, <span class="st">"Sick"</span>])</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(report)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># حساب الدقة المتوازنة</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>b_acc <span class="op">=</span> balanced_accuracy_score(y_test, y_pred)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="ch">\n</span><span class="ss">Balanced Accuracy: </span><span class="sc">{</span>b_acc<span class="sc">:.2f}</span><span class="ss">"</span>)</span></code></pre></div><button title="نسخ إلى الحافظة" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>فهم المقاييس من التقرير:</strong> - <strong>Precision (الدقة التنبؤية لحالة المريض):</strong> من بين كل من صنفهم النموذج كمريض، كم واحد فعلاً مريض؟ - <strong>Recall (الاستدعاء/الحساسية):</strong> من بين كل المرضى الفعليين، كم واحد تمكن النموذج من اصطياده؟ - <strong>F1-score:</strong> الموازنة بين الاثنين (متوسط توافقي). - <strong>Balanced Accuracy:</strong> متوسط قدرة النموذج على تصنيف السليمين بشكل صحيح، وتصنيف المرضى بشكل صحيح، بحيث لا ينخدع النموذج بكثرة السليمين.</p>
+<p><strong>متى نستخدم ماذا؟</strong> - إذا كانت تكلفة تفويت المريض عالية: عظم الـ <strong>Recall</strong>. - إذا كانت تكلفة الإزعاج الكاذب عالية (مثال: الرسائل المزعجة): عظم الـ <strong>Precision</strong>. - إذا كان هناك الكثير من التوازن المفقود، استخدم <strong>F1-score</strong>. —</p>
+</section>
+<section id="ربط-مقاييس-النموذج-بمقاييس-العمل-والمخاطر" class="level2">
+<h2 class="anchored" data-anchor-id="ربط-مقاييس-النموذج-بمقاييس-العمل-والمخاطر">ربط مقاييس النموذج بمقاييس العمل والمخاطر</h2>
+<p><strong>فكرة:</strong> الدقة والـ F1 وغيرها تقيس أداء التصنيف من منظور إحصائي. في التطبيق، تكلفة الخطأ تختلف: “تفويت مريض” قد تكلف أكثر من “مزيد من فحوصات إضافية”. يمكن:</p>
+<ol type="1">
+<li>اختيار مقياس يعكس الأولوية (مثلاً تعظيم recall عند كشف مرض).</li>
+<li><strong>ضبط عتبة القرار:</strong> بدلاً من 0.5 كحد فاصل للاحتمال، نختار عتبة تعظم مقياساً أو تقلل تكلفة متوقعة. هذا موضوع درس <a href="../../../modules/M1/05_best_model/07_post_tuning.html">ضبط عتبة القرار</a> و<a href="https://scikit-learn.org/stable/modules/classification_threshold.html">Tuning the decision threshold</a>.</li>
+</ol>
+<p><strong>تقني:</strong> يمكن تعريف دالة تكلفة أو مقياس مخصص عبر <code>make_scorer</code> واستخدامها في <code>GridSearchCV</code> أو <code>TunedThresholdClassifierCV</code> لربط الأداء بالمخاطر العملية.</p>
+<hr>
+</section>
+<section id="خلاصة" class="level2">
+<h2 class="anchored" data-anchor-id="خلاصة">خلاصة</h2>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 37%">
+<col style="width: 62%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>اليوم</th>
-<th>الوصف</th>
-<th>المواد</th>
-<th>التمارين</th>
+<th>المقياس</th>
+<th>متى نستخدمه</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>1</td>
-<td><strong>مقدمة في علم تعلُّم الآلة</strong> (Machine Learning)</td>
-<td><a href="./modules/M1/01_intro/Intro_ML.html">الدرس</a> <br> <a href="./modules/M1/01_intro/Intro_ML_slides.html">الشرائح</a></td>
-<td><a href="./modules/M1/01_intro/exercises/01_eda_penguins_ex.html">التمرين: استكشاف البطاريق</a> <a href="./modules/M1/01_intro/exercises/01_eda_penguins_sol.html">الحل</a></td>
+<td>Accuracy</td>
+<td>بيانات متوازنة؛ تقرير عام</td>
 </tr>
 <tr class="even">
-<td>2</td>
-<td><strong>التعلم بالإشراف</strong> (Supervised Learning)</td>
-<td><a href="./modules/M1/02_supervised_learning/supervised_learning.html">الدرس</a></td>
-<td><a href="./modules/M1/02_supervised_learning/exercises/02_linear_regression_ex.html">التمرين</a></td>
+<td>Balanced accuracy</td>
+<td>اختلال في الفئات؛ نريد وزنًا متساوياً للصنفين</td>
 </tr>
 <tr class="odd">
-<td>3</td>
-<td><strong>القيم المفقودة</strong> (Missing)</td>
-<td><a href="./modules/M1/03_multi/01_impute.html">الدرس</a></td>
-<td></td>
+<td>Precision</td>
+<td>عندما تكلفة الإيجابيات الكاذبة عالية</td>
 </tr>
 <tr class="even">
-<td></td>
-<td><strong>تقييس المقادير المتصلة</strong> (Scaling)</td>
-<td><a href="./modules/M1/03_multi/02_scale.html">الدرس</a></td>
-<td></td>
+<td>Recall</td>
+<td>عندما تكلفة تفويت الموجب عالية</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td><strong>ترميز المقادير المنفصلة</strong> (Encoding)</td>
-<td><a href="./modules/M1/03_multi/03_encode.html">الدرس</a></td>
-<td><a href="./modules/M1/03_multi/exercises/01_categorical_encoding_ex.html">التمرين</a></td>
+<td>F1</td>
+<td>توازن بين precision و recall</td>
 </tr>
 <tr class="even">
-<td></td>
-<td><strong>خطوط الإنتاج</strong> (Pipelines)</td>
-<td><a href="./modules/M1/03_multi/04_pipeline.html">الدرس</a></td>
-<td><a href="./modules/M1/03_multi/exercises/02_regression_ex_1.html">التمرين الأول</a><br><a href="./modules/M1/03_multi/exercises/03_regression_ex_2.html">التمرين الثاني</a></td>
-</tr>
-<tr class="odd">
-<td>4</td>
-<td>Logistic Regression</td>
-<td><a href="./modules/M1/04_class/01_logistic_regression.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Decision Tree</td>
-<td><a href="./modules/M1/04_class/02_decision_trees.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>Model selection and evaluation</td>
-<td><a href="./modules/M1/05_best_model/lesson.html">Lesson</a></td>
-<td></td>
+<td>ربط بالمخاطر</td>
+<td>عتبة قرار + مقياس مخصص أو تكلفة (انظر درس Post-tuning)</td>
 </tr>
 </tbody>
 </table>
-<p>Resources:</p>
-<ul>
-<li>Naive Bayes | <a href="https://scikit-learn.org/stable/modules/naive_bayes.html">1.9. Naive Bayes</a></li>
-<li>Support Vector Machines | <a href="https://scikit-learn.org/stable/auto_examples/svm/index.html">Support Vector Machines</a></li>
-<li>Ensemble Methods | <a href="https://scikit-learn.org/stable/auto_examples/ensemble/plot_stack_predictors.html">Combine predictors using stacking</a></li>
-</ul>
-<p>مصادر:</p>
-<ul>
-<li><a href="https://web.stanford.edu/class/cs129/syllabus">CS129: Applied ML | Standford</a></li>
-<li><a href="https://inria.github.io/scikit-learn-mooc/">Scikit-learn MOOC</a></li>
-<li><a href="https://github.com/ageron/handson-ml3">Hands-on ML | Aurélien Geron</a></li>
-</ul>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
