@@ -78,6 +78,146 @@ According to Andrew Ng, proportions of splits are based on the size of the data:
 - Small data (thousands of data points) could be 70:20:10
 - Big data (millions of data points) could be 98:1:1
 
+## Inconsistent Pre-processing
+
+scikit-learn provides a library of [Dataset transformations](https://scikit-learn.org/stable/data_transforms.html#data-transforms), which may clean (see [Preprocessing data](https://scikit-learn.org/stable/modules/preprocessing.html#preprocessing)), reduce (see [Unsupervised dimensionality reduction](https://scikit-learn.org/stable/modules/unsupervised_reduction.html#data-reduction)), expand (see [Kernel Approximation](https://scikit-learn.org/stable/modules/kernel_approximation.html#kernel-approximation)) or generate (see [Feature extraction](https://scikit-learn.org/stable/modules/feature_extraction.html#feature-extraction)) feature representations. If these data transforms are used when training a model, they also must be used on subsequent datasets, whether it’s test data or data in a production system. Otherwise, the feature space will change, and the model will not be able to perform effectively.
+
+For the following example, let’s create a synthetic dataset with a single feature:
+
+```python
+from sklearn.datasets import make_regression
+from sklearn.model_selection import train_test_split
+
+random_state = 42
+
+X, y = make_regression(random_state=random_state, n_features=1, noise=1)
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.4,
+    random_state=random_state
+)
+```
+
+### Wrong
+
+The train dataset is scaled, but not the test dataset, so model performance on the test dataset is worse than expected:
+
+```python
+from sklearn.metrics import mean_squared_error
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import StandardScaler
+
+scaler = StandardScaler()
+X_train_transformed = scaler.fit_transform(X_train)
+
+model = LinearRegression()
+model.fit(X_train_transformed, y_train)
+model.score(X_test, y_test)
+```
+
+### Right
+
+Instead of passing the non-transformed `X_test` to `predict`, we should transform the test data, the same way we transformed the training data:
+
+X_test_transformed = scaler.transform(X_test)
+model.score(X_test_transformed, y_test)
+
+
+Alternatively, we recommend using a [`Pipeline`](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline "sklearn.pipeline.Pipeline"), which makes it easier to chain transformations with estimators, and reduces the possibility of forgetting a transformation:
+
+```python
+from sklearn.pipeline import Pipeline
+
+model = Pipeline([
+    ('scaler', StandardScaler()),
+    ('regressor', LinearRegression())
+])
+model.fit(X_train, y_train)
+model.score(X_test, y_test)
+```
+
+Pipelines also help avoiding another common pitfall: leaking the test data into the training data.
+
+## Data Leakage
+
+**Data leakage** occurs when information that would not be available at prediction time is used when building the model. This results in overly optimistic performance estimates.
+
+**Test data should never be used to make choices about the model**. While this may sound obvious, this is easy to miss in some cases, for example when applying certain pre-processing steps.
+
+For example: when you compute statistical parameters (such as the mean and variance for a `StandardScaler`) using the entire dataset, the test data's distribution directly influences the training data. The model therefore receives artificially early access to the test set's characteristics, leading to overly optimistic performance metrics during evaluation that will not hold up in production.
+
+### Wrong
+
+In this flawed approach, the scaler is fitted to the global dataset `X`. The test set's data points are mathematically factored into the scaling logic before the split ever occurs:
+
+```python
+# Incorrect: Fitting the scaler on the entire dataset before splitting
+scaler = StandardScaler()
+X_transformed = scaler.fit_transform(X)
+
+# The test set information has now "leaked" into the training set
+X_train, X_test, y_train, y_test = train_test_split(
+    X_transformed,
+    y,
+    test_size=0.4,
+    random_state=random_state
+)
+
+model = LinearRegression()
+model.fit(X_train, y_train)
+model.score(X_test, y_test)
+```
+
+### Right
+
+To maintain a strict boundary between training and testing data, the dataset must be split _before_ any transformation parameters are calculated. The scaler should only be fitted to the training set.
+
+While you can execute this manually by splitting first and then calling `fit_transform` on `X_train` and `transform` on `X_test`, a `Pipeline` enforces this separation automatically. This is especially critical when using cross-validation, where the train and test splits change with every fold:
+
+```python
+from sklearn.model_selection import cross_val_score
+
+# Correct: The raw data is split. 
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.4,
+    random_state=random_state
+)
+
+model = Pipeline([
+    ('scaler', StandardScaler()),
+    ('regressor', LinearRegression())
+])
+
+# The Pipeline ensures that the StandardScaler is fitted strictly on the 
+# training subsets during each fold of the cross-validation process.
+scores = cross_val_score(model, X_train, y_train, cv=5)
+
+# Finally, evaluate on the isolated test set
+model.fit(X_train, y_train)
+model.score(X_test, y_test)
+```
+
+::: {.callout-warning}
+
+This risk of leakage is relevant with almost all transformations in scikit-learn, including (but not limited to) [`StandardScaler`](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler "sklearn.preprocessing.StandardScaler"), [`SimpleImputer`](https://scikit-learn.org/stable/modules/generated/sklearn.impute.SimpleImputer.html#sklearn.impute.SimpleImputer "sklearn.impute.SimpleImputer"), and [`PCA`](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html#sklearn.decomposition.PCA "sklearn.decomposition.PCA").
+
+:::
+
+### How to avoid data leakage
+
+Below are some tips on avoiding data leakage:
+
+- Always split the data into train and test subsets first, particularly before any preprocessing steps.
+- Never include test data when using the `fit` and `fit_transform` methods. Using all the data, e.g., `fit(X)`, can result in overly optimistic scores.
+  - Conversely, the `transform` method should be used on both train and test subsets as the same preprocessing should be applied to all the data. This can be achieved by using `fit_transform` on the train subset and `transform` on the test subset.
+
+Note: [**Pipeline**](https://scikit-learn.org/stable/modules/compose.html#pipeline) is a great way to prevent data leakage as it ensures that the appropriate method is performed on the correct data subset. The pipeline is ideal for use in **cross-validation** and **hyper-parameter tuning** functions.
+
+
 ## how do we know our model is better than a guess?
 
 When doing supervised learning, a simple sanity check consists of comparing one’s estimator against simple rules of thumb. [`DummyClassifier`](https://scikit-learn.org/stable/modules/generated/sklearn.dummy.DummyClassifier.html#sklearn.dummy.DummyClassifier "sklearn.dummy.DummyClassifier") implements several such simple strategies for classification:
@@ -313,11 +453,110 @@ print(f"Accuracy of best model: {search.best_score_:.2%}")
 
 Refere to [Pipeline: chaining estimators](https://scikit-learn.org/stable/modules/compose.html#pipeline) for more.
 
+### Bayesian Optimization
+
+While Grid and Random Search treat each trial as an independent event, **Bayesian Optimization** treats the search as an optimization problem itself. It constructs a mathematical model of the "objective function" (the relationship between your hyperparameters and the model's accuracy) to find the best values with as few trials as possible.
+
+#### Key Components:
+
+- **Surrogate Model:** Since training a machine learning model is expensive, we build a simpler, probabilistic model (often a **Gaussian Process**) to act as a stand-in. This model estimates the expected performance and the level of uncertainty for any given set of hyperparameters.
+    
+- **Acquisition Function:** This is a logic layer that uses the surrogate model to decide the next point to sample. it balances **Exploitation** (searching where the model predicts high performance) and **Exploration** (searching where the model is uncertain).
+    
+- **Iterative Update:** After each trial, the actual result is fed back into the surrogate model to update its "beliefs," refining its accuracy for the next trial.
+    
+
+**Code Snippet (using `scikit-optimize`):**
+
+```python
+from skopt import BayesSearchCV
+from sklearn.linear_model import SGDClassifier
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+
+# Load data
+X, y = load_iris(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# Define the search space
+# SGD is sensitive to 'alpha' (regularization) and 'loss'
+search_space = {
+    'alpha': (1e-6, 1e-1, 'log-uniform'),
+    'loss': ['hinge', 'log_loss', 'modified_huber'],
+    'penalty': ['l2', 'l1', 'elasticnet']
+}
+
+opt = BayesSearchCV(
+    SGDClassifier(),    
+    search_space,
+    n_iter=25,
+    cv=5
+)
+
+opt.fit(X_train, y_train)
+print(f"Best Score: {opt.best_score_}")
+print(f"Best Parameters: {opt.best_params_}")
+```
+
 ### Model-specific hyper-parameter tuning
 
 Some models can fit data for a range of values of some parameter almost as efficiently as fitting the estimator for a single value of the parameter. This feature can be leveraged to perform a more **efficient cross-validation** used for model selection of this parameter.
 
 See: [3.2.5.1. Model specific cross-validation](https://scikit-learn.org/stable/modules/grid_search.html#model-specific-cross-validation) for a list of those models.
+
+
+## Controlling Randomness
+
+Machine learning algorithms rely heavily on randomness. It is used:
+
+1. to shuffle your data before training
+2. and to set initial starting points for models to learn from
+
+If you do not manage this parameter correctly:
+
+1. your code might give you different results every time you run it
+2. you might accidentally run unfair tests when comparing two different models
+
+### The Two Ways to Set `random_state`
+
+The behavior of your code changes drastically depending on exactly _what_ you assign to `random_state`. You generally have two choices:
+
+#### Option 1: Passing an Integer (e.g., `random_state=42`)
+
+When you use a specific number, the internal random number generator resets to the exact same starting line every single time it is called. **Result:** You get the exact same outcome every time you run that specific step.
+    
+#### Option 2: Passing a RandomState Instance (e.g., `random_state=rng`)
+    
+When you create a specific "random state object" at the top of your code, it acts like a deck of cards. Every time a part of your code asks for randomness, it draws a card from the top of the deck. The next time it asks, it draws a _different_ card. **Result:** The outcome changes slightly every time you run a step, exploring different random possibilities.
+
+### Rule 1: Models (Estimators) should use Instances
+
+A model (like a Random Forest) uses randomness to build itself. When evaluating how good your model is, you want to be certain it is genuinely a good model, and not just performing well because it got "lucky" with one specific random setup.
+
+**The Best Practice:** Pass a RandomState instance to your models.
+
+When you test the model multiple times, the instance forces the model to use a slightly different random internal setup each time. This proves your model's performance is robust and reliable, regardless of how its internal random numbers happen to land.
+
+### Rule 2: Data Splitters should use Integers
+
+Before training a model, you use a splitter tool (like K-Fold Cross-Validation) to divide your data into "training" sets and "testing" sets.
+
+**The Best Practice:** Pass an integer to your data splitters.
+
+If you are comparing Model A and Model B to see which is better, the test must be perfectly fair. They must be evaluated on the exact same cut of data. If you pass an instance to the splitter, the deck gets shuffled between testing Model A and testing Model B. You will not know if Model B won because it is a better model, or because it just got an easier batch of test data. An integer locks the shuffle in place.
+
+### The Ultimate Setup for Reproducibility
+
+If you want to ensure that a coworker running your script gets the exact same final score you did, you need to control the entire environment from the very top of your script.
+
+1. Create a single `RandomState` instance at the very beginning of your code.
+2. Pass that exact same variable down into the `random_state` parameter of your models.
+3. Use a fixed integer for the `random_state` of your data splitters.
+
+This guarantees that the total sequence of random events plays out exactly the same way from start to finish, every single time the script is executed.
+
+For details, see: [11.3. Controlling randomness](https://scikit-learn.org/stable/common_pitfalls.html#controlling-randomness).
+
 
 ## Model scalability: can the model learn from more data?
 
