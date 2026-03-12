@@ -13,7 +13,7 @@ format: html
 |   | **خطوط الإنتاج** (Pipelines) | [الدرس](./modules/M1/03_multi/04_pipeline.ipynb) | [التمرين الأول](./modules/M1/03_multi/exercises/02_regression_ex_1.ipynb)</br>[التمرين الثاني](./modules/M1/03_multi/exercises/03_regression_ex_2.ipynb) |
 | 4 | Logistic Regression | [Lesson](./modules/M1/04_class/01_logistic_regression.ipynb) |  |
 |   | Decision Tree | [Lesson](./modules/M1/04_class/02_decision_trees.ipynb) | |
-| 5 | Model selection and evaluation | [Lesson](./modules/M1/05_best_model/lesson.qmd) | |
+| 5 | Model selection and evaluation | [Lesson](./modules/M1/05_best_model/model_selection_and_evaluation.qmd) | |
 
 Resources:
 

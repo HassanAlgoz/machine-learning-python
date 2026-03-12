@@ -15,13 +15,6 @@ In scikit-learn:
 - **Score**: higher is better.
 - **Error**: lower is better.
 
-Checkout the Guide on [3.4. Metrics and scoring: quantifying the quality of predictions](https://scikit-learn.org/stable/modules/model_evaluation.html) for practical tips on which scoring function should you use.
-
-Take a quick peek at:
-
-- [Classification Metrics](https://scikit-learn.org/stable/modules/model_evaluation.html#classification-metrics)
-- [Regression Metrics](https://scikit-learn.org/stable/modules/model_evaluation.html#regression-metrics)
-
 ## why do we have a held-out set for testing?
 
 Splitting a dataset into **training** and **test** sets is the primary method used to estimate how a model will perform in the real world.
@@ -78,6 +71,12 @@ Using the same data for both training and evaluation creates a **circular depend
 
 A test set provides an **unbiased estimate** of the model's performance (loss, accuracy, precision, etc.) on new observations.
 
+### What is the proportion of the splits?
+
+According to Andrew Ng, proportions of splits are based on the size of the data:
+
+- Small data (thousands of data points) could be 70:20:10
+- Big data (millions of data points) could be 98:1:1
 
 ## how do we know our model is better than a guess?
 
@@ -174,8 +173,6 @@ Note: a low training score and a high validation score is usually not possible. 
 
 Source: [3.5.1. Validation curve](https://scikit-learn.org/stable/modules/learning_curve.html#validation-curve).
 
-TODO: [Plotting Cross-Validated Predictions](https://scikit-learn.org/stable/auto_examples/model_selection/plot_cv_predict.html)
-
 ### Computing cross-validated metrics
 
 The simplest way to use cross-validation is to call the [`cross_val_score`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.cross_val_score.html#sklearn.model_selection.cross_val_score "sklearn.model_selection.cross_val_score") helper function on the estimator and the dataset.
@@ -217,85 +214,110 @@ A search consists of:
 
 ### Hyper-parameter tuning methods
 
-TODO: rewrite this section
-
-Two generic search methods:
+`Scikit-learn` provides tools to automatically find the best parameter combinations (via cross-validation). Mainly:
 
 1. [`GridSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV) exhaustively considers all parameter combinations
 2. [`RandomizedSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV) samples a given number of candidates from a parameter space with a specified distribution.
 
 Note: **CV** indicates that they will search using cross-validation.
 
+Example: decision trees have `n_estimators` and `max_depth`:
+
+![](./assets/gridsearch_vs_randomsearch.png)
+
+For more hyper-parameters, imagine more dimensions (not just 2D grid).
+
+In the following example, we randomly search over the parameter space of a random forest with a [`RandomizedSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV) object.
+
+```python
+from sklearn.datasets import make_regression
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import RandomizedSearchCV
+from sklearn.model_selection import train_test_split
+from scipy.stats import randint
+
+# create a synthetic dataset
+X, y = make_regression(
+    n_samples=20640,
+    n_features=8,
+    noise=0.1,
+    random_state=0
+)
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, random_state=0
+)
+
+# define the parameter space that will be searched over
+param_distributions = {
+    'n_estimators': randint(1, 5),
+    'max_depth': randint(5, 10)
+}
+# now create a searchCV object and fit it to the data
+search = RandomizedSearchCV(
+    estimator=RandomForestRegressor(random_state=0),
+    n_iter=5,
+    param_distributions=param_distributions,
+    random_state=0
+)
+
+search.fit(X_train, y_train)
+```
+
+When the search is over, the [`RandomizedSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV) behaves as a [`RandomForestRegressor`](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor) that has been fitted with the best set of parameters. Read more in the [User Guide](https://scikit-learn.org/stable/modules/grid_search.html#grid-search):
+
+```python
+search.best_params_
+```
+
+the search object now acts like a normal random forest estimator with `max_depth=9` and `n_estimators=4`:
+
+```python
+search.score(X_test, y_test)
+```
+
 [`GridSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV "sklearn.model_selection.GridSearchCV") and [`RandomizedSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV "sklearn.model_selection.RandomizedSearchCV") allow searching over parameters of composite or nested estimators such as [`Pipeline`](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline "sklearn.pipeline.Pipeline"), [`ColumnTransformer`](https://scikit-learn.org/stable/modules/generated/sklearn.compose.ColumnTransformer.html#sklearn.compose.ColumnTransformer "sklearn.compose.ColumnTransformer"), [`VotingClassifier`](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.VotingClassifier.html#sklearn.ensemble.VotingClassifier "sklearn.ensemble.VotingClassifier") or [`CalibratedClassifierCV`](https://scikit-learn.org/stable/modules/generated/sklearn.calibration.CalibratedClassifierCV.html#sklearn.calibration.CalibratedClassifierCV "sklearn.calibration.CalibratedClassifierCV") using a dedicated `<estimator>__<parameter>` syntax:
 
 ```python
-from sklearn.model_selection import GridSearchCV
-from sklearn.calibration import CalibratedClassifierCV
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import GridSearchCV
 from sklearn.datasets import make_moons
 
-X, y = make_moons()
+# 1. Prepare Data
+X, y = make_moons(n_samples=500, noise=0.3, random_state=42)
 
-calibrated_forest = CalibratedClassifierCV(
-    estimator=RandomForestClassifier(n_estimators=10)
-)
-
-param_grid = {
-   'estimator__max_depth': [2, 4, 6, 8]
-}
-
-search = GridSearchCV(
-    calibrated_forest,
-    param_grid,
-    cv=5
-)
-
-search.fit(X, y)
-```
-
-Here, `<estimator>` is the parameter name of the nested estimator, in this case `estimator`. If the meta-estimator is constructed as a collection of estimators as in `pipeline.Pipeline`, then `<estimator>` refers to the name of the estimator, see [Access to nested parameters](https://scikit-learn.org/stable/modules/compose.html#pipeline-nested-parameters). In practice, there can be several levels of nesting:
-
-```python
-from sklearn.pipeline import Pipeline
-from sklearn.feature_selection import SelectKBest
-
+# 2. Define the Pipeline
+# We treat the scaler and the classifier as a single "mega-model."
 pipe = Pipeline([
-   ('select', SelectKBest()),
-   ('model', calibrated_forest)]
-)
+    ('scaler', StandardScaler()),
+    ('model', RandomForestClassifier())
+])
 
+# 3. Define the Search Grid
+# Syntax: <step_name>__<parameter_name>
 param_grid = {
-   'select__k': [1, 2],
-   'model__estimator__max_depth': [2, 4, 6, 8]
+    'model__n_estimators': [50, 100],
+    'model__max_depth': [3, 5, None]
 }
 
-search = GridSearchCV(
-    pipe,
-    param_grid,
-    cv=5
-)
+# 4. Run the Grid Search
+# This automatically scales the data and trains the model for every combination.
+search = GridSearchCV(pipe, param_grid, cv=5)
 search.fit(X, y)
+
+print(f"Best settings found: {search.best_params_}")
+print(f"Accuracy of best model: {search.best_score_:.2%}")
 ```
 
-Please refer to [Pipeline: chaining estimators](https://scikit-learn.org/stable/modules/compose.html#pipeline) for performing parameter searches over pipelines.
+Refere to [Pipeline: chaining estimators](https://scikit-learn.org/stable/modules/compose.html#pipeline) for more.
 
 ### Model-specific hyper-parameter tuning
 
-Some models can fit data for a range of values of some parameter almost as efficiently as fitting the estimator for a single value of the parameter. This feature can be leveraged to perform a more efficient cross-validation used for model selection of this parameter.
+Some models can fit data for a range of values of some parameter almost as efficiently as fitting the estimator for a single value of the parameter. This feature can be leveraged to perform a more **efficient cross-validation** used for model selection of this parameter.
 
 See: [3.2.5.1. Model specific cross-validation](https://scikit-learn.org/stable/modules/grid_search.html#model-specific-cross-validation) for a list of those models.
-
-## Stratification
-
-TODO: https://inria.github.io/scikit-learn-mooc/python_scripts/cross_validation_stratification.html
-
-## Sample Grouping
-
-TODO: https://inria.github.io/scikit-learn-mooc/python_scripts/cross_validation_grouping.html
-
-## Nested cross-validation
-
-TODO: https://inria.github.io/scikit-learn-mooc/python_scripts/cross_validation_nested.html
 
 ## Model scalability: can the model learn from more data?
 
@@ -346,3 +368,17 @@ Learn more: [3.3. Tuning the decision threshold for class prediction](https://sc
 - [3.3.1. Post-tuning the decision threshold](https://scikit-learn.org/stable/modules/classification_threshold.html#post-tuning-the-decision-threshold). Examples:
     - See the example entitled [Post-hoc tuning the cut-off point of decision function](https://scikit-learn.org/stable/auto_examples/model_selection/plot_tuned_decision_threshold.html#sphx-glr-auto-examples-model-selection-plot-tuned-decision-threshold-py), to get insights on the post-tuning of the decision threshold.
     - See the example entitled [Post-tuning the decision threshold for cost-sensitive learning](https://scikit-learn.org/stable/auto_examples/model_selection/plot_cost_sensitive_learning.html#sphx-glr-auto-examples-model-selection-plot-cost-sensitive-learning-py), to learn about cost-sensitive learning and decision threshold tuning.
+
+
+## Next
+
+### Practical considerations when doing cross-validaiton
+
+1. [Stratification notebook](./cross_validaiton_stratification.ipynb).
+2. [Sample grouping notebook](./cross_validation_grouping.ipynb).
+3. [Nested cross-validation notebook](./cross_validation_nested.ipynb).
+
+### Task-specific evaluation
+
+- [Regression Evaluation](./eval_regression.ipynb)
+- [Classification Evaluation](./eval_classification.ipynb)
