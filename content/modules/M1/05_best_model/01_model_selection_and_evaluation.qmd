@@ -284,7 +284,7 @@ The most commonly used method is called $k$-fold cross-validation and splits th
 [Source: Cross-validation: evaluating estimator performance
 | Scikit-learn](https://scikit-learn.org/stable/modules/cross_validation.html)
 
-Sometimes helpful to plot the influence of a single hyperparameter on the training score and the validation score to find out whether the estimator is overfitting or underfitting for some hyperparameter values.
+Sometimes it is helpful to plot the influence of a single hyperparameter on the training score and the validation score to find out whether the estimator is overfitting or underfitting for some hyperparameter values.
 
 ```python
 from sklearn.datasets import load_iris
@@ -416,7 +416,7 @@ the search object now acts like a normal random forest estimator with `max_depth
 search.score(X_test, y_test)
 ```
 
-[`GridSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV "sklearn.model_selection.GridSearchCV") and [`RandomizedSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV "sklearn.model_selection.RandomizedSearchCV") allow searching over parameters of composite or nested estimators such as [`Pipeline`](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline "sklearn.pipeline.Pipeline"), [`ColumnTransformer`](https://scikit-learn.org/stable/modules/generated/sklearn.compose.ColumnTransformer.html#sklearn.compose.ColumnTransformer "sklearn.compose.ColumnTransformer"), [`VotingClassifier`](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.VotingClassifier.html#sklearn.ensemble.VotingClassifier "sklearn.ensemble.VotingClassifier") or [`CalibratedClassifierCV`](https://scikit-learn.org/stable/modules/generated/sklearn.calibration.CalibratedClassifierCV.html#sklearn.calibration.CalibratedClassifierCV "sklearn.calibration.CalibratedClassifierCV") using a dedicated `<estimator>__<parameter>` syntax:
+[`GridSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV "sklearn.model_selection.GridSearchCV") and [`RandomizedSearchCV`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV "sklearn.model_selection.RandomizedSearchCV") allow searching over parameters of composite or nested estimators such as [`Pipeline`](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html#sklearn.pipeline.Pipeline "sklearn.pipeline.Pipeline"), [`ColumnTransformer`](https://scikit-learn.org/stable/modules/generated/sklearn.compose.ColumnTransformer.html#sklearn.compose.ColumnTransformer "sklearn.compose.ColumnTransformer"), [`VotingClassifier`](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.VotingClassifier.html#sklearn.ensemble.VotingClassifier "sklearn.ensemble.VotingClassifier") or [`CalibratedClassifierCV`](https://scikit-learn.org/stable/modules/generated/sklearn.calibration.CalibratedClassifierCV.html#sklearn.calibration.CalibratedClassifierCV "sklearn.calibration.CalibratedClassifierCV") using a dedicated `<estimator>__<parameter>` syntax:
 
 ```python
 from sklearn.pipeline import Pipeline
@@ -497,6 +497,14 @@ opt.fit(X_train, y_train)
 print(f"Best Score: {opt.best_score_}")
 print(f"Best Parameters: {opt.best_params_}")
 ```
+
+![Figure: Results for Bayesian Optimization vs. Random Search vs. Grid Search](./assets/bayesian_optimization.png)
+
+The results look really promising. Bayesian optimization leads the model to the same F1 score but:
+
+1. takes 7x fewer iterations
+2. runs 5x faster
+3. reaches the optimal configuration earlier
 
 ### Model-specific hyper-parameter tuning
 
