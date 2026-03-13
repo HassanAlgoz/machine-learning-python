@@ -364,6 +364,23 @@ Observing such a *plateau* is an indication that **it might not be useful to acq
 
 Read more: [Plotting Learning Curves and Checking Models’ Scalability](https://scikit-learn.org/stable/auto_examples/model_selection/plot_learning_curve.html).
 
+
+### What does "more" data mean for a model?
+
+Generally speaking, yes, given that a few conditions are met:
+
+**It fills gaps:** New data must cover areas where the model actually lacks information. Piling on more examples of what it already understands (orange) won't improve it. In the example below, you’re not going to see much improvement if you keep adding data to the tails (and ignoring the middle area).
+
+![](./assets/adding_wrong_data_points.png)
+
+**The model is capable:** The mathematical tool must be complex enough to match the actual pattern. A basic straight-line model will never learn a curve, regardless of how much data you feed it. In the example below, adding more data will not improve accuracy since we’re attempting to model a nonlinear phenomenon with the wrong tool - linear regression.
+
+![](./assets/inflexible_model.png)
+
+**Correctness**: Beware of “Garbage in - garbage out.” Do not compromise data quality just so that you have a larger dataset. Trading quality for quantity is never a winning bet in machine learning.
+
+[Original Post on Quora](https://qr.ae/pKkdtC).
+
 ## Tuning the hyper-parameters of an estimator
 
 **Hyper-parameters** are parameters that are not directly learnt within estimators (unlike: $w_1, w_2, \dots w_n$ and the bias term: $b$). In scikit-learn they are passed as arguments to the constructor of the estimator classes. Examples include:
