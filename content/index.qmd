@@ -17,10 +17,10 @@ format: html
 
 Resources:
 
+- https://scikit-learn.org/stable/machine_learning_map.html
 - Naive Bayes | [1.9. Naive Bayes](https://scikit-learn.org/stable/modules/naive_bayes.html)
 - Support Vector Machines | [Support Vector Machines](https://scikit-learn.org/stable/auto_examples/svm/index.html)
 - Ensemble Methods | [Combine predictors using stacking](https://scikit-learn.org/stable/auto_examples/ensemble/plot_stack_predictors.html)
-
 
 مصادر:
 
