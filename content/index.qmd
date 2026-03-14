@@ -1,29 +1,23 @@
 ---
-title: "فهرس"
+title: "Index"
 format: html
+page-layout: full
 ---
 
-| اليوم | الوصف | المواد | التمارين |
-|------------------|-------------------|------------------|------------------|
-| 1 | **مقدمة في علم تعلُّم الآلة** (Machine Learning) | [الدرس](./modules/M1/01_intro/Intro_ML.qmd) <br> [الشرائح](./modules/M1/01_intro/Intro_ML_slides.qmd) | [التمرين: استكشاف البطاريق](./modules/M1/01_intro/exercises/01_eda_penguins_ex.ipynb) [الحل](./modules/M1/01_intro/exercises/01_eda_penguins_sol.ipynb)  |
-| 2 | **التعلم بالإشراف** (Supervised Learning) | [الدرس](./modules/M1/02_supervised_learning/supervised_learning.qmd) | [التمرين](./modules/M1/02_supervised_learning/exercises/02_linear_regression_ex.ipynb) |
-| 3 | **القيم المفقودة** (Missing) | [الدرس](./modules/M1/03_multi/01_impute.ipynb) |  |
-|   | **تقييس المقادير المتصلة** (Scaling) | [الدرس](./modules/M1/03_multi/02_scale.qmd) |  |
-|   | **ترميز المقادير المنفصلة** (Encoding) | [الدرس](./modules/M1/03_multi/03_encode.ipynb) | [التمرين](./modules/M1/03_multi/exercises/01_categorical_encoding_ex.ipynb) |
-|   | **خطوط الإنتاج** (Pipelines) | [الدرس](./modules/M1/03_multi/04_pipeline.ipynb) | [التمرين الأول](./modules/M1/03_multi/exercises/02_regression_ex_1.ipynb)</br>[التمرين الثاني](./modules/M1/03_multi/exercises/03_regression_ex_2.ipynb) |
-| 4 | Logistic Regression | [Lesson](./modules/M1/04_class/01_logistic_regression.ipynb) |  |
-|   | Decision Tree | [Lesson](./modules/M1/04_class/02_decision_trees.ipynb) | |
-| 5 | Model selection and evaluation | [Lesson](./modules/M1/05_best_model/model_selection_and_evaluation.qmd) | |
+| Lesson  | Description | Materials | Assignments |
+| ------- | ----------- | --------- | ----------- |
+|    1    | Introduction to ML | [Lesson](./modules/M1/lessons/01_Intro_ML_slides.qmd) | |
+|    2    | Linear Models | [Lesson](./modules/M1/lessons/02_linear_models.qmd) [Lab](./modules/M1/lessons/03_lab_linear_models.ipynb) | |
+|    3    | Non-linear Data | [Lab](./modules/M1/lessons/05_linear_regression_non_linear_link.ipynb) | |
+|    4    | Imputation: Missing Values | [Lab](./modules/M2/lessons/01_impute.ipynb) | |
+|    5    | Scaling: Numerical Features | [Lesson](./modules/M2/lessons/02_scale.qmd) | |
+|    6    | Encoding: Categorical Features | [Lab](./modules/M2/lessons/03_encode.ipynb) | |
+|    7    | Predictive Modeling Pipelines | [Lesson](./modules/M2/lessons/04_pipeline.qmd) [Lab](./modules/M2/lessons/05_lab_pipeline.ipynb) | |
+|    8    | Decision Tree Models | [Lesson](./modules/M3/lessons/01_trees.qmd) [Lab](./modules/M3/lessons/02_lab_decision_trees.ipynb) | |
 
 Resources:
-
-- https://scikit-learn.org/stable/machine_learning_map.html
-- Naive Bayes | [1.9. Naive Bayes](https://scikit-learn.org/stable/modules/naive_bayes.html)
-- Support Vector Machines | [Support Vector Machines](https://scikit-learn.org/stable/auto_examples/svm/index.html)
-- Ensemble Methods | [Combine predictors using stacking](https://scikit-learn.org/stable/auto_examples/ensemble/plot_stack_predictors.html)
-
-مصادر:
 
 - [CS129: Applied ML | Standford](https://web.stanford.edu/class/cs129/syllabus)
 - [Scikit-learn MOOC](https://inria.github.io/scikit-learn-mooc/)
 - [Hands-on ML | Aurélien Geron](https://github.com/ageron/handson-ml3)
+ [Lesson](./modules/M3/lessons/01_trees.qmd) [Lab](./modules/M3/lessons/02_lab_decision_trees.ipynb)

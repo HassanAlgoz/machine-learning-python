@@ -1,0 +1,18 @@
+[project]
+name = "ML-C6"
+version = "0.1.0"
+description = "Machine Learning Course 6"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "matplotlib>=3.10.8",
+    "pandas>=3.0.0",
+    "scikit-learn>=1.8.0",
+    "seaborn>=0.13.2",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.2.0",
+    "nbformat>=5.10.4",
+]
