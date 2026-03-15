@@ -201,6 +201,7 @@ Plot.plot({
 })
 ```
 
+See: [MLPlayGrounds.com for an interactive Linear Regression Demonstration](https://mlplaygrounds.com/machine/learning/linearRegression.html).
 
 ## Linear regression with several variables
 

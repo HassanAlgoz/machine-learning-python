@@ -6,10 +6,10 @@ format: html
 
 *Feature Scaling* is an important preprocessing step for many machine learning algorithms:
 
-- to correctly calculate distance (in distance-based models such as KNeighbors)
-- to correctly do dimensionality reduction algorithms like PCA
-- to speed up convergence time (in Logistic Regression and SGD)
-- to find a better fit model on non-linear data (normalization)
+- to correctly calculate distance (in distance-based models such as **KNeighbors**)
+- to correctly do dimensionality reduction algorithms like **PCA**
+- to speed up convergence time (in **LogisticRegression** and **SGD**)
+- to find a better fit model on **non-linear data** (normalization)
 
 For illustrations, see: [Importance of Feature Scaling | Scikit-learn Docs](https://scikit-learn.org/stable/auto_examples/preprocessing/plot_scaling_importance.html).
 
@@ -19,7 +19,6 @@ Example: number of rooms might range from 1 to 10, while house area might range 
 
 - We want the model to treat 10 rooms as “large” and 1000 sq m as “large” in their respective contexts, and similarly to treat 1 room and 100 sq m as “small.”
 - We also do not want the model to effectively ignore the 1–10 range because those numbers are tiny compared to 100–1000.
-
 
 ## Types of Scaling
 

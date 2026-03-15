@@ -12,6 +12,7 @@ First, let's build up to what **Pipelines** are a solution for.
 Splitting a dataset into **training** and **test** sets is the primary method used to estimate how a model will perform in the real world.
 
 In scikit-learn a random split into training and test sets can be quickly computed with the [`train_test_split`](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html#sklearn.model_selection.train_test_split "sklearn.model_selection.train_test_split") helper function. Let’s load the iris data set to fit a linear support vector machine on it:
+
 ```python
 from sklearn import datasets
 
@@ -113,7 +114,6 @@ X_train, X_test, y_train, y_test = train_test_split(
 The train dataset is scaled, but not the test dataset, so model performance on the test dataset is worse than expected:
 
 ```python
-from sklearn.metrics import mean_squared_error
 from sklearn.linear_model import LinearRegression
 from sklearn.preprocessing import StandardScaler
 
@@ -162,6 +162,10 @@ For example: when you compute statistical parameters (such as the mean and varia
 In this flawed approach, the scaler is fitted to the global dataset `X`. The test set's data points are mathematically factored into the scaling logic before the split ever occurs:
 
 ```python
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import StandardScaler
+
 # Incorrect: Fitting the scaler on the entire dataset before splitting
 scaler = StandardScaler()
 X_transformed = scaler.fit_transform(X)
@@ -187,8 +191,6 @@ To maintain a strict boundary between training and testing data, the dataset mus
 While you can execute this manually by splitting first and then calling `fit_transform` on `X_train` and `transform` on `X_test`, a `Pipeline` enforces this separation automatically. This is especially critical when using cross-validation, where the train and test splits change with every fold:
 
 ```python
-from sklearn.model_selection import cross_val_score
-
 # Correct: The raw data is split. 
 X_train, X_test, y_train, y_test = train_test_split(
     X,
@@ -202,12 +204,11 @@ model = Pipeline([
     ('regressor', LinearRegression())
 ])
 
-# The Pipeline ensures that the StandardScaler is fitted strictly on the 
-# training subsets during each fold of the cross-validation process.
-scores = cross_val_score(model, X_train, y_train, cv=5)
+# The Pipeline ensures that the StandardScaler is fitted
+# strictly on the training subset
+model.fit(X_train, y_train)
 
 # Finally, evaluate on the isolated test set
-model.fit(X_train, y_train)
 model.score(X_test, y_test)
 ```
 
@@ -231,11 +232,13 @@ Note: [**Pipeline**](https://scikit-learn.org/stable/modules/compose.html#pipeli
 1. **cross-validation** and
 2. **hyper-parameter tuning** functions in scikit-learn
 
+Both of these topics will be discussed later.
+
 ## Pipeline
 
 A **Pipeline** chains preprocessing steps and a final model into a single object, so you **treat the whole chain like one model**. That way you can tune the model and all preprocessors together; changing any step or the model’s hyperparameters affects the final prediction.
 
-First benefit: **abstraction.** Instead of writing separate code for each step:
+Instead of writing separate code for each step like this:
 
 ```python
 step_1 = SimpleImputer()

@@ -8,12 +8,14 @@ page-layout: full
 | ------- | ----------- | --------- | ----------- |
 |    1    | Introduction to ML | [Lesson](./modules/M1/lessons/01_Intro_ML_slides.qmd) | |
 |    2    | Linear Models | [Lesson](./modules/M1/lessons/02_linear_models.qmd) [Lab](./modules/M1/lessons/03_lab_linear_models.ipynb) | |
-|    3    | Non-linear Data | [Lab](./modules/M1/lessons/05_linear_regression_non_linear_link.ipynb) | |
-|    4    | Imputation: Missing Values | [Lab](./modules/M2/lessons/01_impute.ipynb) | |
-|    5    | Scaling: Numerical Features | [Lesson](./modules/M2/lessons/02_scale.qmd) | |
-|    6    | Encoding: Categorical Features | [Lab](./modules/M2/lessons/03_encode.ipynb) | |
-|    7    | Predictive Modeling Pipelines | [Lesson](./modules/M2/lessons/04_pipeline.qmd) [Lab](./modules/M2/lessons/05_lab_pipeline.ipynb) | |
-|    8    | Decision Tree Models | [Lesson](./modules/M3/lessons/01_trees.qmd) [Lab](./modules/M3/lessons/02_lab_decision_trees.ipynb) | |
+|    3    | Non-linear Data | [Lab](./modules/M1/lessons/04_linear_regression_non_linear_link.ipynb) | |
+|    4    | Generalization Performance | [Lesson](./modules/M1/lessons/05_evaluation.qmd) [Lab](./modules/M1/lessons/06_lab_generalization.ipynb) | |
+|    5    | Hyper-parameter Tuning | [Lab](./modules/M1/lessons/07_cross_validation_nested.ipynb) | |
+|    6    | Imputation: Missing Values | [Lab](./modules/M2/lessons/01_impute.ipynb) | |
+|    7    | Scaling: Numerical Features | [Lesson](./modules/M2/lessons/02_scale.qmd) | |
+|    8    | Encoding: Categorical Features | [Lab](./modules/M2/lessons/03_encode.ipynb) | |
+|    9    | Predictive Modeling Pipelines | [Lesson](./modules/M2/lessons/04_pipeline.qmd) [Lab](./modules/M2/lessons/05_lab_pipeline.ipynb) | |
+|    10    | Decision Tree Models | [Lesson](./modules/M3/lessons/01_trees.qmd) [Lab](./modules/M3/lessons/02_lab_decision_trees.ipynb) | |
 
 Resources:
 
