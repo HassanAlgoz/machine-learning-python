@@ -6,7 +6,18 @@ format:
     slide-number: true
 ---
 
-# Linear Models
+## Learning Objectives
+
+In this lecture we learn to:
+
+1. Recognize the code for modeling the relationship between two variables
+2. Map target data type (Numerical or Categorical) to suitable model type (`LinearRegression` or `LogisticRegression`)
+3. Given a target variable for prediction, identify which model  to use
+4. Given a 2D-plot, identify the dependent variable and the independent variable
+5. Distinguish between a regression line and a decision boundary
+6. Recognize when linear models wouldn't fit the data well (linear seprability)
+
+## Linear Models
 
 For classification and regression.
 
@@ -23,7 +34,7 @@ settings.
 :::
 
 
-# Outline
+## Outline
 
 - What is a linear model?
 - For regression: linear regression
@@ -173,6 +184,7 @@ intercept coefficient of the linear model.
 ## Linear Regression Interactive Demo
 
 ```{ojs}
+//| code-fold: true
 //| echo: false
 //| panel: sidebar
 viewof m = Inputs.range([-10, 10], {value: 1, step: 0.1, label: "Slope (m)"})
@@ -182,6 +194,7 @@ html`<b>Current Equation:</b> $y = ${m.toFixed(1)}x + ${b.toFixed(1)}$`
 ```
 
 ```{ojs}
+//| code-fold: true
 //| echo: false
 Plot.plot({
   grid: true,

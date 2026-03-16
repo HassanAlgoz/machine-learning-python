@@ -27,7 +27,7 @@ interpret their parameters, and understand when linear assumptions are reasonabl
 |-------------|-------------|------------------------|-----------------------|
 | M1-1 | **Introduction to ML**<br/>High-level tour of machine learning tasks, workflows, and where supervised learning fits in the broader data science landscape. | [Lesson](./modules/M1/lessons/01_Intro_ML_slides.qmd) | [EDA Penguins exercise](./modules/M1/exercises/01_eda_penguins_ex.ipynb) |
 | M1-2 | **Linear Models**<br/>Core ideas behind linear regression and logistic regression, including model specification, parameter estimation, and decision boundaries. | [Lesson](./modules/M1/lessons/02_linear_models.qmd)<br/>[Lab](./modules/M1/lessons/03_lab_linear_models.ipynb) | [Linear regression exercises](./modules/M1/exercises/02_linear_regression_ex.ipynb), [03_linear_regression_ex.ipynb](./modules/M1/exercises/03_linear_regression_ex.ipynb) |
-| M1-3 | **Non-linear Data**<br/>Using feature engineering (e.g., polynomial features) to model non-linear relationships with linear models, and visualizing how transformed features change model flexibility. | [Lab](./modules/M1/lessons/04_linear_regression_non_linear_link.ipynb) |  |
+| M1-3 | **Non-linear Patterns**<br/>Using feature engineering (e.g., polynomial features) to model non-linear relationships with linear models, and visualizing how transformed features change model flexibility. | [Lab](./modules/M1/lessons/04_non_linear_patterns.ipynb) |  |
 
 ## Module 2: Pipelines
 
