@@ -1,25 +1,32 @@
 ---
 title: "Index"
 format: html
-page-layout: full
+# page-layout: full
 ---
 
-| Lesson  | Description | Materials | Assignments |
-| ------- | ----------- | --------- | ----------- |
-|    1    | Introduction to ML | [Lesson](./modules/M1/lessons/01_Intro_ML_slides.qmd) | |
-|    2    | Linear Models | [Lesson](./modules/M1/lessons/02_linear_models.qmd) [Lab](./modules/M1/lessons/03_lab_linear_models.ipynb) | |
-|    3    | Non-linear Data | [Lab](./modules/M1/lessons/04_linear_regression_non_linear_link.ipynb) | |
-|    4    | Generalization Performance | [Lesson](./modules/M1/lessons/05_evaluation.qmd) [Lab](./modules/M1/lessons/06_lab_generalization.ipynb) | |
-|    5    | Hyper-parameter Tuning | [Lab](./modules/M1/lessons/07_cross_validation_nested.ipynb) | |
-|    6    | Imputation: Missing Values | [Lab](./modules/M2/lessons/01_impute.ipynb) | |
-|    7    | Scaling: Numerical Features | [Lesson](./modules/M2/lessons/02_scale.qmd) | |
-|    8    | Encoding: Categorical Features | [Lab](./modules/M2/lessons/03_encode.ipynb) | |
-|    9    | Predictive Modeling Pipelines | [Lesson](./modules/M2/lessons/04_pipeline.qmd) [Lab](./modules/M2/lessons/05_lab_pipeline.ipynb) | |
-|    10    | Decision Tree Models | [Lesson](./modules/M3/lessons/01_trees.qmd) [Lab](./modules/M3/lessons/02_lab_decision_trees.ipynb) | |
+| Lesson | Description | Materials | Assignments |
+|-------------|-------------|------------------------|-----------------------|
+| M1-1 | Introduction to ML | [Lesson](./modules/M1/lessons/01_Intro_ML_slides.qmd) |  |
+| M1-2 | Linear Models | [Lesson](./modules/M1/lessons/02_linear_models.qmd)<br>[Lab](./modules/M1/lessons/03_lab_linear_models.ipynb) |  |
+| M1-3 | Non-linear Data | [Lab](./modules/M1/lessons/04_linear_regression_non_linear_link.ipynb) |  |
+| M2-1 | Imputation: Missing Values | [Lab](./modules/M2/lessons/01_impute.ipynb) |  |
+| M2-2 | Scaling: Numerical Features | [Lesson](./modules/M2/lessons/02_scale.qmd) |  |
+| M2-3 | Encoding: Categorical Features | [Lab](./modules/M2/lessons/03_encode.ipynb) |  |
+| M2-4 | Predictive Modeling Pipelines | [Lesson](./modules/M2/lessons/04_pipeline.qmd)<br>[Lab](./modules/M2/lessons/05_lab_pipeline.ipynb) |  |
+| M2-5 | Regression Metrics | [Lab](./modules/M2/lessons/06_regression_metrics.ipynb) |  |
+| M3-1 | Model Evaluation | [Lesson](./modules/M3/lessons/01_evaluation.qmd) |  |
+| M3-2 | Under-fitting and Over-fitting | [Lab](./modules/M3/lessons/02_lab_generalization.ipynb) |  |
+| M3-3 | Hyper-parameter Tuning | [Lab](./modules/M3/lessons/03_meta-learning.ipynb) |  |
+| M3-4 | Nested Cross-Validation | [Lab](./modules/M3/lessons/04_nested_cv.ipynb) |  |
+| M4-1 | CV Stratification | [Lesson](./modules/M4/lessons/01_cv_stratification.ipynb) |  |
+| M4-2 | CV Grouping | [Lesson](./modules/M4/lessons/02_cv_grouping.ipynb) |  |
+| M4-3 | Classification Metrics | [Lesson](./modules/M4/lessons/03_classification_metrics.ipynb) |  |
+| M4-4 | Classifier Threshold Tuning | [Lesson](./modules/M4/lessons/04_classifier_threshold_tuning.ipynb) |  |
+| M4-5 | Probability Calibration | [Lesson](./modules/M4/lessons/05_probability_calibration.ipynb) |  |
+| M5-1 | Decision Trees | [Lesson](./modules/M5/lessons/01_trees.qmd)<br>[Lab](./modules/M5/lessons/02_lab_decision_trees.ipynb) |  |
 
 Resources:
 
-- [CS129: Applied ML | Standford](https://web.stanford.edu/class/cs129/syllabus)
-- [Scikit-learn MOOC](https://inria.github.io/scikit-learn-mooc/)
-- [Hands-on ML | Aurélien Geron](https://github.com/ageron/handson-ml3)
- [Lesson](./modules/M3/lessons/01_trees.qmd) [Lab](./modules/M3/lessons/02_lab_decision_trees.ipynb)
+-   [CS129: Applied ML \| Standford](https://web.stanford.edu/class/cs129/syllabus)
+-   [Scikit-learn MOOC](https://inria.github.io/scikit-learn-mooc/)
+-   [Hands-on ML \| Aurélien Geron](https://github.com/ageron/handson-ml3)
