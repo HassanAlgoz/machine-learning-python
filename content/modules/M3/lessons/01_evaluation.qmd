@@ -19,11 +19,11 @@ Examples:
 
 Examples:
 
-- [**Regression Metrics**](./03_regression_metrics.ipynb) (where targets are **continuous**):
+- [**Regression Metrics**](../../M2/lessons/06_regression_metrics.ipynb) (where targets are **continuous**):
     - R-squared (default when you call `model.score()`) 
     - Mean Squared Error (MSE)
     - Mean Absolute Percentage Error (MAPE)
-- [**Classification Metrics**](./04_classification_metrics.ipynb) (where targets are **categorical**):
+- [**Classification Metrics**](../../M4/lessons/01_classification_metrics.ipynb) (where targets are **categorical**):
     - Accuracy (default when you call `model.score()`) 
     - Precision
     - Recall

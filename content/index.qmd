@@ -63,7 +63,8 @@ overfitting, and use cross-validation and hyper-parameter tuning to select robus
 - loss functions vs evaluation metrics  
 - baseline models (`DummyClassifier`, `DummyRegressor`)  
 - underfitting, overfitting, bias–variance trade-off  
-- hyper-parameter tuning, grid search, randomized search, nested CV  
+- hyper-parameter tuning, grid search, randomized search, nested CV    
+- stratified cross-validation, grouped cross-validation
 
 | Lesson | Description | Materials | Assignments |
 |-------------|-------------|------------------------|-----------------------|
@@ -71,6 +72,9 @@ overfitting, and use cross-validation and hyper-parameter tuning to select robus
 | M3-2 | **Under-fitting and Over-fitting**<br/>Diagnosing generalization issues through learning curves and understanding how model complexity and data size influence performance. | [Lab](./modules/M3/lessons/02_lab_generalization.ipynb) |  |
 | M3-3 | **Hyper-parameter Tuning**<br/>Using cross-validated grid and randomized searches to optimize model hyper-parameters in a principled way. | [Lab](./modules/M3/lessons/03_meta-learning.ipynb) |  |
 | M3-4 | **Nested Cross-Validation**<br/>Robust evaluation of tuning procedures using nested cross-validation to avoid optimistic bias when reporting model performance. | [Lab](./modules/M3/lessons/04_nested_cv.ipynb) |  |
+| M4-5 | **Stratification**<br/>Ensuring class balance across folds with stratified cross-validation and why this matters for imbalanced datasets. | [Lesson](./modules/M3/lessons/05_cv_stratification.ipynb) |  |
+| M3-6 | **Grouping**<br/>Designing cross-validation schemes that respect grouped or clustered data to reduce data leakage. | [Lesson](./modules/M3/lessons/06_cv_grouping.ipynb) |  |
+
 
 ## Module 4: Classification
 
@@ -81,35 +85,14 @@ metrics, and learn how thresholds and probability calibration affect decision-ma
 **Key Terms:**
 
 - classification metrics: accuracy, precision, recall, F1, ROC–AUC  
-- confusion matrix, precision–recall trade-off  
-- stratified cross-validation, grouped cross-validation  
+- confusion matrix, precision–recall trade-off
 - decision thresholds, score calibration  
 
 | Lesson | Description | Materials | Assignments |
 |-------------|-------------|------------------------|-----------------------|
-| M4-1 | **Stratification**<br/>Ensuring class balance across folds with stratified cross-validation and why this matters for imbalanced datasets. | [Lesson](./modules/M4/lessons/01_cv_stratification.ipynb) |  |
-| M4-2 | **Grouping**<br/>Designing cross-validation schemes that respect grouped or clustered data to reduce data leakage. | [Lesson](./modules/M4/lessons/02_cv_grouping.ipynb) |  |
-| M4-3 | **Classification Metrics**<br/>Overview of key classification metrics and how to choose appropriate ones for a given application. | [Lesson](./modules/M4/lessons/03_classification_metrics.ipynb) |  |
-| M4-4 | **Classifier Threshold Tuning**<br/>How decision thresholds trade off precision and recall and how to choose thresholds aligned with costs and benefits. | [Lesson](./modules/M4/lessons/04_classifier_threshold_tuning.ipynb)<br/>[Interactive threshold widget](./modules/M4/lessons/widget_threshold.qmd) |  |
-| M4-5 | **Probability Calibration**<br/>Measuring and improving the quality of predicted probabilities so they better match observed frequencies. | [Lesson](./modules/M4/lessons/05_probability_calibration.ipynb) |  |
-
-## Module 5: Explainable AI
-
-Module 5 focuses on **model interpretability and explainable AI**. You will learn how to
-use partial dependence plots and SHAP values to understand and communicate how complex
-models make predictions.
-
-**Key Terms:**
-
-- model interpretability, explainable AI (XAI)  
-- partial dependence plots (PDPs)  
-- feature effects, marginal effects  
-- Shapley values, SHAP explanations  
-
-| Lesson | Description | Materials | Assignments |
-|-------------|-------------|------------------------|-----------------------|
-| M5-1 | **Partial Dependence Plots**<br/>Using partial dependence plots to visualize the marginal effect of one or two features on model predictions and detect linear or non-linear relationships. | [Lesson](./modules/M5/lessons/01_pdp.ipynb) |  |
-| M5-2 | **SHAP Values**<br/>Using SHAP to attribute predictions to individual features and provide local, instance-level explanations consistent with game-theoretic principles. | [Lesson](./modules/M5/lessons/02_shap.qmd) |  |
+| M4-1 | **Classification Metrics**<br/>Overview of key classification metrics and how to choose appropriate ones for a given application. | [Lesson](./modules/M4/lessons/01_classification_metrics.ipynb) |  |
+| M4-2 | **Classifier Threshold Tuning**<br/>How decision thresholds trade off precision and recall and how to choose thresholds aligned with costs and benefits. | [Lesson](./modules/M4/lessons/02_classifier_threshold_tuning.ipynb)<br/>[Interactive threshold widget](./modules/M4/lessons/widget_threshold.qmd) |  |
+| M4-3 | **Probability Calibration**<br/>Measuring and improving the quality of predicted probabilities so they better match observed frequencies. | [Lesson](./modules/M4/lessons/03_probability_calibration.ipynb) |  |
 
 ## Module 6: Trees and Ensembles
 
@@ -126,7 +109,7 @@ ensembles such as random forests improve stability and performance.
 
 | Lesson | Description | Materials | Assignments |
 |-------------|-------------|------------------------|-----------------------|
-| M6-1 | **Decision Trees**<br/>Building and interpreting decision trees for classification and regression, including splitting criteria, tree structure, and overfitting behavior. | [Lesson](./modules/M6/lessons/01_trees.qmd)<br/>[Lab](./modules/M6/lessons/02_lab_decision_trees.ipynb)<br/>[Trees quiz](./modules/M6/quizzes/trees_quiz_m5_01.md)<br/>[Quiz widget](./modules/M6/quizzes/01_.qmd) |  |
+| M6-1 | **Decision Trees**<br/>Building and interpreting decision trees for classification and regression, including splitting criteria, tree structure, and overfitting behavior. | [Lesson](./modules/M6/lessons/01_trees.qmd)<br/>[Lab](./modules/M6/lessons/02_lab_decision_trees.ipynb)<br/> |  |
 
 
 Resources:
