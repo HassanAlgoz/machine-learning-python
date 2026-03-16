@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Index – Machine Learning with Python</title>
+<title>تقييس المقادير المتصلة (Scaling) – Machine Learning with Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,50 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,6 +92,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -79,7 +131,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Machine Learning with Python</span>
     </a>
   </div>
@@ -90,7 +142,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">Index</span></a>
   </li>  
 </ul>
@@ -109,11 +161,12 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#module-1-linear-models" id="toc-module-1-linear-models" class="nav-link active" data-scroll-target="#module-1-linear-models">Module 1: Linear Models</a></li>
-  <li><a href="#module-2-pipelines" id="toc-module-2-pipelines" class="nav-link" data-scroll-target="#module-2-pipelines">Module 2: Pipelines</a></li>
-  <li><a href="#module-3-model-selection-and-evaluation" id="toc-module-3-model-selection-and-evaluation" class="nav-link" data-scroll-target="#module-3-model-selection-and-evaluation">Module 3: Model Selection and Evaluation</a></li>
-  <li><a href="#module-4-classification" id="toc-module-4-classification" class="nav-link" data-scroll-target="#module-4-classification">Module 4: Classification</a></li>
-  <li><a href="#module-6-trees-and-ensembles" id="toc-module-6-trees-and-ensembles" class="nav-link" data-scroll-target="#module-6-trees-and-ensembles">Module 6: Trees and Ensembles</a></li>
+  <li><a href="#أهميتها" id="toc-أهميتها" class="nav-link active" data-scroll-target="#أهميتها">أهميتها</a></li>
+  <li><a href="#كيفياتها" id="toc-كيفياتها" class="nav-link" data-scroll-target="#كيفياتها">كيفياتها</a>
+  <ul class="collapse">
+  <li><a href="#أولا-الخطية" id="toc-أولا-الخطية" class="nav-link" data-scroll-target="#أولا-الخطية">أولاً: <strong>الخطية</strong></a></li>
+  <li><a href="#ثانيا-لا-خطية" id="toc-ثانيا-لا-خطية" class="nav-link" data-scroll-target="#ثانيا-لا-خطية">ثانيًا: <strong>لا خطيَّة</strong></a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -122,7 +175,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Index</h1>
+<h1 class="title">تقييس المقادير المتصلة (Scaling)</h1>
 </div>
 
 
@@ -139,260 +192,92 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This course is a <strong>practical introduction to applied machine learning with scikit-learn</strong>.<br>
-You will progress from linear models and feature preprocessing, through model evaluation and classification, to tree-based methods and modern explainable AI techniques. Along the way, you will work through hands-on notebooks, coding exercises, and interactive widgets that help you build an intuition for how models behave in practice.</p>
-<section id="module-1-linear-models" class="level2">
-<h2 class="anchored" data-anchor-id="module-1-linear-models">Module 1: Linear Models</h2>
-<p>Module 1 builds the foundations of supervised learning using linear models for regression and classification. You will learn how to represent data with features, fit linear models, interpret their parameters, and understand when linear assumptions are reasonable.</p>
-<p><strong>Key Terms:</strong></p>
+<p><strong>عملية تقييس الخصائص</strong> (Feature Scaling) <strong>توحِّد قيَم المتغيرات المتفاوتة لتكون على مقياس مماثل</strong>.</p>
+<p>مثال: عدد الغرف يتراوح بين 1 - 10 بينما تتراوح مساحة المنزل بين 100 - 1000 متر مربع.</p>
 <ul>
-<li>supervised learning, data matrix, features, targets<br>
-</li>
-<li>linear regression, logistic regression<br>
-</li>
-<li>model coefficients, intercept, decision boundary<br>
-</li>
-<li>non-linear relationships via feature engineering</li>
+<li>ونريد للنموذج أن يفهم أن 10 في عدد الغرف شيء كبير، كما أن 1000 في مساحة المنزل شيء كبير أيضًا بالمقارنة. ونريده أن يفهم العكس كذلك: أن 1 صغير في عدد الغرف و 100 في مساحة المنزل شيء صغير بالمقارنة.</li>
+<li>كما أننا لا نريد للنموذج أن يُهمِلَ الأعداد 1 - 10 لكونها قليلة في الحساب عند مقارنتها مع المساحة التي تتراوح بين 100 - 1000.</li>
 </ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M1-1</td>
-<td><strong>Introduction to ML</strong><br>High-level tour of machine learning tasks, workflows, and where supervised learning fits in the broader data science landscape.</td>
-<td><a href="./modules/M1/lessons/01_Intro_ML_slides.html">Lesson</a></td>
-<td><a href="./modules/M1/exercises/01_eda_penguins_ex.html">EDA Penguins exercise</a></td>
-</tr>
-<tr class="even">
-<td>M1-2</td>
-<td><strong>Linear Models</strong><br>Core ideas behind linear regression and logistic regression, including model specification, parameter estimation, and decision boundaries.</td>
-<td><a href="./modules/M1/lessons/02_linear_models.html">Lesson</a><br><a href="./modules/M1/lessons/03_lab_linear_models.html">Lab</a></td>
-<td><a href="./modules/M1/exercises/02_linear_regression_ex.html">Linear regression exercises</a>, <a href="./modules/M1/exercises/03_linear_regression_ex.html">03_linear_regression_ex.ipynb</a></td>
-</tr>
-<tr class="odd">
-<td>M1-3</td>
-<td><strong>Non-linear Data</strong><br>Using feature engineering (e.g., polynomial features) to model non-linear relationships with linear models, and visualizing how transformed features change model flexibility.</td>
-<td><a href="./modules/M1/lessons/04_linear_regression_non_linear_link.html">Lab</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<section id="أهميتها" class="level2">
+<h2 class="anchored" data-anchor-id="أهميتها">أهميتها</h2>
+<p>تظهر أهمية ذلك في خوارزمية النزول التدريجي (SGD). إذْ تتأثر الخطوة -في اتجاه تقليل الخطأ- بتفاوت قيَم المتغيرات.</p>
+<p>يظهر في الشكل هذه الدوائر التي تمثل كلُّ منها قيمة ثابتة للخسارة، ويمثل المركز قاع دالة الخطأ.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./assets/gradient_descent_2_params_unscaled_vs_scaled.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="دالة الخطأ لعاملين قبل وبعد التقييس"><img src="./assets/gradient_descent_2_params_unscaled_vs_scaled.png" class="img-fluid figure-img" alt="دالة الخطأ لعاملين قبل وبعد التقييس"></a></p>
+<figcaption>دالة الخطأ لعاملين قبل وبعد التقييس</figcaption>
+</figure>
+</div>
+<p>الحالة اليسرى: (<span class="math inline">\(x_1 &gt;&gt; x_2\)</span>) وتعني أن قيَم المتغير الأول أكبر بكثير مقارنةً بقيَم المتغير الثاني. تصبح تضاريس دالة الخطأ <span class="math inline">\(J(w)\)</span> (وهي: <span class="math inline">\(MSE\)</span>) غير متناسقة؛ مما يظهر في أن أي تغيير بسيط في المعامل <span class="math inline">\(w_1\)</span> (المرتبط بالمتغير الكبير) يؤدي إلى قفزة هائلة في دالة الخطأ، بينما التغيير في <span class="math inline">\(w_2\)</span> لا يكاد يُذكر.</p>
+<p>الحالة اليمنى: بمجرد وضع المتغيرات على نفس المقياس، تتحول تضاريس دالة الخطأ إلى <strong>دوائر متمركزة</strong>. تصبح الحساسية تجاه <span class="math inline">\(w_1\)</span> و <span class="math inline">\(w_2\)</span> متساوية تقريباً.</p>
+<p><strong>النتيجة:</strong> الخط الأحمر الآن ينطلق <strong>كالسهم مباشرة نحو المركز</strong>. لا يوجد تذبذب ولا ضياع للوقت؛ الخوارزمية تجد أقصر طريق ممكن لتقليل الخسارة.</p>
+<p>للمزيد راجع: <a href="https://scikit-learn.org/stable/auto_examples/preprocessing/plot_scaling_importance.html">أهميَّة التقييس</a>.</p>
 </section>
-<section id="module-2-pipelines" class="level2">
-<h2 class="anchored" data-anchor-id="module-2-pipelines">Module 2: Pipelines</h2>
-<p>Module 2 focuses on <strong>data preprocessing and modeling pipelines</strong>. You will learn how to handle missing values, scale numerical features, encode categorical variables, and chain these steps together with estimators into reusable, production-ready pipelines.</p>
-<p><strong>Key Terms:</strong></p>
-<ul>
-<li>imputation, missing values<br>
-</li>
-<li>feature scaling, normalization, standardization<br>
-</li>
-<li>categorical encoding, one-hot encoding, ordinal encoding<br>
-</li>
-<li>scikit-learn transformers, estimators, pipelines<br>
-</li>
-<li>regression metrics (R², MSE, MAE)</li>
-</ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M2-1</td>
-<td><strong>Imputation: Missing Values</strong><br>Strategies to handle missing data, including simple and model-based imputations, and their impact on downstream models.</td>
-<td><a href="./modules/M2/lessons/01_impute.html">Lab</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>M2-2</td>
-<td><strong>Scaling: Numerical Features</strong><br>Why feature scaling matters, how it affects distance-based models, optimization, and when to use min–max or standard scaling.</td>
-<td><a href="./modules/M2/lessons/02_scale.html">Lesson</a></td>
-<td><a href="./modules/M2/exercises/01_scaling_knn_primm.html">Scaling &amp; k-NN exercise</a></td>
-</tr>
-<tr class="odd">
-<td>M2-3</td>
-<td><strong>Encoding: Categorical Features</strong><br>Different approaches to represent categories numerically, along with trade-offs between one-hot and ordinal encodings.</td>
-<td><a href="./modules/M2/lessons/03_encode.html">Lab</a></td>
-<td><a href="./modules/M2/exercises/02_categorical_encoding_ex.html">Categorical encoding exercise</a></td>
-</tr>
-<tr class="even">
-<td>M2-4</td>
-<td><strong>Predictive Modeling Pipelines</strong><br>Building end-to-end scikit-learn pipelines that combine preprocessing and modeling into a single, robust workflow.</td>
-<td><a href="./modules/M2/lessons/04_pipeline.html">Lesson</a><br><a href="./modules/M2/lessons/05_lab_pipeline.html">Lab</a></td>
-<td><a href="./modules/M2/exercises/03_multi-variable_regression_ex_1.html">Multi-variable regression exercises</a>, <a href="./modules/M2/exercises/04_multi-variable_regression_ex_2.html">04_multi-variable_regression_ex_2.ipynb</a></td>
-</tr>
-<tr class="odd">
-<td>M2-5</td>
-<td><strong>Regression Metrics</strong><br>Evaluating regression models with common metrics and learning to interpret metric values in the context of a business problem.</td>
-<td><a href="./modules/M2/lessons/06_regression_metrics.html">Lab</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<section id="كيفياتها" class="level2">
+<h2 class="anchored" data-anchor-id="كيفياتها">كيفياتها</h2>
+<p>وهناك طبيعتان لطرق <strong>التقييس</strong>: خطية ولا خطيَّة.</p>
+<section id="أولا-الخطية" class="level3">
+<h3 class="anchored" data-anchor-id="أولا-الخطية">أولاً: <strong>الخطية</strong></h3>
+<p>وهي لا تغيِّرُ نسبة ما بين القيَم نفسها.</p>
+<p>ولها طريقتان معروفتان:</p>
+<section id="الطريقة-الأولى-تقييس-النطاق-بين-الصفر-والواحد" class="level4">
+<h4 class="anchored" data-anchor-id="الطريقة-الأولى-تقييس-النطاق-بين-الصفر-والواحد">الطريقة الأولى: تقييس النطاق بين الصفر والواحد</h4>
+<p>في المكتبة (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html"><code>MinMaxScaler</code></a>)، وتعني تحويل القيم من نطاقها الأصلي إلى نطاق ثابت، عادةً من 0 إلى 1.</p>
+<p><span class="math display">\[
+x_\text{scaled} = \frac{x - x_\text{min}}{x_\text{max} - x_\text{min}}
+\]</span></p>
+<p><strong>المناسبة</strong>: عندما تكون البيانات موزعة <strong>توزيعاً منتظماً</strong> (Uniform Distribution).</p>
 </section>
-<section id="module-3-model-selection-and-evaluation" class="level2">
-<h2 class="anchored" data-anchor-id="module-3-model-selection-and-evaluation">Module 3: Model Selection and Evaluation</h2>
-<p>Module 3 deepens your understanding of <strong>generalization and model selection</strong>. You will practice splitting data into training, validation, and test sets, detect underfitting and overfitting, and use cross-validation and hyper-parameter tuning to select robust models.</p>
-<p><strong>Key Terms:</strong></p>
-<ul>
-<li>training/validation/test splits, cross-validation<br>
-</li>
-<li>loss functions vs evaluation metrics<br>
-</li>
-<li>baseline models (<code>DummyClassifier</code>, <code>DummyRegressor</code>)<br>
-</li>
-<li>underfitting, overfitting, bias–variance trade-off<br>
-</li>
-<li>hyper-parameter tuning, grid search, randomized search, nested CV</li>
-</ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M3-1</td>
-<td><strong>Model Evaluation</strong><br>Distinguishing training loss from evaluation metrics, using appropriate scores for regression and classification, and benchmarking against baselines.</td>
-<td><a href="./modules/M3/lessons/01_evaluation.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>M3-2</td>
-<td><strong>Under-fitting and Over-fitting</strong><br>Diagnosing generalization issues through learning curves and understanding how model complexity and data size influence performance.</td>
-<td><a href="./modules/M3/lessons/02_lab_generalization.html">Lab</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>M3-3</td>
-<td><strong>Hyper-parameter Tuning</strong><br>Using cross-validated grid and randomized searches to optimize model hyper-parameters in a principled way.</td>
-<td><a href="./modules/M3/lessons/03_meta-learning.html">Lab</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>M3-4</td>
-<td><strong>Nested Cross-Validation</strong><br>Robust evaluation of tuning procedures using nested cross-validation to avoid optimistic bias when reporting model performance.</td>
-<td><a href="./modules/M3/lessons/04_nested_cv.html">Lab</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<section id="الطريقة-الثانية-تقييس-النطاق-بالمقياس-الطبيعي" class="level4">
+<h4 class="anchored" data-anchor-id="الطريقة-الثانية-تقييس-النطاق-بالمقياس-الطبيعي">الطريقة الثانية: تقييس النطاق بالمقياس الطبيعي</h4>
+<p>في المكتبة (<a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html"><code>StandardScaler</code></a>)، إذْ يتم مركزة القيَم حوْلَ الصفر (بطرحها من المتوسط)، وتكون القيَم بين ثلاث درجات بالنسبة للانحراف المعياري (بقسمتها عليه).</p>
+<p>يتم حساب الدرجة المعيارية <span class="math inline">\(z\)</span> لعينة <span class="math inline">\(x\)</span> كما يلي:</p>
+<p><span class="math display">\[
+z = \frac{x - \mu}{s}
+\]</span></p>
+<p>حيث تمثل <span class="math inline">\(\mu\)</span> و <span class="math inline">\(s\)</span> المتوسط الحسابي والانحراف المعياري لعينات التدريب، على التوالي.</p>
+<p><strong>المناسبة</strong>: عندما تكون البيانات موزعة <strong>توزيعاً طبيعياً</strong> (Normal Distribution) أو قريبًا منه.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="./assets/normal_distribution.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="التوزيع الطبيعي"><img src="./assets/normal_distribution.png" class="img-fluid figure-img" alt="التوزيع الطبيعي"></a></p>
+<figcaption>التوزيع الطبيعي</figcaption>
+</figure>
+</div>
+<p><strong>في الممارسة العملية</strong>: غالبًا ما نتجاهل شكل التوزيع ونقوم فقط بتقييس البيانات بالمقياس الطبيعي على أية حال كانت. <span class="citation" data-cites="scikit-learn.org">(<a href="#ref-scikit-learn.org" role="doc-biblioref"><span>“Scikit-Learn”</span> 2026</a>)</span></p>
+<p>وفيه يتم اعتبار البيانات التي تقع خارج نطاق -3 إلى +3 درجات معيارية كـ <strong>قيم متطرفة (Outliers)</strong>. وقد يتم إزالتها إن كان لها أثر سلبي على أداء النموذج، ضمن خطوات المعالجة.</p>
 </section>
-<section id="module-4-classification" class="level2">
-<h2 class="anchored" data-anchor-id="module-4-classification">Module 4: Classification</h2>
-<p>Module 4 introduces <strong>classification-specific evaluation and validation techniques</strong>. You will explore stratified and grouped cross-validation, work with common classification metrics, and learn how thresholds and probability calibration affect decision-making.</p>
-<p><strong>Key Terms:</strong></p>
-<ul>
-<li>classification metrics: accuracy, precision, recall, F1, ROC–AUC<br>
-</li>
-<li>confusion matrix, precision–recall trade-off<br>
-</li>
-<li>stratified cross-validation, grouped cross-validation<br>
-</li>
-<li>decision thresholds, score calibration</li>
-</ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M4-1</td>
-<td><strong>Stratification</strong><br>Ensuring class balance across folds with stratified cross-validation and why this matters for imbalanced datasets.</td>
-<td><a href="./modules/M4/lessons/01_cv_stratification.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>M4-2</td>
-<td><strong>Grouping</strong><br>Designing cross-validation schemes that respect grouped or clustered data to reduce data leakage.</td>
-<td><a href="./modules/M4/lessons/02_cv_grouping.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>M4-3</td>
-<td><strong>Classification Metrics</strong><br>Overview of key classification metrics and how to choose appropriate ones for a given application.</td>
-<td><a href="./modules/M4/lessons/03_classification_metrics.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>M4-4</td>
-<td><strong>Classifier Threshold Tuning</strong><br>How decision thresholds trade off precision and recall and how to choose thresholds aligned with costs and benefits.</td>
-<td><a href="./modules/M4/lessons/04_classifier_threshold_tuning.html">Lesson</a><br><a href="./modules/M4/lessons/widget_threshold.html">Interactive threshold widget</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>M4-5</td>
-<td><strong>Probability Calibration</strong><br>Measuring and improving the quality of predicted probabilities so they better match observed frequencies.</td>
-<td><a href="./modules/M4/lessons/05_probability_calibration.html">Lesson</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
 </section>
-<section id="module-6-trees-and-ensembles" class="level2">
-<h2 class="anchored" data-anchor-id="module-6-trees-and-ensembles">Module 6: Trees and Ensembles</h2>
-<p>Module 6 introduces <strong>decision trees and tree-based ensembles</strong>. You will see how trees can capture non-linear relationships, understand their tendency to overfit, and learn how ensembles such as random forests improve stability and performance.</p>
-<p><strong>Key Terms:</strong></p>
+<section id="ثانيا-لا-خطية" class="level3">
+<h3 class="anchored" data-anchor-id="ثانيا-لا-خطية">ثانيًا: <strong>لا خطيَّة</strong></h3>
+<p>إذْ تغيِّرُ نسبة ما بين القيَم. ومنها:</p>
+<section id="الطريقة-الأولى-تقييس-لوغارتمي-log-scaling" class="level4">
+<h4 class="anchored" data-anchor-id="الطريقة-الأولى-تقييس-لوغارتمي-log-scaling">الطريقة الأولى: تقييس لوغارتمي (Log Scaling)</h4>
+<p>فهي تحوِّل التوزيع غير الطبيعي، المنحاز إلى أحد الجانبين -الموجب أو السالب- إلى <strong>توزيع طبيعي</strong> (Normal Distribution) متناظر باستعمال اللوغاريتم الطبيعي:</p>
+<p><span class="math display">\[
+x_\text{normalized} = \ln(x)
+\]</span></p>
+<p>كما هو موضح في الصورة التالية:</p>
+<p><a href="https://scikit-learn.org/stable/_images/sphx_glr_plot_transformed_target_001.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="https://scikit-learn.org/stable/_images/sphx_glr_plot_transformed_target_001.png" class="img-fluid"></a></p>
+<p>مفيدة للبيانات التي تتبع <strong>توزيع قانون القوة (Power Law Distribution)</strong>، والذي يتميز بوجود قلة من نقاط البيانات ذات القيم العالية جداً وكثير من النقاط ذات القيم المنخفضة.</p>
+<p>أمثلة:</p>
 <ul>
-<li>decision trees, splits, tree depth, leaves<br>
-</li>
-<li>regression trees, classification trees<br>
-</li>
-<li>overfitting with deep trees, pruning<br>
-</li>
-<li>ensembles of trees (e.g., random forests, gradient boosting — conceptually)</li>
+<li>عدد قليل من الأفلام يشتهر بقوَّة، بينما الغالبية العظمى تحصل على القليل من الانتباه.</li>
+<li>سكان المدن: إذا قمت بترتيب المدن حسب عدد السكان، ستجد أن أكبر مدينة في الدولة عادة ما تكون ضعف حجم المدينة الثانية، وثلاثة أضعاف حجم المدينة الثالثة (قانون زيف - Zipf’s Law). في الولايات المتحدة، يبلغ عدد سكان مدينة نيويورك (حوالي 8.3 مليون نسمة) ضعف حجم مدينة لوس أنجلوس (حوالي 3.8 مليون نسمة) تقريباً.</li>
 </ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M6-1</td>
-<td><strong>Decision Trees</strong><br>Building and interpreting decision trees for classification and regression, including splitting criteria, tree structure, and overfitting behavior.</td>
-<td><a href="./modules/M6/lessons/01_trees.html">Lesson</a><br><a href="./modules/M6/lessons/02_lab_decision_trees.html">Lab</a><br></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>Resources:</p>
-<ul>
-<li><a href="https://web.stanford.edu/class/cs129/syllabus">CS129: Applied ML | Standford</a></li>
-<li><a href="https://inria.github.io/scikit-learn-mooc/">Scikit-learn MOOC</a></li>
-<li><a href="https://github.com/ageron/handson-ml3">Hands-on ML | Aurélien Geron</a></li>
-</ul>
+<p>انظر <a href="https://scikit-learn.org/stable/auto_examples/compose/plot_transformed_target.html">تحويل قيمة الهدف</a>.</p>
+<hr>
+
 
 
 </section>
+</section>
+</section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-scikit-learn.org" class="csl-entry" role="listitem">
+<span>“Scikit-Learn.”</span> 2026. scikit-learn. 2026. <a href="https://scikit-learn.org/stable/auto_examples/preprocessing/plot_scaling_importance.html">https://scikit-learn.org/stable/auto_examples/preprocessing/plot_scaling_importance.html</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -794,6 +679,38 @@ You will progress from linear models and feature preprocessing, through model ev
   });
   </script>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

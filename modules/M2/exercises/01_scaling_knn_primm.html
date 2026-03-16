@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" dir="ltr"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.26">
@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Index – Machine Learning with Python</title>
+<title>Exercise: Effect of Feature Scaling on KNN (PRIMM) – Machine Learning with Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -79,7 +114,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Machine Learning with Python</span>
     </a>
   </div>
@@ -90,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">Index</span></a>
   </li>  
 </ul>
@@ -109,20 +144,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#module-1-linear-models" id="toc-module-1-linear-models" class="nav-link active" data-scroll-target="#module-1-linear-models">Module 1: Linear Models</a></li>
-  <li><a href="#module-2-pipelines" id="toc-module-2-pipelines" class="nav-link" data-scroll-target="#module-2-pipelines">Module 2: Pipelines</a></li>
-  <li><a href="#module-3-model-selection-and-evaluation" id="toc-module-3-model-selection-and-evaluation" class="nav-link" data-scroll-target="#module-3-model-selection-and-evaluation">Module 3: Model Selection and Evaluation</a></li>
-  <li><a href="#module-4-classification" id="toc-module-4-classification" class="nav-link" data-scroll-target="#module-4-classification">Module 4: Classification</a></li>
-  <li><a href="#module-6-trees-and-ensembles" id="toc-module-6-trees-and-ensembles" class="nav-link" data-scroll-target="#module-6-trees-and-ensembles">Module 6: Trees and Ensembles</a></li>
+  <li><a href="#predict" id="toc-predict" class="nav-link active" data-scroll-target="#predict">1. Predict</a></li>
+  <li><a href="#run" id="toc-run" class="nav-link" data-scroll-target="#run">2. Run</a></li>
+  <li><a href="#investigate" id="toc-investigate" class="nav-link" data-scroll-target="#investigate">3. Investigate</a></li>
+  <li><a href="#modify" id="toc-modify" class="nav-link" data-scroll-target="#modify">4. Modify</a></li>
+  <li><a href="#make" id="toc-make" class="nav-link" data-scroll-target="#make">5. Make</a></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="01_scaling_knn_primm.out.ipynb" download="01_scaling_knn_primm.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Index</h1>
+<h1 class="title">Exercise: Effect of Feature Scaling on KNN (PRIMM)</h1>
 </div>
 
 
@@ -139,255 +174,111 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This course is a <strong>practical introduction to applied machine learning with scikit-learn</strong>.<br>
-You will progress from linear models and feature preprocessing, through model evaluation and classification, to tree-based methods and modern explainable AI techniques. Along the way, you will work through hands-on notebooks, coding exercises, and interactive widgets that help you build an intuition for how models behave in practice.</p>
-<section id="module-1-linear-models" class="level2">
-<h2 class="anchored" data-anchor-id="module-1-linear-models">Module 1: Linear Models</h2>
-<p>Module 1 builds the foundations of supervised learning using linear models for regression and classification. You will learn how to represent data with features, fit linear models, interpret their parameters, and understand when linear assumptions are reasonable.</p>
-<p><strong>Key Terms:</strong></p>
+<p>In this exercise, we will use the <strong>PRIMM</strong> (Predict, Run, Investigate, Modify, Make) method to understand the importance of preprocessing numerical data—specifically, how feature scaling impacts distance-based algorithms like K-Nearest Neighbors (KNN).</p>
+<section id="predict" class="level3">
+<h3 class="anchored" data-anchor-id="predict">1. Predict</h3>
+<p>Read the code in the “Run” section below, but <strong>do not run it yet</strong>.</p>
+<p>We are using the <code>KNeighborsClassifier</code> on two features from the Breast Cancer dataset: <code>mean area</code> and <code>mean smoothness</code>.</p>
 <ul>
-<li>supervised learning, data matrix, features, targets<br>
-</li>
-<li>linear regression, logistic regression<br>
-</li>
-<li>model coefficients, intercept, decision boundary<br>
-</li>
-<li>non-linear relationships via feature engineering</li>
+<li><code>mean area</code> has values that vary between approximately <code>143.5</code> and <code>2501.0</code>.</li>
+<li><code>mean smoothness</code> has values that vary between approximately <code>0.05</code> and <code>0.16</code>.</li>
 </ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M1-1</td>
-<td><strong>Introduction to ML</strong><br>High-level tour of machine learning tasks, workflows, and where supervised learning fits in the broader data science landscape.</td>
-<td><a href="./modules/M1/lessons/01_Intro_ML_slides.html">Lesson</a></td>
-<td><a href="./modules/M1/exercises/01_eda_penguins_ex.html">EDA Penguins exercise</a></td>
-</tr>
-<tr class="even">
-<td>M1-2</td>
-<td><strong>Linear Models</strong><br>Core ideas behind linear regression and logistic regression, including model specification, parameter estimation, and decision boundaries.</td>
-<td><a href="./modules/M1/lessons/02_linear_models.html">Lesson</a><br><a href="./modules/M1/lessons/03_lab_linear_models.html">Lab</a></td>
-<td><a href="./modules/M1/exercises/02_linear_regression_ex.html">Linear regression exercises</a>, <a href="./modules/M1/exercises/03_linear_regression_ex.html">03_linear_regression_ex.ipynb</a></td>
-</tr>
-<tr class="odd">
-<td>M1-3</td>
-<td><strong>Non-linear Data</strong><br>Using feature engineering (e.g., polynomial features) to model non-linear relationships with linear models, and visualizing how transformed features change model flexibility.</td>
-<td><a href="./modules/M1/lessons/04_linear_regression_non_linear_link.html">Lab</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<p>We train a model on both the unscaled and scaled versions (using <code>StandardScaler</code>) of these two features.</p>
+<p><strong>Predict:</strong></p>
+<ol type="1">
+<li>Will the decision boundaries for the model trained on unscaled data and scaled data be the same or different?</li>
+<li>For the unscaled data, distances will be dominated by which feature? Why?</li>
+</ol>
+<p><em>Double click here to write your predictions:</em></p>
 </section>
-<section id="module-2-pipelines" class="level2">
-<h2 class="anchored" data-anchor-id="module-2-pipelines">Module 2: Pipelines</h2>
-<p>Module 2 focuses on <strong>data preprocessing and modeling pipelines</strong>. You will learn how to handle missing values, scale numerical features, encode categorical variables, and chain these steps together with estimators into reusable, production-ready pipelines.</p>
-<p><strong>Key Terms:</strong></p>
-<ul>
-<li>imputation, missing values<br>
-</li>
-<li>feature scaling, normalization, standardization<br>
-</li>
-<li>categorical encoding, one-hot encoding, ordinal encoding<br>
-</li>
-<li>scikit-learn transformers, estimators, pipelines<br>
-</li>
-<li>regression metrics (R², MSE, MAE)</li>
-</ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M2-1</td>
-<td><strong>Imputation: Missing Values</strong><br>Strategies to handle missing data, including simple and model-based imputations, and their impact on downstream models.</td>
-<td><a href="./modules/M2/lessons/01_impute.html">Lab</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>M2-2</td>
-<td><strong>Scaling: Numerical Features</strong><br>Why feature scaling matters, how it affects distance-based models, optimization, and when to use min–max or standard scaling.</td>
-<td><a href="./modules/M2/lessons/02_scale.html">Lesson</a></td>
-<td><a href="./modules/M2/exercises/01_scaling_knn_primm.html">Scaling &amp; k-NN exercise</a></td>
-</tr>
-<tr class="odd">
-<td>M2-3</td>
-<td><strong>Encoding: Categorical Features</strong><br>Different approaches to represent categories numerically, along with trade-offs between one-hot and ordinal encodings.</td>
-<td><a href="./modules/M2/lessons/03_encode.html">Lab</a></td>
-<td><a href="./modules/M2/exercises/02_categorical_encoding_ex.html">Categorical encoding exercise</a></td>
-</tr>
-<tr class="even">
-<td>M2-4</td>
-<td><strong>Predictive Modeling Pipelines</strong><br>Building end-to-end scikit-learn pipelines that combine preprocessing and modeling into a single, robust workflow.</td>
-<td><a href="./modules/M2/lessons/04_pipeline.html">Lesson</a><br><a href="./modules/M2/lessons/05_lab_pipeline.html">Lab</a></td>
-<td><a href="./modules/M2/exercises/03_multi-variable_regression_ex_1.html">Multi-variable regression exercises</a>, <a href="./modules/M2/exercises/04_multi-variable_regression_ex_2.html">04_multi-variable_regression_ex_2.ipynb</a></td>
-</tr>
-<tr class="odd">
-<td>M2-5</td>
-<td><strong>Regression Metrics</strong><br>Evaluating regression models with common metrics and learning to interpret metric values in the context of a business problem.</td>
-<td><a href="./modules/M2/lessons/06_regression_metrics.html">Lab</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<section id="run" class="level3">
+<h3 class="anchored" data-anchor-id="run">2. Run</h3>
+<p>Run the following code block to visualize the decision boundary of the KNN classifier on the two versions of the data.</p>
+<div id="0fbd9709" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_breast_cancer</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.inspection <span class="im">import</span> DecisionBoundaryDisplay</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.neighbors <span class="im">import</span> KNeighborsClassifier</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dataset</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>cancer <span class="op">=</span> load_breast_cancer(as_frame<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>X, y <span class="op">=</span> cancer.data, cancer.target</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Select a subset of features with different orders of magnitude</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>X_plot <span class="op">=</span> X[[<span class="st">"mean area"</span>, <span class="st">"mean smoothness"</span>]]</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Scale the data and keep it as a DataFrame</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>X_plot_scaled <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    scaler.fit_transform(X_plot), </span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    columns<span class="op">=</span>X_plot.columns</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a KNN classifier</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>clf <span class="op">=</span> KNeighborsClassifier(n_neighbors<span class="op">=</span><span class="dv">20</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fit_and_plot_model(X_data, y_data, clf, ax):</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    clf.fit(X_data, y_data)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    disp <span class="op">=</span> DecisionBoundaryDisplay.from_estimator(</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        clf,</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        X_data,</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        response_method<span class="op">=</span><span class="st">"predict"</span>,</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        alpha<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>        ax<span class="op">=</span>ax,</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    disp.ax_.scatter(X_data[<span class="st">"mean area"</span>], X_data[<span class="st">"mean smoothness"</span>], c<span class="op">=</span>y_data, s<span class="op">=</span><span class="dv">20</span>, edgecolor<span class="op">=</span><span class="st">"k"</span>)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    disp.ax_.set_xlim((X_data[<span class="st">"mean area"</span>].<span class="bu">min</span>(), X_data[<span class="st">"mean area"</span>].<span class="bu">max</span>()))</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    disp.ax_.set_ylim((X_data[<span class="st">"mean smoothness"</span>].<span class="bu">min</span>(), X_data[<span class="st">"mean smoothness"</span>].<span class="bu">max</span>()))</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> disp.ax_</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(ncols<span class="op">=</span><span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>fit_and_plot_model(X_plot, y, clf, ax1)</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">"KNN without scaling"</span>)</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>fit_and_plot_model(X_plot_scaled, y, clf, ax2)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>ax2.set_xlabel(<span class="st">"scaled mean area"</span>)</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>ax2.set_ylabel(<span class="st">"scaled mean smoothness"</span>)</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> ax2.set_title(<span class="st">"KNN with scaling"</span>)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
-<section id="module-3-model-selection-and-evaluation" class="level2">
-<h2 class="anchored" data-anchor-id="module-3-model-selection-and-evaluation">Module 3: Model Selection and Evaluation</h2>
-<p>Module 3 deepens your understanding of <strong>generalization and model selection</strong>. You will practice splitting data into training, validation, and test sets, detect underfitting and overfitting, and use cross-validation and hyper-parameter tuning to select robust models.</p>
-<p><strong>Key Terms:</strong></p>
+<section id="investigate" class="level3">
+<h3 class="anchored" data-anchor-id="investigate">3. Investigate</h3>
+<p>Review the output.</p>
 <ul>
-<li>training/validation/test splits, cross-validation<br>
-</li>
-<li>loss functions vs evaluation metrics<br>
-</li>
-<li>baseline models (<code>DummyClassifier</code>, <code>DummyRegressor</code>)<br>
-</li>
-<li>underfitting, overfitting, bias–variance trade-off<br>
-</li>
-<li>hyper-parameter tuning, grid search, randomized search, nested CV</li>
+<li>Was your prediction correct?</li>
+<li>How did scaling affect the decision boundaries?</li>
+<li>Look at the scale of the x-axis and y-axis in both plots. Why does the plot on the left visually emphasize vertical decision boundaries (meaning decisions rely largely on the x-axis)?</li>
 </ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M3-1</td>
-<td><strong>Model Evaluation</strong><br>Distinguishing training loss from evaluation metrics, using appropriate scores for regression and classification, and benchmarking against baselines.</td>
-<td><a href="./modules/M3/lessons/01_evaluation.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>M3-2</td>
-<td><strong>Under-fitting and Over-fitting</strong><br>Diagnosing generalization issues through learning curves and understanding how model complexity and data size influence performance.</td>
-<td><a href="./modules/M3/lessons/02_lab_generalization.html">Lab</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>M3-3</td>
-<td><strong>Hyper-parameter Tuning</strong><br>Using cross-validated grid and randomized searches to optimize model hyper-parameters in a principled way.</td>
-<td><a href="./modules/M3/lessons/03_meta-learning.html">Lab</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>M3-4</td>
-<td><strong>Nested Cross-Validation</strong><br>Robust evaluation of tuning procedures using nested cross-validation to avoid optimistic bias when reporting model performance.</td>
-<td><a href="./modules/M3/lessons/04_nested_cv.html">Lab</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<p><em>Double click here to write your investigation findings:</em></p>
 </section>
-<section id="module-4-classification" class="level2">
-<h2 class="anchored" data-anchor-id="module-4-classification">Module 4: Classification</h2>
-<p>Module 4 introduces <strong>classification-specific evaluation and validation techniques</strong>. You will explore stratified and grouped cross-validation, work with common classification metrics, and learn how thresholds and probability calibration affect decision-making.</p>
-<p><strong>Key Terms:</strong></p>
-<ul>
-<li>classification metrics: accuracy, precision, recall, F1, ROC–AUC<br>
-</li>
-<li>confusion matrix, precision–recall trade-off<br>
-</li>
-<li>stratified cross-validation, grouped cross-validation<br>
-</li>
-<li>decision thresholds, score calibration</li>
-</ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M4-1</td>
-<td><strong>Stratification</strong><br>Ensuring class balance across folds with stratified cross-validation and why this matters for imbalanced datasets.</td>
-<td><a href="./modules/M4/lessons/01_cv_stratification.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>M4-2</td>
-<td><strong>Grouping</strong><br>Designing cross-validation schemes that respect grouped or clustered data to reduce data leakage.</td>
-<td><a href="./modules/M4/lessons/02_cv_grouping.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>M4-3</td>
-<td><strong>Classification Metrics</strong><br>Overview of key classification metrics and how to choose appropriate ones for a given application.</td>
-<td><a href="./modules/M4/lessons/03_classification_metrics.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>M4-4</td>
-<td><strong>Classifier Threshold Tuning</strong><br>How decision thresholds trade off precision and recall and how to choose thresholds aligned with costs and benefits.</td>
-<td><a href="./modules/M4/lessons/04_classifier_threshold_tuning.html">Lesson</a><br><a href="./modules/M4/lessons/widget_threshold.html">Interactive threshold widget</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>M4-5</td>
-<td><strong>Probability Calibration</strong><br>Measuring and improving the quality of predicted probabilities so they better match observed frequencies.</td>
-<td><a href="./modules/M4/lessons/05_probability_calibration.html">Lesson</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<section id="modify" class="level3">
+<h3 class="anchored" data-anchor-id="modify">4. Modify</h3>
+<p>Modify the code below to experiment with the algorithm:</p>
+<ol type="1">
+<li>Change the value of <code>n_neighbors</code> (e.g., to 1 or 50) and run the cell again. What changes do you observe in the boundary map?</li>
+<li>Swap <code>StandardScaler</code> with <code>MinMaxScaler</code> (from <code>sklearn.preprocessing</code>). How does it change the scaled plot?</li>
+</ol>
+<div id="fa941270" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Copy the code from the "Run" section, paste here, and modify it!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 </section>
-<section id="module-6-trees-and-ensembles" class="level2">
-<h2 class="anchored" data-anchor-id="module-6-trees-and-ensembles">Module 6: Trees and Ensembles</h2>
-<p>Module 6 introduces <strong>decision trees and tree-based ensembles</strong>. You will see how trees can capture non-linear relationships, understand their tendency to overfit, and learn how ensembles such as random forests improve stability and performance.</p>
-<p><strong>Key Terms:</strong></p>
+<section id="make" class="level3">
+<h3 class="anchored" data-anchor-id="make">5. Make</h3>
+<p>Now it’s your turn. Use the same dataset but select two completely different features, like <code>mean radius</code> and <code>mean texture</code>.</p>
 <ul>
-<li>decision trees, splits, tree depth, leaves<br>
-</li>
-<li>regression trees, classification trees<br>
-</li>
-<li>overfitting with deep trees, pruning<br>
-</li>
-<li>ensembles of trees (e.g., random forests, gradient boosting — conceptually)</li>
+<li>Print their minimum and maximum values to evaluate their magnitude differences.</li>
+<li>Apply <code>KNeighborsClassifier</code> WITHOUT scaling and plot the decision boundary.</li>
+<li>Apply <code>KNeighborsClassifier</code> WITH scaling and plot the decision boundary.</li>
+<li>Does scaling make as huge of an impact here? Why or why not?</li>
 </ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M6-1</td>
-<td><strong>Decision Trees</strong><br>Building and interpreting decision trees for classification and regression, including splitting criteria, tree structure, and overfitting behavior.</td>
-<td><a href="./modules/M6/lessons/01_trees.html">Lesson</a><br><a href="./modules/M6/lessons/02_lab_decision_trees.html">Lab</a><br></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>Resources:</p>
-<ul>
-<li><a href="https://web.stanford.edu/class/cs129/syllabus">CS129: Applied ML | Standford</a></li>
-<li><a href="https://inria.github.io/scikit-learn-mooc/">Scikit-learn MOOC</a></li>
-<li><a href="https://github.com/ageron/handson-ml3">Hands-on ML | Aurélien Geron</a></li>
-</ul>
+<div id="cell-16" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Write your own code from scratch down here!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 
 
 </section>

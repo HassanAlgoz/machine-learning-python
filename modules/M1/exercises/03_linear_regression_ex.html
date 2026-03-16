@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" dir="ltr"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.8.26">
@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Index – Machine Learning with Python</title>
+<title>Exercise: Linear Regression – Machine Learning with Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,6 +103,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -79,7 +117,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Machine Learning with Python</span>
     </a>
   </div>
@@ -90,7 +128,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">Index</span></a>
   </li>  
 </ul>
@@ -109,20 +147,18 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#module-1-linear-models" id="toc-module-1-linear-models" class="nav-link active" data-scroll-target="#module-1-linear-models">Module 1: Linear Models</a></li>
-  <li><a href="#module-2-pipelines" id="toc-module-2-pipelines" class="nav-link" data-scroll-target="#module-2-pipelines">Module 2: Pipelines</a></li>
-  <li><a href="#module-3-model-selection-and-evaluation" id="toc-module-3-model-selection-and-evaluation" class="nav-link" data-scroll-target="#module-3-model-selection-and-evaluation">Module 3: Model Selection and Evaluation</a></li>
-  <li><a href="#module-4-classification" id="toc-module-4-classification" class="nav-link" data-scroll-target="#module-4-classification">Module 4: Classification</a></li>
-  <li><a href="#module-6-trees-and-ensembles" id="toc-module-6-trees-and-ensembles" class="nav-link" data-scroll-target="#module-6-trees-and-ensembles">Module 6: Trees and Ensembles</a></li>
+  <li><a href="#hours-vs-marks-dataset" id="toc-hours-vs-marks-dataset" class="nav-link active" data-scroll-target="#hours-vs-marks-dataset">1. Hours vs Marks Dataset</a></li>
+  <li><a href="#experience-vs-salary-data" id="toc-experience-vs-salary-data" class="nav-link" data-scroll-target="#experience-vs-salary-data">2. Experience vs Salary Data</a></li>
+  <li><a href="#bmi-and-life-expectancy-dataset" id="toc-bmi-and-life-expectancy-dataset" class="nav-link" data-scroll-target="#bmi-and-life-expectancy-dataset">3. BMI and Life Expectancy Dataset</a></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="03_linear_regression_ex.out.ipynb" download="03_linear_regression_ex.out.ipynb"><i class="bi bi-journal-code"></i>Jupyter</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Index</h1>
+<h1 class="title">Exercise: Linear Regression</h1>
 </div>
 
 
@@ -139,255 +175,185 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This course is a <strong>practical introduction to applied machine learning with scikit-learn</strong>.<br>
-You will progress from linear models and feature preprocessing, through model evaluation and classification, to tree-based methods and modern explainable AI techniques. Along the way, you will work through hands-on notebooks, coding exercises, and interactive widgets that help you build an intuition for how models behave in practice.</p>
-<section id="module-1-linear-models" class="level2">
-<h2 class="anchored" data-anchor-id="module-1-linear-models">Module 1: Linear Models</h2>
-<p>Module 1 builds the foundations of supervised learning using linear models for regression and classification. You will learn how to represent data with features, fit linear models, interpret their parameters, and understand when linear assumptions are reasonable.</p>
-<p><strong>Key Terms:</strong></p>
+<p>Note: you can <strong>Download</strong> the notebook from the sidebar, where it says “<strong>Jupyter</strong>”.</p>
+<p><strong>Your task</strong> is to do the following:</p>
+<ol type="1">
+<li>Load the data</li>
+<li>Identify the features and their types</li>
+<li>Identify the target and its type</li>
+<li>Explore the data
 <ul>
-<li>supervised learning, data matrix, features, targets<br>
-</li>
-<li>linear regression, logistic regression<br>
-</li>
-<li>model coefficients, intercept, decision boundary<br>
-</li>
-<li>non-linear relationships via feature engineering</li>
-</ul>
-<table class="caption-top table">
+<li>What is the number of samples?</li>
+<li>What is the distribution of the features? (<code>min</code>, <code>max</code>, <code>mean</code>, <code>median</code>, <code>std</code>, <code>quantiles</code>). Hint: use <code>DataFrame.describe()</code></li>
+<li>What is the distribution of the target?</li>
+<li>Are there missing values?</li>
+</ul></li>
+<li>What is the relationship between the feature and the target? Increasing, decreasing, random, or non-linear (changing: maybe, increasing until X, then decreasing)? Plot the feature vs the target to answer this.</li>
+<li>Initialize a regression model</li>
+<li>Train the model (on the train set)</li>
+<li>Evaluate the model (on the test set)</li>
+<li>Make predictions on new cases of your choice</li>
+</ol>
+<p>You will do these for all three datasets below..</p>
+<div id="9a33cbf7" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="hours-vs-marks-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="hours-vs-marks-dataset">1. Hours vs Marks Dataset</h3>
+<p><a href="../datasets/Rounded_Student_Hours_Studied_vs_Marks_Dataset.csv" download="">Download Hours vs Marks Dataset</a> [<a href="https://www.kaggle.com/datasets/souradippal/simple-linear-regression-hours-vs-marks-data">Source</a>].</p>
+<div id="54c086fb" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pd.read_csv(<span class="st">"../datasets/Rounded_Student_Hours_Studied_vs_Marks_Dataset.csv"</span>).head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Hours_Studied</th>
+<th data-quarto-table-cell-role="th">Marks</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>M1-1</td>
-<td><strong>Introduction to ML</strong><br>High-level tour of machine learning tasks, workflows, and where supervised learning fits in the broader data science landscape.</td>
-<td><a href="./modules/M1/lessons/01_Intro_ML_slides.html">Lesson</a></td>
-<td><a href="./modules/M1/exercises/01_eda_penguins_ex.html">EDA Penguins exercise</a></td>
+<th data-quarto-table-cell-role="th">0</th>
+<td>4.76</td>
+<td>46.27</td>
 </tr>
 <tr class="even">
-<td>M1-2</td>
-<td><strong>Linear Models</strong><br>Core ideas behind linear regression and logistic regression, including model specification, parameter estimation, and decision boundaries.</td>
-<td><a href="./modules/M1/lessons/02_linear_models.html">Lesson</a><br><a href="./modules/M1/lessons/03_lab_linear_models.html">Lab</a></td>
-<td><a href="./modules/M1/exercises/02_linear_regression_ex.html">Linear regression exercises</a>, <a href="./modules/M1/exercises/03_linear_regression_ex.html">03_linear_regression_ex.ipynb</a></td>
+<th data-quarto-table-cell-role="th">1</th>
+<td>3.00</td>
+<td>34.30</td>
 </tr>
 <tr class="odd">
-<td>M1-3</td>
-<td><strong>Non-linear Data</strong><br>Using feature engineering (e.g., polynomial features) to model non-linear relationships with linear models, and visualizing how transformed features change model flexibility.</td>
-<td><a href="./modules/M1/lessons/04_linear_regression_non_linear_link.html">Lab</a></td>
-<td></td>
+<th data-quarto-table-cell-role="th">2</th>
+<td>2.08</td>
+<td>33.63</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>4.04</td>
+<td>47.81</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>9.49</td>
+<td>66.26</td>
 </tr>
 </tbody>
 </table>
+
+</div>
+</div>
+</div>
 </section>
-<section id="module-2-pipelines" class="level2">
-<h2 class="anchored" data-anchor-id="module-2-pipelines">Module 2: Pipelines</h2>
-<p>Module 2 focuses on <strong>data preprocessing and modeling pipelines</strong>. You will learn how to handle missing values, scale numerical features, encode categorical variables, and chain these steps together with estimators into reusable, production-ready pipelines.</p>
-<p><strong>Key Terms:</strong></p>
-<ul>
-<li>imputation, missing values<br>
-</li>
-<li>feature scaling, normalization, standardization<br>
-</li>
-<li>categorical encoding, one-hot encoding, ordinal encoding<br>
-</li>
-<li>scikit-learn transformers, estimators, pipelines<br>
-</li>
-<li>regression metrics (R², MSE, MAE)</li>
-</ul>
-<table class="caption-top table">
+<section id="experience-vs-salary-data" class="level3">
+<h3 class="anchored" data-anchor-id="experience-vs-salary-data">2. Experience vs Salary Data</h3>
+<p><a href="https://raw.githubusercontent.com/ybifoundation/Dataset/main/Salary%20Data.csv" download="">Donwload Experience vs Salary Dataset</a></p>
+<div id="3d821217" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pd.read_csv(<span class="st">"../datasets/Salary Data.csv"</span>).head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Experience Years</th>
+<th data-quarto-table-cell-role="th">Salary</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>M2-1</td>
-<td><strong>Imputation: Missing Values</strong><br>Strategies to handle missing data, including simple and model-based imputations, and their impact on downstream models.</td>
-<td><a href="./modules/M2/lessons/01_impute.html">Lab</a></td>
-<td></td>
+<th data-quarto-table-cell-role="th">0</th>
+<td>1.1</td>
+<td>39343</td>
 </tr>
 <tr class="even">
-<td>M2-2</td>
-<td><strong>Scaling: Numerical Features</strong><br>Why feature scaling matters, how it affects distance-based models, optimization, and when to use min–max or standard scaling.</td>
-<td><a href="./modules/M2/lessons/02_scale.html">Lesson</a></td>
-<td><a href="./modules/M2/exercises/01_scaling_knn_primm.html">Scaling &amp; k-NN exercise</a></td>
+<th data-quarto-table-cell-role="th">1</th>
+<td>1.2</td>
+<td>42774</td>
 </tr>
 <tr class="odd">
-<td>M2-3</td>
-<td><strong>Encoding: Categorical Features</strong><br>Different approaches to represent categories numerically, along with trade-offs between one-hot and ordinal encodings.</td>
-<td><a href="./modules/M2/lessons/03_encode.html">Lab</a></td>
-<td><a href="./modules/M2/exercises/02_categorical_encoding_ex.html">Categorical encoding exercise</a></td>
+<th data-quarto-table-cell-role="th">2</th>
+<td>1.3</td>
+<td>46205</td>
 </tr>
 <tr class="even">
-<td>M2-4</td>
-<td><strong>Predictive Modeling Pipelines</strong><br>Building end-to-end scikit-learn pipelines that combine preprocessing and modeling into a single, robust workflow.</td>
-<td><a href="./modules/M2/lessons/04_pipeline.html">Lesson</a><br><a href="./modules/M2/lessons/05_lab_pipeline.html">Lab</a></td>
-<td><a href="./modules/M2/exercises/03_multi-variable_regression_ex_1.html">Multi-variable regression exercises</a>, <a href="./modules/M2/exercises/04_multi-variable_regression_ex_2.html">04_multi-variable_regression_ex_2.ipynb</a></td>
+<th data-quarto-table-cell-role="th">3</th>
+<td>1.5</td>
+<td>37731</td>
 </tr>
 <tr class="odd">
-<td>M2-5</td>
-<td><strong>Regression Metrics</strong><br>Evaluating regression models with common metrics and learning to interpret metric values in the context of a business problem.</td>
-<td><a href="./modules/M2/lessons/06_regression_metrics.html">Lab</a></td>
-<td></td>
+<th data-quarto-table-cell-role="th">4</th>
+<td>2.0</td>
+<td>43525</td>
 </tr>
 </tbody>
 </table>
+
+</div>
+</div>
+</div>
 </section>
-<section id="module-3-model-selection-and-evaluation" class="level2">
-<h2 class="anchored" data-anchor-id="module-3-model-selection-and-evaluation">Module 3: Model Selection and Evaluation</h2>
-<p>Module 3 deepens your understanding of <strong>generalization and model selection</strong>. You will practice splitting data into training, validation, and test sets, detect underfitting and overfitting, and use cross-validation and hyper-parameter tuning to select robust models.</p>
-<p><strong>Key Terms:</strong></p>
-<ul>
-<li>training/validation/test splits, cross-validation<br>
-</li>
-<li>loss functions vs evaluation metrics<br>
-</li>
-<li>baseline models (<code>DummyClassifier</code>, <code>DummyRegressor</code>)<br>
-</li>
-<li>underfitting, overfitting, bias–variance trade-off<br>
-</li>
-<li>hyper-parameter tuning, grid search, randomized search, nested CV</li>
-</ul>
-<table class="caption-top table">
+<section id="bmi-and-life-expectancy-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="bmi-and-life-expectancy-dataset">3. BMI and Life Expectancy Dataset</h3>
+<p><a href="../datasets/bmi_and_life_expectancy.csv" download="">Download BMI and Life Expectancy Dataset</a></p>
+<p>Optional: the <code>Country</code> column can be used to group some countries together to find out some underlying patterns that are not directly visible in the data.</p>
+<div id="871eb07a" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pd.read_csv(<span class="st">"../datasets/bmi_and_life_expectancy.csv"</span>).head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
 <thead>
 <tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">Country</th>
+<th data-quarto-table-cell-role="th">Life expectancy</th>
+<th data-quarto-table-cell-role="th">BMI</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>M3-1</td>
-<td><strong>Model Evaluation</strong><br>Distinguishing training loss from evaluation metrics, using appropriate scores for regression and classification, and benchmarking against baselines.</td>
-<td><a href="./modules/M3/lessons/01_evaluation.html">Lesson</a></td>
-<td></td>
+<th data-quarto-table-cell-role="th">0</th>
+<td>Afghanistan</td>
+<td>52.8</td>
+<td>20.62058</td>
 </tr>
 <tr class="even">
-<td>M3-2</td>
-<td><strong>Under-fitting and Over-fitting</strong><br>Diagnosing generalization issues through learning curves and understanding how model complexity and data size influence performance.</td>
-<td><a href="./modules/M3/lessons/02_lab_generalization.html">Lab</a></td>
-<td></td>
+<th data-quarto-table-cell-role="th">1</th>
+<td>Albania</td>
+<td>76.8</td>
+<td>26.44657</td>
 </tr>
 <tr class="odd">
-<td>M3-3</td>
-<td><strong>Hyper-parameter Tuning</strong><br>Using cross-validated grid and randomized searches to optimize model hyper-parameters in a principled way.</td>
-<td><a href="./modules/M3/lessons/03_meta-learning.html">Lab</a></td>
-<td></td>
+<th data-quarto-table-cell-role="th">2</th>
+<td>Algeria</td>
+<td>75.5</td>
+<td>24.59620</td>
 </tr>
 <tr class="even">
-<td>M3-4</td>
-<td><strong>Nested Cross-Validation</strong><br>Robust evaluation of tuning procedures using nested cross-validation to avoid optimistic bias when reporting model performance.</td>
-<td><a href="./modules/M3/lessons/04_nested_cv.html">Lab</a></td>
-<td></td>
+<th data-quarto-table-cell-role="th">3</th>
+<td>Andorra</td>
+<td>84.6</td>
+<td>27.63048</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Angola</td>
+<td>56.7</td>
+<td>22.25083</td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="module-4-classification" class="level2">
-<h2 class="anchored" data-anchor-id="module-4-classification">Module 4: Classification</h2>
-<p>Module 4 introduces <strong>classification-specific evaluation and validation techniques</strong>. You will explore stratified and grouped cross-validation, work with common classification metrics, and learn how thresholds and probability calibration affect decision-making.</p>
-<p><strong>Key Terms:</strong></p>
-<ul>
-<li>classification metrics: accuracy, precision, recall, F1, ROC–AUC<br>
-</li>
-<li>confusion matrix, precision–recall trade-off<br>
-</li>
-<li>stratified cross-validation, grouped cross-validation<br>
-</li>
-<li>decision thresholds, score calibration</li>
-</ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M4-1</td>
-<td><strong>Stratification</strong><br>Ensuring class balance across folds with stratified cross-validation and why this matters for imbalanced datasets.</td>
-<td><a href="./modules/M4/lessons/01_cv_stratification.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>M4-2</td>
-<td><strong>Grouping</strong><br>Designing cross-validation schemes that respect grouped or clustered data to reduce data leakage.</td>
-<td><a href="./modules/M4/lessons/02_cv_grouping.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>M4-3</td>
-<td><strong>Classification Metrics</strong><br>Overview of key classification metrics and how to choose appropriate ones for a given application.</td>
-<td><a href="./modules/M4/lessons/03_classification_metrics.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>M4-4</td>
-<td><strong>Classifier Threshold Tuning</strong><br>How decision thresholds trade off precision and recall and how to choose thresholds aligned with costs and benefits.</td>
-<td><a href="./modules/M4/lessons/04_classifier_threshold_tuning.html">Lesson</a><br><a href="./modules/M4/lessons/widget_threshold.html">Interactive threshold widget</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>M4-5</td>
-<td><strong>Probability Calibration</strong><br>Measuring and improving the quality of predicted probabilities so they better match observed frequencies.</td>
-<td><a href="./modules/M4/lessons/05_probability_calibration.html">Lesson</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="module-6-trees-and-ensembles" class="level2">
-<h2 class="anchored" data-anchor-id="module-6-trees-and-ensembles">Module 6: Trees and Ensembles</h2>
-<p>Module 6 introduces <strong>decision trees and tree-based ensembles</strong>. You will see how trees can capture non-linear relationships, understand their tendency to overfit, and learn how ensembles such as random forests improve stability and performance.</p>
-<p><strong>Key Terms:</strong></p>
-<ul>
-<li>decision trees, splits, tree depth, leaves<br>
-</li>
-<li>regression trees, classification trees<br>
-</li>
-<li>overfitting with deep trees, pruning<br>
-</li>
-<li>ensembles of trees (e.g., random forests, gradient boosting — conceptually)</li>
-</ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M6-1</td>
-<td><strong>Decision Trees</strong><br>Building and interpreting decision trees for classification and regression, including splitting criteria, tree structure, and overfitting behavior.</td>
-<td><a href="./modules/M6/lessons/01_trees.html">Lesson</a><br><a href="./modules/M6/lessons/02_lab_decision_trees.html">Lab</a><br></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>Resources:</p>
-<ul>
-<li><a href="https://web.stanford.edu/class/cs129/syllabus">CS129: Applied ML | Standford</a></li>
-<li><a href="https://inria.github.io/scikit-learn-mooc/">Scikit-learn MOOC</a></li>
-<li><a href="https://github.com/ageron/handson-ml3">Hands-on ML | Aurélien Geron</a></li>
-</ul>
+
+</div>
+</div>
+</div>
 
 
 </section>

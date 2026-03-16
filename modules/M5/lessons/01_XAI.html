@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Index – Machine Learning with Python</title>
+<title>xai – Machine Learning with Python</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +23,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -79,7 +79,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Machine Learning with Python</span>
     </a>
   </div>
@@ -90,7 +90,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="../../../index.html"> 
 <span class="menu-text">Index</span></a>
   </li>  
 </ul>
@@ -109,287 +109,39 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#module-1-linear-models" id="toc-module-1-linear-models" class="nav-link active" data-scroll-target="#module-1-linear-models">Module 1: Linear Models</a></li>
-  <li><a href="#module-2-pipelines" id="toc-module-2-pipelines" class="nav-link" data-scroll-target="#module-2-pipelines">Module 2: Pipelines</a></li>
-  <li><a href="#module-3-model-selection-and-evaluation" id="toc-module-3-model-selection-and-evaluation" class="nav-link" data-scroll-target="#module-3-model-selection-and-evaluation">Module 3: Model Selection and Evaluation</a></li>
-  <li><a href="#module-4-classification" id="toc-module-4-classification" class="nav-link" data-scroll-target="#module-4-classification">Module 4: Classification</a></li>
-  <li><a href="#module-6-trees-and-ensembles" id="toc-module-6-trees-and-ensembles" class="nav-link" data-scroll-target="#module-6-trees-and-ensembles">Module 6: Trees and Ensembles</a></li>
+  <li><a href="#partial-dependence-plots" id="toc-partial-dependence-plots" class="nav-link active" data-scroll-target="#partial-dependence-plots">Partial Dependence Plots</a>
+  <ul class="collapse">
+  <li><a href="#examples" id="toc-examples" class="nav-link" data-scroll-target="#examples">Examples</a></li>
+  </ul></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="01_XAI.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Index</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<p>This course is a <strong>practical introduction to applied machine learning with scikit-learn</strong>.<br>
-You will progress from linear models and feature preprocessing, through model evaluation and classification, to tree-based methods and modern explainable AI techniques. Along the way, you will work through hands-on notebooks, coding exercises, and interactive widgets that help you build an intuition for how models behave in practice.</p>
-<section id="module-1-linear-models" class="level2">
-<h2 class="anchored" data-anchor-id="module-1-linear-models">Module 1: Linear Models</h2>
-<p>Module 1 builds the foundations of supervised learning using linear models for regression and classification. You will learn how to represent data with features, fit linear models, interpret their parameters, and understand when linear assumptions are reasonable.</p>
-<p><strong>Key Terms:</strong></p>
+<section id="partial-dependence-plots" class="level1">
+<h1>Partial Dependence Plots</h1>
+<p>The partial dependence plot (short PDP or PD plot) shows the marginal effect one or two features have on the predicted outcome of a machine learning model&nbsp;(<a href="https://christophm.github.io/interpretable-ml-book/references.html#ref-friedman2001greedy">Friedman 2001</a>). A partial dependence plot can show whether the relationship between the target and a feature is linear, monotonic, or more complex. - A PDP assumes independence between the features, and can be misleading otherwise (e.g.&nbsp;when the model has many high order interactions). - Computing and graphing a PDP is relatively quick.</p>
+<section id="examples" class="level3">
+<h3 class="anchored" data-anchor-id="examples">Examples</h3>
+<p>Due to the limits of human perception, the size of the set of input features of interest must be small (usually, one or two) thus the input features of interest are usually chosen among the most important features.</p>
+<p>The figure below shows two one-way and one two-way partial dependence plots for the bike sharing dataset, with a&nbsp;<a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingRegressor.html#sklearn.ensemble.HistGradientBoostingRegressor" title="sklearn.ensemble.HistGradientBoostingRegressor"><code>HistGradientBoostingRegressor</code></a>: <img src="../assets/pdp.png" class="img-fluid" alt="Figure: 1-way vs 2-way of numerical Partial Dependence Plot using Gradient Boosting"> <strong>One-way PDPs</strong> tell us about the interaction between the target response and an input feature of interest (e.g.&nbsp;linear, non-linear). In the above figure:</p>
 <ul>
-<li>supervised learning, data matrix, features, targets<br>
-</li>
-<li>linear regression, logistic regression<br>
-</li>
-<li>model coefficients, intercept, decision boundary<br>
-</li>
-<li>non-linear relationships via feature engineering</li>
+<li>Left plot: shows the effect of the temperature on the number of bike rentals; we can clearly see that a higher temperature is related with a higher number of bike rentals.</li>
+<li>Middle plot: shows the effect of the humidity on the number of bike rentals.</li>
+<li>Thus, these interpretations are marginal, considering a feature at a time.</li>
 </ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M1-1</td>
-<td><strong>Introduction to ML</strong><br>High-level tour of machine learning tasks, workflows, and where supervised learning fits in the broader data science landscape.</td>
-<td><a href="./modules/M1/lessons/01_Intro_ML_slides.html">Lesson</a></td>
-<td><a href="./modules/M1/exercises/01_eda_penguins_ex.html">EDA Penguins exercise</a></td>
-</tr>
-<tr class="even">
-<td>M1-2</td>
-<td><strong>Linear Models</strong><br>Core ideas behind linear regression and logistic regression, including model specification, parameter estimation, and decision boundaries.</td>
-<td><a href="./modules/M1/lessons/02_linear_models.html">Lesson</a><br><a href="./modules/M1/lessons/03_lab_linear_models.html">Lab</a></td>
-<td><a href="./modules/M1/exercises/02_linear_regression_ex.html">Linear regression exercises</a>, <a href="./modules/M1/exercises/03_linear_regression_ex.html">03_linear_regression_ex.ipynb</a></td>
-</tr>
-<tr class="odd">
-<td>M1-3</td>
-<td><strong>Non-linear Data</strong><br>Using feature engineering (e.g., polynomial features) to model non-linear relationships with linear models, and visualizing how transformed features change model flexibility.</td>
-<td><a href="./modules/M1/lessons/04_linear_regression_non_linear_link.html">Lab</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<p><strong>PDPs with two input features</strong> of interest show the interactions among the two features. For example, the two-variable PDP in the above figure shows the dependence of the number of bike rentals on joint values of temperature and humidity. We can clearly see an interaction between the two features:</p>
+<ul>
+<li>with a temperature higher than 20 degrees Celsius, mainly the humidity has a strong impact on the number of bike rentals.</li>
+<li>for lower temperatures, both the temperature and the humidity have an impact on the number of bike rentals.</li>
+</ul>
+
+
 </section>
-<section id="module-2-pipelines" class="level2">
-<h2 class="anchored" data-anchor-id="module-2-pipelines">Module 2: Pipelines</h2>
-<p>Module 2 focuses on <strong>data preprocessing and modeling pipelines</strong>. You will learn how to handle missing values, scale numerical features, encode categorical variables, and chain these steps together with estimators into reusable, production-ready pipelines.</p>
-<p><strong>Key Terms:</strong></p>
-<ul>
-<li>imputation, missing values<br>
-</li>
-<li>feature scaling, normalization, standardization<br>
-</li>
-<li>categorical encoding, one-hot encoding, ordinal encoding<br>
-</li>
-<li>scikit-learn transformers, estimators, pipelines<br>
-</li>
-<li>regression metrics (R², MSE, MAE)</li>
-</ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M2-1</td>
-<td><strong>Imputation: Missing Values</strong><br>Strategies to handle missing data, including simple and model-based imputations, and their impact on downstream models.</td>
-<td><a href="./modules/M2/lessons/01_impute.html">Lab</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>M2-2</td>
-<td><strong>Scaling: Numerical Features</strong><br>Why feature scaling matters, how it affects distance-based models, optimization, and when to use min–max or standard scaling.</td>
-<td><a href="./modules/M2/lessons/02_scale.html">Lesson</a></td>
-<td><a href="./modules/M2/exercises/01_scaling_knn_primm.html">Scaling &amp; k-NN exercise</a></td>
-</tr>
-<tr class="odd">
-<td>M2-3</td>
-<td><strong>Encoding: Categorical Features</strong><br>Different approaches to represent categories numerically, along with trade-offs between one-hot and ordinal encodings.</td>
-<td><a href="./modules/M2/lessons/03_encode.html">Lab</a></td>
-<td><a href="./modules/M2/exercises/02_categorical_encoding_ex.html">Categorical encoding exercise</a></td>
-</tr>
-<tr class="even">
-<td>M2-4</td>
-<td><strong>Predictive Modeling Pipelines</strong><br>Building end-to-end scikit-learn pipelines that combine preprocessing and modeling into a single, robust workflow.</td>
-<td><a href="./modules/M2/lessons/04_pipeline.html">Lesson</a><br><a href="./modules/M2/lessons/05_lab_pipeline.html">Lab</a></td>
-<td><a href="./modules/M2/exercises/03_multi-variable_regression_ex_1.html">Multi-variable regression exercises</a>, <a href="./modules/M2/exercises/04_multi-variable_regression_ex_2.html">04_multi-variable_regression_ex_2.ipynb</a></td>
-</tr>
-<tr class="odd">
-<td>M2-5</td>
-<td><strong>Regression Metrics</strong><br>Evaluating regression models with common metrics and learning to interpret metric values in the context of a business problem.</td>
-<td><a href="./modules/M2/lessons/06_regression_metrics.html">Lab</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="module-3-model-selection-and-evaluation" class="level2">
-<h2 class="anchored" data-anchor-id="module-3-model-selection-and-evaluation">Module 3: Model Selection and Evaluation</h2>
-<p>Module 3 deepens your understanding of <strong>generalization and model selection</strong>. You will practice splitting data into training, validation, and test sets, detect underfitting and overfitting, and use cross-validation and hyper-parameter tuning to select robust models.</p>
-<p><strong>Key Terms:</strong></p>
-<ul>
-<li>training/validation/test splits, cross-validation<br>
-</li>
-<li>loss functions vs evaluation metrics<br>
-</li>
-<li>baseline models (<code>DummyClassifier</code>, <code>DummyRegressor</code>)<br>
-</li>
-<li>underfitting, overfitting, bias–variance trade-off<br>
-</li>
-<li>hyper-parameter tuning, grid search, randomized search, nested CV</li>
-</ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M3-1</td>
-<td><strong>Model Evaluation</strong><br>Distinguishing training loss from evaluation metrics, using appropriate scores for regression and classification, and benchmarking against baselines.</td>
-<td><a href="./modules/M3/lessons/01_evaluation.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>M3-2</td>
-<td><strong>Under-fitting and Over-fitting</strong><br>Diagnosing generalization issues through learning curves and understanding how model complexity and data size influence performance.</td>
-<td><a href="./modules/M3/lessons/02_lab_generalization.html">Lab</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>M3-3</td>
-<td><strong>Hyper-parameter Tuning</strong><br>Using cross-validated grid and randomized searches to optimize model hyper-parameters in a principled way.</td>
-<td><a href="./modules/M3/lessons/03_meta-learning.html">Lab</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>M3-4</td>
-<td><strong>Nested Cross-Validation</strong><br>Robust evaluation of tuning procedures using nested cross-validation to avoid optimistic bias when reporting model performance.</td>
-<td><a href="./modules/M3/lessons/04_nested_cv.html">Lab</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="module-4-classification" class="level2">
-<h2 class="anchored" data-anchor-id="module-4-classification">Module 4: Classification</h2>
-<p>Module 4 introduces <strong>classification-specific evaluation and validation techniques</strong>. You will explore stratified and grouped cross-validation, work with common classification metrics, and learn how thresholds and probability calibration affect decision-making.</p>
-<p><strong>Key Terms:</strong></p>
-<ul>
-<li>classification metrics: accuracy, precision, recall, F1, ROC–AUC<br>
-</li>
-<li>confusion matrix, precision–recall trade-off<br>
-</li>
-<li>stratified cross-validation, grouped cross-validation<br>
-</li>
-<li>decision thresholds, score calibration</li>
-</ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M4-1</td>
-<td><strong>Stratification</strong><br>Ensuring class balance across folds with stratified cross-validation and why this matters for imbalanced datasets.</td>
-<td><a href="./modules/M4/lessons/01_cv_stratification.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>M4-2</td>
-<td><strong>Grouping</strong><br>Designing cross-validation schemes that respect grouped or clustered data to reduce data leakage.</td>
-<td><a href="./modules/M4/lessons/02_cv_grouping.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>M4-3</td>
-<td><strong>Classification Metrics</strong><br>Overview of key classification metrics and how to choose appropriate ones for a given application.</td>
-<td><a href="./modules/M4/lessons/03_classification_metrics.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>M4-4</td>
-<td><strong>Classifier Threshold Tuning</strong><br>How decision thresholds trade off precision and recall and how to choose thresholds aligned with costs and benefits.</td>
-<td><a href="./modules/M4/lessons/04_classifier_threshold_tuning.html">Lesson</a><br><a href="./modules/M4/lessons/widget_threshold.html">Interactive threshold widget</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>M4-5</td>
-<td><strong>Probability Calibration</strong><br>Measuring and improving the quality of predicted probabilities so they better match observed frequencies.</td>
-<td><a href="./modules/M4/lessons/05_probability_calibration.html">Lesson</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="module-6-trees-and-ensembles" class="level2">
-<h2 class="anchored" data-anchor-id="module-6-trees-and-ensembles">Module 6: Trees and Ensembles</h2>
-<p>Module 6 introduces <strong>decision trees and tree-based ensembles</strong>. You will see how trees can capture non-linear relationships, understand their tendency to overfit, and learn how ensembles such as random forests improve stability and performance.</p>
-<p><strong>Key Terms:</strong></p>
-<ul>
-<li>decision trees, splits, tree depth, leaves<br>
-</li>
-<li>regression trees, classification trees<br>
-</li>
-<li>overfitting with deep trees, pruning<br>
-</li>
-<li>ensembles of trees (e.g., random forests, gradient boosting — conceptually)</li>
-</ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M6-1</td>
-<td><strong>Decision Trees</strong><br>Building and interpreting decision trees for classification and regression, including splitting criteria, tree structure, and overfitting behavior.</td>
-<td><a href="./modules/M6/lessons/01_trees.html">Lesson</a><br><a href="./modules/M6/lessons/02_lab_decision_trees.html">Lab</a><br></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<p>Resources:</p>
-<ul>
-<li><a href="https://web.stanford.edu/class/cs129/syllabus">CS129: Applied ML | Standford</a></li>
-<li><a href="https://inria.github.io/scikit-learn-mooc/">Scikit-learn MOOC</a></li>
-<li><a href="https://github.com/ageron/handson-ml3">Hands-on ML | Aurélien Geron</a></li>
-</ul>
-
-
 </section>
 
 </main> <!-- /main -->
