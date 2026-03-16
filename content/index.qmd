@@ -4,29 +4,134 @@ format: html
 # page-layout: full
 ---
 
+This course is a **practical introduction to applied machine learning with scikit-learn**.  
+You will progress from linear models and feature preprocessing, through model evaluation and
+classification, to tree-based methods and modern explainable AI techniques. Along the way,
+you will work through hands-on notebooks, coding exercises, and interactive widgets that help
+you build an intuition for how models behave in practice.
+
+## Module 1: Linear Models
+
+Module 1 builds the foundations of supervised learning using linear models for regression and
+classification. You will learn how to represent data with features, fit linear models,
+interpret their parameters, and understand when linear assumptions are reasonable.
+
+**Key Terms:**
+
+- supervised learning, data matrix, features, targets  
+- linear regression, logistic regression  
+- model coefficients, intercept, decision boundary  
+- non-linear relationships via feature engineering  
+
 | Lesson | Description | Materials | Assignments |
 |-------------|-------------|------------------------|-----------------------|
-| M1-1 | Introduction to ML | [Lesson](./modules/M1/lessons/01_Intro_ML_slides.qmd) |  |
-| M1-2 | Linear Models | [Lesson](./modules/M1/lessons/02_linear_models.qmd)<br>[Lab](./modules/M1/lessons/03_lab_linear_models.ipynb) |  |
-| M1-3 | Non-linear Data | [Lab](./modules/M1/lessons/04_linear_regression_non_linear_link.ipynb) |  |
-| M2-1 | Imputation: Missing Values | [Lab](./modules/M2/lessons/01_impute.ipynb) |  |
-| M2-2 | Scaling: Numerical Features | [Lesson](./modules/M2/lessons/02_scale.qmd) |  |
-| M2-3 | Encoding: Categorical Features | [Lab](./modules/M2/lessons/03_encode.ipynb) |  |
-| M2-4 | Predictive Modeling Pipelines | [Lesson](./modules/M2/lessons/04_pipeline.qmd)<br>[Lab](./modules/M2/lessons/05_lab_pipeline.ipynb) |  |
-| M2-5 | Regression Metrics | [Lab](./modules/M2/lessons/06_regression_metrics.ipynb) |  |
-| M3-1 | Model Evaluation | [Lesson](./modules/M3/lessons/01_evaluation.qmd) |  |
-| M3-2 | Under-fitting and Over-fitting | [Lab](./modules/M3/lessons/02_lab_generalization.ipynb) |  |
-| M3-3 | Hyper-parameter Tuning | [Lab](./modules/M3/lessons/03_meta-learning.ipynb) |  |
-| M3-4 | Nested Cross-Validation | [Lab](./modules/M3/lessons/04_nested_cv.ipynb) |  |
-| M4-1 | CV Stratification | [Lesson](./modules/M4/lessons/01_cv_stratification.ipynb) |  |
-| M4-2 | CV Grouping | [Lesson](./modules/M4/lessons/02_cv_grouping.ipynb) |  |
-| M4-3 | Classification Metrics | [Lesson](./modules/M4/lessons/03_classification_metrics.ipynb) |  |
-| M4-4 | Classifier Threshold Tuning | [Lesson](./modules/M4/lessons/04_classifier_threshold_tuning.ipynb) |  |
-| M4-5 | Probability Calibration | [Lesson](./modules/M4/lessons/05_probability_calibration.ipynb) |  |
-| M5-1 | Decision Trees | [Lesson](./modules/M5/lessons/01_trees.qmd)<br>[Lab](./modules/M5/lessons/02_lab_decision_trees.ipynb) |  |
+| M1-1 | **Introduction to ML**<br/>High-level tour of machine learning tasks, workflows, and where supervised learning fits in the broader data science landscape. | [Lesson](./modules/M1/lessons/01_Intro_ML_slides.qmd) | [EDA Penguins exercise](./modules/M1/exercises/01_eda_penguins_ex.ipynb) |
+| M1-2 | **Linear Models**<br/>Core ideas behind linear regression and logistic regression, including model specification, parameter estimation, and decision boundaries. | [Lesson](./modules/M1/lessons/02_linear_models.qmd)<br/>[Lab](./modules/M1/lessons/03_lab_linear_models.ipynb) | [Linear regression exercises](./modules/M1/exercises/02_linear_regression_ex.ipynb), [03_linear_regression_ex.ipynb](./modules/M1/exercises/03_linear_regression_ex.ipynb) |
+| M1-3 | **Non-linear Data**<br/>Using feature engineering (e.g., polynomial features) to model non-linear relationships with linear models, and visualizing how transformed features change model flexibility. | [Lab](./modules/M1/lessons/04_linear_regression_non_linear_link.ipynb) |  |
+
+## Module 2: Pipelines
+
+Module 2 focuses on **data preprocessing and modeling pipelines**. You will learn how to
+handle missing values, scale numerical features, encode categorical variables, and chain
+these steps together with estimators into reusable, production-ready pipelines.
+
+**Key Terms:**
+
+- imputation, missing values  
+- feature scaling, normalization, standardization  
+- categorical encoding, one-hot encoding, ordinal encoding  
+- scikit-learn transformers, estimators, pipelines  
+- regression metrics (R², MSE, MAE)  
+
+| Lesson | Description | Materials | Assignments |
+|-------------|-------------|------------------------|-----------------------|
+| M2-1 | **Imputation: Missing Values**<br/>Strategies to handle missing data, including simple and model-based imputations, and their impact on downstream models. | [Lab](./modules/M2/lessons/01_impute.ipynb) |  |
+| M2-2 | **Scaling: Numerical Features**<br/>Why feature scaling matters, how it affects distance-based models, optimization, and when to use min–max or standard scaling. | [Lesson](./modules/M2/lessons/02_scale.qmd) | [Scaling & k-NN exercise](./modules/M2/exercises/01_scaling_knn_primm.ipynb) |
+| M2-3 | **Encoding: Categorical Features**<br/>Different approaches to represent categories numerically, along with trade-offs between one-hot and ordinal encodings. | [Lab](./modules/M2/lessons/03_encode.ipynb) | [Categorical encoding exercise](./modules/M2/exercises/02_categorical_encoding_ex.ipynb) |
+| M2-4 | **Predictive Modeling Pipelines**<br/>Building end-to-end scikit-learn pipelines that combine preprocessing and modeling into a single, robust workflow. | [Lesson](./modules/M2/lessons/04_pipeline.qmd)<br/>[Lab](./modules/M2/lessons/05_lab_pipeline.ipynb) | [Multi-variable regression exercises](./modules/M2/exercises/03_multi-variable_regression_ex_1.ipynb), [04_multi-variable_regression_ex_2.ipynb](./modules/M2/exercises/04_multi-variable_regression_ex_2.ipynb) |
+| M2-5 | **Regression Metrics**<br/>Evaluating regression models with common metrics and learning to interpret metric values in the context of a business problem. | [Lab](./modules/M2/lessons/06_regression_metrics.ipynb) |  |
+
+## Module 3: Model Selection and Evaluation
+
+Module 3 deepens your understanding of **generalization and model selection**. You will
+practice splitting data into training, validation, and test sets, detect underfitting and
+overfitting, and use cross-validation and hyper-parameter tuning to select robust models.
+
+**Key Terms:**
+
+- training/validation/test splits, cross-validation  
+- loss functions vs evaluation metrics  
+- baseline models (`DummyClassifier`, `DummyRegressor`)  
+- underfitting, overfitting, bias–variance trade-off  
+- hyper-parameter tuning, grid search, randomized search, nested CV  
+
+| Lesson | Description | Materials | Assignments |
+|-------------|-------------|------------------------|-----------------------|
+| M3-1 | **Model Evaluation**<br/>Distinguishing training loss from evaluation metrics, using appropriate scores for regression and classification, and benchmarking against baselines. | [Lesson](./modules/M3/lessons/01_evaluation.qmd) |  |
+| M3-2 | **Under-fitting and Over-fitting**<br/>Diagnosing generalization issues through learning curves and understanding how model complexity and data size influence performance. | [Lab](./modules/M3/lessons/02_lab_generalization.ipynb) |  |
+| M3-3 | **Hyper-parameter Tuning**<br/>Using cross-validated grid and randomized searches to optimize model hyper-parameters in a principled way. | [Lab](./modules/M3/lessons/03_meta-learning.ipynb) |  |
+| M3-4 | **Nested Cross-Validation**<br/>Robust evaluation of tuning procedures using nested cross-validation to avoid optimistic bias when reporting model performance. | [Lab](./modules/M3/lessons/04_nested_cv.ipynb) |  |
+
+## Module 4: Classification
+
+Module 4 introduces **classification-specific evaluation and validation techniques**. You
+will explore stratified and grouped cross-validation, work with common classification
+metrics, and learn how thresholds and probability calibration affect decision-making.
+
+**Key Terms:**
+
+- classification metrics: accuracy, precision, recall, F1, ROC–AUC  
+- confusion matrix, precision–recall trade-off  
+- stratified cross-validation, grouped cross-validation  
+- decision thresholds, score calibration  
+
+| Lesson | Description | Materials | Assignments |
+|-------------|-------------|------------------------|-----------------------|
+| M4-1 | **Stratification**<br/>Ensuring class balance across folds with stratified cross-validation and why this matters for imbalanced datasets. | [Lesson](./modules/M4/lessons/01_cv_stratification.ipynb) |  |
+| M4-2 | **Grouping**<br/>Designing cross-validation schemes that respect grouped or clustered data to reduce data leakage. | [Lesson](./modules/M4/lessons/02_cv_grouping.ipynb) |  |
+| M4-3 | **Classification Metrics**<br/>Overview of key classification metrics and how to choose appropriate ones for a given application. | [Lesson](./modules/M4/lessons/03_classification_metrics.ipynb) |  |
+| M4-4 | **Classifier Threshold Tuning**<br/>How decision thresholds trade off precision and recall and how to choose thresholds aligned with costs and benefits. | [Lesson](./modules/M4/lessons/04_classifier_threshold_tuning.ipynb)<br/>[Interactive threshold widget](./modules/M4/lessons/widget_threshold.qmd) |  |
+| M4-5 | **Probability Calibration**<br/>Measuring and improving the quality of predicted probabilities so they better match observed frequencies. | [Lesson](./modules/M4/lessons/05_probability_calibration.ipynb) |  |
+
+## Module 5: Explainable AI
+
+Module 5 focuses on **model interpretability and explainable AI**. You will learn how to
+use partial dependence plots and SHAP values to understand and communicate how complex
+models make predictions.
+
+**Key Terms:**
+
+- model interpretability, explainable AI (XAI)  
+- partial dependence plots (PDPs)  
+- feature effects, marginal effects  
+- Shapley values, SHAP explanations  
+
+| Lesson | Description | Materials | Assignments |
+|-------------|-------------|------------------------|-----------------------|
+| M5-1 | **Partial Dependence Plots**<br/>Using partial dependence plots to visualize the marginal effect of one or two features on model predictions and detect linear or non-linear relationships. | [Lesson](./modules/M5/lessons/01_pdp.ipynb) |  |
+| M5-2 | **SHAP Values**<br/>Using SHAP to attribute predictions to individual features and provide local, instance-level explanations consistent with game-theoretic principles. | [Lesson](./modules/M5/lessons/02_shap.qmd) |  |
+
+## Module 6: Trees and Ensembles
+
+Module 6 introduces **decision trees and tree-based ensembles**. You will see how trees can
+capture non-linear relationships, understand their tendency to overfit, and learn how
+ensembles such as random forests improve stability and performance.
+
+**Key Terms:**
+
+- decision trees, splits, tree depth, leaves  
+- regression trees, classification trees  
+- overfitting with deep trees, pruning  
+- ensembles of trees (e.g., random forests, gradient boosting — conceptually)  
+
+| Lesson | Description | Materials | Assignments |
+|-------------|-------------|------------------------|-----------------------|
+| M6-1 | **Decision Trees**<br/>Building and interpreting decision trees for classification and regression, including splitting criteria, tree structure, and overfitting behavior. | [Lesson](./modules/M6/lessons/01_trees.qmd)<br/>[Lab](./modules/M6/lessons/02_lab_decision_trees.ipynb)<br/>[Trees quiz](./modules/M6/quizzes/trees_quiz_m5_01.md)<br/>[Quiz widget](./modules/M6/quizzes/01_.qmd) |  |
+
 
 Resources:
 
 -   [CS129: Applied ML \| Standford](https://web.stanford.edu/class/cs129/syllabus)
 -   [Scikit-learn MOOC](https://inria.github.io/scikit-learn-mooc/)
 -   [Hands-on ML \| Aurélien Geron](https://github.com/ageron/handson-ml3)
+
