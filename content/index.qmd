@@ -95,7 +95,7 @@ metrics, and learn how thresholds and probability calibration affect decision-ma
 | M4-2 | **Classifier Threshold Tuning**<br/>How decision thresholds trade off precision and recall and how to choose thresholds aligned with costs and benefits. | [Lesson](./modules/M4/lessons/02_classifier_threshold_tuning.ipynb)<br/>[Interactive threshold widget](./modules/M4/lessons/widget_threshold.qmd) |  |
 | M4-3 | **Probability Calibration**<br/>Measuring and improving the quality of predicted probabilities so they better match observed frequencies. | [Lesson](./modules/M4/lessons/03_probability_calibration.ipynb) |  |
 
-## Module 5: Trees and Explainable AI
+## Module 5: Decision Tree and Ensembles
 
 Module 5 introduces **decision trees and tree-based ensembles**, then turns to **explainable AI**. You will see how trees capture non-linear relationships, understand their tendency to overfit, and learn how ensembles such as random forests improve stability and performance. You will also use **Shapley values (SHAP)** to explain individual predictions, compare models, and interpret feature impact in a model-agnostic way.
 
@@ -110,7 +110,9 @@ Module 5 introduces **decision trees and tree-based ensembles**, then turns to *
 | Lesson | Description | Materials | Assignments |
 |-------------|-------------|------------------------|-----------------------|
 | M5-1 | **Decision Trees**<br/>Building and interpreting decision trees for classification and regression, including splitting criteria, tree structure, and overfitting behavior. | [Lesson](./modules/M5/lessons/01_trees.qmd)<br/>[Lab](./modules/M5/lessons/02_lab_decision_trees.ipynb) |  |
-| M5-2 | **Explainable AI with SHAP**<br/>Using Shapley values to explain individual predictions, compare models, and interpret feature impact with waterfall plots and SHAP heatmaps. | [Lab](./modules/M5/lessons/03_shap.ipynb) |  |
+| M5-2 | **Bagging**<br/> | [Lesson](./modules/M5/lessons/03_bagging.qmd)<br/> |  |
+| M5-3 | **Boosting**<br/> | [Lesson](./modules/M5/lessons/04_boosting.qmd)<br/> |  |
+| M5-2 | **Explainable AI with SHAP**<br/>Using Shapley values to explain individual predictions, compare models, and interpret feature impact with waterfall plots and SHAP heatmaps. | [Lab](./modules/M5/lessons/xx_shap.ipynb) |  |
 
 
 ## Resources
