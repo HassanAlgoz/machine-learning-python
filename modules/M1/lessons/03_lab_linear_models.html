@@ -179,7 +179,8 @@ window.Quarto = {
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#part-1-regression" id="toc-part-1-regression" class="nav-link active" data-scroll-target="#part-1-regression">Part 1: Regression</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#part-1-regression" id="toc-part-1-regression" class="nav-link" data-scroll-target="#part-1-regression">Part 1: Regression</a></li>
   <li><a href="#part-2-classification" id="toc-part-2-classification" class="nav-link" data-scroll-target="#part-2-classification">Part 2: Classification</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="03_lab_linear_models.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
@@ -206,6 +207,27 @@ window.Quarto = {
 </header>
 
 
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<p>In this notebook we learn to:</p>
+<p>Part 1:</p>
+<ol type="1">
+<li>Given a DataFrame, split the feature columns from the target columns</li>
+<li>Train a regressor (<code>LinearRegression</code>) model</li>
+<li>Inspect the learned parameters of the model</li>
+<li>Predict the target for any feature value</li>
+<li>Plot the data scatter plot</li>
+<li>Plot the linear regression line on the same plot</li>
+<li>Estimate the model error</li>
+</ol>
+<p>Part 2:</p>
+<ol type="1">
+<li>Given a (features-target) split, further split the data into (train-test)</li>
+<li>Justify having a held-out set for testing</li>
+<li>Explain what the <code>stratify=target</code> parameter does</li>
+<li>Train a classifier (<code>LogisticRegression</code>) model</li>
+<li>Given a <code>DecisionBoundaryDisplay</code> distinguish between a classifier’s <code>predict</code> and <code>predict_proba</code> methods</li>
+</ol>
 <div id="e30cf6ae" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> fetch_openml</span>
@@ -290,10 +312,15 @@ window.Quarto = {
 </div>
 </div>
 </div>
+</section>
 <section id="part-1-regression" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-regression">Part 1: Regression</h2>
 <p>In regression, the target to be predicted is a continuous variable.</p>
-<p>For simplicity we will pick one feature <span class="math inline">\(x\)</span> (<code>flipper_length_mm</code>) to predict the target <span class="math inline">\(y\)</span> (<code>body_mass_g</code>).</p>
+<p>For simplicity we will pick:</p>
+<ul>
+<li>one feature <span class="math inline">\(x\)</span>: <code>flipper_length_mm</code></li>
+<li>to predict the target <span class="math inline">\(y\)</span>: <code>body_mass_g</code></li>
+</ul>
 <div id="1a15e131" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>feature_name <span class="op">=</span> <span class="st">"flipper_length_mm"</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>target_name <span class="op">=</span> <span class="st">"body_mass_g"</span></span>
@@ -1191,14 +1218,21 @@ Name: body_mass_g, Length: 344, dtype: float64</code></pre>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    data[feat] <span class="op">=</span> data[feat].fillna(data[feat].mean())</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>target <span class="op">=</span> target.fillna(target.mode()[<span class="dv">0</span>])</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><strong>Why use a train/test split?</strong> So far we have used the same data to fit the model and to evaluate it. That gives an overly optimistic view of performance: the model has already “seen” the answers during training. To get an honest estimate of how well the model will do on <strong>new, unseen data</strong>, we set aside part of the data as a <strong>test set</strong>. We fit the model only on the <strong>training set</strong> and evaluate it on the <strong>test set</strong>. That way, the test set acts as a stand-in for future data we don’t have yet.</p>
-<div id="a303886c" class="cell" data-execution_count="18">
+<p><strong>Why use a train/test split?</strong> So far we have used the same data to fit the model and to evaluate it. That gives an overly optimistic view of performance: the model has already “seen” the answers during training. To get an honest estimate of how well the model will do on <strong>new, unseen data</strong>, we set aside part of the data as a <strong>test set</strong>. We fit the model only on the <strong>training set</strong> and evaluate it on the <strong>test set</strong>.</p>
+<p>That way, the test set acts as a stand-in for future data we don’t have yet.</p>
+<div id="a303886c" class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    data, target, test_size<span class="op">=</span><span class="fl">0.25</span>, random_state<span class="op">=</span><span class="dv">42</span>, stratify<span class="op">=</span>target</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    data, target,</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.25</span>,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    stratify<span class="op">=</span>target</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>The <code>random_state</code> is known as a <strong>seed</strong> for the pseudo-randomness. Which would trigger the default <code>shuffle=True</code> parameter, mixing the data points so that their original order doesn’t play a role in learning (since that’s irrelevant).</p>
+<p>Note that the <code>stratify=target</code> is here to ensure that the train and test sets are representative of one another. That is, they have the same class distribution (i.e., if 35% of rows has the <code>species="Adelle"</code>, and 65% has <code>species="Gentoo"</code> before the split, then both train and test splits should have this same distribution).</p>
+<p>Here we specify the <code>test_size</code> to be 25% which leaves the rest 75% for the training data.</p>
 <p>We can quickly start by visualizing the feature distribution by class:</p>
 <div id="080f34ad" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>

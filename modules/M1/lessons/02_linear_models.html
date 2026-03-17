@@ -207,8 +207,20 @@
 </div>
 
 </section>
-<section id="linear-models" class="title-slide slide level1 center">
-<h1>Linear Models</h1>
+<section id="learning-objectives" class="slide level2 scrollable">
+<h2>Learning Objectives</h2>
+<p>In this lecture we learn to:</p>
+<ol type="1">
+<li>Recognize the code for modeling the relationship between two variables</li>
+<li>Map target data type (Numerical or Categorical) to suitable model type (<code>LinearRegression</code> or <code>LogisticRegression</code>)</li>
+<li>Given a target variable for prediction, identify which model to use</li>
+<li>Given a 2D-plot, identify the dependent variable and the independent variable</li>
+<li>Distinguish between a regression line and a decision boundary</li>
+<li>Recognize when linear models wouldn’t fit the data well (linear seprability)</li>
+</ol>
+</section>
+<section id="linear-models" class="slide level2">
+<h2>Linear Models</h2>
 <p>For classification and regression.</p>
 <p>Simple models, easy to understand and fast to train.</p>
 <p><a href="../assets/scikit-learn-logo.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="../assets/scikit-learn-logo.svg"></a></p>
@@ -227,10 +239,8 @@
           display:block!important;
       }</style></aside>
 </section>
-
-<section>
-<section id="outline" class="title-slide slide level1 center">
-<h1>Outline</h1>
+<section id="outline" class="slide level2">
+<h2>Outline</h2>
 <ul>
 <li>What is a linear model?</li>
 <li>For regression: linear regression</li>
@@ -393,10 +403,13 @@
 <h2>Linear Regression Interactive Demo</h2>
 <div class="layout-sidebar layout-sidebar-left">
 <div class="cell panel-sidebar">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb6" data-startfrom="178" data-source-offset="-0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 177;"><span id="cb6-178"><a></a>viewof m <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> {<span class="dt">value</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Slope (m)"</span>})</span>
-<span id="cb6-179"><a></a>viewof b <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> {<span class="dt">value</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Intercept (b)"</span>})</span>
-<span id="cb6-180"><a></a></span>
-<span id="cb6-181"><a></a><span class="fu">html</span><span class="vs">`&lt;b&gt;Current Equation:&lt;/b&gt; $y = </span><span class="sc">${</span>m<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs">x + </span><span class="sc">${</span>b<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs">$`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb6" data-startfrom="190" data-source-offset="-0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 189;"><span id="cb6-190"><a></a>viewof m <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> {<span class="dt">value</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Slope (m)"</span>})</span>
+<span id="cb6-191"><a></a>viewof b <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> {<span class="dt">value</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Intercept (b)"</span>})</span>
+<span id="cb6-192"><a></a></span>
+<span id="cb6-193"><a></a><span class="fu">html</span><span class="vs">`&lt;b&gt;Current Equation:&lt;/b&gt; $y = </span><span class="sc">${</span>m<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs">x + </span><span class="sc">${</span>b<span class="op">.</span><span class="fu">toFixed</span>(<span class="dv">1</span>)<span class="sc">}</span><span class="vs">$`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-display">
 <div>
 <div id="ojs-cell-1-1" data-nodetype="declaration">
@@ -421,22 +434,25 @@
 </div>
 <div class="panel-fill">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb7" data-startfrom="185" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 184;"><span id="cb7-185"><a></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb7-186"><a></a>  <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb7-187"><a></a>  <span class="dt">x</span><span class="op">:</span> { <span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"x"</span> }<span class="op">,</span></span>
-<span id="cb7-188"><a></a>  <span class="dt">y</span><span class="op">:</span> { <span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"y"</span> }<span class="op">,</span></span>
-<span id="cb7-189"><a></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb7-190"><a></a>    <span class="co">// The Line: defined by the function y = mx + b</span></span>
-<span id="cb7-191"><a></a>    Plot<span class="op">.</span><span class="fu">ruleY</span>([<span class="dv">0</span>]<span class="op">,</span> {<span class="dt">strokeOpacity</span><span class="op">:</span> <span class="fl">0.2</span>})<span class="op">,</span></span>
-<span id="cb7-192"><a></a>    Plot<span class="op">.</span><span class="fu">ruleX</span>([<span class="dv">0</span>]<span class="op">,</span> {<span class="dt">strokeOpacity</span><span class="op">:</span> <span class="fl">0.2</span>})<span class="op">,</span></span>
-<span id="cb7-193"><a></a>    Plot<span class="op">.</span><span class="fu">line</span>(d3<span class="op">.</span><span class="fu">range</span>(<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="fl">0.1</span>)<span class="op">,</span> {</span>
-<span id="cb7-194"><a></a>      <span class="dt">x</span><span class="op">:</span> d <span class="kw">=&gt;</span> d<span class="op">,</span></span>
-<span id="cb7-195"><a></a>      <span class="dt">y</span><span class="op">:</span> d <span class="kw">=&gt;</span> m <span class="op">*</span> d <span class="op">+</span> b<span class="op">,</span></span>
-<span id="cb7-196"><a></a>      <span class="dt">stroke</span><span class="op">:</span> <span class="st">"steelblue"</span><span class="op">,</span></span>
-<span id="cb7-197"><a></a>      <span class="dt">strokeWidth</span><span class="op">:</span> <span class="dv">2</span></span>
-<span id="cb7-198"><a></a>    })</span>
-<span id="cb7-199"><a></a>  ]</span>
-<span id="cb7-200"><a></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<details class="code-fold hidden">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb7" data-startfrom="198" data-source-offset="0"><pre class="sourceCode numberSource js number-lines code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 197;"><span id="cb7-198"><a></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb7-199"><a></a>  <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb7-200"><a></a>  <span class="dt">x</span><span class="op">:</span> { <span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"x"</span> }<span class="op">,</span></span>
+<span id="cb7-201"><a></a>  <span class="dt">y</span><span class="op">:</span> { <span class="dt">domain</span><span class="op">:</span> [<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">10</span>]<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"y"</span> }<span class="op">,</span></span>
+<span id="cb7-202"><a></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb7-203"><a></a>    <span class="co">// The Line: defined by the function y = mx + b</span></span>
+<span id="cb7-204"><a></a>    Plot<span class="op">.</span><span class="fu">ruleY</span>([<span class="dv">0</span>]<span class="op">,</span> {<span class="dt">strokeOpacity</span><span class="op">:</span> <span class="fl">0.2</span>})<span class="op">,</span></span>
+<span id="cb7-205"><a></a>    Plot<span class="op">.</span><span class="fu">ruleX</span>([<span class="dv">0</span>]<span class="op">,</span> {<span class="dt">strokeOpacity</span><span class="op">:</span> <span class="fl">0.2</span>})<span class="op">,</span></span>
+<span id="cb7-206"><a></a>    Plot<span class="op">.</span><span class="fu">line</span>(d3<span class="op">.</span><span class="fu">range</span>(<span class="op">-</span><span class="dv">10</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="fl">0.1</span>)<span class="op">,</span> {</span>
+<span id="cb7-207"><a></a>      <span class="dt">x</span><span class="op">:</span> d <span class="kw">=&gt;</span> d<span class="op">,</span></span>
+<span id="cb7-208"><a></a>      <span class="dt">y</span><span class="op">:</span> d <span class="kw">=&gt;</span> m <span class="op">*</span> d <span class="op">+</span> b<span class="op">,</span></span>
+<span id="cb7-209"><a></a>      <span class="dt">stroke</span><span class="op">:</span> <span class="st">"steelblue"</span><span class="op">,</span></span>
+<span id="cb7-210"><a></a>      <span class="dt">strokeWidth</span><span class="op">:</span> <span class="dv">2</span></span>
+<span id="cb7-211"><a></a>    })</span>
+<span id="cb7-212"><a></a>  ]</span>
+<span id="cb7-213"><a></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
 <div class="cell-output cell-output-display">
 <div id="ojs-cell-2" data-nodetype="expression">
 
@@ -647,7 +663,7 @@
       }</style></aside>
 
 
-</section></section>
+</section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
