@@ -15,13 +15,12 @@ format:
 
 In this lecture we learn to:
 
-1. Define *Machine Learning*
+1. Define *Machine Learning* and understand its utility
 2. Identify the two main tasks in *Supervised ML*
 3. Identify the two parts of a *Data Matrix*
 4. Distinguish *Features* from *Target*
-5. Understand the merit of using ML
-6. Recognize foundations and related fields
-7. Recognize the three main topics of ML
+5. Recognize foundations and related fields
+6. Recognize the three main topics of ML
 
 ## Definition
 
