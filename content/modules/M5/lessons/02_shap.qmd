@@ -1,8 +1,0 @@
-![](../assets/partial_dependence_plot.png)
-
-- The gray horizontal line in the plot above represents the expected value of the model when applied to the California housing dataset.
-- The vertical gray line represents the average value of the median income feature.
-- Note that the blue partial dependence plot line (which is the average value of the model output when we fix the median income feature to a given value) always passes through the intersection of the two gray expected value lines. We can consider this intersection point as the “center” of the partial dependence plot with respect to the data distribution.
-
-The impact of this centering will become clear when we turn to Shapley values next.
-

@@ -24,6 +24,7 @@ execute:
   freeze: auto
 
 
+
 format:
   html:
     theme: [cosmo, custom.scss]
