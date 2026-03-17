@@ -6,17 +6,6 @@ format:
     slide-number: true
 ---
 
-## Learning Objectives
-
-In this lecture we learn to:
-
-1. Recognize the code for modeling the relationship between two variables
-2. Map target data type (Numerical or Categorical) to suitable model type (`LinearRegression` or `LogisticRegression`)
-3. Given a target variable for prediction, identify which model  to use
-4. Given a 2D-plot, identify the dependent variable and the independent variable
-5. Distinguish between a regression line and a decision boundary
-6. Recognize when linear models wouldn't fit the data well (linear seprability)
-
 ## Linear Models
 
 For classification and regression.
@@ -180,41 +169,6 @@ This minimization happens when we call the `fit` method of the
 `LinearRegression` class. The result is the automated tuning of the slope and
 intercept coefficient of the linear model.
 :::
-
-## Linear Regression Interactive Demo
-
-```{ojs}
-//| code-fold: true
-//| echo: false
-//| panel: sidebar
-viewof m = Inputs.range([-10, 10], {value: 1, step: 0.1, label: "Slope (m)"})
-viewof b = Inputs.range([-10, 10], {value: 0, step: 0.1, label: "Intercept (b)"})
-
-html`<b>Current Equation:</b> $y = ${m.toFixed(1)}x + ${b.toFixed(1)}$`
-```
-
-```{ojs}
-//| code-fold: true
-//| echo: false
-Plot.plot({
-  grid: true,
-  x: { domain: [-10, 10], label: "x" },
-  y: { domain: [-10, 10], label: "y" },
-  marks: [
-    // The Line: defined by the function y = mx + b
-    Plot.ruleY([0], {strokeOpacity: 0.2}),
-    Plot.ruleX([0], {strokeOpacity: 0.2}),
-    Plot.line(d3.range(-10, 11, 0.1), {
-      x: d => d,
-      y: d => m * d + b,
-      stroke: "steelblue",
-      strokeWidth: 2
-    })
-  ]
-})
-```
-
-See: [MLPlayGrounds.com for an interactive Linear Regression Demonstration](https://mlplaygrounds.com/machine/learning/linearRegression.html).
 
 ## Linear regression with several variables
 
