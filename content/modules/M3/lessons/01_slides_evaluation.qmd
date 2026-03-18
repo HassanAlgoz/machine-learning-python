@@ -91,7 +91,7 @@ Reinforce why baselines matter: they represent the performance you get without l
 
 ## Compare dummy vs real model (classification)
 
-```{python}
+```python
 from sklearn.dummy import DummyClassifier
 
 dummy_clf = DummyClassifier(strategy="most_frequent")

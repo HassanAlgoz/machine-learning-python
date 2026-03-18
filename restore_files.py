@@ -4,12 +4,11 @@ from pathlib import Path
 # 1. Define your paths
 # Use absolute paths to avoid ambiguity
 source_dir = Path("Resources/ignored/nd/scikit-learn-mooc/figures")
-module_root = Path("content/modules/M3")
+module_root = Path("content/modules/M5")
 target_dir = module_root / "assets"
 
 # 2. List of filenames to recover
-files_to_move = [
-]
+files_to_move = []
 
 
 

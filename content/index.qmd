@@ -63,6 +63,24 @@ Tips (slides):
 
 ## Module 2: Predictive Modeling Pipelines
 
+### M2-1: Data Profiling and Privacy
+
+1. Define *data quality profiling* and why it matters
+2. Explain how profiling differs by *data type* (tabular, time-series, text, ...)
+3. Describe how to handle *large datasets* (e.g., sampling)
+4. Use *dataset comparison* to track quality across versions
+5. Understand *data quality alerts* and turn them into next actions
+6. Understand why **Data Privacy** matters
+6. Given a dataset, indentify fields that count as PII directly and indirectly
+7. Given a dataset, apply techniques to protect sensitive data
+
+**Materials**:
+
+1. [Slides 1](./modules/M2/lessons/01_slides_data_quality_profiling.qmd)
+2. [Slides 2](./modules/M2/lessons/02_slides_sensitive_data.qmd)
+
+### M2-2: Pipelines
+
 Goal: Build a Pipeline to handle preprocessing of both categorical and numerical features.
 
 1. Identify causes of missing data
@@ -73,7 +91,7 @@ Goal: Build a Pipeline to handle preprocessing of both categorical and numerical
 6. Distinguish between linear and non-linear scaling methods
 7. Given a scaled dataset, use `inverse_transform` to show their original values
 8. Distinguish between `OrdinalEncoder` and `OneHotEncoder`
-9.  Show why one-hot encoding could be a problem; and explain how to handle
+9. Show why one-hot encoding could be a problem; and explain how to handle
 10. Explain why we split data into train-test splits
 11. List steps to avoid data leakage
 12. Distinguish between `fit`, `predict`, and `transform` methods
@@ -81,11 +99,11 @@ Goal: Build a Pipeline to handle preprocessing of both categorical and numerical
 
 **Materials:**
 
-1. [[Slides]](./modules/M2/lessons/01_slides_pipeline.qmd)
+1. [[Slides]](./modules/M2/lessons/03_slides_pipeline.qmd)
      - [[Lab 1.A: Handle Missing Values]](./modules/M2/lessons/lab_impute.ipynb)
      - [[Lab 1.B: Scaling: Numerical Features]](./modules/M2/lessons/lab_scale.ipynb)
      - [[Lab 1.C: Encoding: Cateogrical Features]](./modules/M2/lessons/lab_encode.ipynb)
-2. [[Lab 2]](./modules/M2/lessons/02_lab_pipeline.ipynb)
+2. [[Lab 2]](./modules/M2/lessons/04_lab_pipeline.ipynb)
 
 **Assignments**:
 
