@@ -94,6 +94,7 @@ Goal: Build a Pipeline to handle preprocessing of both categorical and numerical
 2. [[Categorical feature encoding]](./modules/M2/exercises/02_categorical_encoding_ex.ipynb)
 3. [[Mult-variable Regression 1]](./modules/M2/exercises/03_multi-variable_regression_ex_1.ipynb)
 4. [[Mult-variable Regression 2]](./modules/M2/exercises/04_multi-variable_regression_ex_2.ipynb)
+5. [[High-cardinality categorical features]](./modules/M2/exercises/05_high-cardinality.ipynb)
 
 ### M2-2: Regression Metrics
 
