@@ -49,3 +49,7 @@ format:
 
 number-depth: 1
 lightbox: auto
+mermaid: 
+  theme: default
+
+mermaid-format: png

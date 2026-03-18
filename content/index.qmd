@@ -10,47 +10,81 @@ classification, to tree-based methods and modern explainable AI techniques. Alon
 you will work through hands-on notebooks, coding exercises, and interactive widgets that help
 you build an intuition for how models behave in practice.
 
+Tips:
+
+- `Ctrl+click` to zoom
+- `Esc` to navigate the slides
+- `M` to navigate from the outline
+- `E` to view slides concatenated as one page
 
 ## Module 1: Linear Models
 
-Module 1 builds the foundations of supervised learning using linear models for regression and
-classification. You will learn how to represent data with features, fit linear models,
-interpret their parameters, and understand when linear assumptions are reasonable.
+### M1-1: Introduction to ML
 
-**Key Terms:**
+- Define *Machine Learning* and understand its utility
+- Identify the two main tasks in *Supervised ML*
+- Identify the two parts of a *Data Matrix*
+- Distinguish *Features* from *Target*
+- Recognize foundations and related fields
+- Recognize the three main topics of ML
 
-- supervised learning, data matrix, features, targets  
-- linear regression, logistic regression  
-- model coefficients, intercept, decision boundary  
-- non-linear relationships via feature engineering  
+**Materials:** [[Slides]](./modules/M1/lessons/01_slides_Intro_ML.qmd)
+**Assignments:** [Penguins EDA](./modules/M1/exercises/01_eda_penguins_ex.ipynb)
 
-| Lesson | Description | Materials | Assignments |
-|-------------|-------------|------------------------|-----------------------|
-| M1-1 | **Introduction to ML**<br/>High-level tour of machine learning tasks, workflows, and where supervised learning fits in the broader data science landscape. | [Lesson](./modules/M1/lessons/01_slides_Intro_ML.qmd) | [Penguins EDA](./modules/M1/exercises/01_eda_penguins_ex.ipynb) |
-| M1-2 | **Linear Models**<br/>Core ideas behind linear regression and logistic regression, including model specification, parameter estimation, and decision boundaries. | [Lesson](./modules/M1/lessons/02_slides_linear_models.qmd)<br/>[Lab](./modules/M1/lessons/03_lab_linear_models.ipynb) | [Linear Regression 1](./modules/M1/exercises/02_linear_regression_ex.ipynb)<br/>[Linear Regression 2](./modules/M1/exercises/03_linear_regression_ex.ipynb) |
-| M1-3 | **Non-linear Patterns**<br/>Using feature engineering (e.g., polynomial features) to model non-linear relationships with linear models, and visualizing how transformed features change model flexibility. | [Lesson](./modules/M1/lessons/04_slides_non_linear_patterns.qmd)<br/>[Lab](./modules/M1/lessons/05_lab_non_linear_patterns.ipynb) |  |
+### M1-2: Linear Models
+
+- Given a DataFrame, split the feature columns from the target columns
+- Train a regressor (`LinearRegression`) model
+- Inspect the learned parameters of the model
+- Predict the target for any feature value
+- Plot the data scatter plot
+- Plot the linear regression line on the same plot
+- Estimate the model error
+- Given a (features-target) split, further split the data into (train-test)
+- Justify having a held-out set for testing
+- Explain what the `stratify=target` parameter does
+- Train a classifier (`LogisticRegression`) model
+- Given a `DecisionBoundaryDisplay` distinguish between a classifier's `predict` and `predict_proba` methods
+
+**Materials:** [[Slides]](./modules/M1/lessons/02_slides_linear_models.qmd), [[Lab]](./modules/M1/lessons/03_lab_linear_models.ipynb)
+**Assignments:** [Linear Regression 1](./modules/M1/exercises/02_linear_regression_ex.ipynb), [Linear Regression 2](./modules/M1/exercises/03_linear_regression_ex.ipynb)
+
+### M1-3: Non-linear Patterns
+
+- Distinguish between linear and non-linear relationships.
+- Fit non-linear patterns using non-linear models.
+- Fit non-linear patterns using linear models with `PolynomialFeatures`.
+- Fit non-linear patterns using linear models with `SplineTransformer`.
+- Recognize Decision Trees and Support Vector Machines as non-linear models.
+
+**Materials:** [[Slides]](./modules/M1/lessons/04_slides_non_linear_patterns.qmd), [[Lab]](./modules/M1/lessons/05_lab_non_linear_patterns.ipynb)
 
 ## Module 2: Pipelines
 
-Module 2 focuses on **data preprocessing and modeling pipelines**. You will learn how to
-handle missing values, scale numerical features, encode categorical variables, and chain
-these steps together with estimators into reusable, production-ready pipelines.
+Goal: Build a Pipeline to handle preprocessing of both categorical and numerical features.
 
-**Key Terms:**
+1. Identify causes of missing data
+2. Apply `KNNImputer` to fill missing values; both numerical and categorical
+3. Detect errors where `fit` and `transform` are misused on the wrong set of data
+4. Enumerate the correct order of predictive modeling pipeline steps
+5. Explain the need for *Feature Scaling* in layman terms
+6. Distinguish between linear and non-linear scaling methods
+7. Given a scaled dataset, use `inverse_transform` to show their original values
+8. Distinguish between `OrdinalEncoder` and `OneHotEncoder`
+9.  Show why one-hot encoding could be a problem; and explain how to handle
+10. Explain why we split data into train-test splits
+11. List steps to avoid data leakage
+12. Distinguish between `fit`, `predict`, and `transform` methods
+13. Put together pieces of the `Pipeline` using objects like `ColumnTransformer`
 
-- imputation, missing values  
-- feature scaling, normalization, standardization  
-- categorical encoding, one-hot encoding, ordinal encoding  
-- scikit-learn transformers, estimators, pipelines  
-- regression metrics (R², MSE, MAE)  
+**Materials:**
 
-| Lesson | Description | Materials | Assignments |
-|-------------|-------------|------------------------|-----------------------|
-| M2-1 | **Imputation: Missing Values**<br/>Strategies to handle missing data, including simple and model-based imputations, and their impact on downstream models. | [Lab](./modules/M2/lessons/01_impute.ipynb) |  |
-| M2-2 | **Scaling: Numerical Features**<br/>Why feature scaling matters, how it affects distance-based models, optimization, and when to use min–max or standard scaling. | [Lesson](./modules/M2/lessons/02_scale.qmd) | [Scaling & k-NN exercise](./modules/M2/exercises/01_scaling_knn_primm.ipynb) |
-| M2-3 | **Encoding: Categorical Features**<br/>Different approaches to represent categories numerically, along with trade-offs between one-hot and ordinal encodings. | [Lab](./modules/M2/lessons/03_encode.ipynb) | [Categorical encoding exercise](./modules/M2/exercises/02_categorical_encoding_ex.ipynb) |
-| M2-4 | **Predictive Modeling Pipelines**<br/>Building end-to-end scikit-learn pipelines that combine preprocessing and modeling into a single, robust workflow. | [Lesson](./modules/M2/lessons/04_pipeline.qmd)<br/>[Lab](./modules/M2/lessons/05_lab_pipeline.ipynb) | [Multi-variable regression exercises](./modules/M2/exercises/03_multi-variable_regression_ex_1.ipynb), [04_multi-variable_regression_ex_2.ipynb](./modules/M2/exercises/04_multi-variable_regression_ex_2.ipynb) |
-| M2-5 | **Regression Metrics**<br/>Evaluating regression models with common metrics and learning to interpret metric values in the context of a business problem. | [Lab](./modules/M2/lessons/06_regression_metrics.ipynb) |  |
+- [[Slides]](./modules/M2/lessons/04_slides_pipeline.qmd)
+- [[Lab 1]](./modules/M2/lessons/01_lab_impute.ipynb)
+- [[Lab 2]](./modules/M2/lessons/02_lab_scale.ipynb)
+- [[Lab 3]](./modules/M2/lessons/03_lab_encode.ipynb)
+- [[Lab 4]](./modules/M2/lessons/05_lab_pipeline.ipynb)
+
 
 ## Module 3: Model Selection and Evaluation
 
@@ -69,11 +103,11 @@ overfitting, and use cross-validation and hyper-parameter tuning to select robus
 
 | Lesson | Description | Materials | Assignments |
 |-------------|-------------|------------------------|-----------------------|
-| M3-1 | **Model Evaluation**<br/>Distinguishing training loss from evaluation metrics, using appropriate scores for regression and classification, and benchmarking against baselines. | [Lesson](./modules/M3/lessons/01_evaluation.qmd) |  |
-| M3-2 | **Under-fitting and Over-fitting**<br/>Diagnosing generalization issues through learning curves and understanding how model complexity and data size influence performance. | [Lab](./modules/M3/lessons/02_lab_generalization.ipynb) |  |
-| M3-3 | **Hyper-parameter Tuning**<br/>Using cross-validated grid and randomized searches to optimize model hyper-parameters in a principled way. | [Lab](./modules/M3/lessons/03_meta-learning.ipynb) |  |
-| M3-4 | **Nested Cross-Validation**<br/>Robust evaluation of tuning procedures using nested cross-validation to avoid optimistic bias when reporting model performance. | [Lab](./modules/M3/lessons/04_nested_cv.ipynb) |  |
-| M3-5 | **Grouping**<br/>Designing cross-validation schemes that respect grouped or clustered data to reduce data leakage. | [Lesson](./modules/M3/lessons/05_cv_grouping.ipynb) |  |
+| M3-1 | **Model Evaluation**<br/>Distinguishing training loss from evaluation metrics, using appropriate scores for regression and classification, and benchmarking against baselines. | [[Slides]](./modules/M3/lessons/01_evaluation.qmd) |  |
+| M3-2 | **Under-fitting and Over-fitting**<br/>Diagnosing generalization issues through learning curves and understanding how model complexity and data size influence performance. | [[Lab]](./modules/M3/lessons/02_lab_generalization.ipynb) |  |
+| M3-3 | **Hyper-parameter Tuning**<br/>Using cross-validated grid and randomized searches to optimize model hyper-parameters in a principled way. | [[Lab]](./modules/M3/lessons/03_meta-learning.ipynb) |  |
+| M3-4 | **Nested Cross-Validation**<br/>Robust evaluation of tuning procedures using nested cross-validation to avoid optimistic bias when reporting model performance. | [[Lab]](./modules/M3/lessons/04_nested_cv.ipynb) |  |
+| M3-5 | **Grouping**<br/>Designing cross-validation schemes that respect grouped or clustered data to reduce data leakage. | [[Slides]](./modules/M3/lessons/05_cv_grouping.ipynb) |  |
 
 
 ## Module 4: Classification
@@ -90,9 +124,9 @@ metrics, and learn how thresholds and probability calibration affect decision-ma
 
 | Lesson | Description | Materials | Assignments |
 |-------------|-------------|------------------------|-----------------------|
-| M4-1 | **Classification Metrics**<br/>Overview of key classification metrics and how to choose appropriate ones for a given application. | [Lesson](./modules/M4/lessons/01_classification_metrics.ipynb) |  |
-| M4-2 | **Classifier Threshold Tuning**<br/>How decision thresholds trade off precision and recall and how to choose thresholds aligned with costs and benefits. | [Lesson](./modules/M4/lessons/02_classifier_threshold_tuning.ipynb)<br/>[Interactive threshold widget](./modules/M4/lessons/widget_threshold.qmd) |  |
-| M4-3 | **Probability Calibration**<br/>Measuring and improving the quality of predicted probabilities so they better match observed frequencies. | [Lesson](./modules/M4/lessons/03_probability_calibration.ipynb) |  |
+| M4-1 | **Classification Metrics**<br/>Overview of key classification metrics and how to choose appropriate ones for a given application. | [[Slides]](./modules/M4/lessons/01_classification_metrics.ipynb) |  |
+| M4-2 | **Classifier Threshold Tuning**<br/>How decision thresholds trade off precision and recall and how to choose thresholds aligned with costs and benefits. | [[Slides]](./modules/M4/lessons/02_classifier_threshold_tuning.ipynb)<br/>[Interactive threshold widget](./modules/M4/lessons/widget_threshold.qmd) |  |
+| M4-3 | **Probability Calibration**<br/>Measuring and improving the quality of predicted probabilities so they better match observed frequencies. | [[Slides]](./modules/M4/lessons/03_probability_calibration.ipynb) |  |
 
 ## Module 5: Decision Trees and Ensembles
 
@@ -108,10 +142,10 @@ Module 5 focuses on **decision trees, ensemble methods (bagging, random forests,
 
 | Lesson | Description | Materials | Assignments |
 |-------------|-------------|-------------------------------|-----------------------|
-| M5-1 | **Decision Trees**<br/>Building and interpreting decision trees for classification and regression. Covers splitting criteria, how trees grow, and how overfitting happens. | [Lesson](./modules/M5/lessons/01_trees.qmd)<br/>[Lab](./modules/M5/lessons/02_lab_decision_trees.ipynb) |  |
-| M5-2 | **Bagging and Random Forests**<br/>Understanding bagging, bootstrapping, and how random forests aggregate deep trees using feature and sample randomness. | [Lesson](./modules/M5/lessons/03_bagging.qmd) |  |
-| M5-3 | **Boosting**<br/>Introduction to ensemble methods that combine shallow trees sequentially, such as AdaBoost and Gradient Boosting. | [Lesson](./modules/M5/lessons/04_boosting.qmd)<br/>[Lab](./modules/M5/lessons/05_lab_ensembles.ipynb) |  |
-| M5-4 | **Explainable AI with SHAP**<br/>Interpreting individual predictions and feature importance using Shapley values and SHAP visualizations. | [Lab](./modules/M5/lessons/06_lab_shap.ipynb) |  |
+| M5-1 | **Decision Trees**<br/>Building and interpreting decision trees for classification and regression. Covers splitting criteria, how trees grow, and how overfitting happens. | [[Slides]](./modules/M5/lessons/01_trees.qmd)<br/>[[Lab]](./modules/M5/lessons/02_lab_decision_trees.ipynb) |  |
+| M5-2 | **Bagging and Random Forests**<br/>Understanding bagging, bootstrapping, and how random forests aggregate deep trees using feature and sample randomness. | [[Slides]](./modules/M5/lessons/03_bagging.qmd) |  |
+| M5-3 | **Boosting**<br/>Introduction to ensemble methods that combine shallow trees sequentially, such as AdaBoost and Gradient Boosting. | [[Slides]](./modules/M5/lessons/04_boosting.qmd)<br/>[[Lab]](./modules/M5/lessons/05_lab_ensembles.ipynb) |  |
+| M5-4 | **Explainable AI with SHAP**<br/>Interpreting individual predictions and feature importance using Shapley values and SHAP visualizations. | [[Lab]](./modules/M5/lessons/06_lab_shap.ipynb) |  |
 
 
 

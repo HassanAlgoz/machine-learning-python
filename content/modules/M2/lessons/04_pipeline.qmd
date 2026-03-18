@@ -3,9 +3,17 @@ title: "Predictive Modeling Pipeline"
 format: html
 ---
 
-## The Problem
+## Learning Objectives
 
-First, let's build up to what **Pipelines** are a solution for.
+Goal: Build a Pipeline to handle preprocessing of both categorical and numerical features.
+
+To get there, we learn to:
+
+1. Enumerate the correct order of predictive modeling pipeline steps
+2. Explain why we split data into train-test splits
+3. List steps to avoid data leakage
+4. Distinguish between `fit`, `predict`, and `transform` methods
+5. Put together pieces of the `Pipeline` using objects like `ColumnTransformer`
 
 ### Why do we split our data?
 
@@ -235,6 +243,17 @@ Note: [**Pipeline**](https://scikit-learn.org/stable/modules/compose.html#pipeli
 Both of these topics will be discussed later.
 
 ## Pipeline
+
+```{mermaid}
+%% |fig-align: center
+flowchart LR
+    A[X] --> Pipeline{{Pipeline}}
+    subgraph Pipeline
+        direction LR
+        B1["StandardScaler"] --> B2["KNNImputer"] --> B3["LinearRegression"]
+    end
+    Pipeline --> Y[y]
+```
 
 A **Pipeline** chains preprocessing steps and a final model into a single object, so you **treat the whole chain like one model**. That way you can tune the model and all preprocessors together; changing any step or the model’s hyperparameters affects the final prediction.
 
