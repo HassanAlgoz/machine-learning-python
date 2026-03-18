@@ -3,41 +3,35 @@ title: "Model Evaluation"
 format: html
 ---
 
+## Loss Function vs Evaluation Metric
+
 The question is: how to evaluate the model's performance?
 
-**Loss or Error**: Is the internal objective function being minimized by the selected machine learning algorithm during training.
-
-Examples:
+**Loss** (lower is better): is the internal objective function being minimized by the selected machine learning algorithm during training. Examples:
 
 - Mean Squared Error (MSE) for `LinearRegression`
 - Log Loss for `LogisticRegression`
 - Entropy for `DecisionTreeClassifier`
 
-..etc.
-
-**Metrics or Scores**: are used to evaluate the model's performance from a practical or business perspective. They are not used to "train" the model; rather, to judge it's performance and compare it against other models.
-
-Examples:
+**Metrics**: are used to evaluate the model's performance from a practical or business perspective. They are not used to "train" the model; rather, to judge it's performance and compare it against other models. Examples:
 
 - [**Regression Metrics**](../../M2/lessons/06_regression_metrics.ipynb) (where targets are **continuous**):
     - R-squared (default when you call `model.score()`) 
-    - Mean Squared Error (MSE)
+    - Mean Squared Error (MSE) - (also used as a loss function)
     - Mean Absolute Percentage Error (MAPE)
 - [**Classification Metrics**](../../M4/lessons/01_classification_metrics.ipynb) (where targets are **categorical**):
     - Accuracy (default when you call `model.score()`) 
     - Precision
     - Recall
 
-..etc.
+If you are wondering, can we use a metric as a loss function? The math says: only if the function is differentiable.
 
-Notice that:
+What about using the loss as a metric? Humans say: if they are easily translatable to our business problem. (more on this later).
 
-- **Score**: higher is better
-- **Error**: lower is better
 
-## Verify model is learning relationship between X and Y in the data
+## How to verify the model is learning?
 
-The question is: How to verify the model is actually learning from the data given to it?
+We can answer by saying: **it should at least be better than a guess, let alone a random prediction**.
 
 When doing supervised learning, a simple sanity check consists of comparing one’s estimator against simple rules of thumb. [`DummyClassifier`](https://scikit-learn.org/stable/modules/generated/sklearn.dummy.DummyClassifier.html#sklearn.dummy.DummyClassifier "sklearn.dummy.DummyClassifier") implements several such simple strategies for classification:
 
@@ -116,7 +110,7 @@ Right: SVM classifier with RBF kernel.
 
 :::
 :::
-<!-- end columns -->
+
 
 Observing such a *plateau* is an indication that **it might not be useful to acquire new data to train the model** since the generalization performance of the model will not increase anymore.
 
@@ -189,7 +183,10 @@ To make our scoring more reliable we use **Cross-validation (CV)** which works w
 
 By repeating the splitting procedure, and averaging the results, CV achieves a more reliable estimate of whether the model is over-fitting, under-fitting, or generalizing well.
 
-To make use of the full dataset (especially in time-series predictions where recency it crucial); a final training on the entire dataset (including the test) is often done. But, no further testing is done after that. Instead, we report the number we got from the previous test.
+The following figure shows a generalization performance of a 3 different models, each across 5 CV splits:
+
+![Figure: Generalization performance across 5 CV splits](../assets/cv_generalization_performance_3_models.png)
+
 
 ### Cross-validation strategies
 
@@ -210,3 +207,11 @@ The most commonly used method is called $k$-fold cross-validation and splits th
 :::
 
 The technique is explained in more details in the following lab.
+
+### Cross-validation for Time-series data
+
+In time-series data, the order of the data is important. So, we need to use a cross-validation strategy that preserves the order of the data. One such strategy is called `TimeSeriesSplit`.
+
+Refer to [this section](https://scikit-learn.org/stable/modules/cross_validation.html#cross-validation-of-time-series-data) for more details.
+
+Then, to make use of the full dataset (especially in time-series predictions where recency it crucial); a final training on the entire dataset (including the test) is often done. But, no further testing is done after that. Instead, we report the number we got from the previous test.
