@@ -383,3 +383,7 @@ Delivery cue: the dataset is chronological, so “randomly shuffling” folds ca
 - Use correct evaluation:
   - train/validation/test splits
   - cross-validation for robustness (including time-aware CV when needed)
+
+:::: {.notes}
+Final wrap-up: if you remember one workflow, it’s this—(1) choose the right metric for the problem, (2) sanity-check with baselines, (3) diagnose with learning curves/bias-variance, and (4) estimate generalization with proper splits (time-aware when needed).
+::::
