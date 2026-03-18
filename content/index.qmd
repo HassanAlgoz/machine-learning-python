@@ -2,6 +2,7 @@
 title: "Index"
 format: html
 # page-layout: full
+mermaid-format: svg
 ---
 
 This course is a **practical introduction to applied machine learning with scikit-learn**.  
@@ -10,7 +11,7 @@ classification, to tree-based methods and modern explainable AI techniques. Alon
 you will work through hands-on notebooks, coding exercises, and interactive widgets that help
 you build an intuition for how models behave in practice.
 
-Tips:
+Tips (slides):
 
 - `Ctrl+click` to zoom
 - `Esc` to navigate the slides
@@ -21,45 +22,47 @@ Tips:
 
 ### M1-1: Introduction to ML
 
-- Define *Machine Learning* and understand its utility
-- Identify the two main tasks in *Supervised ML*
-- Identify the two parts of a *Data Matrix*
-- Distinguish *Features* from *Target*
-- Recognize foundations and related fields
-- Recognize the three main topics of ML
+1. Define *Machine Learning* and understand its utility
+1. Identify the two main tasks in *Supervised ML*
+1. Identify the two parts of a *Data Matrix*
+1. Distinguish *Features* from *Target*
+1. Recognize foundations and related fields
+1. Recognize the three main topics of ML
 
 **Materials:** [[Slides]](./modules/M1/lessons/01_slides_Intro_ML.qmd)
 **Assignments:** [Penguins EDA](./modules/M1/exercises/01_eda_penguins_ex.ipynb)
 
 ### M1-2: Linear Models
 
-- Given a DataFrame, split the feature columns from the target columns
-- Train a regressor (`LinearRegression`) model
-- Inspect the learned parameters of the model
-- Predict the target for any feature value
-- Plot the data scatter plot
-- Plot the linear regression line on the same plot
-- Estimate the model error
-- Given a (features-target) split, further split the data into (train-test)
-- Justify having a held-out set for testing
-- Explain what the `stratify=target` parameter does
-- Train a classifier (`LogisticRegression`) model
-- Given a `DecisionBoundaryDisplay` distinguish between a classifier's `predict` and `predict_proba` methods
+1. Given a DataFrame, split the feature columns from the target columns
+1. Train a regressor (`LinearRegression`) model
+1. Inspect the learned parameters of the model
+1. Predict the target for any feature value
+1. Plot the data scatter plot
+1. Plot the linear regression line on the same plot
+1. Estimate the model error
+1. Given a (features-target) split, further split the data into (train-test)
+1. Justify having a held-out set for testing
+1. Explain what the `stratify=target` parameter does
+1. Train a classifier (`LogisticRegression`) model
+1. Given a `DecisionBoundaryDisplay` distinguish between a classifier's `predict` and `predict_proba` methods
 
 **Materials:** [[Slides]](./modules/M1/lessons/02_slides_linear_models.qmd), [[Lab]](./modules/M1/lessons/03_lab_linear_models.ipynb)
 **Assignments:** [Linear Regression 1](./modules/M1/exercises/02_linear_regression_ex.ipynb), [Linear Regression 2](./modules/M1/exercises/03_linear_regression_ex.ipynb)
 
 ### M1-3: Non-linear Patterns
 
-- Distinguish between linear and non-linear relationships.
-- Fit non-linear patterns using non-linear models.
-- Fit non-linear patterns using linear models with `PolynomialFeatures`.
-- Fit non-linear patterns using linear models with `SplineTransformer`.
-- Recognize Decision Trees and Support Vector Machines as non-linear models.
+1. Distinguish between linear and non-linear relationships.
+1. Fit non-linear patterns using non-linear models.
+1. Fit non-linear patterns using linear models with `PolynomialFeatures`.
+1. Fit non-linear patterns using linear models with `SplineTransformer`.
+1. Recognize Decision Trees and Support Vector Machines as non-linear models.
 
 **Materials:** [[Slides]](./modules/M1/lessons/04_slides_non_linear_patterns.qmd), [[Lab]](./modules/M1/lessons/05_lab_non_linear_patterns.ipynb)
 
 ## Module 2: Pipelines
+
+### M2-1: Predictive Modeling Pipelines
 
 Goal: Build a Pipeline to handle preprocessing of both categorical and numerical features.
 
@@ -79,12 +82,30 @@ Goal: Build a Pipeline to handle preprocessing of both categorical and numerical
 
 **Materials:**
 
-- [[Slides]](./modules/M2/lessons/04_slides_pipeline.qmd)
-- [[Lab 1]](./modules/M2/lessons/01_lab_impute.ipynb)
-- [[Lab 2]](./modules/M2/lessons/02_lab_scale.ipynb)
-- [[Lab 3]](./modules/M2/lessons/03_lab_encode.ipynb)
-- [[Lab 4]](./modules/M2/lessons/05_lab_pipeline.ipynb)
+1. [[Slides]](./modules/M2/lessons/01_slides_pipeline.qmd)
+     - [[Lab 1.A: Handle Missing Values]](./modules/M2/lessons/lab_impute.ipynb)
+     - [[Lab 1.B: Scaling: Numerical Features]](./modules/M2/lessons/lab_scale.ipynb)
+     - [[Lab 1.C: Encoding: Cateogrical Features]](./modules/M2/lessons/lab_encode.ipynb)
+2. [[Lab 2]](./modules/M2/lessons/02_lab_pipeline.ipynb)
 
+**Assignments**:
+
+1. [[Effect of rescaling on a k-neighbors models]](./modules/M2/exercises/01_scaling_knn.ipynb)
+2. [[Categorical feature encoding]](./modules/M2/exercises/02_categorical_encoding_ex.ipynb)
+3. [[Mult-variable Regression 1]](./modules/M2/exercises/03_multi-variable_regression_ex_1.ipynb)
+4. [[Mult-variable Regression 2]](./modules/M2/exercises/04_multi-variable_regression_ex_2.ipynb)
+
+### M2-2: Regression Metrics
+
+1. Explain why regression models need dedicated evaluation metrics.
+2. Interpret and compare MSE, ($R^2$), MAE, median AE, and MAPE.
+3. Diagnose regression models visually using prediction and residual plots.
+4. Explain when a target transformation can improve model fit and metrics.
+
+**Materials:**
+
+- [[Slides]](./modules/M2/lessons/03_slides_regression_metrics.qmd)
+- [[Lab]](./modules/M2/lessons/04_lab_regression_metrics.ipynb)
 
 ## Module 3: Model Selection and Evaluation
 

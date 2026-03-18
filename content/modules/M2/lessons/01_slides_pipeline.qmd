@@ -129,11 +129,11 @@ Point out how 1% of a million is still 10,000 points. That's plenty of ground tr
 
 Before building a predictive model, your data must be **pre-processed** with some or all of the following core transformations:
 
-1. *Lab: [Handling Missing Values](./01_lab_impute.ipynb)*  
+1. *Lab: [Handling Missing Values](./lab_impute.ipynb)*  
    Replace missing values using an imputer.
-2. *Lab: [Scaling: Numerical Features](./02_lab_lab_scale.ipynb)*  
+2. *Lab: [Scaling: Numerical Features](./lab_lab_scale.ipynb)*  
    Apply scaling methods to ensure numerical features are on comparable scales.
-3. *Lab: [Encoding: Categorical Features](./03_lab_encode.ipynb)*  
+3. *Lab: [Encoding: Categorical Features](./lab_encode.ipynb)*  
     Convert categorical features into a numeric format with encoders.
 
 All of these pre-processing steps can be chained together and encapsulated inside a [`Pipeline`](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html), ensuring that each transformation is **fit only on the training set** and then consistently applied to any test or new data.
