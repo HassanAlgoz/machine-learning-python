@@ -139,11 +139,13 @@ Goal: Build a Pipeline to handle preprocessing of both categorical and numerical
 4. Explain the difference between Grid Search and either Random Search or Bayesian Search
 5. Recognize the more efficient, model-specific cross-validations
 6. Explain the problem of data dependency and why sample grouping solves it
+7. Distinguish different cases to use `random_state` correctly to control randomness
 
 **Materials:**
 
 1. [[Lab 1]](./modules/M3/lessons/03_hyper-parameter_tuning.ipynb)
 3. [[Lab 2]](./modules/M3/lessons/04_sample_grouping.ipynb)
+4. [[Text]](./modules/M3/texts/text_controlling_randomness.qmd)
 
 ## Module 4: Regression and Classification Metrics
 
