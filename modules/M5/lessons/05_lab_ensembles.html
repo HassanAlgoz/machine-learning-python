@@ -156,7 +156,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#max_features" id="toc-max_features" class="nav-link" data-scroll-target="#max_features"><code>max_features</code></a></li>
   <li><a href="#depth-parameters" id="toc-depth-parameters" class="nav-link" data-scroll-target="#depth-parameters">Depth Parameters</a></li>
   </ul></li>
-  <li><a href="#histogram-gradient-boosting-decision-trees" id="toc-histogram-gradient-boosting-decision-trees" class="nav-link" data-scroll-target="#histogram-gradient-boosting-decision-trees">Histogram gradient-boosting decision trees</a>
+  <li><a href="#boosting-histogram-gradient-boosting-decision-trees" id="toc-boosting-histogram-gradient-boosting-decision-trees" class="nav-link" data-scroll-target="#boosting-histogram-gradient-boosting-decision-trees">Boosting: Histogram gradient-boosting decision trees</a>
   <ul class="collapse">
   <li><a href="#learning_rate" id="toc-learning_rate" class="nav-link" data-scroll-target="#learning_rate"><code>learning_rate</code></a></li>
   </ul></li>
@@ -622,8 +622,8 @@ Warning
 </div>
 </section>
 </section>
-<section id="histogram-gradient-boosting-decision-trees" class="level2">
-<h2 class="anchored" data-anchor-id="histogram-gradient-boosting-decision-trees">Histogram gradient-boosting decision trees</h2>
+<section id="boosting-histogram-gradient-boosting-decision-trees" class="level2">
+<h2 class="anchored" data-anchor-id="boosting-histogram-gradient-boosting-decision-trees">Boosting: Histogram gradient-boosting decision trees</h2>
 <p>For gradient-boosting, hyperparameters are coupled, so we cannot set them one after the other anymore. The important hyperparameters are&nbsp;<code>max_iter</code>,&nbsp;<code>learning_rate</code>, and&nbsp;<code>max_depth</code>&nbsp;or&nbsp;<code>max_leaf_nodes</code>&nbsp;(as previously discussed random forest).</p>
 <p>Let’s first discuss&nbsp;<code>max_iter</code>&nbsp;which, similarly to the&nbsp;<code>n_estimators</code>&nbsp;hyperparameter in random forests, controls the number of trees in the estimator. The difference is that the actual number of trees trained by the model is not entirely set by the user, but depends also on the stopping criteria: the number of trees can be lower than&nbsp;<code>max_iter</code>&nbsp;if adding a new tree does not improve the model enough. We will give more details on this in the next exercise.</p>
 <p>The depth of the trees is controlled by&nbsp;<code>max_depth</code>&nbsp;(or&nbsp;<code>max_leaf_nodes</code>). We saw in the section on gradient-boosting that boosting algorithms fit the error of the previous tree in the ensemble. Thus, fitting fully grown trees would be detrimental. Indeed, the first tree of the ensemble would perfectly fit (overfit) the data and thus no subsequent tree would be required, since there would be no residuals. Therefore, the tree used in gradient-boosting should have a low depth, typically between 3 to 8 levels, or few leaves (&nbsp;to&nbsp;). Having very weak learners at each step helps reducing overfitting.</p>

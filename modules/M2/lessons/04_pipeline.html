@@ -75,7 +75,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-726ac0091047a073ae154519e6f230aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script src="../../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -106,9 +106,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="../../../site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="../../../site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="../../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -150,7 +147,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Contents</h2>
    
   <ul>
-  <li><a href="#the-problem" id="toc-the-problem" class="nav-link active" data-scroll-target="#the-problem">The Problem</a>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a>
   <ul class="collapse">
   <li><a href="#why-do-we-split-our-data" id="toc-why-do-we-split-our-data" class="nav-link" data-scroll-target="#why-do-we-split-our-data">Why do we split our data?</a></li>
   <li><a href="#what-is-the-proportion-of-the-splits" id="toc-what-is-the-proportion-of-the-splits" class="nav-link" data-scroll-target="#what-is-the-proportion-of-the-splits">What is the proportion of the splits?</a></li>
@@ -199,9 +196,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="the-problem" class="level2">
-<h2 class="anchored" data-anchor-id="the-problem">The Problem</h2>
-<p>First, let’s build up to what <strong>Pipelines</strong> are a solution for.</p>
+<section id="learning-objectives" class="level2">
+<h2 class="anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<p>Goal: Build a Pipeline to handle preprocessing of both categorical and numerical features.</p>
+<p>To get there, we learn to:</p>
+<ol type="1">
+<li>Enumerate the correct order of predictive modeling pipeline steps</li>
+<li>Explain why we split data into train-test splits</li>
+<li>List steps to avoid data leakage</li>
+<li>Distinguish between <code>fit</code>, <code>predict</code>, and <code>transform</code> methods</li>
+<li>Put together pieces of the <code>Pipeline</code> using objects like <code>ColumnTransformer</code></li>
+</ol>
 <section id="why-do-we-split-our-data" class="level3">
 <h3 class="anchored" data-anchor-id="why-do-we-split-our-data">Why do we split our data?</h3>
 <p>Splitting a dataset into <strong>training</strong> and <strong>test</strong> sets is the primary method used to estimate how a model will perform in the real world.</p>
@@ -222,19 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
-<pre class="mermaid mermaid-js">flowchart TD
-    A[Dataset] -- "random 80%" --&gt; B[Training Set]
-    B --&gt; B1
-    B --&gt; B2
-    B1[X_train]
-    B2[y_train]
-
-    A -- "random 20%" --&gt; C[Testing Set]
-    C --&gt; C1
-    C --&gt; C2
-    C1[X_test]
-    C2[y_test]
-</pre>
+<p><a href="04_pipeline_files/figure-html/mermaid-figure-1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="04_pipeline_files/figure-html/mermaid-figure-1.png" style="width:6.22in;height:3.15in" class="figure-img"></a></p>
 </div>
 <p></p></figure><p></p>
 </div>
@@ -403,6 +396,17 @@ Warning
 </section>
 <section id="pipeline" class="level2">
 <h2 class="anchored" data-anchor-id="pipeline">Pipeline</h2>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<p><a href="04_pipeline_files/figure-html/mermaid-figure-2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="04_pipeline_files/figure-html/mermaid-figure-2.png" style="width:10.12in;height:1.46in" class="figure-img"></a></p>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 <p>A <strong>Pipeline</strong> chains preprocessing steps and a final model into a single object, so you <strong>treat the whole chain like one model</strong>. That way you can tune the model and all preprocessors together; changing any step or the model’s hyperparameters affects the final prediction.</p>
 <p>Instead of writing separate code for each step like this:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>step_1 <span class="op">=</span> SimpleImputer()</span>
@@ -447,7 +451,7 @@ Warning
 </ol>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="../assets/estimator_transformer_predictor.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Estimator: Transformer and Predictor"><img src="../assets/estimator_transformer_predictor.png" class="img-fluid figure-img" alt="Estimator: Transformer and Predictor"></a></p>
+<p><a href="../assets/estimator_transformer_predictor.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Estimator: Transformer and Predictor"><img src="../assets/estimator_transformer_predictor.png" class="img-fluid figure-img" alt="Estimator: Transformer and Predictor"></a></p>
 <figcaption>Estimator: Transformer and Predictor</figcaption>
 </figure>
 </div>

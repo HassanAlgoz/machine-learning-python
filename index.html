@@ -40,7 +40,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-007ff81e57e5ec5aa3045356d80bc304.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-726ac0091047a073ae154519e6f230aa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -108,12 +137,13 @@ ul.task-list li input[type="checkbox"] {
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Contents</h2>
    
-  <ul>
+  <ul class="collapse">
   <li><a href="#module-1-linear-models" id="toc-module-1-linear-models" class="nav-link active" data-scroll-target="#module-1-linear-models">Module 1: Linear Models</a></li>
-  <li><a href="#module-2-pipelines" id="toc-module-2-pipelines" class="nav-link" data-scroll-target="#module-2-pipelines">Module 2: Pipelines</a></li>
+  <li><a href="#module-2-predictive-modeling-pipelines" id="toc-module-2-predictive-modeling-pipelines" class="nav-link" data-scroll-target="#module-2-predictive-modeling-pipelines">Module 2: Predictive Modeling Pipelines</a></li>
   <li><a href="#module-3-model-selection-and-evaluation" id="toc-module-3-model-selection-and-evaluation" class="nav-link" data-scroll-target="#module-3-model-selection-and-evaluation">Module 3: Model Selection and Evaluation</a></li>
-  <li><a href="#module-4-classification" id="toc-module-4-classification" class="nav-link" data-scroll-target="#module-4-classification">Module 4: Classification</a></li>
+  <li><a href="#module-4-regression-and-classification-metrics" id="toc-module-4-regression-and-classification-metrics" class="nav-link" data-scroll-target="#module-4-regression-and-classification-metrics">Module 4: Regression and Classification Metrics</a></li>
   <li><a href="#module-5-decision-trees-and-ensembles" id="toc-module-5-decision-trees-and-ensembles" class="nav-link" data-scroll-target="#module-5-decision-trees-and-ensembles">Module 5: Decision Trees and Ensembles</a></li>
+  <li><a href="#project" id="toc-project" class="nav-link" data-scroll-target="#project">Project</a></li>
   <li><a href="#resources" id="toc-resources" class="nav-link" data-scroll-target="#resources">Resources</a></li>
   </ul>
 </nav>
@@ -142,260 +172,252 @@ ul.task-list li input[type="checkbox"] {
 
 <p>This course is a <strong>practical introduction to applied machine learning with scikit-learn</strong>.<br>
 You will progress from linear models and feature preprocessing, through model evaluation and classification, to tree-based methods and modern explainable AI techniques. Along the way, you will work through hands-on notebooks, coding exercises, and interactive widgets that help you build an intuition for how models behave in practice.</p>
+<p>Tips (slides):</p>
+<ul>
+<li><code>Ctrl+click</code> to zoom</li>
+<li><code>Esc</code> to navigate the slides</li>
+<li><code>M</code> to navigate from the outline</li>
+<li><code>E</code> to view slides concatenated as one page</li>
+</ul>
 <section id="module-1-linear-models" class="level2">
 <h2 class="anchored" data-anchor-id="module-1-linear-models">Module 1: Linear Models</h2>
-<p>Module 1 builds the foundations of supervised learning using linear models for regression and classification. You will learn how to represent data with features, fit linear models, interpret their parameters, and understand when linear assumptions are reasonable.</p>
-<p><strong>Key Terms:</strong></p>
-<ul>
-<li>supervised learning, data matrix, features, targets<br>
-</li>
-<li>linear regression, logistic regression<br>
-</li>
-<li>model coefficients, intercept, decision boundary<br>
-</li>
-<li>non-linear relationships via feature engineering</li>
-</ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M1-1</td>
-<td><strong>Introduction to ML</strong><br>High-level tour of machine learning tasks, workflows, and where supervised learning fits in the broader data science landscape.</td>
-<td><a href="./modules/M1/lessons/01_Intro_ML_slides.html">Lesson</a></td>
-<td><a href="./modules/M1/exercises/01_eda_penguins_ex.html">EDA Penguins exercise</a></td>
-</tr>
-<tr class="even">
-<td>M1-2</td>
-<td><strong>Linear Models</strong><br>Core ideas behind linear regression and logistic regression, including model specification, parameter estimation, and decision boundaries.</td>
-<td><a href="./modules/M1/lessons/02_linear_models.html">Lesson</a><br><a href="./modules/M1/lessons/03_lab_linear_models.html">Lab</a></td>
-<td><a href="./modules/M1/exercises/02_linear_regression_ex.html">Linear regression exercises</a>, <a href="./modules/M1/exercises/03_linear_regression_ex.html">03_linear_regression_ex.ipynb</a></td>
-</tr>
-<tr class="odd">
-<td>M1-3</td>
-<td><strong>Non-linear Patterns</strong><br>Using feature engineering (e.g., polynomial features) to model non-linear relationships with linear models, and visualizing how transformed features change model flexibility.</td>
-<td><a href="./modules/M1/lessons/04_non_linear_patterns.html">Lab</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<section id="m1-1-introduction-to-ml" class="level3">
+<h3 class="anchored" data-anchor-id="m1-1-introduction-to-ml">M1-1: Introduction to ML</h3>
+<ol type="1">
+<li>Define <em>Machine Learning</em> and understand its utility</li>
+<li>Identify the two main tasks in <em>Supervised ML</em></li>
+<li>Identify the two parts of a <em>Data Matrix</em></li>
+<li>Distinguish <em>Features</em> from <em>Target</em></li>
+<li>Recognize foundations and related fields</li>
+<li>Recognize the three main topics of ML</li>
+</ol>
+<p><strong>Materials:</strong> <a href="./modules/M1/lessons/01_slides_Intro_ML.html">[Slides]</a> <strong>Assignments:</strong> <a href="./modules/M1/exercises/01_eda_penguins_ex.html">Penguins EDA</a></p>
 </section>
-<section id="module-2-pipelines" class="level2">
-<h2 class="anchored" data-anchor-id="module-2-pipelines">Module 2: Pipelines</h2>
-<p>Module 2 focuses on <strong>data preprocessing and modeling pipelines</strong>. You will learn how to handle missing values, scale numerical features, encode categorical variables, and chain these steps together with estimators into reusable, production-ready pipelines.</p>
-<p><strong>Key Terms:</strong></p>
+<section id="m1-2-linear-models" class="level3">
+<h3 class="anchored" data-anchor-id="m1-2-linear-models">M1-2: Linear Models</h3>
+<ol type="1">
+<li>Given a DataFrame, split the feature columns from the target columns</li>
+<li>Train a regressor (<code>LinearRegression</code>) model</li>
+<li>Inspect the learned parameters of the model</li>
+<li>Predict the target for any feature value</li>
+<li>Plot the data scatter plot</li>
+<li>Plot the linear regression line on the same plot</li>
+<li>Estimate the model error</li>
+<li>Given a (features-target) split, further split the data into (train-test)</li>
+<li>Justify having a held-out set for testing</li>
+<li>Explain what the <code>stratify=target</code> parameter does</li>
+<li>Train a classifier (<code>LogisticRegression</code>) model</li>
+<li>Given a <code>DecisionBoundaryDisplay</code> distinguish between a classifier’s <code>predict</code> and <code>predict_proba</code> methods</li>
+</ol>
+<p><strong>Materials:</strong> <a href="./modules/M1/lessons/02_slides_linear_models.html">[Slides]</a>, <a href="./modules/M1/lessons/03_lab_linear_models.html">[Lab]</a> <strong>Assignments:</strong> <a href="./modules/M1/exercises/02_linear_regression_ex.html">Linear Regression 1</a>, <a href="./modules/M1/exercises/03_linear_regression_ex.html">Linear Regression 2</a></p>
+</section>
+<section id="m1-3-non-linear-patterns" class="level3">
+<h3 class="anchored" data-anchor-id="m1-3-non-linear-patterns">M1-3: Non-linear Patterns</h3>
+<ol type="1">
+<li>Distinguish between linear and non-linear relationships.</li>
+<li>Fit non-linear patterns using non-linear models.</li>
+<li>Fit non-linear patterns using linear models with <code>PolynomialFeatures</code>.</li>
+<li>Fit non-linear patterns using linear models with <code>SplineTransformer</code>.</li>
+<li>Recognize Decision Trees and Support Vector Machines as non-linear models.</li>
+</ol>
+<p><strong>Materials:</strong> <a href="./modules/M1/lessons/04_slides_non_linear_patterns.html">[Slides]</a>, <a href="./modules/M1/lessons/05_lab_non_linear_patterns.html">[Lab]</a></p>
+</section>
+</section>
+<section id="module-2-predictive-modeling-pipelines" class="level2">
+<h2 class="anchored" data-anchor-id="module-2-predictive-modeling-pipelines">Module 2: Predictive Modeling Pipelines</h2>
+<section id="m2-1-data-profiling-and-privacy" class="level3">
+<h3 class="anchored" data-anchor-id="m2-1-data-profiling-and-privacy">M2-1: Data Profiling and Privacy</h3>
+<ol type="1">
+<li>Define <em>data quality profiling</em> and why it matters</li>
+<li>Explain how profiling differs by <em>data type</em> (tabular, time-series, text, …)</li>
+<li>Describe how to handle <em>large datasets</em> (e.g., sampling)</li>
+<li>Use <em>dataset comparison</em> to track quality across versions</li>
+<li>Understand <em>data quality alerts</em> and turn them into next actions</li>
+<li>Understand why <strong>Data Privacy</strong> matters</li>
+<li>Given a dataset, indentify fields that count as PII directly and indirectly</li>
+<li>Given a dataset, apply techniques to protect sensitive data</li>
+</ol>
+<p><strong>Materials</strong>:</p>
+<ol type="1">
+<li><a href="./modules/M2/lessons/01_slides_data_quality_profiling.html">Slides 1</a></li>
+<li><a href="./modules/M2/lessons/02_slides_sensitive_data.html">Slides 2</a></li>
+</ol>
+</section>
+<section id="m2-2-pipelines" class="level3">
+<h3 class="anchored" data-anchor-id="m2-2-pipelines">M2-2: Pipelines</h3>
+<p>Goal: Build a Pipeline to handle preprocessing of both categorical and numerical features.</p>
+<ol type="1">
+<li>Identify causes of missing data</li>
+<li>Apply <code>KNNImputer</code> to fill missing values; both numerical and categorical</li>
+<li>Detect errors where <code>fit</code> and <code>transform</code> are misused on the wrong set of data</li>
+<li>Enumerate the correct order of predictive modeling pipeline steps</li>
+<li>Explain the need for <em>Feature Scaling</em> in layman terms</li>
+<li>Distinguish between linear and non-linear scaling methods</li>
+<li>Given a scaled dataset, use <code>inverse_transform</code> to show their original values</li>
+<li>Distinguish between <code>OrdinalEncoder</code> and <code>OneHotEncoder</code></li>
+<li>Show why one-hot encoding could be a problem; and explain how to handle</li>
+<li>Explain why we split data into train-test splits</li>
+<li>List steps to avoid data leakage</li>
+<li>Distinguish between <code>fit</code>, <code>predict</code>, and <code>transform</code> methods</li>
+<li>Put together pieces of the <code>Pipeline</code> using objects like <code>ColumnTransformer</code></li>
+</ol>
+<p><strong>Materials:</strong></p>
+<ol type="1">
+<li><a href="./modules/M2/lessons/03_slides_pipeline.html">[Slides]</a>
 <ul>
-<li>imputation, missing values<br>
-</li>
-<li>feature scaling, normalization, standardization<br>
-</li>
-<li>categorical encoding, one-hot encoding, ordinal encoding<br>
-</li>
-<li>scikit-learn transformers, estimators, pipelines<br>
-</li>
-<li>regression metrics (R², MSE, MAE)</li>
-</ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M2-1</td>
-<td><strong>Imputation: Missing Values</strong><br>Strategies to handle missing data, including simple and model-based imputations, and their impact on downstream models.</td>
-<td><a href="./modules/M2/lessons/01_impute.html">Lab</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>M2-2</td>
-<td><strong>Scaling: Numerical Features</strong><br>Why feature scaling matters, how it affects distance-based models, optimization, and when to use min–max or standard scaling.</td>
-<td><a href="./modules/M2/lessons/02_scale.html">Lesson</a></td>
-<td><a href="./modules/M2/exercises/01_scaling_knn_primm.html">Scaling &amp; k-NN exercise</a></td>
-</tr>
-<tr class="odd">
-<td>M2-3</td>
-<td><strong>Encoding: Categorical Features</strong><br>Different approaches to represent categories numerically, along with trade-offs between one-hot and ordinal encodings.</td>
-<td><a href="./modules/M2/lessons/03_encode.html">Lab</a></td>
-<td><a href="./modules/M2/exercises/02_categorical_encoding_ex.html">Categorical encoding exercise</a></td>
-</tr>
-<tr class="even">
-<td>M2-4</td>
-<td><strong>Predictive Modeling Pipelines</strong><br>Building end-to-end scikit-learn pipelines that combine preprocessing and modeling into a single, robust workflow.</td>
-<td><a href="./modules/M2/lessons/04_pipeline.html">Lesson</a><br><a href="./modules/M2/lessons/05_lab_pipeline.html">Lab</a></td>
-<td><a href="./modules/M2/exercises/03_multi-variable_regression_ex_1.html">Multi-variable regression exercises</a>, <a href="./modules/M2/exercises/04_multi-variable_regression_ex_2.html">04_multi-variable_regression_ex_2.ipynb</a></td>
-</tr>
-<tr class="odd">
-<td>M2-5</td>
-<td><strong>Regression Metrics</strong><br>Evaluating regression models with common metrics and learning to interpret metric values in the context of a business problem.</td>
-<td><a href="./modules/M2/lessons/06_regression_metrics.html">Lab</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<li><a href="./modules/M2/lessons/lab_impute.html">[Lab 1.A: Handle Missing Values]</a></li>
+<li><a href="./modules/M2/lessons/lab_scale.html">[Lab 1.B: Scaling: Numerical Features]</a></li>
+<li><a href="./modules/M2/lessons/lab_encode.html">[Lab 1.C: Encoding: Cateogrical Features]</a></li>
+</ul></li>
+<li><a href="./modules/M2/lessons/04_lab_pipeline.html">[Lab 2]</a></li>
+</ol>
+<p><strong>Assignments</strong>:</p>
+<ol type="1">
+<li><a href="./modules/M2/exercises/01_scaling_knn.html">[Effect of rescaling on a k-neighbors models]</a></li>
+<li><a href="./modules/M2/exercises/02_categorical_encoding_ex.html">[Categorical feature encoding]</a></li>
+<li><a href="./modules/M2/exercises/03_multi-variable_regression_ex_1.html">[Mult-variable Regression 1]</a></li>
+<li><a href="./modules/M2/exercises/04_multi-variable_regression_ex_2.html">[Mult-variable Regression 2]</a></li>
+<li><a href="./modules/M2/exercises/05_high-cardinality.html">[High-cardinality categorical features]</a></li>
+</ol>
+</section>
 </section>
 <section id="module-3-model-selection-and-evaluation" class="level2">
 <h2 class="anchored" data-anchor-id="module-3-model-selection-and-evaluation">Module 3: Model Selection and Evaluation</h2>
-<p>Module 3 deepens your understanding of <strong>generalization and model selection</strong>. You will practice splitting data into training, validation, and test sets, detect underfitting and overfitting, and use cross-validation and hyper-parameter tuning to select robust models.</p>
-<p><strong>Key Terms:</strong></p>
-<ul>
-<li>training/validation/test splits, cross-validation<br>
-</li>
-<li>loss functions vs evaluation metrics<br>
-</li>
-<li>baseline models (<code>DummyClassifier</code>, <code>DummyRegressor</code>)<br>
-</li>
-<li>underfitting, overfitting, bias–variance trade-off<br>
-</li>
-<li>hyper-parameter tuning, grid search, randomized search, nested CV<br>
-</li>
-<li>stratified cross-validation, grouped cross-validation</li>
-</ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M3-1</td>
-<td><strong>Model Evaluation</strong><br>Distinguishing training loss from evaluation metrics, using appropriate scores for regression and classification, and benchmarking against baselines.</td>
-<td><a href="./modules/M3/lessons/01_evaluation.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>M3-2</td>
-<td><strong>Under-fitting and Over-fitting</strong><br>Diagnosing generalization issues through learning curves and understanding how model complexity and data size influence performance.</td>
-<td><a href="./modules/M3/lessons/02_lab_generalization.html">Lab</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>M3-3</td>
-<td><strong>Hyper-parameter Tuning</strong><br>Using cross-validated grid and randomized searches to optimize model hyper-parameters in a principled way.</td>
-<td><a href="./modules/M3/lessons/03_meta-learning.html">Lab</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>M3-4</td>
-<td><strong>Nested Cross-Validation</strong><br>Robust evaluation of tuning procedures using nested cross-validation to avoid optimistic bias when reporting model performance.</td>
-<td><a href="./modules/M3/lessons/04_nested_cv.html">Lab</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>M4-5</td>
-<td><strong>Stratification</strong><br>Ensuring class balance across folds with stratified cross-validation and why this matters for imbalanced datasets.</td>
-<td><a href="./modules/M3/lessons/05_cv_stratification.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>M3-6</td>
-<td><strong>Grouping</strong><br>Designing cross-validation schemes that respect grouped or clustered data to reduce data leakage.</td>
-<td><a href="./modules/M3/lessons/06_cv_grouping.html">Lesson</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<section id="m3-1-evaluation-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="m3-1-evaluation-metrics">M3-1: Evaluation Metrics</h3>
+<ol type="1">
+<li>Distinguish between loss function and evaluation metric</li>
+<li>List 3 Regression Metrics and 3 Classification Metrics</li>
+<li>Given a model, verify it is actually learning from the data</li>
+<li>Explain why more data might not add any information to the model</li>
+<li>Suggest ways in which data would actually add information to the model</li>
+<li>Measure the scalability of the model</li>
+<li>Explain the utility of a validation split</li>
+<li>Tell whether a model is under-fitting or over-fitting; and explain why</li>
+</ol>
+<p><strong>Materials:</strong></p>
+<ol type="1">
+<li><a href="./modules/M3/lessons/01_slides_evaluation.html">[Slides]</a></li>
+<li><a href="./modules/M3/lessons/02_lab_generalization.html">[Lab]</a></li>
+</ol>
 </section>
-<section id="module-4-classification" class="level2">
-<h2 class="anchored" data-anchor-id="module-4-classification">Module 4: Classification</h2>
-<p>Module 4 introduces <strong>classification-specific evaluation and validation techniques</strong>. You will explore stratified and grouped cross-validation, work with common classification metrics, and learn how thresholds and probability calibration affect decision-making.</p>
-<p><strong>Key Terms:</strong></p>
+<section id="m3-2-hyper-parameter-tuning" class="level3">
+<h3 class="anchored" data-anchor-id="m3-2-hyper-parameter-tuning">M3-2: Hyper-parameter Tuning</h3>
+<ol type="1">
+<li>Given Linear Regression or Decision Tree model, distinguish between it’s <em>parameters</em> and <em>hyper-parameters</em></li>
+<li>Recognize the 5 elements of hyper-parameter search in scikit-learn</li>
+<li>Explain the process of hyper-parameter search; describing the role of each of the 5 elements</li>
+<li>Explain the difference between Grid Search and either Random Search or Bayesian Search</li>
+<li>Recognize the more efficient, model-specific cross-validations</li>
+<li>Explain the problem of data dependency and why sample grouping solves it</li>
+<li>Distinguish different cases to use <code>random_state</code> correctly to control randomness</li>
+</ol>
+<p><strong>Materials:</strong></p>
+<ol type="1">
+<li><a href="./modules/M3/lessons/03_hyper-parameter_tuning.html">[Lab 1]</a></li>
+<li><a href="./modules/M3/lessons/04_sample_grouping.html">[Lab 2]</a></li>
+<li><a href="./modules/M3/texts/text_controlling_randomness.html">[Text]</a></li>
+</ol>
+</section>
+</section>
+<section id="module-4-regression-and-classification-metrics" class="level2">
+<h2 class="anchored" data-anchor-id="module-4-regression-and-classification-metrics">Module 4: Regression and Classification Metrics</h2>
+<section id="m4-1-regression-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="m4-1-regression-metrics">M4-1: Regression Metrics</h3>
+<ol type="1">
+<li>Explain why regression models need dedicated evaluation metrics.</li>
+<li>Interpret and compare MSE, (<span class="math inline">\(R^2\)</span>), MAE, median AE, and MAPE.</li>
+<li>Diagnose regression models visually using prediction and residual plots.</li>
+<li>Explain when a target transformation can improve model fit and metrics.</li>
+</ol>
+<p><strong>Materials:</strong></p>
 <ul>
-<li>classification metrics: accuracy, precision, recall, F1, ROC–AUC<br>
-</li>
-<li>confusion matrix, precision–recall trade-off</li>
-<li>decision thresholds, score calibration</li>
+<li><a href="./modules/M4/lessons/01_slides_regression_metrics.html">[Slides]</a></li>
+<li><a href="./modules/M4/lessons/02_lab_regression_metrics.html">[Lab]</a></li>
 </ul>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M4-1</td>
-<td><strong>Classification Metrics</strong><br>Overview of key classification metrics and how to choose appropriate ones for a given application.</td>
-<td><a href="./modules/M4/lessons/01_classification_metrics.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>M4-2</td>
-<td><strong>Classifier Threshold Tuning</strong><br>How decision thresholds trade off precision and recall and how to choose thresholds aligned with costs and benefits.</td>
-<td><a href="./modules/M4/lessons/02_classifier_threshold_tuning.html">Lesson</a><br><a href="./modules/M4/lessons/widget_threshold.html">Interactive threshold widget</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>M4-3</td>
-<td><strong>Probability Calibration</strong><br>Measuring and improving the quality of predicted probabilities so they better match observed frequencies.</td>
-<td><a href="./modules/M4/lessons/03_probability_calibration.html">Lesson</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+</section>
+<section id="m4-2-classification-metrics" class="level3">
+<h3 class="anchored" data-anchor-id="m4-2-classification-metrics">M4-2: Classification Metrics</h3>
+<ol type="1">
+<li>Distinguish between classification metrics on the basis of <span class="math inline">\(FP\)</span> and <span class="math inline">\(FN\)</span></li>
+<li>Given a confusion matrix; tell the performance of a classifier</li>
+<li>Given a PR-curve or ROC-curve; be able to tell which classifier is better</li>
+<li>Given a set of classifiers; evaluate and select the best one</li>
+</ol>
+<p><strong>Materials:</strong></p>
+<ul>
+<li><a href="./modules/M4/lessons/03_slides_classification_metrics.html">[Slides]</a></li>
+<li><a href="./modules/M4/lessons/04_lab_classification_metrics.html">[Lab]</a></li>
+<li><a href="./modules/M4/lessons/widget_threshold.html">[Widget: Classifier Threshold]</a></li>
+</ul>
+</section>
+<section id="m4-3-classifier-threshold-tuning" class="level3">
+<h3 class="anchored" data-anchor-id="m4-3-classifier-threshold-tuning">M4-3: Classifier Threshold Tuning</h3>
+<ol type="1">
+<li>Distinguish cases where one should trade Recall for Precision and vice-versa</li>
+<li>Identify the component that affects this trade-off in a fitted classifier (it is the classification threshold)</li>
+<li>Given a classifier; tune the decision threshold to maximize either precision or recall</li>
+<li>Given a classifier and a specific ratio between <span class="math inline">\(FN\)</span> and <span class="math inline">\(FP\)</span>; tune the decision threshold to optimize for that ratio</li>
+<li>Understand why probability calibration is important</li>
+</ol>
+<p><strong>Materials:</strong></p>
+<ul>
+<li><a href="./modules/M4/lessons/06_lab_classifier_threshold_tuning.html">[Lab 1]</a></li>
+<li><a href="./modules/M4/lessons/07_lab_probability_calibration.html">[Lab 2]</a></li>
+</ul>
+</section>
 </section>
 <section id="module-5-decision-trees-and-ensembles" class="level2">
 <h2 class="anchored" data-anchor-id="module-5-decision-trees-and-ensembles">Module 5: Decision Trees and Ensembles</h2>
-<p>Module 5 focuses on <strong>decision trees, ensemble methods (bagging, random forests, boosting)</strong>, and wraps up with an introduction to <strong>explainable AI (SHAP)</strong>. You’ll learn how trees make predictions, how ensembles reduce variance and boost performance, and how to interpret complex models with feature importance and SHAP explanations.</p>
-<p><strong>Key Terms:</strong> - decision trees, splits, tree depth, leaves<br>
-- regression trees, classification trees<br>
-- overfitting with deep trees, pruning<br>
-- bagging, random forests, boosting (gradient boosting, AdaBoost)<br>
-- ensembles of trees<br>
-- SHAP, feature contribution, explainability</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Description</th>
-<th>Materials</th>
-<th>Assignments</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>M5-1</td>
-<td><strong>Decision Trees</strong><br>Building and interpreting decision trees for classification and regression. Covers splitting criteria, how trees grow, and how overfitting happens.</td>
-<td><a href="./modules/M5/lessons/01_trees.html">Lesson</a><br><a href="./modules/M5/lessons/02_lab_decision_trees.html">Lab</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>M5-2</td>
-<td><strong>Bagging and Random Forests</strong><br>Understanding bagging, bootstrapping, and how random forests aggregate deep trees using feature and sample randomness.</td>
-<td><a href="./modules/M5/lessons/03_bagging.html">Lesson</a></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>M5-3</td>
-<td><strong>Boosting</strong><br>Introduction to ensemble methods that combine shallow trees sequentially, such as AdaBoost and Gradient Boosting.</td>
-<td><a href="./modules/M5/lessons/04_boosting.html">Lesson</a><br><a href="./modules/M5/lessons/05_lab_ensembles.html">Lab</a></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>M5-4</td>
-<td><strong>Explainable AI with SHAP</strong><br>Interpreting individual predictions and feature importance using Shapley values and SHAP visualizations.</td>
-<td><a href="./modules/M5/lessons/06_lab_shap.html">Lab</a></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<section id="m5-1-decision-trees" class="level3">
+<h3 class="anchored" data-anchor-id="m5-1-decision-trees">M5-1: Decision Trees</h3>
+<ol type="1">
+<li>Explain how decision trees work for regression; two levels deep</li>
+<li>Explain how decision trees work for classification; two levels deep</li>
+<li>Explain how the maximum depth impacts generalization performance?</li>
+<li>Enumerate at least 2 advantages of decision trees</li>
+</ol>
+<p><strong>Materials:</strong></p>
+<ul>
+<li><a href="./modules/M5/lessons/01_slides_trees.html">[Slides]</a></li>
+<li><a href="./modules/M5/lessons/02_lab_decision_trees.html">[Lab]</a></li>
+</ul>
+</section>
+<section id="m5-2-ensemble-methods" class="level3">
+<h3 class="anchored" data-anchor-id="m5-2-ensemble-methods">M5-2: Ensemble Methods</h3>
+<ol type="1">
+<li>Describe the bagging ensemble method</li>
+<li>Describe the boosting ensemble method</li>
+<li>Recognize which of the two methods a Random Forest is an instance of</li>
+<li>List at least 2 difference between bagging and boosting</li>
+<li>Rank the three boosting techniques (Ada Boost, Gradient Boosting, Histogram Gradient Boosting) in terms of accuracy and computational cost</li>
+</ol>
+<p><strong>Materials:</strong></p>
+<ul>
+<li><a href="./modules/M5/lessons/03_slides_bagging.html">[Slides 1]</a></li>
+<li><a href="./modules/M5/lessons/04_slides_boosting.html">[Slides 2]</a></li>
+<li><a href="./modules/M5/lessons/05_lab_ensembles.html">[Lab]</a></li>
+</ul>
+</section>
+<section id="m5-3-explainable-ai" class="level3">
+<h3 class="anchored" data-anchor-id="m5-3-explainable-ai">M5-3: Explainable AI</h3>
+<ol type="1">
+<li>Show the impact (positive and negative) of features on individual predictions made by the model</li>
+<li>Explian the Waterfall Plot as visualized</li>
+<li>Rank features by impact</li>
+<li>Show features that have infrequently high impact</li>
+<li>Interpret a SHAP heatmap</li>
+<li>Zoom in on specific features to inspect their impact and support for specific SHAP-values</li>
+</ol>
+<p><strong>Materials:</strong></p>
+<ul>
+<li><a href="./modules/M5/lessons/06_lab_shap.html">[Lab]</a></li>
+</ul>
+</section>
+</section>
+<section id="project" class="level2">
+<h2 class="anchored" data-anchor-id="project">Project</h2>
+<p>Pick a Kaggle competition and do it: <a href="https://www.kaggle.com/competitions">Link</a>.</p>
 </section>
 <section id="resources" class="level2">
 <h2 class="anchored" data-anchor-id="resources">Resources</h2>
