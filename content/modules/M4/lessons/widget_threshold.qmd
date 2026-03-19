@@ -16,6 +16,7 @@ Try:
 - Where would you say is the right cut-off point for the imbalanced data case? Is it higher or lower than 0.5?
 
 ```{ojs}
+// |echo: false
 // |code-fold: true
 
 viewof classificationTool = {

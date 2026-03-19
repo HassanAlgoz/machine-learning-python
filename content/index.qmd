@@ -158,8 +158,8 @@ Goal: Build a Pipeline to handle preprocessing of both categorical and numerical
 
 **Materials:**
 
-- [[Slides]](./modules/M2/lessons/03_slides_regression_metrics.qmd)
-- [[Lab]](./modules/M2/lessons/04_lab_regression_metrics.ipynb)
+- [[Slides]](./modules/M4/lessons/01_slides_regression_metrics.qmd)
+- [[Lab]](./modules/M4/lessons/02_lab_regression_metrics.ipynb)
 
 ### M4-2: Classification Metrics
 
@@ -170,56 +170,46 @@ Goal: Build a Pipeline to handle preprocessing of both categorical and numerical
 
 **Materials:**
 
-- [[Slides]](./modules/M4/lessons/01_slides_classification_metrics.qmd)
-- [[Lab]](./modules/M4/lessons/02_lab_classification_metrics.ipynb)
+- [[Slides]](./modules/M4/lessons/03_slides_classification_metrics.qmd)
+- [[Lab]](./modules/M4/lessons/04_lab_classification_metrics.ipynb)
+- [[Widget: Classifier Threshold]](./modules/M4/lessons/widget_threshold.qmd)
 
+### M4-3: Classifier Threshold Tuning
+
+1. Distinguish cases where one should trade Recall for Precision and vice-versa
+2. Identify the component that affects this trade-off in a fitted classifier (it is the classification threshold)
+3. Given a classifier; tune the decision threshold to maximize either precision or recall
+4. Given a classifier and a specific ratio between $FN$ and $FP$; tune the decision threshold to optimize for that ratio
+5. Understand why probability calibration is important
+
+**Materials:**
+
+- [[Lab 1]](./modules/M4/lessons/06_lab_classifier_threshold_tuning.ipynb)
+- [[Lab 2]](./modules/M4/lessons/07_lab_probability_calibration.ipynb)
 
 ## Module 5: Decision Trees and Ensembles
 
 ### M5-1: Decision Trees
 
-1. Explain how decision trees make predictions
-2. Explain how decision trees overfit
-3. Explain how decision trees can be pruned
-4. Explain how decision trees can be used for classification and regression
+1. Explain how decision trees work for regression; two levels deep
+2. Explain how decision trees work for classification; two levels deep
+3. Explain how the maximum depth impacts generalization performance?
+4. Enumerate at least 2 advantages of decision trees
 
 **Materials:**
 
-- [[Slides]](./modules/M5/lessons/01_slides_decision_trees.qmd)
+- [[Slides]](./modules/M5/lessons/01_slides_trees.qmd)
 - [[Lab]](./modules/M5/lessons/02_lab_decision_trees.ipynb)
 
-### M5-2: Bagging and Random Forests
 
-1. Explain how bagging works
-2. Explain how random forests work
+### M5-2: Bagging and Boosting
+
+
 
 **Materials:**
 
 - [[Slides]](./modules/M5/lessons/03_slides_bagging.qmd)
-- [[Lab]](./modules/M5/lessons/04_lab_bagging.ipynb)
-
-### M5-3: Boosting
-
-1. Explain how boosting works
-2. Explain how gradient boosting works
-3. Explain how AdaBoost works
-4. Explain how XGBoost works
-
-**Materials:**
-
-- [[Slides]](./modules/M5/lessons/05_slides_boosting.qmd)
-- [[Lab]](./modules/M5/lessons/06_lab_boosting.ipynb)
-
-### M5-4: Explainable AI with SHAP
-
-1. Explain how SHAP works
-2. Explain how SHAP can be used to interpret a model
-3. Explain how SHAP can be used to select the best model
-
-**Materials:**
-
-- [[Slides]](./modules/M5/lessons/07_slides_shap.qmd)
-- [[Lab]](./modules/M5/lessons/08_lab_shap.ipynb)
+- [[Lab]](./modules/M5/lessons/04_slides_boosting.qmd)
 
 ## Resources
 
