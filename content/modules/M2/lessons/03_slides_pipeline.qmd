@@ -75,6 +75,7 @@ The fundamental goal is generalization: performing well on real-world, unseen da
 
 ```{mermaid}
 %% |fig-align: center
+
 flowchart TD
     A[Dataset] --> B(Training Set<br>80%)
     A --> C(Testing Set<br>20%)
@@ -131,7 +132,7 @@ Before building a predictive model, your data must be **pre-processed** with som
 
 1. *Lab: [Handling Missing Values](./lab_impute.ipynb)*  
    Replace missing values using an imputer.
-2. *Lab: [Scaling: Numerical Features](./lab_lab_scale.ipynb)*  
+2. *Lab: [Scaling: Numerical Features](./lab_scale.ipynb)*  
    Apply scaling methods to ensure numerical features are on comparable scales.
 3. *Lab: [Encoding: Categorical Features](./lab_encode.ipynb)*  
     Convert categorical features into a numeric format with encoders.
@@ -242,6 +243,20 @@ Let's see the Pipeline logic iteratively.
 
 ---
 
+## Pipelines
+
+In scikit-learn, a `Pipeline` is a strictly ordered sequence of steps where the output of one step becomes the input of the next.
+
+```{mermaid}
+flowchart LR
+    A[X] --> Pipeline{{Pipeline}}
+    subgraph Pipeline
+        direction LR
+        B1["SimpleImputer<br/>(Transformer)"] --> B2["OneHotEncoder<br/>(Transformer)"] --> B3["LinearRegression<br/>(Predictor)"]
+    end
+    Pipeline --> Y[y]
+```
+
 ## Architecture of a Pipeline
 
 :::: {.columns}
@@ -258,22 +273,12 @@ Let's see the Pipeline logic iteratively.
 
 ::::
 
-```{mermaid}
-%% |fig-align: center
-flowchart LR
-    A[X] --> Pipeline{{Pipeline}}
-    subgraph Pipeline
-        direction LR
-        B1["StandardScaler"] --> B2["KNNImputer"] --> B3["LinearRegression"]
-    end
-    Pipeline --> Y[y]
-```
-
 :::: {.notes}
 All of scikit-learn is architected identically to this pipeline schema.
 ::::
 
 ---
+
 
 ## Transformer
 
