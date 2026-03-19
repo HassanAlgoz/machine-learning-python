@@ -202,14 +202,32 @@ Goal: Build a Pipeline to handle preprocessing of both categorical and numerical
 - [[Lab]](./modules/M5/lessons/02_lab_decision_trees.ipynb)
 
 
-### M5-2: Bagging and Boosting
+### M5-2: Ensemble Methods
 
-
+1. Describe the bagging ensemble method
+2. Describe the boosting ensemble method
+3. Recognize which of the two methods a Random Forest is an instance of
+4. List at least 2 difference between bagging and boosting
+5. Rank the three boosting techniques (Ada Boost, Gradient Boosting, Histogram Gradient Boosting) in terms of accuracy and computational cost
 
 **Materials:**
 
-- [[Slides]](./modules/M5/lessons/03_slides_bagging.qmd)
-- [[Lab]](./modules/M5/lessons/04_slides_boosting.qmd)
+- [[Slides 1]](./modules/M5/lessons/03_slides_bagging.qmd)
+- [[Slides 2]](./modules/M5/lessons/04_slides_boosting.qmd)
+- [[Lab]](./modules/M5/lessons/05_lab_ensembles.ipynb)
+
+### M5-3: Explainable AI
+
+1. Show the impact (positive and negative) of features on individual predictions made by the model
+2. Explian the Waterfall Plot as visualized
+3. Rank features by impact
+4. Show features that have infrequently high impact
+5. Interpret a SHAP heatmap
+6. Zoom in on specific features to inspect their impact and support for specific SHAP-values
+
+**Materials:**
+
+- [[Lab]](./modules/M5/lessons/06_lab_shap.ipynb)
 
 ## Resources
 
