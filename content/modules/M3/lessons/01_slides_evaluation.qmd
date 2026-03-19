@@ -150,7 +150,7 @@ Set expectations: collecting more data is an investment, not a guarantee. Perfor
 - You get the biggest benefit when new data covers **missing/uncertain regions**
 ::::
 :::: {.column width="60%"}
-![](../assets/adding_wrong_data_points.png)
+![Figure: blue is real, orange is model, points are data.](../assets/adding_wrong_data_points.png)
 ::::
 ::::
 
@@ -170,7 +170,7 @@ Interpretation: the model’s weak generalization comes from regions it rarely s
   - trying to model a nonlinear curve with a straight-line model
 ::::
 :::: {.column width="60%"}
-![](../assets/inflexible_model.png)
+![Figure: blue is model, points are data.](../assets/inflexible_model.png)
 ::::
 ::::
 
@@ -194,15 +194,36 @@ Reading learning curves: pay attention to whether the *gap* between train and te
 
 ---
 
+## Learning Curve
+
+**Learning curves** show the effect of adding more training samples.
+
+![Figure: Learning Curve](https://scikit-learn.org/stable/_images/sphx_glr_plot_learning_curve_001.png)
+
+Press `S` to open speaker notes.
+
+:::: {.notes}
+Left: naive Bayes classifier. Its shape can be found in more complex datasets very often:
+
+- the training score is very high when using few samples for training and decreases when increasing the number of samples
+- whereas the test score is very low at the beginning and then increases when adding samples.
+- the training and test scores become more realistic when all the samples are used for training.
+
+Right: SVM classifier with RBF kernel.
+
+- The training score remains high regardless of the size of the training set.
+- On the other hand, the test score increases with the size of the training dataset.
+- Indeed, it increases up to a point where it reaches a plateau.
+
+::::
+
 ## Over-fitting and under-fitting
 
 Both regression and classification models can:
-- under-fit (too simple)
-- fit just right
-- over-fit (too detailed)
 
-Under-fitting and over-fitting look different depending on the task, but the diagnosis is the same:
-- compare training behavior with validation/test behavior
+- under-fit (too general)
+- fit just right
+- over-fit (too specific)
 
 :::: {.notes}
 Make the “diagnostic loop” explicit: you’re not just fitting a model, you’re checking whether it generalizes. Training error alone cannot tell you whether the model is too simple or too complex.
@@ -215,11 +236,11 @@ Make the “diagnostic loop” explicit: you’re not just fitting a model, you�
 :::: {.columns}
 :::: {.column width="40%"}
 - Under-fitting:
-  - model cannot capture the pattern
+    - model cannot capture the pattern
 - Over-fitting:
-  - model captures noise and fails to generalize
+    - model captures noise and fails to generalize
 - Optimal fit:
-  - best balance between the two
+    - best balance between the two
 ::::
 :::: {.column width="60%"}
 ![](../assets/classification_under_optimal_overfitting.png)

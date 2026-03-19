@@ -138,12 +138,12 @@ Goal: Build a Pipeline to handle preprocessing of both categorical and numerical
 3. Explain the process of hyper-parameter search; describing the role of each of the 5 elements
 4. Explain the difference between Grid Search and either Random Search or Bayesian Search
 5. Recognize the more efficient, model-specific cross-validations
+6. Explain the problem of data dependency and why sample grouping solves it
 
 **Materials:**
 
-1. [[Slides]](./modules/M3/lessons/03_slides_hyper-parameter_tuning.qmd)
-2. [[Lab]](./modules/M3/lessons/04_lab_hyper-parameter_tuning.ipynb)
-
+1. [[Lab 1]](./modules/M3/lessons/03_hyper-parameter_tuning.ipynb)
+3. [[Lab 2]](./modules/M3/lessons/04_sample_grouping.ipynb)
 
 ## Module 4: Regression and Classification Metrics
 
